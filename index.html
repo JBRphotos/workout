@@ -12,13 +12,12 @@
   <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
   <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { height: 100%; }
-    body { height: 100%; overflow: hidden; background: #05050F; }
-    #root { height: 100%; }
-    ::-webkit-scrollbar { display: none; }
-    input[type=number]::-webkit-inner-spin-button,
-    input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{height:100%}
+    body{height:100%;overflow:hidden;background:#05050F}
+    #root{height:100%}
+    ::-webkit-scrollbar{display:none}
+    input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
   </style>
 </head>
 <body>
@@ -1448,8 +1447,9 @@ function PRList({ exercisePRs, color }) {
         hasMore && (React.createElement("button", { onClick: () => setShowAll(v => !v), style: { width: "100%", marginTop: 8, padding: "8px", borderRadius: 10, background: "none",
                 border: "1px solid #1e1e1e", color: C.muted, fontSize: 12, cursor: "pointer" } }, showAll ? `▲ Show less` : `▼ Show all ${filtered.length} exercises`))));
 }
-function HunterProfile({ rankInfo, totalXP, profile, setProfile, checkIns, setCheckIns, weeklyCheckinDone, xpEvents, awardXP, intensity, cardioHistory = [], themeId, setThemeId, exercisePRs = {}, setShowCardioLog }) {
+function HunterProfile({ rankInfo, totalXP, profile, setProfile, checkIns, setCheckIns, weeklyCheckinDone, xpEvents, awardXP, intensity, cardioHistory = [], themeId, setThemeId, exercisePRs = {}, setShowCardioLog, workoutHistory = [], setShowWorkoutLog, onResetStats }) {
     const C = useC();
+    const [resetConfirm, setResetConfirm] = useState(false);
     const { current, next, xpInto, xpSpan, progress } = rankInfo;
     const [editingProfile, setEditingProfile] = useState(false);
     const [draft, setDraft] = useState(profile);
@@ -1632,6 +1632,35 @@ function HunterProfile({ rankInfo, totalXP, profile, setProfile, checkIns, setCh
                     isCurrent && React.createElement("div", { style: { fontSize: 10, color: r.color, fontWeight: 800, letterSpacing: "0.05em" } }, "YOU"),
                     !isCurrent && unlocked && React.createElement("div", { style: { fontSize: 12, color: C.muted } }, "\u2713")));
             }))),
+        React.createElement("div", { style: { padding: "0 24px 20px" } },
+            React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 } },
+                React.createElement("div", { style: { fontSize: 10, color: C.muted, letterSpacing: "0.1em", textTransform: "uppercase" } }, "Workout Log"),
+                workoutHistory.length > 0 && (React.createElement("button", { onClick: () => setShowWorkoutLog === null || setShowWorkoutLog === void 0 ? void 0 : setShowWorkoutLog(true), style: { fontSize: 10, padding: "4px 10px", borderRadius: 8, background: C.btnBg, border: `1px solid ${C.btnBorder}`, color: C.muted, cursor: "pointer" } },
+                    "View All (",
+                    workoutHistory.length,
+                    ")"))),
+            workoutHistory.length === 0 ? (React.createElement("div", { style: { fontSize: 12, color: C.muted, padding: "10px 0" } }, "No workouts logged yet")) : (React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 7 } }, workoutHistory.slice(0, 3).map((s, i) => {
+                var _a;
+                const plan = WORKOUT_PLANS[s.workout];
+                const color = (plan === null || plan === void 0 ? void 0 : plan.color) || "#555";
+                return (React.createElement("div", { key: i, style: { background: C.deep, borderRadius: 12, padding: "11px 14px", border: `1px solid ${color}22`, display: "flex", alignItems: "center", justifyContent: "space-between" } },
+                    React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 10 } },
+                        React.createElement("div", { style: { width: 28, height: 28, borderRadius: 8, background: color + "22", border: `1px solid ${color}44`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 } }, ((_a = IC[PLAN_ICON[s.workout]]) === null || _a === void 0 ? void 0 : _a.call(IC, color, 16)) || IC.Active(color, 16)),
+                        React.createElement("div", null,
+                            React.createElement("div", { style: { fontSize: 12, fontWeight: 600, color: C.text } }, s.workout),
+                            React.createElement("div", { style: { fontSize: 10, color: C.muted } },
+                                s.setsCompleted,
+                                " sets \u00B7 ",
+                                s.duration,
+                                "min \u00B7 ",
+                                s.intensity))),
+                    React.createElement("div", { style: { textAlign: "right" } },
+                        React.createElement("div", { style: { fontSize: 11, fontWeight: 700, color: current.color } },
+                            "+",
+                            s.xpEarned,
+                            " XP"),
+                        React.createElement("div", { style: { fontSize: 9, color: C.muted } }, s.date))));
+            })))),
         React.createElement("div", { style: { padding: "20px 24px 32px" } },
             React.createElement("div", { style: { fontSize: 10, color: current.color, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 12 } }, "App Theme"),
             React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 8 } }, Object.values(APP_THEMES).map(theme => {
@@ -1646,9 +1675,78 @@ function HunterProfile({ rankInfo, totalXP, profile, setProfile, checkIns, setCh
                             React.createElement("span", { style: { fontSize: 14, fontWeight: 700, color: isSelected ? theme.accent : "#DDD" } }, theme.name),
                             React.createElement("span", { style: { fontSize: 10, padding: "2px 7px", borderRadius: 8, background: C.btnBg, color: C.muted, border: `1px solid ${C.inputBorder}` } }, theme.tag))),
                     isSelected && (React.createElement("div", { style: { width: 8, height: 8, borderRadius: "50%", background: theme.accent, flexShrink: 0, boxShadow: `0 0 8px ${theme.accent}` } }))));
-            })))));
+            }))),
+        React.createElement("div", { style: { padding: "0 24px 60px" } },
+            React.createElement("div", { style: { borderTop: `1px solid ${C.cardBorder}`, paddingTop: 20 } },
+                React.createElement("div", { style: { fontSize: 10, color: "#F87171", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 12 } }, "Danger Zone"),
+                !resetConfirm ? (React.createElement("button", { onClick: () => setResetConfirm(true), style: { width: "100%", padding: "12px", borderRadius: 12, background: "transparent", border: "1.5px solid #F8717144", color: "#F87171", fontSize: 13, fontWeight: 600, cursor: "pointer" } }, "Reset All Stats")) : (React.createElement("div", { style: { background: "#F8717112", borderRadius: 12, padding: "16px", border: "1.5px solid #F8717144" } },
+                    React.createElement("div", { style: { fontSize: 13, fontWeight: 700, color: "#F87171", marginBottom: 6 } }, "Are you sure?"),
+                    React.createElement("div", { style: { fontSize: 12, color: C.muted, marginBottom: 14, lineHeight: 1.6 } }, "This will permanently delete your XP, PRs, cardio history, workout log, check-ins, and body stats. Your name and theme will be kept. This cannot be undone."),
+                    React.createElement("div", { style: { display: "flex", gap: 8 } },
+                        React.createElement("button", { onClick: () => setResetConfirm(false), style: { flex: 1, padding: "11px", borderRadius: 10, background: C.btnBg, border: `1px solid ${C.btnBorder}`, color: C.muted, fontSize: 13, cursor: "pointer" } }, "Cancel"),
+                        React.createElement("button", { onClick: () => { onResetStats === null || onResetStats === void 0 ? void 0 : onResetStats(); setResetConfirm(false); }, style: { flex: 1, padding: "11px", borderRadius: 10, background: "#F87171", border: "none", color: "#000", fontSize: 13, fontWeight: 700, cursor: "pointer" } }, "Yes, Reset"))))))));
 }
-// ── CARDIO LOG ────────────────────────────────────────────────────────────────
+// ── WORKOUT LOG ───────────────────────────────────────────────────────────────
+function WorkoutLog({ workoutHistory, onClose, accentColor }) {
+    const C = useC();
+    const [expanded, setExpanded] = useState(null);
+    const accent = accentColor || "#FF6B35";
+    const totalSessions = workoutHistory.length;
+    const totalSets = workoutHistory.reduce((a, s) => a + (s.setsCompleted || 0), 0);
+    const totalMinutes = workoutHistory.reduce((a, s) => a + (s.duration || 0), 0);
+    const totalXPEarned = workoutHistory.reduce((a, s) => a + (s.xpEarned || 0), 0);
+    return (React.createElement("div", { style: { position: "fixed", inset: 0, background: C.surface, zIndex: 200, display: "flex", flexDirection: "column", maxWidth: 420, margin: "0 auto" } },
+        React.createElement("div", { style: { padding: "52px 24px 16px", borderBottom: `1px solid ${C.border}`, flexShrink: 0 } },
+            React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "flex-start" } },
+                React.createElement("div", null,
+                    React.createElement("div", { style: { fontSize: 10, color: C.muted, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 4 } }, "History"),
+                    React.createElement("div", { style: { fontSize: 26, fontWeight: 800, letterSpacing: "-0.02em", color: C.text } }, "Workout Log")),
+                React.createElement("button", { onClick: onClose, style: { width: 36, height: 36, borderRadius: 10, background: C.btnBg, border: `1px solid ${C.btnBorder}`, color: C.muted, fontSize: 18, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" } }, "\u2715")),
+            React.createElement("div", { style: { display: "flex", gap: 8, marginTop: 16 } }, [
+                { label: "Sessions", value: totalSessions },
+                { label: "Sets", value: totalSets },
+                { label: "Minutes", value: Math.round(totalMinutes) },
+                { label: "XP", value: totalXPEarned },
+            ].map(s => (React.createElement("div", { key: s.label, style: { flex: 1, background: C.card, borderRadius: 12, padding: "10px 8px", border: `1px solid ${C.cardBorder}`, textAlign: "center" } },
+                React.createElement("div", { style: { fontSize: 16, fontWeight: 800, color: accent } }, s.value),
+                React.createElement("div", { style: { fontSize: 8, color: C.muted, textTransform: "uppercase", letterSpacing: "0.06em", marginTop: 2 } }, s.label)))))),
+        React.createElement("div", { style: { flex: 1, overflowY: "auto", padding: "12px 24px 40px" } }, workoutHistory.length === 0 ? (React.createElement("div", { style: { textAlign: "center", padding: "40px 0", color: C.muted, fontSize: 13 } }, "No workouts logged yet")) : (React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 8 } }, workoutHistory.map((s, i) => {
+            var _a, _b;
+            const plan = WORKOUT_PLANS[s.workout];
+            const color = (plan === null || plan === void 0 ? void 0 : plan.color) || "#555";
+            const isOpen = expanded === i;
+            return (React.createElement("div", { key: s.id || i, style: { background: C.card, borderRadius: 14, border: `1px solid ${isOpen ? color + "55" : C.cardBorder}`, overflow: "hidden", transition: "border-color 0.15s" } },
+                React.createElement("div", { onClick: () => setExpanded(isOpen ? null : i), style: { padding: "13px 16px", display: "flex", alignItems: "center", gap: 12, cursor: "pointer" } },
+                    React.createElement("div", { style: { width: 36, height: 36, borderRadius: 10, background: color + "22", border: `1px solid ${color}44`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 } }, ((_a = IC[PLAN_ICON[s.workout]]) === null || _a === void 0 ? void 0 : _a.call(IC, color, 20)) || IC.Active(color, 20)),
+                    React.createElement("div", { style: { flex: 1 } },
+                        React.createElement("div", { style: { fontSize: 13, fontWeight: 700, color: C.text } }, s.workout),
+                        React.createElement("div", { style: { fontSize: 11, color: C.muted, marginTop: 2 } },
+                            s.setsCompleted,
+                            " sets \u00B7 ",
+                            s.duration,
+                            "min \u00B7 ",
+                            React.createElement("span", { style: { color: (_b = INTENSITY_CONFIG[s.intensity]) === null || _b === void 0 ? void 0 : _b.color } }, s.intensity))),
+                    React.createElement("div", { style: { textAlign: "right" } },
+                        React.createElement("div", { style: { fontSize: 12, fontWeight: 700, color: accent } },
+                            "+",
+                            s.xpEarned,
+                            " XP"),
+                        React.createElement("div", { style: { fontSize: 10, color: C.muted, marginTop: 1 } }, s.date)),
+                    React.createElement("div", { style: { fontSize: 11, color: C.muted, transform: isOpen ? "rotate(180deg)" : "none", transition: "transform 0.2s", marginLeft: 4 } }, "\u25BE")),
+                isOpen && (React.createElement("div", { style: { background: C.deep, borderTop: `1px solid ${C.cardBorder}`, padding: "12px 16px" } },
+                    React.createElement("div", { style: { fontSize: 9, color: C.muted, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 10 } }, "Exercises Logged"),
+                    Object.keys(s.exercises || {}).length === 0 ? (React.createElement("div", { style: { fontSize: 12, color: C.muted } }, "No set data recorded")) : (React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 6 } }, Object.entries(s.exercises).map(([name, sets]) => (React.createElement("div", { key: name, style: { display: "flex", justifyContent: "space-between", alignItems: "center" } },
+                        React.createElement("div", { style: { fontSize: 12, color: C.text } }, name),
+                        React.createElement("div", { style: { display: "flex", gap: 6, flexWrap: "wrap", justifyContent: "flex-end" } }, (sets || []).map((set, j) => (React.createElement("div", { key: j, style: { fontSize: 10, padding: "2px 8px", borderRadius: 8, background: color + "22", color } },
+                            set.weight > 0 ? `${set.weight}lb` : "",
+                            set.weight > 0 && set.reps > 0 ? " × " : "",
+                            set.reps > 0 ? `${set.reps}` : ""))))))))),
+                    React.createElement("div", { style: { fontSize: 10, color: C.muted, marginTop: 10 } },
+                        s.time,
+                        " \u00B7 ",
+                        s.date)))));
+        }))))));
+}
 function CardioLog({ cardioHistory, onClose, accentColor }) {
     const C = useC();
     const [filter, setFilter] = useState("all");
@@ -1872,14 +1970,15 @@ function WorkoutApp() {
     const [xpEvents, setXpEvents] = useState([]);
     const [cardioHistory, setCardioHistory] = useState([]);
     const [exercisePRs, setExercisePRs] = useState({});
+    const [workoutHistory, setWorkoutHistory] = useState([]);
     const [customSchedule, setCustomSchedule] = useState(() => generateSchedule(3));
     const [currentWeekKey, setCurrentWeekKey] = useState(() => getISOWeek(new Date()));
     // Load from storage on mount
     useEffect(() => {
         (async () => {
             try {
-                const keys = ["daysPerWeek", "themeId", "intensity", "totalXP", "profile", "checkIns", "xpEvents", "cardioHistory", "exercisePRs", "customSchedule", "currentWeekKey"];
-                const setters = { daysPerWeek: setDaysPerWeek, themeId: setThemeId, intensity: setIntensity, totalXP: setTotalXP, profile: setProfile, checkIns: setCheckIns, xpEvents: setXpEvents, cardioHistory: setCardioHistory, exercisePRs: setExercisePRs, customSchedule: setCustomSchedule, currentWeekKey: setCurrentWeekKey };
+                const keys = ["daysPerWeek", "themeId", "intensity", "totalXP", "profile", "checkIns", "xpEvents", "cardioHistory", "exercisePRs", "workoutHistory", "customSchedule", "currentWeekKey"];
+                const setters = { daysPerWeek: setDaysPerWeek, themeId: setThemeId, intensity: setIntensity, totalXP: setTotalXP, profile: setProfile, checkIns: setCheckIns, xpEvents: setXpEvents, cardioHistory: setCardioHistory, exercisePRs: setExercisePRs, workoutHistory: setWorkoutHistory, customSchedule: setCustomSchedule, currentWeekKey: setCurrentWeekKey };
                 let hasProfile = false;
                 for (const key of keys) {
                     try {
@@ -1926,6 +2025,8 @@ function WorkoutApp() {
     useEffect(() => { if (storageReady)
         save("exercisePRs", exercisePRs); }, [exercisePRs, storageReady]);
     useEffect(() => { if (storageReady)
+        save("workoutHistory", workoutHistory); }, [workoutHistory, storageReady]);
+    useEffect(() => { if (storageReady)
         save("customSchedule", customSchedule); }, [customSchedule, storageReady]);
     useEffect(() => { if (storageReady)
         save("currentWeekKey", currentWeekKey); }, [currentWeekKey, storageReady]);
@@ -1962,6 +2063,7 @@ function WorkoutApp() {
     const [showXPToast, setShowXPToast] = useState(null);
     const [weeklyCheckinDone, setWeeklyCheckinDone] = useState(false);
     const [showCardioLog, setShowCardioLog] = useState(false);
+    const [showWorkoutLog, setShowWorkoutLog] = useState(false);
     // Check if this week's check-in already done
     useEffect(() => {
         const thisWeek = getWeekKey();
@@ -2068,6 +2170,22 @@ function WorkoutApp() {
         setWorkoutActive(false);
         setSelectedWorkout(null);
         setActiveTab("home");
+        // ── Save session to workout history ──
+        if (setsCompleted > 0) {
+            const sessionRecord = {
+                id: Date.now(),
+                date: new Date().toLocaleDateString(),
+                time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+                workout: selectedWorkout,
+                intensity,
+                duration: Math.round(workoutTimer / 60),
+                setsCompleted,
+                exercises: Object.keys(byExercise).length > 0 ? byExercise : {},
+                setLogs: Object.assign({}, setLogs),
+                xpEarned: setsCompleted > 0 ? getXP("WORKOUT_COMPLETE", intensity) + setsCompleted * getXP("SET_COMPLETE", intensity) : 0,
+            };
+            setWorkoutHistory(prev => [sessionRecord, ...prev].slice(0, 50));
+        }
     };
     const sendMessage = async () => {
         if (!input.trim() || loading)
@@ -2189,6 +2307,7 @@ function WorkoutApp() {
     return (React.createElement("div", { style: { height: "100dvh", background: TH.bg, color: TH.text, fontFamily: "'DM Sans','Helvetica Neue',sans-serif", maxWidth: 420, margin: "0 auto", display: "flex", flexDirection: "column", position: "relative" } },
         React.createElement("div", { style: { position: "absolute", inset: 0, pointerEvents: "none", zIndex: 0, background: `radial-gradient(ellipse at 20% 0%, ${TH.accent}12 0%, transparent 60%), radial-gradient(ellipse at 80% 100%, ${TH.accent2}0d 0%, transparent 60%)` } }),
         React.createElement(BrowserBanner, null),
+        showWorkoutLog && (React.createElement(WorkoutLog, { workoutHistory: workoutHistory, onClose: () => setShowWorkoutLog(false), accentColor: TH.accent })),
         showCardioLog && (React.createElement(CardioLog, { cardioHistory: cardioHistory, onClose: () => setShowCardioLog(false), accentColor: TH.accent })),
         activeTab === "home" && (React.createElement("div", { style: { flex: 1, overflowY: "auto", position: "relative", zIndex: 1, paddingBottom: 80 } },
             React.createElement("div", { style: { padding: "52px 24px 16px" } },
@@ -2547,7 +2666,15 @@ function WorkoutApp() {
                     showXPToast.xp,
                     " XP"),
                 React.createElement("div", { style: { fontSize: 11, color: C.muted, marginTop: 2 } }, showXPToast.label)))),
-        activeTab === "profile" && (React.createElement(HunterProfile, { rankInfo: rankInfo, totalXP: totalXP, profile: profile, setProfile: setProfile, checkIns: checkIns, setCheckIns: setCheckIns, weeklyCheckinDone: weeklyCheckinDone, xpEvents: xpEvents, awardXP: awardXP, intensity: intensity, cardioHistory: cardioHistory, exercisePRs: exercisePRs, themeId: themeId, setThemeId: setThemeId, setShowCardioLog: setShowCardioLog })),
+        activeTab === "profile" && (React.createElement(HunterProfile, { rankInfo: rankInfo, totalXP: totalXP, profile: profile, setProfile: setProfile, checkIns: checkIns, setCheckIns: setCheckIns, weeklyCheckinDone: weeklyCheckinDone, xpEvents: xpEvents, awardXP: awardXP, intensity: intensity, cardioHistory: cardioHistory, exercisePRs: exercisePRs, workoutHistory: workoutHistory, setShowCardioLog: setShowCardioLog, setShowWorkoutLog: setShowWorkoutLog, onResetStats: () => {
+                setTotalXP(0);
+                setProfile({ name: profile.name, goal: profile.goal, weight: "", height: "", age: "", bodyFat: "", chest: "", waist: "", arms: "", shoulders: "" });
+                setCheckIns([]);
+                setXpEvents([]);
+                setCardioHistory([]);
+                setExercisePRs({});
+                setWorkoutHistory([]);
+            }, themeId: themeId, setThemeId: setThemeId })),
         React.createElement("div", { style: { flexShrink: 0, position: "relative", zIndex: 100, background: TH.bg === "FFFFFF" || TH.bg === "#FFFFFF" ? "rgba(255,255,255,0.97)" : `rgba(10,10,10,0.98)`, backdropFilter: "blur(20px)", borderTop: `1px solid ${TH.border}`, display: "flex", justifyContent: "space-around", paddingTop: "10px", paddingBottom: "calc(16px + env(safe-area-inset-bottom))" } }, [
             { id: "home", key: "Home", label: "Home" },
             { id: "active", key: "Active", label: "Active" },
