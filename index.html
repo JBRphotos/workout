@@ -14,11 +14,7 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { height: 100%; }
-    body {
-      height: 100%;
-      overflow: hidden;
-      background: #0A0A0A;
-    }
+    body { height: 100%; overflow: hidden; background: #0A0A0A; }
     #root { height: 100%; }
     ::-webkit-scrollbar { display: none; }
     input[type=number]::-webkit-inner-spin-button,
@@ -27,8 +23,7 @@
 </head>
 <body>
   <div id="root"></div>
-  <script>
-const { useState, useRef, useEffect } = React;
+  <script>const { useState, useRef, useEffect } = React;
 // ── XP + LEVEL SYSTEM ────────────────────────────────────────────────────────
 // XP rewards scale with intensity. Each entry: { Light, Moderate, Hard, description }
 const XP_TABLE = [
@@ -1740,6 +1735,79 @@ function CardioLog({ cardioHistory, onClose, accentColor }) {
         }))))));
 }
 // ── WELCOME SCREEN ────────────────────────────────────────────────────────────
+// ── BROWSER DETECTION ────────────────────────────────────────────────────────
+function getBrowserInfo() {
+    const ua = navigator.userAgent;
+    const isIOS = /iphone|ipad|ipod/i.test(ua);
+    const isAndroid = /android/i.test(ua);
+    const isSafari = /safari/i.test(ua) && !/chrome|crios|fxios|opios/i.test(ua);
+    const isChrome = /chrome|crios/i.test(ua);
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+    return { isIOS, isAndroid, isSafari, isChrome, isStandalone };
+}
+function BrowserBanner() {
+    const [dismissed, setDismissed] = useState(false);
+    const { isIOS, isAndroid, isSafari, isChrome, isStandalone } = getBrowserInfo();
+    if (dismissed || isStandalone)
+        return null;
+    // iOS but not Safari — must switch
+    if (isIOS && !isSafari) {
+        return (React.createElement("div", { style: { position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 9999, background: "#1a0a00", borderTop: "2px solid #FF6B35", padding: "16px 20px", fontFamily: "'DM Sans',sans-serif", maxWidth: 420, margin: "0 auto" } },
+            React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 12 } },
+                React.createElement("div", { style: { flex: 1 } },
+                    React.createElement("div", { style: { fontSize: 13, fontWeight: 700, color: "#FF6B35", marginBottom: 4 } }, "Open in Safari to install"),
+                    React.createElement("div", { style: { fontSize: 12, color: "#888", lineHeight: 1.5 } },
+                        "JBR Fitness works best installed to your home screen. Copy this URL, open ",
+                        React.createElement("strong", { style: { color: "#ccc" } }, "Safari"),
+                        ", paste it, then tap ",
+                        React.createElement("strong", { style: { color: "#ccc" } }, "Share \u2192 Add to Home Screen"),
+                        ".")),
+                React.createElement("button", { onClick: () => setDismissed(true), style: { background: "none", border: "none", color: "#555", fontSize: 20, cursor: "pointer", flexShrink: 0, padding: "0 4px", lineHeight: 1 } }, "\u2715"))));
+    }
+    // iOS Safari — not yet installed
+    if (isIOS && isSafari) {
+        return (React.createElement("div", { style: { position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 9999, background: "#001a0a", borderTop: "2px solid #52E3A0", padding: "16px 20px", fontFamily: "'DM Sans',sans-serif", maxWidth: 420, margin: "0 auto" } },
+            React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 12 } },
+                React.createElement("div", { style: { flex: 1 } },
+                    React.createElement("div", { style: { fontSize: 13, fontWeight: 700, color: "#52E3A0", marginBottom: 4 } }, "Install to home screen"),
+                    React.createElement("div", { style: { fontSize: 12, color: "#888", lineHeight: 1.5 } },
+                        "Tap ",
+                        React.createElement("strong", { style: { color: "#ccc" } }, "Share \u2191"),
+                        " then ",
+                        React.createElement("strong", { style: { color: "#ccc" } }, "Add to Home Screen"),
+                        " for the full app experience \u2014 no browser bar.")),
+                React.createElement("button", { onClick: () => setDismissed(true), style: { background: "none", border: "none", color: "#555", fontSize: 20, cursor: "pointer", flexShrink: 0, padding: "0 4px", lineHeight: 1 } }, "\u2715"))));
+    }
+    // Android Chrome — can install directly
+    if (isAndroid && isChrome) {
+        return (React.createElement("div", { style: { position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 9999, background: "#001a0a", borderTop: "2px solid #52E3A0", padding: "16px 20px", fontFamily: "'DM Sans',sans-serif", maxWidth: 420, margin: "0 auto" } },
+            React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 12 } },
+                React.createElement("div", { style: { flex: 1 } },
+                    React.createElement("div", { style: { fontSize: 13, fontWeight: 700, color: "#52E3A0", marginBottom: 4 } }, "Install to home screen"),
+                    React.createElement("div", { style: { fontSize: 12, color: "#888", lineHeight: 1.5 } },
+                        "Tap the ",
+                        React.createElement("strong", { style: { color: "#ccc" } }, "\u22EE menu"),
+                        " then ",
+                        React.createElement("strong", { style: { color: "#ccc" } }, "Add to Home Screen"),
+                        " for the full app experience.")),
+                React.createElement("button", { onClick: () => setDismissed(true), style: { background: "none", border: "none", color: "#555", fontSize: 20, cursor: "pointer", flexShrink: 0, padding: "0 4px", lineHeight: 1 } }, "\u2715"))));
+    }
+    // Android but not Chrome
+    if (isAndroid && !isChrome) {
+        return (React.createElement("div", { style: { position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 9999, background: "#1a0a00", borderTop: "2px solid #FF6B35", padding: "16px 20px", fontFamily: "'DM Sans',sans-serif", maxWidth: 420, margin: "0 auto" } },
+            React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 12 } },
+                React.createElement("div", { style: { flex: 1 } },
+                    React.createElement("div", { style: { fontSize: 13, fontWeight: 700, color: "#FF6B35", marginBottom: 4 } }, "Open in Chrome for best experience"),
+                    React.createElement("div", { style: { fontSize: 12, color: "#888", lineHeight: 1.5 } },
+                        "Copy this URL, open ",
+                        React.createElement("strong", { style: { color: "#ccc" } }, "Chrome"),
+                        ", and paste it. Then tap ",
+                        React.createElement("strong", { style: { color: "#ccc" } }, "\u22EE \u2192 Add to Home Screen"),
+                        ".")),
+                React.createElement("button", { onClick: () => setDismissed(true), style: { background: "none", border: "none", color: "#555", fontSize: 20, cursor: "pointer", flexShrink: 0, padding: "0 4px", lineHeight: 1 } }, "\u2715"))));
+    }
+    return null;
+}
 function WelcomeScreen({ onComplete }) {
     const [name, setName] = useState("");
     const [days, setDays] = useState(3);
@@ -2096,28 +2164,31 @@ function WorkoutApp() {
             React.createElement("div", { style: { fontSize: 12, color: "#444", letterSpacing: "0.1em", textTransform: "uppercase" } }, "Loading...")));
     }
     if (showWelcome) {
-        return (React.createElement(WelcomeScreen, { onComplete: ({ name, goal, days }) => {
-                const newProfile = { name, goal, weight: "", height: "", age: "", bodyFat: "", chest: "", waist: "", arms: "", shoulders: "" };
-                setProfile(newProfile);
-                setDaysPerWeek(days);
-                setCustomSchedule(generateSchedule(days));
-                try {
-                    localStorage.setItem('jbr:profile', JSON.stringify(newProfile));
-                }
-                catch (e) { }
-                try {
-                    localStorage.setItem('jbr:daysPerWeek', JSON.stringify(days));
-                }
-                catch (e) { }
-                try {
-                    localStorage.setItem('jbr:customSchedule', JSON.stringify(generateSchedule(days)));
-                }
-                catch (e) { }
-                setShowWelcome(false);
-            } }));
+        return (React.createElement(React.Fragment, null,
+            React.createElement(WelcomeScreen, { onComplete: ({ name, goal, days }) => {
+                    const newProfile = { name, goal, weight: "", height: "", age: "", bodyFat: "", chest: "", waist: "", arms: "", shoulders: "" };
+                    setProfile(newProfile);
+                    setDaysPerWeek(days);
+                    setCustomSchedule(generateSchedule(days));
+                    try {
+                        localStorage.setItem('jbr:profile', JSON.stringify(newProfile));
+                    }
+                    catch (e) { }
+                    try {
+                        localStorage.setItem('jbr:daysPerWeek', JSON.stringify(days));
+                    }
+                    catch (e) { }
+                    try {
+                        localStorage.setItem('jbr:customSchedule', JSON.stringify(generateSchedule(days)));
+                    }
+                    catch (e) { }
+                    setShowWelcome(false);
+                } }),
+            React.createElement(BrowserBanner, null)));
     }
     return (React.createElement("div", { style: { height: "100dvh", background: TH.bg, color: TH.text, fontFamily: "'DM Sans','Helvetica Neue',sans-serif", maxWidth: 420, margin: "0 auto", display: "flex", flexDirection: "column", position: "relative" } },
         React.createElement("div", { style: { position: "absolute", inset: 0, pointerEvents: "none", zIndex: 0, background: `radial-gradient(ellipse at 20% 0%, ${TH.accent}12 0%, transparent 60%), radial-gradient(ellipse at 80% 100%, ${TH.accent2}0d 0%, transparent 60%)` } }),
+        React.createElement(BrowserBanner, null),
         showCardioLog && (React.createElement(CardioLog, { cardioHistory: cardioHistory, onClose: () => setShowCardioLog(false), accentColor: TH.accent })),
         activeTab === "home" && (React.createElement("div", { style: { flex: 1, overflowY: "auto", position: "relative", zIndex: 1, paddingBottom: 80 } },
             React.createElement("div", { style: { padding: "52px 24px 16px" } },
@@ -2498,7 +2569,6 @@ function WorkoutApp() {
       `)));
 }
 ReactDOM.createRoot(document.getElementById("root")).render(React.createElement(WorkoutApp));
-
-  </script>
+</script>
 </body>
 </html>
