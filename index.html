@@ -950,7 +950,7 @@ function FormGuideBody({ guide, color }) {
 // ── STRETCH TIMER CARD ────────────────────────────────────────────────────────
 function playChime() {
     try {
-        const ctx = new (window.AudioContext || (window.AudioContext || window.webkitAudioContext))();
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
         [0, 0.18, 0.36].forEach((delay, i) => {
             const osc = ctx.createOscillator();
             const gain = ctx.createGain();
@@ -1753,36 +1753,37 @@ function WelcomeScreen({ onComplete }) {
     const submitSetup = () => {
         onComplete({ name: name.trim(), goal, days });
     };
-    return (React.createElement("div", { style: { height: "100vh", background: "#0A0A0A", display: "flex", flexDirection: "column", justifyContent: "center", fontFamily: "'DM Sans','Helvetica Neue',sans-serif", maxWidth: 420, margin: "0 auto", padding: "0 28px" } },
-        React.createElement("div", { style: { marginBottom: 48 } },
-            React.createElement("div", { style: { fontSize: 36, fontWeight: 900, color: "#FF6B35", letterSpacing: "-0.03em" } }, "JBR"),
-            React.createElement("div", { style: { fontSize: 13, color: "#444", letterSpacing: "0.12em", textTransform: "uppercase", marginTop: 2 } }, "Fitness")),
-        step === 1 && (React.createElement(React.Fragment, null,
-            React.createElement("div", { style: { fontSize: 28, fontWeight: 800, color: "#F0EDE8", letterSpacing: "-0.02em", marginBottom: 8, lineHeight: 1.2 } }, "Welcome, Hunter."),
-            React.createElement("div", { style: { fontSize: 14, color: "#555", marginBottom: 40, lineHeight: 1.6 } }, "What should we call you?"),
-            React.createElement("input", { value: name, onChange: e => { setName(e.target.value); setError(""); }, onKeyDown: e => e.key === "Enter" && submitName(), placeholder: "Your name", autoFocus: true, style: { width: "100%", padding: "16px 18px", borderRadius: 14, background: "#141414", border: `1.5px solid ${error ? "#F87171" : "#222"}`, color: "#F0EDE8", fontSize: 18, outline: "none", fontFamily: "inherit", marginBottom: 8, transition: "border-color 0.15s" } }),
-            error && React.createElement("div", { style: { fontSize: 12, color: "#F87171", marginBottom: 12 } }, error),
-            React.createElement("button", { onClick: submitName, style: { width: "100%", padding: "16px", borderRadius: 14, background: "#FF6B35", border: "none", color: "#000", fontSize: 15, fontWeight: 800, cursor: "pointer", marginTop: 8, letterSpacing: "0.02em" } }, "Continue \u2192"))),
-        step === 2 && (React.createElement(React.Fragment, null,
-            React.createElement("div", { style: { fontSize: 28, fontWeight: 800, color: "#F0EDE8", letterSpacing: "-0.02em", marginBottom: 8, lineHeight: 1.2 } },
-                "Let's set you up,",
-                React.createElement("br", null),
-                React.createElement("span", { style: { color: "#FF6B35" } }, name),
-                "."),
-            React.createElement("div", { style: { fontSize: 14, color: "#555", marginBottom: 32, lineHeight: 1.6 } }, "A few quick settings \u2014 you can change these anytime."),
-            React.createElement("div", { style: { fontSize: 10, color: "#555", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 10 } }, "Your Goal"),
-            React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 8, marginBottom: 28 } }, goals.map(g => (React.createElement("button", { key: g, onClick: () => setGoal(g), style: { padding: "12px 16px", borderRadius: 12, cursor: "pointer", textAlign: "left", fontSize: 14, fontWeight: 600,
-                    background: goal === g ? "#FF6B3522" : "#141414",
-                    border: `1.5px solid ${goal === g ? "#FF6B35" : "#222"}`,
-                    color: goal === g ? "#FF6B35" : "#666",
-                    transition: "all 0.15s" } }, g)))),
-            React.createElement("div", { style: { fontSize: 10, color: "#555", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 10 } }, "Days Per Week"),
-            React.createElement("div", { style: { display: "flex", gap: 8, marginBottom: 36 } }, [2, 3, 4, 5, 6].map(d => (React.createElement("button", { key: d, onClick: () => setDays(d), style: { flex: 1, padding: "12px 0", borderRadius: 12, cursor: "pointer", fontSize: 15, fontWeight: 700,
-                    background: days === d ? "#FF6B3522" : "#141414",
-                    border: `1.5px solid ${days === d ? "#FF6B35" : "#222"}`,
-                    color: days === d ? "#FF6B35" : "#555",
-                    transition: "all 0.15s" } }, d)))),
-            React.createElement("button", { onClick: submitSetup, style: { width: "100%", padding: "16px", borderRadius: 14, background: "#FF6B35", border: "none", color: "#000", fontSize: 15, fontWeight: 800, cursor: "pointer", letterSpacing: "0.02em" } }, "Start Training \u2192")))));
+    return (React.createElement("div", { style: { height: "100vh", background: "#0A0A0A", overflowY: "auto", fontFamily: "'DM Sans','Helvetica Neue',sans-serif", maxWidth: 420, margin: "0 auto" } },
+        React.createElement("div", { style: { minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", padding: "60px 28px 48px" } },
+            React.createElement("div", { style: { marginBottom: 48 } },
+                React.createElement("div", { style: { fontSize: 36, fontWeight: 900, color: "#FF6B35", letterSpacing: "-0.03em" } }, "JBR"),
+                React.createElement("div", { style: { fontSize: 13, color: "#444", letterSpacing: "0.12em", textTransform: "uppercase", marginTop: 2 } }, "Fitness")),
+            step === 1 && (React.createElement(React.Fragment, null,
+                React.createElement("div", { style: { fontSize: 28, fontWeight: 800, color: "#F0EDE8", letterSpacing: "-0.02em", marginBottom: 8, lineHeight: 1.2 } }, "Welcome, Hunter."),
+                React.createElement("div", { style: { fontSize: 14, color: "#555", marginBottom: 40, lineHeight: 1.6 } }, "What should we call you?"),
+                React.createElement("input", { value: name, onChange: e => { setName(e.target.value); setError(""); }, onKeyDown: e => e.key === "Enter" && submitName(), placeholder: "Your name", autoFocus: true, style: { width: "100%", padding: "16px 18px", borderRadius: 14, background: "#141414", border: `1.5px solid ${error ? "#F87171" : "#222"}`, color: "#F0EDE8", fontSize: 18, outline: "none", fontFamily: "inherit", marginBottom: 8, transition: "border-color 0.15s" } }),
+                error && React.createElement("div", { style: { fontSize: 12, color: "#F87171", marginBottom: 12 } }, error),
+                React.createElement("button", { onClick: submitName, style: { width: "100%", padding: "16px", borderRadius: 14, background: "#FF6B35", border: "none", color: "#000", fontSize: 15, fontWeight: 800, cursor: "pointer", marginTop: 8, letterSpacing: "0.02em" } }, "Continue \u2192"))),
+            step === 2 && (React.createElement(React.Fragment, null,
+                React.createElement("div", { style: { fontSize: 28, fontWeight: 800, color: "#F0EDE8", letterSpacing: "-0.02em", marginBottom: 8, lineHeight: 1.2 } },
+                    "Let's set you up,",
+                    React.createElement("br", null),
+                    React.createElement("span", { style: { color: "#FF6B35" } }, name),
+                    "."),
+                React.createElement("div", { style: { fontSize: 14, color: "#555", marginBottom: 32, lineHeight: 1.6 } }, "A few quick settings \u2014 you can change these anytime."),
+                React.createElement("div", { style: { fontSize: 10, color: "#555", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 10 } }, "Your Goal"),
+                React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 8, marginBottom: 28 } }, goals.map(g => (React.createElement("button", { key: g, onClick: () => setGoal(g), style: { padding: "12px 16px", borderRadius: 12, cursor: "pointer", textAlign: "left", fontSize: 14, fontWeight: 600,
+                        background: goal === g ? "#FF6B3522" : "#141414",
+                        border: `1.5px solid ${goal === g ? "#FF6B35" : "#222"}`,
+                        color: goal === g ? "#FF6B35" : "#666",
+                        transition: "all 0.15s" } }, g)))),
+                React.createElement("div", { style: { fontSize: 10, color: "#555", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 10 } }, "Days Per Week"),
+                React.createElement("div", { style: { display: "flex", gap: 8, marginBottom: 36 } }, [2, 3, 4, 5, 6].map(d => (React.createElement("button", { key: d, onClick: () => setDays(d), style: { flex: 1, padding: "12px 0", borderRadius: 12, cursor: "pointer", fontSize: 15, fontWeight: 700,
+                        background: days === d ? "#FF6B3522" : "#141414",
+                        border: `1.5px solid ${days === d ? "#FF6B35" : "#222"}`,
+                        color: days === d ? "#FF6B35" : "#555",
+                        transition: "all 0.15s" } }, d)))),
+                React.createElement("button", { onClick: submitSetup, style: { width: "100%", padding: "16px", borderRadius: 14, background: "#FF6B35", border: "none", color: "#000", fontSize: 15, fontWeight: 800, cursor: "pointer", letterSpacing: "0.02em" } }, "Start Training \u2192"))))));
 }
 function WorkoutApp() {
     var _a;
