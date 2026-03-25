@@ -1461,6 +1461,7 @@ function PRList({ exercisePRs, color }) {
 function HunterProfile({ rankInfo, totalXP, profile, setProfile, checkIns, setCheckIns, weeklyCheckinDone, xpEvents, awardXP, intensity, cardioHistory = [], themeId, setThemeId, exercisePRs = {}, setShowCardioLog, workoutHistory = [], setShowWorkoutLog, onResetStats }) {
     const C = useC();
     const [resetConfirm, setResetConfirm] = useState(false);
+    const [expandedSession, setExpandedSession] = useState(null);
     const { current, next, xpInto, xpSpan, progress } = rankInfo;
     const [editingProfile, setEditingProfile] = useState(false);
     const [draft, setDraft] = useState(profile);
@@ -1544,6 +1545,49 @@ function HunterProfile({ rankInfo, totalXP, profile, setProfile, checkIns, setCh
                         React.createElement("div", { style: { fontSize: 9, color: C.muted } }, "Auto-tracked from workouts")),
                     Object.keys(exercisePRs).length === 0 ? (React.createElement("div", { style: { fontSize: 12, color: C.muted, textAlign: "center", padding: "8px 0" } }, "Log workouts to populate PRs automatically")) : (React.createElement(PRList, { exercisePRs: exercisePRs, color: current.color }))),
                 !profile.weight && Object.keys(exercisePRs).length === 0 && (React.createElement("div", { style: { textAlign: "center", padding: "12px", color: C.muted, fontSize: 13 } }, "Tap Edit to enter body stats \u2191"))))),
+        React.createElement("div", { style: { padding: "0 24px 20px" } },
+            React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 } },
+                React.createElement("div", { style: { fontSize: 10, color: C.muted, letterSpacing: "0.1em", textTransform: "uppercase" } }, "Workout Log"),
+                workoutHistory.length > 0 && (React.createElement("button", { onClick: () => setShowWorkoutLog === null || setShowWorkoutLog === void 0 ? void 0 : setShowWorkoutLog(true), style: { fontSize: 10, padding: "4px 10px", borderRadius: 8, background: C.btnBg, border: `1px solid ${C.btnBorder}`, color: C.muted, cursor: "pointer" } },
+                    "View All (",
+                    workoutHistory.length,
+                    ")"))),
+            workoutHistory.length === 0 ? (React.createElement("div", { style: { fontSize: 12, color: C.muted, padding: "4px 0" } }, "No workouts logged yet")) : (React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 8 } }, workoutHistory.slice(0, 3).map((s, i) => {
+                var _a, _b;
+                const plan = WORKOUT_PLANS[s.workout];
+                const color = (plan === null || plan === void 0 ? void 0 : plan.color) || "#555";
+                const isOpen = expandedSession === i;
+                return (React.createElement("div", { key: i, style: { background: C.card, borderRadius: 14, border: `1px solid ${isOpen ? color + "55" : C.cardBorder}`, overflow: "hidden", transition: "border-color 0.15s" } },
+                    React.createElement("div", { onClick: () => setExpandedSession(isOpen ? null : i), style: { padding: "12px 14px", display: "flex", alignItems: "center", gap: 10, cursor: "pointer" } },
+                        React.createElement("div", { style: { width: 32, height: 32, borderRadius: 9, background: color + "22", border: `1px solid ${color}44`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 } }, ((_a = IC[PLAN_ICON[s.workout]]) === null || _a === void 0 ? void 0 : _a.call(IC, color, 18)) || IC.Active(color, 18)),
+                        React.createElement("div", { style: { flex: 1 } },
+                            React.createElement("div", { style: { fontSize: 13, fontWeight: 600, color: C.text } }, s.workout),
+                            React.createElement("div", { style: { fontSize: 10, color: C.muted, marginTop: 1 } },
+                                s.setsCompleted,
+                                " sets \u00B7 ",
+                                s.duration,
+                                "min \u00B7 ",
+                                React.createElement("span", { style: { color: (_b = INTENSITY_CONFIG[s.intensity]) === null || _b === void 0 ? void 0 : _b.color } }, s.intensity))),
+                        React.createElement("div", { style: { textAlign: "right" } },
+                            React.createElement("div", { style: { fontSize: 12, fontWeight: 700, color: current.color } },
+                                "+",
+                                s.xpEarned,
+                                " XP"),
+                            React.createElement("div", { style: { fontSize: 9, color: C.muted } }, s.date)),
+                        React.createElement("div", { style: { fontSize: 11, color: C.muted, transform: isOpen ? "rotate(180deg)" : "none", transition: "transform 0.2s", marginLeft: 4 } }, "\u25BE")),
+                    isOpen && (React.createElement("div", { style: { background: C.deep, borderTop: `1px solid ${C.cardBorder}`, padding: "12px 14px" } },
+                        React.createElement("div", { style: { fontSize: 9, color: C.muted, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 8 } }, "Exercises Logged"),
+                        Object.keys(s.exercises || {}).length === 0 ? (React.createElement("div", { style: { fontSize: 12, color: C.muted } }, "No set data recorded")) : (React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 6 } }, Object.entries(s.exercises).map(([name, sets]) => (React.createElement("div", { key: name, style: { display: "flex", justifyContent: "space-between", alignItems: "center" } },
+                            React.createElement("div", { style: { fontSize: 12, color: C.text } }, name),
+                            React.createElement("div", { style: { display: "flex", gap: 5, flexWrap: "wrap", justifyContent: "flex-end" } }, (sets || []).map((set, j) => (React.createElement("div", { key: j, style: { fontSize: 10, padding: "2px 7px", borderRadius: 8, background: color + "22", color } },
+                                set.weight > 0 ? `${set.weight}lb` : "",
+                                set.weight > 0 && set.reps > 0 ? " × " : "",
+                                set.reps > 0 ? `${set.reps}` : ""))))))))),
+                        React.createElement("div", { style: { fontSize: 9, color: C.muted, marginTop: 8 } },
+                            s.time,
+                            " \u00B7 ",
+                            s.date)))));
+            })))),
         React.createElement("div", { style: { padding: "0 24px 20px" } },
             React.createElement("div", { style: { fontSize: 10, color: C.muted, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 12 } }, "XP Rewards"),
             React.createElement("div", { style: { background: C.card, borderRadius: 14, border: "1.5px solid #1e1e1e", overflow: "hidden" } },
@@ -1643,35 +1687,6 @@ function HunterProfile({ rankInfo, totalXP, profile, setProfile, checkIns, setCh
                     isCurrent && React.createElement("div", { style: { fontSize: 10, color: r.color, fontWeight: 800, letterSpacing: "0.05em" } }, "YOU"),
                     !isCurrent && unlocked && React.createElement("div", { style: { fontSize: 12, color: C.muted } }, "\u2713")));
             }))),
-        React.createElement("div", { style: { padding: "0 24px 20px" } },
-            React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 } },
-                React.createElement("div", { style: { fontSize: 10, color: C.muted, letterSpacing: "0.1em", textTransform: "uppercase" } }, "Workout Log"),
-                workoutHistory.length > 0 && (React.createElement("button", { onClick: () => setShowWorkoutLog === null || setShowWorkoutLog === void 0 ? void 0 : setShowWorkoutLog(true), style: { fontSize: 10, padding: "4px 10px", borderRadius: 8, background: C.btnBg, border: `1px solid ${C.btnBorder}`, color: C.muted, cursor: "pointer" } },
-                    "View All (",
-                    workoutHistory.length,
-                    ")"))),
-            workoutHistory.length === 0 ? (React.createElement("div", { style: { fontSize: 12, color: C.muted, padding: "10px 0" } }, "No workouts logged yet")) : (React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 7 } }, workoutHistory.slice(0, 3).map((s, i) => {
-                var _a;
-                const plan = WORKOUT_PLANS[s.workout];
-                const color = (plan === null || plan === void 0 ? void 0 : plan.color) || "#555";
-                return (React.createElement("div", { key: i, style: { background: C.deep, borderRadius: 12, padding: "11px 14px", border: `1px solid ${color}22`, display: "flex", alignItems: "center", justifyContent: "space-between" } },
-                    React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 10 } },
-                        React.createElement("div", { style: { width: 28, height: 28, borderRadius: 8, background: color + "22", border: `1px solid ${color}44`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 } }, ((_a = IC[PLAN_ICON[s.workout]]) === null || _a === void 0 ? void 0 : _a.call(IC, color, 16)) || IC.Active(color, 16)),
-                        React.createElement("div", null,
-                            React.createElement("div", { style: { fontSize: 12, fontWeight: 600, color: C.text } }, s.workout),
-                            React.createElement("div", { style: { fontSize: 10, color: C.muted } },
-                                s.setsCompleted,
-                                " sets \u00B7 ",
-                                s.duration,
-                                "min \u00B7 ",
-                                s.intensity))),
-                    React.createElement("div", { style: { textAlign: "right" } },
-                        React.createElement("div", { style: { fontSize: 11, fontWeight: 700, color: current.color } },
-                            "+",
-                            s.xpEarned,
-                            " XP"),
-                        React.createElement("div", { style: { fontSize: 9, color: C.muted } }, s.date))));
-            })))),
         React.createElement("div", { style: { padding: "20px 24px 32px" } },
             React.createElement("div", { style: { fontSize: 10, color: current.color, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 12 } }, "App Theme"),
             React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 8 } }, Object.values(APP_THEMES).map(theme => {
