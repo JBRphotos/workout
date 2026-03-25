@@ -18,7 +18,6 @@
       height: 100%;
       overflow: hidden;
       background: #0A0A0A;
-      padding-bottom: env(safe-area-inset-bottom);
     }
     #root { height: 100%; }
     ::-webkit-scrollbar { display: none; }
@@ -2092,7 +2091,7 @@ function WorkoutApp() {
                     plan.exercises.length - 3))));
     };
     if (!storageReady) {
-        return (React.createElement("div", { style: { height: "100vh", background: "#0A0A0A", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", fontFamily: "'DM Sans',sans-serif" } },
+        return (React.createElement("div", { style: { height: "100dvh", background: "#0A0A0A", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", fontFamily: "'DM Sans',sans-serif" } },
             React.createElement("div", { style: { fontSize: 28, fontWeight: 900, color: "#FF6B35", letterSpacing: "-0.02em", marginBottom: 12 } }, "JBR"),
             React.createElement("div", { style: { fontSize: 12, color: "#444", letterSpacing: "0.1em", textTransform: "uppercase" } }, "Loading...")));
     }
@@ -2117,7 +2116,7 @@ function WorkoutApp() {
                 setShowWelcome(false);
             } }));
     }
-    return (React.createElement("div", { style: { height: "100vh", background: TH.bg, color: TH.text, fontFamily: "'DM Sans','Helvetica Neue',sans-serif", maxWidth: 420, margin: "0 auto", display: "flex", flexDirection: "column", position: "relative" } },
+    return (React.createElement("div", { style: { height: "100dvh", background: TH.bg, color: TH.text, fontFamily: "'DM Sans','Helvetica Neue',sans-serif", maxWidth: 420, margin: "0 auto", display: "flex", flexDirection: "column", position: "relative" } },
         React.createElement("div", { style: { position: "absolute", inset: 0, pointerEvents: "none", zIndex: 0, background: `radial-gradient(ellipse at 20% 0%, ${TH.accent}12 0%, transparent 60%), radial-gradient(ellipse at 80% 100%, ${TH.accent2}0d 0%, transparent 60%)` } }),
         showCardioLog && (React.createElement(CardioLog, { cardioHistory: cardioHistory, onClose: () => setShowCardioLog(false), accentColor: TH.accent })),
         activeTab === "home" && (React.createElement("div", { style: { flex: 1, overflowY: "auto", position: "relative", zIndex: 1, paddingBottom: 80 } },
@@ -2478,7 +2477,7 @@ function WorkoutApp() {
                     " XP"),
                 React.createElement("div", { style: { fontSize: 11, color: C.muted, marginTop: 2 } }, showXPToast.label)))),
         activeTab === "profile" && (React.createElement(HunterProfile, { rankInfo: rankInfo, totalXP: totalXP, profile: profile, setProfile: setProfile, checkIns: checkIns, setCheckIns: setCheckIns, weeklyCheckinDone: weeklyCheckinDone, xpEvents: xpEvents, awardXP: awardXP, intensity: intensity, cardioHistory: cardioHistory, exercisePRs: exercisePRs, themeId: themeId, setThemeId: setThemeId, setShowCardioLog: setShowCardioLog })),
-        React.createElement("div", { style: { flexShrink: 0, position: "relative", zIndex: 100, background: TH.bg === "FFFFFF" || TH.bg === "#FFFFFF" ? "rgba(255,255,255,0.97)" : `rgba(10,10,10,0.98)`, backdropFilter: "blur(20px)", borderTop: `1px solid ${TH.border}`, display: "flex", justifyContent: "space-around", padding: "10px 0 20px" } }, [
+        React.createElement("div", { style: { flexShrink: 0, position: "relative", zIndex: 100, background: TH.bg === "FFFFFF" || TH.bg === "#FFFFFF" ? "rgba(255,255,255,0.97)" : `rgba(10,10,10,0.98)`, backdropFilter: "blur(20px)", borderTop: `1px solid ${TH.border}`, display: "flex", justifyContent: "space-around", paddingTop: "10px", paddingBottom: "calc(16px + env(safe-area-inset-bottom))" } }, [
             { id: "home", key: "Home", label: "Home" },
             { id: "active", key: "Active", label: "Active" },
             { id: "library", key: "Library", label: "Library" },
