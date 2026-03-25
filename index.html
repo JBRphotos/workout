@@ -13,7 +13,13 @@
   <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; overflow: hidden; background: #0A0A0A; }
+    html { height: 100%; }
+    body {
+      height: 100%;
+      overflow: hidden;
+      background: #0A0A0A;
+      padding-bottom: env(safe-area-inset-bottom);
+    }
     #root { height: 100%; }
     ::-webkit-scrollbar { display: none; }
     input[type=number]::-webkit-inner-spin-button,
@@ -1753,8 +1759,8 @@ function WelcomeScreen({ onComplete }) {
     const submitSetup = () => {
         onComplete({ name: name.trim(), goal, days });
     };
-    return (React.createElement("div", { style: { height: "100vh", background: "#0A0A0A", overflowY: "auto", fontFamily: "'DM Sans','Helvetica Neue',sans-serif", maxWidth: 420, margin: "0 auto" } },
-        React.createElement("div", { style: { minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", padding: "60px 28px 48px" } },
+    return (React.createElement("div", { style: { minHeight: "100dvh", background: "#0A0A0A", overflowY: "auto", fontFamily: "'DM Sans','Helvetica Neue',sans-serif", maxWidth: 420, margin: "0 auto" } },
+        React.createElement("div", { style: { padding: "60px 28px 120px" } },
             React.createElement("div", { style: { marginBottom: 48 } },
                 React.createElement("div", { style: { fontSize: 36, fontWeight: 900, color: "#FF6B35", letterSpacing: "-0.03em" } }, "JBR"),
                 React.createElement("div", { style: { fontSize: 13, color: "#444", letterSpacing: "0.12em", textTransform: "uppercase", marginTop: 2 } }, "Fitness")),
