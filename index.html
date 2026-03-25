@@ -1326,14 +1326,30 @@ function CardioLogger({ workoutColor, onComplete, onCancel }) {
     const [running, setRunning] = useState(false);
     const [elapsed, setElapsed] = useState(0);
     const timerRef = useRef(null);
+    const startRef = useRef(null);
+    const baseRef = useRef(0);
     const ct = CARDIO_TYPES.find(c => c.id === cardioType);
     useEffect(() => {
         if (running) {
-            timerRef.current = setInterval(() => setElapsed(t => t + 1), 1000);
+            startRef.current = Date.now();
+            timerRef.current = setInterval(() => {
+                setElapsed(Math.floor(baseRef.current + (Date.now() - startRef.current) / 1000));
+            }, 500);
+            const onVisible = () => {
+                if (!document.hidden && startRef.current) {
+                    setElapsed(Math.floor(baseRef.current + (Date.now() - startRef.current) / 1000));
+                }
+            };
+            document.addEventListener('visibilitychange', onVisible);
+            return () => { clearInterval(timerRef.current); document.removeEventListener('visibilitychange', onVisible); };
         }
-        else
+        else {
+            if (startRef.current) {
+                baseRef.current += (Date.now() - startRef.current) / 1000;
+                startRef.current = null;
+            }
             clearInterval(timerRef.current);
-        return () => clearInterval(timerRef.current);
+        }
     }, [running]);
     const formatElapsed = s => {
         const h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), sec = s % 60;
@@ -2110,13 +2126,26 @@ function WorkoutApp() {
     const chatEndRef = useRef(null);
     const inputRef = useRef(null);
     useEffect(() => { setTimeout(() => { var _a; return (_a = chatEndRef.current) === null || _a === void 0 ? void 0 : _a.scrollIntoView({ behavior: "smooth" }); }, 80); }, [messages]);
+    const workoutStartRef = useRef(null);
+    const workoutBaseRef = useRef(0);
     useEffect(() => {
         if (workoutActive) {
-            timerRef.current = setInterval(() => setWorkoutTimer(t => t + 1), 1000);
+            workoutStartRef.current = Date.now() - workoutBaseRef.current * 1000;
+            timerRef.current = setInterval(() => {
+                setWorkoutTimer(Math.floor((Date.now() - workoutStartRef.current) / 1000));
+            }, 500);
+            const onVisible = () => {
+                if (!document.hidden && workoutStartRef.current) {
+                    setWorkoutTimer(Math.floor((Date.now() - workoutStartRef.current) / 1000));
+                }
+            };
+            document.addEventListener('visibilitychange', onVisible);
+            return () => { clearInterval(timerRef.current); document.removeEventListener('visibilitychange', onVisible); };
         }
-        else
+        else {
+            workoutBaseRef.current = workoutTimer;
             clearInterval(timerRef.current);
-        return () => clearInterval(timerRef.current);
+        }
     }, [workoutActive]);
     const formatTime = s => `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
     const toggleSet = (name, idx) => setCompletedSets(prev => { const k = `${name}-${idx}`; return Object.assign(Object.assign({}, prev), { [k]: !prev[k] }); });
