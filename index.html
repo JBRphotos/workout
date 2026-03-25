@@ -1936,6 +1936,7 @@ function BrowserBanner() {
     return null;
 }
 function WelcomeScreen({ onComplete }) {
+    const C = useC();
     const [name, setName] = useState("");
     const [days, setDays] = useState(3);
     const [goal, setGoal] = useState("Build Muscle");
@@ -1964,7 +1965,7 @@ function WelcomeScreen({ onComplete }) {
             step === 1 && (React.createElement(React.Fragment, null,
                 React.createElement("div", { style: { fontSize: 28, fontWeight: 800, color: "#F0EDE8", letterSpacing: "-0.02em", marginBottom: 8, lineHeight: 1.2 } }, "Welcome, Hunter."),
                 React.createElement("div", { style: { fontSize: 14, color: "#555", marginBottom: 40, lineHeight: 1.6 } }, "What should we call you?"),
-                React.createElement("input", { value: name, onChange: e => { setName(e.target.value); setError(""); }, onKeyDown: e => e.key === "Enter" && submitName(), placeholder: "Your name", autoFocus: true, style: { width: "100%", padding: "16px 18px", borderRadius: 14, background: C.input, border: `1.5px solid ${error ? "#F87171" : "#222"}`, color: "#F0EDE8", fontSize: 18, outline: "none", fontFamily: "inherit", marginBottom: 8, transition: "border-color 0.15s" } }),
+                React.createElement("input", { value: name, onChange: e => { setName(e.target.value); setError(""); }, onKeyDown: e => e.key === "Enter" && submitName(), placeholder: "Your name", autoFocus: true, style: { width: "100%", padding: "16px 18px", borderRadius: 14, background: "#141414", border: `1.5px solid ${error ? "#F87171" : "#222"}`, color: "#F0EDE8", fontSize: 18, outline: "none", fontFamily: "inherit", marginBottom: 8, transition: "border-color 0.15s" } }),
                 error && React.createElement("div", { style: { fontSize: 12, color: "#F87171", marginBottom: 12 } }, error))),
             step === 2 && (React.createElement(React.Fragment, null,
                 React.createElement("div", { style: { fontSize: 28, fontWeight: 800, color: "#F0EDE8", letterSpacing: "-0.02em", marginBottom: 8, lineHeight: 1.2 } },
@@ -1975,13 +1976,13 @@ function WelcomeScreen({ onComplete }) {
                 React.createElement("div", { style: { fontSize: 14, color: "#555", marginBottom: 32, lineHeight: 1.6 } }, "A few quick settings \u2014 you can change these anytime."),
                 React.createElement("div", { style: { fontSize: 10, color: "#555", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 10 } }, "Your Goal"),
                 React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 8, marginBottom: 28 } }, goals.map(g => (React.createElement("button", { key: g, onClick: () => setGoal(g), style: { padding: "12px 16px", borderRadius: 12, cursor: "pointer", textAlign: "left", fontSize: 14, fontWeight: 600,
-                        background: goal === g ? "#FF6B3522" : C.input,
+                        background: goal === g ? "#FF6B3522" : "#141414",
                         border: `1.5px solid ${goal === g ? "#FF6B35" : "#222"}`,
                         color: goal === g ? "#FF6B35" : "#666",
                         transition: "all 0.15s" } }, g)))),
                 React.createElement("div", { style: { fontSize: 10, color: "#555", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 10 } }, "Days Per Week"),
                 React.createElement("div", { style: { display: "flex", gap: 8 } }, [2, 3, 4, 5, 6].map(d => (React.createElement("button", { key: d, onClick: () => setDays(d), style: { flex: 1, padding: "12px 0", borderRadius: 12, cursor: "pointer", fontSize: 15, fontWeight: 700,
-                        background: days === d ? "#FF6B3522" : C.input,
+                        background: days === d ? "#FF6B3522" : "#141414",
                         border: `1.5px solid ${days === d ? "#FF6B35" : "#222"}`,
                         color: days === d ? "#FF6B35" : "#555",
                         transition: "all 0.15s" } }, d)))))))));
