@@ -1259,6 +1259,17 @@ const CARDIO_TYPES = [
             React.createElement("line", { x1: "12", y1: "4", x2: "12", y2: "9" }),
             React.createElement("line", { x1: "8", y1: "6", x2: "12", y2: "9" }),
             React.createElement("line", { x1: "16", y1: "6", x2: "12", y2: "9" })) },
+    { id: "stairmaster", label: "StairMaster", color: "#F7DC6F", hasIncline: false, speedLabel: "Steps/min", distLabel: "Flights",
+        icon: (c, s = 22) => React.createElement("svg", { width: s, height: s, viewBox: "0 0 24 24", fill: "none", stroke: c, strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" },
+            React.createElement("polyline", { points: "3,21 3,15 9,15 9,9 15,9 15,3 21,3" }),
+            React.createElement("line", { x1: "3", y1: "21", x2: "21", y2: "21" })) },
+    { id: "rowing", label: "Row", color: "#4DD0E1", hasIncline: false, speedLabel: "Split (min/500m)", distLabel: "Meters",
+        icon: (c, s = 22) => React.createElement("svg", { width: s, height: s, viewBox: "0 0 24 24", fill: "none", stroke: c, strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" },
+            React.createElement("circle", { cx: "18", cy: "6", r: "2" }),
+            React.createElement("path", { d: "M3 18 Q8 14 12 15 Q16 16 20 12" }),
+            React.createElement("line", { x1: "12", y1: "15", x2: "10", y2: "9" }),
+            React.createElement("line", { x1: "6", y1: "18", x2: "10", y2: "9" }),
+            React.createElement("line", { x1: "10", y1: "9", x2: "14", y2: "11" })) },
 ];
 // XP formula: base + pace bonus
 // Pace bonus: for runs, sub-8min/mi = elite, sub-10 = strong, sub-12 = solid
