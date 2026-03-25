@@ -7,14 +7,14 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="JBR Fitness">
-  <meta name="theme-color" content="#0A0A0A">
+  <meta name="theme-color" content="#05050F">
   <title>JBR Fitness</title>
   <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
   <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { height: 100%; }
-    body { height: 100%; overflow: hidden; background: #0A0A0A; }
+    body { height: 100%; overflow: hidden; background: #05050F; }
     #root { height: 100%; }
     ::-webkit-scrollbar { display: none; }
     input[type=number]::-webkit-inner-spin-button,
@@ -1864,7 +1864,7 @@ function WorkoutApp() {
     const [showWelcome, setShowWelcome] = useState(false);
     // ── PERSISTENT STATE ──────────────────────────────────────────────────────
     const [daysPerWeek, setDaysPerWeek] = useState(3);
-    const [themeId, setThemeId] = useState("dark");
+    const [themeId, setThemeId] = useState("cyber");
     const [intensity, setIntensity] = useState("Moderate");
     const [totalXP, setTotalXP] = useState(0);
     const [profile, setProfile] = useState({ name: "Jesse", weight: "", height: "", age: "", bodyFat: "", chest: "", waist: "", arms: "", shoulders: "" });
