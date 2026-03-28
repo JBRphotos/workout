@@ -2604,7 +2604,7 @@ function WorkoutShareScreen({ summary, profile, onClose }) {
     const textAlign = ["tl", "bl"].includes(position) ? "left" : ["tr", "br"].includes(position) ? "right" : "center";
     const flexJust = textAlign === "center" ? "center" : textAlign === "right" ? "flex-end" : "flex-start";
     return (React.createElement("div", { style: { position: "fixed", inset: 0, zIndex: 600, background: "#000", fontFamily: "'DM Sans',sans-serif" } },
-        React.createElement("video", { ref: videoRef, playsInline: true, muted: true, autoPlay: true, style: { position: "fixed", top: 0, left: 0, width: "100vw", height: "100vh", objectFit: "cover", zIndex: 0, opacity: camReady ? 1 : 0, transition: "opacity 0.3s" } }),
+        React.createElement("video", { ref: videoRef, playsInline: true, muted: true, autoPlay: true, style: { position: "fixed", top: 0, left: 0, width: "100vw", height: "100vh", objectFit: "cover", zIndex: 0, opacity: camReady ? 1 : 0, transition: "opacity 0.3s", transform: facing === "user" ? "scaleX(-1)" : "none" } }),
         camError && React.createElement("div", { style: { position: "absolute", inset: 0, background: "linear-gradient(135deg, #0A0A14 0%, #0d0d20 100%)", zIndex: 1 } }),
         !camReady && !camError && React.createElement("div", { style: { position: "absolute", inset: 0, background: "#000", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1 } },
             React.createElement("div", { style: { fontSize: 11, color: "#444", letterSpacing: "0.12em" } }, "LOADING CAMERA\u2026")),
