@@ -1017,7 +1017,7 @@ function StretchCard({ stretch, color, defaultDur }) {
             clearInterval(timerRef.current);
         return () => clearInterval(timerRef.current);
     }, [active]);
-    const reset = () => { setActive(false); setDone(false); setRemaining(dur); };
+    const reset = () => { setDone(false); setRemaining(dur); setActive(true); unlockAudio(); };
     const progress = done ? 1 : (dur - remaining) / dur;
     const muscles = stretch.muscles || [];
     return (React.createElement("div", { style: { background: done ? color + "15" : C.card, borderRadius: 14, border: `1.5px solid ${done ? color + "55" : C.cardBorder}`, transition: "all 0.2s" } },
