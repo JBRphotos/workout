@@ -2596,15 +2596,21 @@ function WorkoutShareScreen({ summary, profile, onClose }) {
         setShowSettings(false);
     };
     const capturePhoto = async () => {
-        var _a, _b;
         const vid = videoRef.current;
         const canvas = canvasRef.current;
-        if (!vid || !canvas || !camReady)
+        if (!vid || !canvas) {
+            alert("Missing vid or canvas");
             return;
+        }
+        if (!camReady) {
+            alert("Camera not ready");
+            return;
+        }
         setFlashAnim(true);
         setTimeout(() => setFlashAnim(false), 300);
         const vw = vid.videoWidth || window.innerWidth;
         const vh = vid.videoHeight || window.innerHeight;
+        alert(`Video size: ${vw}x${vh}`);
         canvas.width = vw;
         canvas.height = vh;
         const ctx = canvas.getContext("2d");
@@ -2617,146 +2623,33 @@ function WorkoutShareScreen({ summary, profile, onClose }) {
         if (facing === "user") {
             ctx.setTransform(1, 0, 0, 1, 0, 0);
         }
-        // Scale factor: canvas px per screen px
-        const sx = vw / window.innerWidth;
-        const sy = vh / window.innerHeight;
-        // ── Helper ──────────────────────────────────────────────
-        const px = (n) => n * sx;
-        const py = (n) => n * sy;
-        ctx.textBaseline = "top";
-        // ── VIGNETTE ──
-        const vig = ctx.createRadialGradient(vw / 2, vh / 2, vh * 0.18, vw / 2, vh / 2, vh * 0.72);
-        vig.addColorStop(0, "rgba(0,0,0,0)");
-        vig.addColorStop(1, "rgba(0,0,0,0.45)");
-        ctx.fillStyle = vig;
-        ctx.fillRect(0, 0, vw, vh);
-        // ── STATS BLOCK ──
-        const posMap = {
-            tl: { x: px(20), y: py(110) },
-            tr: { x: vw - px(20), y: py(110) },
-            bl: { x: px(20), y: vh - py(240) },
-            br: { x: vw - px(20), y: vh - py(240) },
-            center: { x: vw / 2, y: vh / 2 - py(60) },
-        };
-        const spos = posMap[position] || posMap.center;
-        const isRight = ["tr", "br"].includes(position);
-        const isCenter = position === "center";
-        ctx.textAlign = isCenter ? "center" : isRight ? "right" : "left";
-        const dateSz = px(9 * sc);
-        const nameSz = px(28 * sc);
-        const valSz = px(22 * sc);
-        const labelSz = px(8 * sc);
-        const gap = px(20 * sc);
-        // Date
-        ctx.font = `600 ${dateSz}px 'Helvetica Neue', Arial, sans-serif`;
-        ctx.fillStyle = "rgba(255,255,255,0.65)";
-        ctx.shadowColor = "rgba(0,0,0,0.8)";
-        ctx.shadowBlur = px(6);
-        ctx.fillText(new Date().toLocaleDateString([], { weekday: "long", month: "short", day: "numeric" }).toUpperCase(), spos.x, spos.y);
-        // Workout name
-        ctx.font = `900 ${nameSz}px 'Helvetica Neue', Arial, sans-serif`;
-        ctx.fillStyle = "#ffffff";
-        ctx.shadowBlur = px(14);
-        const wname = (workout || "").replace("Bodyweight ", "BW ");
-        ctx.fillText(wname, spos.x, spos.y + dateSz + py(6));
-        // Stats row
-        const statsY = spos.y + dateSz + py(6) + nameSz + py(14);
-        const stats = [{ label: "DURATION", value: formatDur }, { label: "XP EARNED", value: `+${xpEarned}` }];
-        ctx.shadowBlur = px(10);
-        if (isCenter) {
-            const totalW = stats.length * valSz * 2.5 + (stats.length - 1) * gap;
-            let sx2 = vw / 2 - totalW / 2;
-            for (const s of stats) {
-                ctx.textAlign = "left";
-                ctx.font = `900 ${valSz}px 'Helvetica Neue', Arial, sans-serif`;
-                ctx.fillStyle = "#fff";
-                ctx.fillText(s.value, sx2, statsY);
-                ctx.font = `600 ${labelSz}px 'Helvetica Neue', Arial, sans-serif`;
-                ctx.fillStyle = "rgba(255,255,255,0.6)";
-                ctx.fillText(s.label, sx2, statsY + valSz + py(3));
-                sx2 += ctx.measureText(s.value).width + gap + px(20);
-            }
-            ctx.textAlign = "center";
-        }
-        else {
-            let offset = 0;
-            for (const s of (isRight ? [...stats].reverse() : stats)) {
-                ctx.font = `900 ${valSz}px 'Helvetica Neue', Arial, sans-serif`;
-                ctx.fillStyle = "#fff";
-                const valW = ctx.measureText(s.value).width;
-                const drawX = isRight ? spos.x - offset : spos.x + offset;
-                ctx.fillText(s.value, drawX, statsY);
-                ctx.font = `600 ${labelSz}px 'Helvetica Neue', Arial, sans-serif`;
-                ctx.fillStyle = "rgba(255,255,255,0.6)";
-                ctx.fillText(s.label, drawX, statsY + valSz + py(3));
-                offset += valW + gap + (isRight ? 0 : px(10));
-            }
-        }
-        // ── RANK BADGE ──
-        const badgeX = px(20), badgeY = py(56);
-        const bw = px(40), bh = py(40);
-        ctx.shadowBlur = 0;
-        ctx.fillStyle = "rgba(0,0,0,0.55)";
-        roundRect(ctx, badgeX, badgeY, bw, bh, px(10));
-        ctx.strokeStyle = ((rank === null || rank === void 0 ? void 0 : rank.color) || "#888") + "99";
-        ctx.lineWidth = px(1.5);
-        roundRect(ctx, badgeX, badgeY, bw, bh, px(10), false);
-        ctx.textAlign = "center";
-        ctx.font = `700 ${px(7)}px 'Helvetica Neue', Arial, sans-serif`;
-        ctx.fillStyle = (rank === null || rank === void 0 ? void 0 : rank.color) || "#888";
-        ctx.fillText("LVL", badgeX + bw / 2, badgeY + py(7));
-        ctx.font = `900 ${px(16)}px 'Helvetica Neue', Arial, sans-serif`;
-        ctx.fillText(String((rank === null || rank === void 0 ? void 0 : rank.level) || ""), badgeX + bw / 2, badgeY + py(16));
-        // XP bar under badge
-        const barY = badgeY + bh + py(4);
-        ctx.fillStyle = "rgba(255,255,255,0.15)";
-        ctx.beginPath();
-        (_a = ctx.roundRect) === null || _a === void 0 ? void 0 : _a.call(ctx, badgeX, barY, bw, py(3), py(2));
-        ctx.fill();
-        const prog = Math.min(1, (rankInfo === null || rankInfo === void 0 ? void 0 : rankInfo.progress) || 0);
-        const grad = ctx.createLinearGradient(badgeX, 0, badgeX + bw, 0);
-        grad.addColorStop(0, (rank === null || rank === void 0 ? void 0 : rank.color) || "#888");
-        grad.addColorStop(1, "#A855F7");
-        ctx.fillStyle = grad;
-        ctx.beginPath();
-        (_b = ctx.roundRect) === null || _b === void 0 ? void 0 : _b.call(ctx, badgeX, barY, bw * prog, py(3), py(2));
-        ctx.fill();
-        // Rank title
-        ctx.textAlign = "left";
-        ctx.font = `700 ${px(12)}px 'Helvetica Neue', Arial, sans-serif`;
-        ctx.fillStyle = "#fff";
-        ctx.shadowColor = "rgba(0,0,0,0.9)";
-        ctx.shadowBlur = px(6);
-        ctx.fillText((rank === null || rank === void 0 ? void 0 : rank.title) || "", badgeX + bw + px(10), badgeY + py(8));
-        ctx.font = `400 ${px(9)}px 'Helvetica Neue', Arial, sans-serif`;
-        ctx.fillStyle = "rgba(255,255,255,0.45)";
-        ctx.fillText("Rank " + ((rank === null || rank === void 0 ? void 0 : rank.rank) || ""), badgeX + bw + px(10), badgeY + py(22));
-        // ── BRANDING ──
-        ctx.shadowBlur = px(8);
-        ctx.font = `900 ${px(14)}px 'Helvetica Neue', Arial, sans-serif`;
-        ctx.fillStyle = "#fff";
-        ctx.fillText("Level Up", px(20), vh - py(110));
-        ctx.font = `400 ${px(9)}px 'Helvetica Neue', Arial, sans-serif`;
-        ctx.fillStyle = "rgba(255,255,255,0.4)";
-        ctx.fillText(`WORKOUT TRACKER · ${(profile === null || profile === void 0 ? void 0 : profile.name) || ""}`, px(20), vh - py(96));
-        ctx.shadowBlur = 0;
-        // Export
+        // Test: just draw a red rectangle to confirm canvas works
+        ctx.fillStyle = "red";
+        ctx.fillRect(50, 50, 200, 200);
         canvas.toBlob(async (blob) => {
             var _a;
-            if (!blob)
+            if (!blob) {
+                alert("toBlob failed — blob is null");
                 return;
+            }
+            alert(`Blob size: ${blob.size} bytes. Attempting share...`);
             const file = new File([blob], "levelup-workout.jpg", { type: "image/jpeg" });
-            if (navigator.share && ((_a = navigator.canShare) === null || _a === void 0 ? void 0 : _a.call(navigator, { files: [file] }))) {
+            const canShare = (_a = navigator.canShare) === null || _a === void 0 ? void 0 : _a.call(navigator, { files: [file] });
+            alert(`navigator.share exists: ${!!navigator.share}, canShare: ${canShare}`);
+            if (navigator.share && canShare) {
                 try {
                     await navigator.share({ files: [file], title: "Level Up Workout" });
                     return;
                 }
-                catch (e) { }
+                catch (e) {
+                    alert("Share failed: " + e.message);
+                }
             }
             const a = document.createElement("a");
             a.href = URL.createObjectURL(blob);
             a.download = "levelup-workout.jpg";
             a.click();
+            alert("Download triggered");
         }, "image/jpeg", 0.92);
     };
     // Canvas roundRect helper for older Safari
