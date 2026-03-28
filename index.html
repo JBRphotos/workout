@@ -1873,7 +1873,7 @@ function HunterProfile({ rankInfo, totalXP, profile, setProfile, checkIns, setCh
                         React.createElement("button", { onClick: () => { onResetStats === null || onResetStats === void 0 ? void 0 : onResetStats(); setResetConfirm(false); }, style: { flex: 1, padding: "11px", borderRadius: 10, background: "#F87171", border: "none", color: "#000", fontSize: 13, fontWeight: 700, cursor: "pointer" } }, "Yes, Reset"))))))));
 }
 // ── WORKOUT LOG ───────────────────────────────────────────────────────────────
-function WorkoutLog({ workoutHistory, onClose, accentColor }) {
+function WorkoutLog({ workoutHistory, onClose, accentColor, onShare }) {
     const C = useC();
     const [expanded, setExpanded] = useState(null);
     const accent = accentColor || "#FF6B35";
@@ -1930,7 +1930,12 @@ function WorkoutLog({ workoutHistory, onClose, accentColor }) {
                     React.createElement("div", { style: { fontSize: 10, color: C.muted, marginTop: 10 } },
                         s.time,
                         " \u00B7 ",
-                        s.date)))));
+                        s.date),
+                    onShare && (React.createElement("button", { onClick: () => onShare(s), style: { marginTop: 12, width: "100%", padding: "9px", borderRadius: 10, background: color + "22", border: `1px solid ${color}44`, color, fontSize: 12, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 6 } },
+                        React.createElement("svg", { width: "13", height: "13", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round" },
+                            React.createElement("path", { d: "M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" }),
+                            React.createElement("circle", { cx: "12", cy: "13", r: "4" })),
+                        "Share Stats"))))));
         }))))));
 }
 function CardioLog({ cardioHistory, onClose, accentColor }) {
@@ -3221,7 +3226,18 @@ function WorkoutApp() {
         showShareScreen && lastWorkoutSummary && (React.createElement(WorkoutShareScreen, { summary: lastWorkoutSummary, profile: profile, onClose: () => setShowShareScreen(false) })),
         showSplash && React.createElement(QuoteSplash, { onDone: () => setShowSplash(false) }),
         editingPlan && (React.createElement(PlanEditor, { planName: editingPlan, exercises: getPlanExercises(editingPlan), onSave: (newList) => setPlanOverrides(prev => (Object.assign(Object.assign({}, prev), { [editingPlan]: newList }))), onClose: () => setEditingPlan(null) })),
-        showWorkoutLog && (React.createElement(WorkoutLog, { workoutHistory: workoutHistory, onClose: () => setShowWorkoutLog(false), accentColor: TH.accent })),
+        showWorkoutLog && (React.createElement(WorkoutLog, { workoutHistory: workoutHistory, onClose: () => setShowWorkoutLog(false), accentColor: TH.accent, onShare: (session) => {
+                setLastWorkoutSummary({
+                    workout: session.workout,
+                    duration: session.duration,
+                    setsCompleted: session.setsCompleted,
+                    xpEarned: session.xpEarned,
+                    intensity: session.intensity,
+                    rankInfo: getRankInfo(totalXP),
+                });
+                setShowWorkoutLog(false);
+                setShowShareScreen(true);
+            } })),
         showCardioLog && (React.createElement(CardioLog, { cardioHistory: cardioHistory, onClose: () => setShowCardioLog(false), accentColor: TH.accent })),
         activeTab === "home" && (React.createElement("div", { style: { flex: 1, overflowY: "auto", position: "relative", zIndex: 1, paddingBottom: 80 } },
             React.createElement("div", { style: { padding: "52px 24px 16px" } },
