@@ -2523,6 +2523,119 @@ function BrowserBanner() {
     }
     return null;
 }
+// ── WORKOUT SHARE SCREEN ──────────────────────────────────────────────────────
+function WorkoutShareScreen({ summary, profile, onClose }) {
+    const videoRef = useRef(null);
+    const streamRef = useRef(null);
+    const [camReady, setCamReady] = useState(false);
+    const [camError, setCamError] = useState(false);
+    const [flashAnim, setFlashAnim] = useState(false);
+    const [position, setPosition] = useState("center");
+    const [size, setSize] = useState("medium");
+    const [showSettings, setShowSettings] = useState(false);
+    const [uiVisible, setUiVisible] = useState(true); // controls only top-right buttons
+    const { workout, duration, xpEarned, rankInfo } = summary;
+    const plan = WORKOUT_PLANS[workout];
+    const color = (plan === null || plan === void 0 ? void 0 : plan.color) || "#FF6B35";
+    const rank = rankInfo === null || rankInfo === void 0 ? void 0 : rankInfo.current;
+    const mins = Math.floor(duration);
+    const formatDur = mins >= 60 ? `${Math.floor(mins / 60)}h ${mins % 60}m` : `${mins}m`;
+    useEffect(() => {
+        (async () => {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({
+                    video: { facingMode: "environment", width: { ideal: 1280 }, height: { ideal: 720 } },
+                    audio: false,
+                });
+                streamRef.current = stream;
+                if (videoRef.current) {
+                    videoRef.current.srcObject = stream;
+                    videoRef.current.play();
+                    setCamReady(true);
+                }
+            }
+            catch (e) {
+                setCamError(true);
+            }
+        })();
+        return () => { var _a; (_a = streamRef.current) === null || _a === void 0 ? void 0 : _a.getTracks().forEach(t => t.stop()); };
+    }, []);
+    const handleEye = () => {
+        setUiVisible(false);
+        setShowSettings(false);
+        setFlashAnim(true);
+        setTimeout(() => setFlashAnim(false), 250);
+        setTimeout(() => setUiVisible(true), 3000);
+    };
+    // Size scale factor
+    const sc = { small: 0.65, medium: 1.0, large: 1.45 }[size];
+    // Position styles — safe margins to avoid rank badge (top-left) and branding (bottom-left)
+    const posStyle = {
+        tl: { top: 110, left: 20, right: "auto", bottom: "auto", transform: "none" },
+        tr: { top: 110, right: 20, left: "auto", bottom: "auto", transform: "none" },
+        bl: { bottom: 160, left: 20, right: "auto", top: "auto", transform: "none" },
+        br: { bottom: 160, right: 20, left: "auto", top: "auto", transform: "none" },
+        center: { top: "50%", left: "50%", right: "auto", bottom: "auto", transform: "translate(-50%,-50%)" },
+    }[position];
+    const textAlign = ["tl", "bl"].includes(position) ? "left" : ["tr", "br"].includes(position) ? "right" : "center";
+    const flexJust = textAlign === "center" ? "center" : textAlign === "right" ? "flex-end" : "flex-start";
+    return (React.createElement("div", { style: { position: "fixed", inset: 0, zIndex: 600, background: "#000", maxWidth: 420, margin: "0 auto", fontFamily: "'DM Sans',sans-serif" } },
+        camReady && React.createElement("video", { ref: videoRef, playsInline: true, muted: true, autoPlay: true, style: { position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" } }),
+        camError && React.createElement("div", { style: { position: "absolute", inset: 0, background: "linear-gradient(135deg, #0A0A14 0%, #0d0d20 100%)" } }),
+        !camReady && !camError && React.createElement("div", { style: { position: "absolute", inset: 0, background: "#000", display: "flex", alignItems: "center", justifyContent: "center" } },
+            React.createElement("div", { style: { fontSize: 11, color: "#444", letterSpacing: "0.12em" } }, "LOADING CAMERA\u2026")),
+        flashAnim && React.createElement("div", { style: { position: "absolute", inset: 0, background: "white", opacity: 0.55, zIndex: 20, pointerEvents: "none" } }),
+        React.createElement("div", { style: { position: "absolute", inset: 0, background: "radial-gradient(ellipse at center, transparent 35%, rgba(0,0,0,0.45) 100%)", pointerEvents: "none" } }),
+        React.createElement("div", { style: Object.assign(Object.assign({ position: "absolute" }, posStyle), { zIndex: 5, maxWidth: 280 }) },
+            React.createElement("div", { style: { background: "rgba(0,0,0,0.28)", backdropFilter: "blur(10px)", borderRadius: 16, padding: `${14 * sc}px ${18 * sc}px`, border: "1px solid rgba(255,255,255,0.12)" } },
+                React.createElement("div", { style: { fontSize: 9 * sc, color: "rgba(255,255,255,0.5)", letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 5 * sc } }, new Date().toLocaleDateString([], { weekday: "long", month: "short", day: "numeric" })),
+                React.createElement("div", { style: { fontSize: 28 * sc, fontWeight: 900, color: "#fff", letterSpacing: "-0.02em", lineHeight: 1, marginBottom: 12 * sc } }, workout === null || workout === void 0 ? void 0 : workout.replace("Bodyweight ", "BW ")),
+                React.createElement("div", { style: { display: "flex", justifyContent: flexJust, gap: 20 * sc } }, [{ label: "Duration", value: formatDur }, { label: "XP Earned", value: `+${xpEarned}` }].map(s => (React.createElement("div", { key: s.label },
+                    React.createElement("div", { style: { fontSize: 22 * sc, fontWeight: 900, color: "#fff", lineHeight: 1 } }, s.value),
+                    React.createElement("div", { style: { fontSize: 8 * sc, color: "rgba(255,255,255,0.5)", letterSpacing: "0.1em", textTransform: "uppercase", marginTop: 3 * sc } }, s.label))))))),
+        React.createElement("div", { style: { position: "absolute", top: 56, left: 20, display: "flex", alignItems: "center", gap: 10, zIndex: 6 } },
+            React.createElement("div", { style: { display: "flex", flexDirection: "column", alignItems: "center", gap: 4 } },
+                React.createElement("div", { style: { width: 40, height: 40, borderRadius: 10, background: "rgba(0,0,0,0.55)", border: `1.5px solid ${rank === null || rank === void 0 ? void 0 : rank.color}99`, backdropFilter: "blur(8px)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" } },
+                    React.createElement("div", { style: { fontSize: 7, color: rank === null || rank === void 0 ? void 0 : rank.color, fontWeight: 700, letterSpacing: "0.06em" } }, "LVL"),
+                    React.createElement("div", { style: { fontSize: 16, fontWeight: 900, color: rank === null || rank === void 0 ? void 0 : rank.color, lineHeight: 1 } }, rank === null || rank === void 0 ? void 0 : rank.level)),
+                React.createElement("div", { style: { width: 40, height: 3, background: "rgba(255,255,255,0.15)", borderRadius: 2, overflow: "hidden" } },
+                    React.createElement("div", { style: { height: 3, borderRadius: 2, width: `${Math.min(100, ((rankInfo === null || rankInfo === void 0 ? void 0 : rankInfo.progress) || 0) * 100)}%`, background: `linear-gradient(90deg, ${rank === null || rank === void 0 ? void 0 : rank.color}, #A855F7)`, transition: "width 0.5s" } }))),
+            React.createElement("div", null,
+                React.createElement("div", { style: { fontSize: 12, fontWeight: 700, color: "#fff", textShadow: "0 1px 6px rgba(0,0,0,0.9)" } }, rank === null || rank === void 0 ? void 0 : rank.title),
+                React.createElement("div", { style: { fontSize: 9, color: "rgba(255,255,255,0.45)" } },
+                    "Rank ", rank === null || rank === void 0 ? void 0 :
+                    rank.rank))),
+        React.createElement("div", { style: { position: "absolute", bottom: 100, left: 20, zIndex: 6 } },
+            React.createElement("div", { style: { fontSize: 14, fontWeight: 900, color: "#fff", letterSpacing: "-0.01em", textShadow: "0 2px 8px rgba(0,0,0,0.8)" } }, "Level Up"),
+            React.createElement("div", { style: { fontSize: 9, color: "rgba(255,255,255,0.4)", letterSpacing: "0.1em" } },
+                "WORKOUT TRACKER \u00B7 ", profile === null || profile === void 0 ? void 0 :
+                profile.name)),
+        uiVisible && (React.createElement("div", { style: { position: "absolute", top: 52, right: 16, display: "flex", gap: 8, zIndex: 10 } },
+            React.createElement("button", { onClick: () => setShowSettings(v => !v), style: { width: 36, height: 36, borderRadius: 10, background: showSettings ? "rgba(255,255,255,0.25)" : "rgba(0,0,0,0.5)", border: `1px solid ${showSettings ? "rgba(255,255,255,0.4)" : "rgba(255,255,255,0.15)"}`, color: "rgba(255,255,255,0.85)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", backdropFilter: "blur(8px)" } },
+                React.createElement("svg", { width: "16", height: "16", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round" },
+                    React.createElement("circle", { cx: "12", cy: "12", r: "3" }),
+                    React.createElement("path", { d: "M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" }))),
+            React.createElement("button", { onClick: handleEye, style: { width: 36, height: 36, borderRadius: 10, background: "rgba(0,0,0,0.5)", border: "1px solid rgba(255,255,255,0.15)", color: "rgba(255,255,255,0.85)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", backdropFilter: "blur(8px)" } },
+                React.createElement("svg", { width: "16", height: "16", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round" },
+                    React.createElement("path", { d: "M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" }),
+                    React.createElement("circle", { cx: "12", cy: "12", r: "3" }))),
+            React.createElement("button", { onClick: onClose, style: { width: 36, height: 36, borderRadius: 10, background: "rgba(0,0,0,0.5)", border: "1px solid rgba(255,255,255,0.15)", color: "rgba(255,255,255,0.7)", fontSize: 16, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", backdropFilter: "blur(8px)" } }, "\u2715"))),
+        uiVisible && showSettings && (React.createElement("div", { style: { position: "absolute", top: 100, right: 16, zIndex: 10, background: "rgba(0,0,0,0.75)", backdropFilter: "blur(16px)", borderRadius: 14, padding: "14px 16px", border: "1px solid rgba(255,255,255,0.15)", minWidth: 180 } },
+            React.createElement("div", { style: { fontSize: 9, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 8 } }, "Position"),
+            React.createElement("div", { style: { display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 5, marginBottom: 14, width: 72 } }, [["tl", "", "tr"], ["", "center", ""], ["bl", "", "br"]].flat().map((pos, i) => (pos === "" ? React.createElement("div", { key: i }) : (React.createElement("div", { key: pos, onClick: () => setPosition(pos), style: { width: 20, height: 20, borderRadius: 5, cursor: "pointer",
+                    background: position === pos ? "#fff" : "rgba(255,255,255,0.18)",
+                    border: `1px solid ${position === pos ? "#fff" : "rgba(255,255,255,0.15)"}`,
+                    transition: "all 0.1s" } }))))),
+            React.createElement("div", { style: { fontSize: 9, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 8 } }, "Size"),
+            React.createElement("div", { style: { display: "flex", gap: 6 } }, [["S", "small"], ["M", "medium"], ["L", "large"]].map(([label, val]) => (React.createElement("button", { key: val, onClick: () => setSize(val), style: { width: 32, height: 32, borderRadius: 7, cursor: "pointer", fontSize: 11, fontWeight: 700,
+                    background: size === val ? "#fff" : "rgba(255,255,255,0.15)",
+                    color: size === val ? "#000" : "rgba(255,255,255,0.6)",
+                    border: `1px solid ${size === val ? "#fff" : "rgba(255,255,255,0.15)"}`,
+                    transition: "all 0.1s" } }, label)))))),
+        uiVisible && (React.createElement("div", { style: { position: "absolute", bottom: "calc(20px + env(safe-area-inset-bottom))", left: 20, right: 20, zIndex: 6, textAlign: "center" } },
+            React.createElement("div", { style: { fontSize: 11, color: "rgba(255,255,255,0.35)", letterSpacing: "0.06em" } }, "Tap \uD83D\uDC41 to hide UI \u00B7 then screenshot to share"),
+            camError && React.createElement("div", { style: { fontSize: 10, color: "rgba(255,255,255,0.25)", marginTop: 4 } }, "Camera unavailable \u2014 dark background active")))));
+}
 // ── PLAN EDITOR ───────────────────────────────────────────────────────────────
 function PlanEditor({ planName, exercises, onSave, onClose }) {
     const C = useC();
@@ -2654,7 +2767,7 @@ function WelcomeScreen({ onComplete }) {
 function WorkoutApp() {
     var _a;
     const [storageReady, setStorageReady] = useState(false);
-    const [showSplash, setShowSplash] = useState(true);
+    const [showSplash, setShowSplash] = useState(false); // starts false, set true after load or after welcome
     const [showWelcome, setShowWelcome] = useState(false);
     // ── PERSISTENT STATE ──────────────────────────────────────────────────────
     const [daysPerWeek, setDaysPerWeek] = useState(3);
@@ -2687,9 +2800,14 @@ function WorkoutApp() {
                     }
                     catch (e) { }
                 }
-                // First-time user — show welcome screen
-                if (!hasProfile)
+                // First-time user — show welcome, no splash yet
+                if (!hasProfile) {
                     setShowWelcome(true);
+                }
+                else {
+                    // Returning user — show daily quote splash
+                    setShowSplash(true);
+                }
             }
             catch (e) { }
             setStorageReady(true);
@@ -2762,7 +2880,10 @@ function WorkoutApp() {
     const [weeklyCheckinDone, setWeeklyCheckinDone] = useState(false);
     const [showCardioLog, setShowCardioLog] = useState(false);
     const [showWorkoutLog, setShowWorkoutLog] = useState(false);
-    const [editingPlan, setEditingPlan] = useState(null); // plan name being edited
+    const [editingPlan, setEditingPlan] = useState(null);
+    const [showShareScreen, setShowShareScreen] = useState(false);
+    const [showSharePrompt, setShowSharePrompt] = useState(false);
+    const [lastWorkoutSummary, setLastWorkoutSummary] = useState(null);
     // Check if this week's check-in already done
     useEffect(() => {
         const thisWeek = getWeekKey();
@@ -2885,6 +3006,7 @@ function WorkoutApp() {
         setSelectedWorkout(null);
         setActiveTab("home");
         // ── Save session to workout history ──
+        const xpEarned = setsCompleted > 0 ? getXP("WORKOUT_COMPLETE", intensity) + setsCompleted * getXP("SET_COMPLETE", intensity) : 0;
         if (setsCompleted > 0) {
             const sessionRecord = {
                 id: Date.now(),
@@ -2896,9 +3018,19 @@ function WorkoutApp() {
                 setsCompleted,
                 exercises: Object.keys(byExercise).length > 0 ? byExercise : {},
                 setLogs: Object.assign({}, setLogs),
-                xpEarned: setsCompleted > 0 ? getXP("WORKOUT_COMPLETE", intensity) + setsCompleted * getXP("SET_COMPLETE", intensity) : 0,
+                xpEarned,
             };
             setWorkoutHistory(prev => [sessionRecord, ...prev].slice(0, 50));
+            // Show share screen
+            setLastWorkoutSummary({
+                workout: selectedWorkout,
+                duration: Math.round(workoutTimer / 60),
+                setsCompleted,
+                xpEarned,
+                intensity,
+                rankInfo: getRankInfo(totalXP),
+            });
+            setShowSharePrompt(true);
         }
     };
     const sendMessage = async () => {
@@ -3019,13 +3151,36 @@ function WorkoutApp() {
                     }
                     catch (e) { }
                     setShowWelcome(false);
+                    setShowSplash(true); // show quote after setup completes
                 } }),
-            React.createElement(BrowserBanner, null),
-            showSplash && React.createElement(QuoteSplash, { onDone: () => setShowSplash(false) })));
+            React.createElement(BrowserBanner, null)));
     }
     return (React.createElement("div", { style: { height: "100dvh", background: TH.bg, color: TH.text, fontFamily: "'DM Sans','Helvetica Neue',sans-serif", maxWidth: 420, margin: "0 auto", display: "flex", flexDirection: "column", position: "relative" } },
         React.createElement("div", { style: { position: "absolute", inset: 0, pointerEvents: "none", zIndex: 0, background: `radial-gradient(ellipse at 20% 0%, ${TH.accent}12 0%, transparent 60%), radial-gradient(ellipse at 80% 100%, ${TH.accent2}0d 0%, transparent 60%)` } }),
         React.createElement(BrowserBanner, null),
+        showSharePrompt && lastWorkoutSummary && (React.createElement("div", { style: { position: "fixed", inset: 0, zIndex: 500, display: "flex", alignItems: "flex-end", justifyContent: "center", background: "rgba(0,0,0,0.5)", backdropFilter: "blur(6px)", maxWidth: 420, margin: "0 auto" } },
+            React.createElement("div", { style: { width: "100%", background: C.surface, borderRadius: "20px 20px 0 0", padding: "28px 24px calc(32px + env(safe-area-inset-bottom))", border: `1px solid ${C.border}` } },
+                React.createElement("div", { style: { width: 36, height: 4, borderRadius: 2, background: C.btnBorder, margin: "0 auto 24px" } }),
+                React.createElement("div", { style: { textAlign: "center", marginBottom: 20 } },
+                    React.createElement("div", { style: { fontSize: 11, color: C.muted, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 8 } }, "Workout Complete"),
+                    React.createElement("div", { style: { fontSize: 48, fontWeight: 900, color: C.text, letterSpacing: "-0.02em", lineHeight: 1 } },
+                        React.createElement("span", { style: { color: TH.accent } },
+                            "+",
+                            lastWorkoutSummary.xpEarned),
+                        " XP"),
+                    React.createElement("div", { style: { fontSize: 13, color: C.muted, marginTop: 8 } },
+                        lastWorkoutSummary.workout,
+                        " \u00B7 ",
+                        Math.floor(lastWorkoutSummary.duration),
+                        "min")),
+                React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 10 } },
+                    React.createElement("button", { onClick: () => { setShowSharePrompt(false); setShowShareScreen(true); }, style: { width: "100%", padding: "15px", borderRadius: 14, background: TH.accent, border: "none", color: TH.onAccent || "#fff", fontSize: 15, fontWeight: 800, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 10 } },
+                        React.createElement("svg", { width: "18", height: "18", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round" },
+                            React.createElement("path", { d: "M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" }),
+                            React.createElement("circle", { cx: "12", cy: "13", r: "4" })),
+                        "Share Stats"),
+                    React.createElement("button", { onClick: () => setShowSharePrompt(false), style: { width: "100%", padding: "15px", borderRadius: 14, background: C.card, border: `1.5px solid ${C.cardBorder}`, color: C.muted, fontSize: 15, fontWeight: 600, cursor: "pointer" } }, "Skip"))))),
+        showShareScreen && lastWorkoutSummary && (React.createElement(WorkoutShareScreen, { summary: lastWorkoutSummary, profile: profile, onClose: () => setShowShareScreen(false) })),
         showSplash && React.createElement(QuoteSplash, { onDone: () => setShowSplash(false) }),
         editingPlan && (React.createElement(PlanEditor, { planName: editingPlan, exercises: getPlanExercises(editingPlan), onSave: (newList) => setPlanOverrides(prev => (Object.assign(Object.assign({}, prev), { [editingPlan]: newList }))), onClose: () => setEditingPlan(null) })),
         showWorkoutLog && (React.createElement(WorkoutLog, { workoutHistory: workoutHistory, onClose: () => setShowWorkoutLog(false), accentColor: TH.accent })),
