@@ -2529,37 +2529,53 @@ function WorkoutShareScreen({ summary, profile, onClose }) {
     const streamRef = useRef(null);
     const [camReady, setCamReady] = useState(false);
     const [camError, setCamError] = useState(false);
+    const [camDenied, setCamDenied] = useState(false);
     const [flashAnim, setFlashAnim] = useState(false);
     const [position, setPosition] = useState("center");
     const [size, setSize] = useState("medium");
     const [showSettings, setShowSettings] = useState(false);
-    const [uiVisible, setUiVisible] = useState(true); // controls only top-right buttons
+    const [uiVisible, setUiVisible] = useState(true);
+    const [facing, setFacing] = useState("environment"); // environment | user
     const { workout, duration, xpEarned, rankInfo } = summary;
     const plan = WORKOUT_PLANS[workout];
     const color = (plan === null || plan === void 0 ? void 0 : plan.color) || "#FF6B35";
     const rank = rankInfo === null || rankInfo === void 0 ? void 0 : rankInfo.current;
     const mins = Math.floor(duration);
     const formatDur = mins >= 60 ? `${Math.floor(mins / 60)}h ${mins % 60}m` : `${mins}m`;
+    const startCamera = async (facingMode) => {
+        var _a;
+        // Stop any existing stream first
+        (_a = streamRef.current) === null || _a === void 0 ? void 0 : _a.getTracks().forEach(t => t.stop());
+        setCamReady(false);
+        setCamError(false);
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({
+                video: { facingMode, width: { ideal: 1280 }, height: { ideal: 720 } },
+                audio: false,
+            });
+            streamRef.current = stream;
+            if (videoRef.current) {
+                videoRef.current.srcObject = stream;
+                await videoRef.current.play();
+                setCamReady(true);
+            }
+        }
+        catch (e) {
+            if (e.name === "NotAllowedError" || e.name === "PermissionDeniedError") {
+                setCamDenied(true);
+            }
+            setCamError(true);
+        }
+    };
     useEffect(() => {
-        (async () => {
-            try {
-                const stream = await navigator.mediaDevices.getUserMedia({
-                    video: { facingMode: "environment", width: { ideal: 1280 }, height: { ideal: 720 } },
-                    audio: false,
-                });
-                streamRef.current = stream;
-                if (videoRef.current) {
-                    videoRef.current.srcObject = stream;
-                    videoRef.current.play();
-                    setCamReady(true);
-                }
-            }
-            catch (e) {
-                setCamError(true);
-            }
-        })();
+        startCamera(facing);
         return () => { var _a; (_a = streamRef.current) === null || _a === void 0 ? void 0 : _a.getTracks().forEach(t => t.stop()); };
     }, []);
+    const flipCamera = () => {
+        const newFacing = facing === "environment" ? "user" : "environment";
+        setFacing(newFacing);
+        startCamera(newFacing);
+    };
     const handleEye = () => {
         setUiVisible(false);
         setShowSettings(false);
@@ -2584,6 +2600,14 @@ function WorkoutShareScreen({ summary, profile, onClose }) {
         camError && React.createElement("div", { style: { position: "absolute", inset: 0, background: "linear-gradient(135deg, #0A0A14 0%, #0d0d20 100%)" } }),
         !camReady && !camError && React.createElement("div", { style: { position: "absolute", inset: 0, background: "#000", display: "flex", alignItems: "center", justifyContent: "center" } },
             React.createElement("div", { style: { fontSize: 11, color: "#444", letterSpacing: "0.12em" } }, "LOADING CAMERA\u2026")),
+        camError && (React.createElement("div", { style: { position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 14, zIndex: 4, padding: "0 40px", textAlign: "center" } }, camDenied ? (React.createElement(React.Fragment, null,
+            React.createElement("div", { style: { fontSize: 13, color: "rgba(255,255,255,0.5)", lineHeight: 1.6 } },
+                "Camera access denied.",
+                React.createElement("br", null),
+                "Go to ",
+                React.createElement("strong", { style: { color: "#fff" } }, "Settings \u2192 Safari \u2192 Camera"),
+                " and allow access, then tap retry."),
+            React.createElement("button", { onClick: () => { setCamError(false); setCamDenied(false); startCamera(facing); }, style: { padding: "10px 24px", borderRadius: 10, background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.25)", color: "#fff", fontSize: 13, fontWeight: 600, cursor: "pointer" } }, "Retry Camera"))) : (React.createElement("button", { onClick: () => { setCamError(false); startCamera(facing); }, style: { padding: "10px 24px", borderRadius: 10, background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.25)", color: "#fff", fontSize: 13, fontWeight: 600, cursor: "pointer" } }, "Tap to Enable Camera")))),
         flashAnim && React.createElement("div", { style: { position: "absolute", inset: 0, background: "white", opacity: 0.55, zIndex: 20, pointerEvents: "none" } }),
         React.createElement("div", { style: { position: "absolute", inset: 0, background: "radial-gradient(ellipse at center, transparent 35%, rgba(0,0,0,0.45) 100%)", pointerEvents: "none" } }),
         React.createElement("div", { style: Object.assign(Object.assign({ position: "absolute" }, posStyle), { zIndex: 5, maxWidth: 280 }) },
@@ -2611,6 +2635,11 @@ function WorkoutShareScreen({ summary, profile, onClose }) {
                 "WORKOUT TRACKER \u00B7 ", profile === null || profile === void 0 ? void 0 :
                 profile.name)),
         uiVisible && (React.createElement("div", { style: { position: "absolute", top: 52, right: 16, display: "flex", gap: 8, zIndex: 10 } },
+            React.createElement("button", { onClick: flipCamera, style: { width: 36, height: 36, borderRadius: 10, background: "rgba(0,0,0,0.5)", border: "1px solid rgba(255,255,255,0.15)", color: "rgba(255,255,255,0.85)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", backdropFilter: "blur(8px)" } },
+                React.createElement("svg", { width: "16", height: "16", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round" },
+                    React.createElement("path", { d: "M20 7h-3a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" }),
+                    React.createElement("path", { d: "M8 12a4 4 0 1 1 4.5 3.97" }),
+                    React.createElement("polyline", { points: "8 10 8 12 10 12" }))),
             React.createElement("button", { onClick: () => setShowSettings(v => !v), style: { width: 36, height: 36, borderRadius: 10, background: showSettings ? "rgba(255,255,255,0.25)" : "rgba(0,0,0,0.5)", border: `1px solid ${showSettings ? "rgba(255,255,255,0.4)" : "rgba(255,255,255,0.15)"}`, color: "rgba(255,255,255,0.85)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", backdropFilter: "blur(8px)" } },
                 React.createElement("svg", { width: "16", height: "16", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round" },
                     React.createElement("circle", { cx: "12", cy: "12", r: "3" }),
@@ -2633,8 +2662,9 @@ function WorkoutShareScreen({ summary, profile, onClose }) {
                     border: `1px solid ${size === val ? "#fff" : "rgba(255,255,255,0.15)"}`,
                     transition: "all 0.1s" } }, label)))))),
         uiVisible && (React.createElement("div", { style: { position: "absolute", bottom: "calc(20px + env(safe-area-inset-bottom))", left: 20, right: 20, zIndex: 6, textAlign: "center" } },
-            React.createElement("div", { style: { fontSize: 11, color: "rgba(255,255,255,0.35)", letterSpacing: "0.06em" } }, "Tap \uD83D\uDC41 to hide UI \u00B7 then screenshot to share"),
-            camError && React.createElement("div", { style: { fontSize: 10, color: "rgba(255,255,255,0.25)", marginTop: 4 } }, "Camera unavailable \u2014 dark background active")))));
+            React.createElement("div", { style: { fontSize: 11, color: "rgba(255,255,255,0.35)", letterSpacing: "0.06em" } }, "Tap \uD83D\uDC41 to hide UI \u00B7 screenshot to share"),
+            camError && !camDenied && React.createElement("div", { style: { fontSize: 10, color: "rgba(255,255,255,0.25)", marginTop: 4 } }, "Tap the camera icon to retry"),
+            camError && camDenied && React.createElement("div", { style: { fontSize: 10, color: "rgba(255,255,255,0.25)", marginTop: 4 } }, "Allow camera in Settings \u2192 Safari \u2192 Camera")))));
 }
 // ── PLAN EDITOR ───────────────────────────────────────────────────────────────
 function PlanEditor({ planName, exercises, onSave, onClose }) {
