@@ -2616,9 +2616,107 @@ function WorkoutShareScreen({ summary, profile, onClose }) {
         if (facing === "user") {
             ctx.setTransform(1, 0, 0, 1, 0, 0);
         }
-        // Test: just draw a red rectangle to confirm canvas works
-        ctx.fillStyle = "red";
-        ctx.fillRect(50, 50, 200, 200);
+        // Scale helpers
+        const sx = vw / window.innerWidth;
+        const sy = vh / window.innerHeight;
+        const px = (n) => n * sx;
+        const py = (n) => n * sy;
+        ctx.textBaseline = "top";
+        // Vignette
+        const vig = ctx.createRadialGradient(vw / 2, vh / 2, vh * 0.18, vw / 2, vh / 2, vh * 0.72);
+        vig.addColorStop(0, "rgba(0,0,0,0)");
+        vig.addColorStop(1, "rgba(0,0,0,0.45)");
+        ctx.fillStyle = vig;
+        ctx.fillRect(0, 0, vw, vh);
+        // Stats position
+        const posMap = {
+            tl: { x: px(20), y: py(110) },
+            tr: { x: vw - px(20), y: py(110) },
+            bl: { x: px(20), y: vh - py(240) },
+            br: { x: vw - px(20), y: vh - py(240) },
+            center: { x: vw / 2, y: vh / 2 - py(60) },
+        };
+        const spos = posMap[position] || posMap.center;
+        const isRight = ["tr", "br"].includes(position);
+        const isCenter = position === "center";
+        ctx.textAlign = isCenter ? "center" : isRight ? "right" : "left";
+        const dateSz = px(9 * sc);
+        const nameSz = px(28 * sc);
+        const valSz = px(22 * sc);
+        const labelSz = px(8 * sc);
+        const statGap = px(20 * sc);
+        // Date
+        ctx.font = `600 ${dateSz}px 'Helvetica Neue',Arial,sans-serif`;
+        ctx.fillStyle = "rgba(255,255,255,0.65)";
+        ctx.shadowColor = "rgba(0,0,0,0.8)";
+        ctx.shadowBlur = px(6);
+        ctx.fillText(new Date().toLocaleDateString([], { weekday: "long", month: "short", day: "numeric" }).toUpperCase(), spos.x, spos.y);
+        // Workout name
+        ctx.font = `900 ${nameSz}px 'Helvetica Neue',Arial,sans-serif`;
+        ctx.fillStyle = "#fff";
+        ctx.shadowBlur = px(14);
+        ctx.fillText((workout || "").replace("Bodyweight ", "BW "), spos.x, spos.y + dateSz + py(6));
+        // Stats row
+        const statsY = spos.y + dateSz + py(6) + nameSz + py(14);
+        ctx.shadowBlur = px(10);
+        const stats = [{ label: "DURATION", value: formatDur }, { label: "XP EARNED", value: `+${xpEarned}` }];
+        let offsetX = 0;
+        for (const s of stats) {
+            const drawX = isCenter ? spos.x + offsetX - px(60) : isRight ? spos.x - offsetX : spos.x + offsetX;
+            const align = isCenter ? "left" : isRight ? "right" : "left";
+            ctx.textAlign = align;
+            ctx.font = `900 ${valSz}px 'Helvetica Neue',Arial,sans-serif`;
+            ctx.fillStyle = "#fff";
+            ctx.fillText(s.value, drawX, statsY);
+            ctx.font = `600 ${labelSz}px 'Helvetica Neue',Arial,sans-serif`;
+            ctx.fillStyle = "rgba(255,255,255,0.6)";
+            ctx.fillText(s.label, drawX, statsY + valSz + py(3));
+            const w = ctx.measureText(s.value).width;
+            offsetX += w + statGap + px(10);
+        }
+        // Rank badge
+        ctx.textAlign = "center";
+        const bx = px(20), by = py(56), bw = px(40), bh = py(40);
+        ctx.fillStyle = "rgba(0,0,0,0.55)";
+        roundRect(ctx, bx, by, bw, bh, px(10));
+        ctx.strokeStyle = ((rank === null || rank === void 0 ? void 0 : rank.color) || "#888") + "99";
+        ctx.lineWidth = px(1.5);
+        roundRect(ctx, bx, by, bw, bh, px(10), false);
+        ctx.font = `700 ${px(7)}px 'Helvetica Neue',Arial,sans-serif`;
+        ctx.fillStyle = (rank === null || rank === void 0 ? void 0 : rank.color) || "#888";
+        ctx.shadowBlur = 0;
+        ctx.fillText("LVL", bx + bw / 2, by + py(7));
+        ctx.font = `900 ${px(16)}px 'Helvetica Neue',Arial,sans-serif`;
+        ctx.fillText(String((rank === null || rank === void 0 ? void 0 : rank.level) || ""), bx + bw / 2, by + py(17));
+        // XP bar
+        const barY = by + bh + py(4);
+        ctx.fillStyle = "rgba(255,255,255,0.15)";
+        ctx.fillRect(bx, barY, bw, py(3));
+        const prog = Math.min(1, (rankInfo === null || rankInfo === void 0 ? void 0 : rankInfo.progress) || 0);
+        const grad = ctx.createLinearGradient(bx, 0, bx + bw, 0);
+        grad.addColorStop(0, (rank === null || rank === void 0 ? void 0 : rank.color) || "#888");
+        grad.addColorStop(1, "#A855F7");
+        ctx.fillStyle = grad;
+        ctx.fillRect(bx, barY, bw * prog, py(3));
+        // Rank text
+        ctx.textAlign = "left";
+        ctx.shadowColor = "rgba(0,0,0,0.9)";
+        ctx.shadowBlur = px(6);
+        ctx.font = `700 ${px(12)}px 'Helvetica Neue',Arial,sans-serif`;
+        ctx.fillStyle = "#fff";
+        ctx.fillText((rank === null || rank === void 0 ? void 0 : rank.title) || "", bx + bw + px(10), by + py(8));
+        ctx.font = `400 ${px(9)}px 'Helvetica Neue',Arial,sans-serif`;
+        ctx.fillStyle = "rgba(255,255,255,0.45)";
+        ctx.fillText("Rank " + ((rank === null || rank === void 0 ? void 0 : rank.rank) || ""), bx + bw + px(10), by + py(22));
+        // Branding
+        ctx.shadowBlur = px(8);
+        ctx.font = `900 ${px(14)}px 'Helvetica Neue',Arial,sans-serif`;
+        ctx.fillStyle = "#fff";
+        ctx.fillText("Level Up", px(20), vh - py(110));
+        ctx.font = `400 ${px(9)}px 'Helvetica Neue',Arial,sans-serif`;
+        ctx.fillStyle = "rgba(255,255,255,0.4)";
+        ctx.fillText(`WORKOUT TRACKER · ${(profile === null || profile === void 0 ? void 0 : profile.name) || ""}`, px(20), vh - py(96));
+        ctx.shadowBlur = 0;
         canvas.toBlob(async (blob) => {
             var _a;
             if (!blob)
@@ -2628,14 +2726,17 @@ function WorkoutShareScreen({ summary, profile, onClose }) {
             if (navigator.share && canShare) {
                 try {
                     await navigator.share({ files: [file], title: "Level Up Workout" });
-                    return;
                 }
                 catch (e) { }
             }
-            const a = document.createElement("a");
-            a.href = URL.createObjectURL(blob);
-            a.download = "levelup-workout.jpg";
-            a.click();
+            else {
+                const a = document.createElement("a");
+                a.href = URL.createObjectURL(blob);
+                a.download = "levelup-workout.jpg";
+                a.click();
+            }
+            // Resume camera after share sheet closes
+            startCamera(facing);
         }, "image/jpeg", 0.92);
     };
     // Canvas roundRect helper for older Safari
