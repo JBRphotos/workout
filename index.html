@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Level Up">
@@ -16,8 +16,8 @@
   <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{height:100%}
-    body{height:100%;overflow:hidden;background:#FFFFFF}
+    html{height:100%;touch-action:manipulation}
+    body{height:100%;overflow:hidden;background:#FFFFFF;touch-action:manipulation}
     #root{height:100%}
     ::-webkit-scrollbar{display:none}
     input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
@@ -1047,9 +1047,9 @@ function StretchCard({ stretch, color, defaultDur }) {
                 React.createElement("svg", { width: "14", height: "14", viewBox: "0 0 14 14", fill: "currentColor", stroke: "none" },
                     React.createElement("polygon", { points: "3,1 13,7 3,13" })),
                 remaining < dur ? `Resume (${remaining}s)` : `Start ${dur}s`)))) : (React.createElement("button", { onClick: reset, style: { flex: 1, padding: "10px", borderRadius: 10, cursor: "pointer", fontWeight: 600, fontSize: 13, border: `1px solid ${color}44`, background: "transparent", color, transition: "all 0.15s", display: "flex", alignItems: "center", justifyContent: "center", gap: 8 } },
-                React.createElement("svg", { width: "14", height: "14", viewBox: "0 0 14 14", fill: "none", stroke: "currentColor", strokeWidth: "1.8", strokeLinecap: "round", strokeLinejoin: "round" },
-                    React.createElement("polyline", { points: "2,8 2,12 6,12" }),
-                    React.createElement("path", { d: "M12 7A5 5 0 0 1 2 9.5" })),
+                React.createElement("svg", { width: "14", height: "14", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round" },
+                    React.createElement("path", { d: "M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" }),
+                    React.createElement("polyline", { points: "3 3 3 8 8 8" })),
                 "Redo")))),
         expanded && muscles.length > 0 && (React.createElement("div", { style: { borderTop: "1px solid #1a1a1a", padding: "14px", background: C.deep } },
             React.createElement("div", { style: { fontSize: 10, color: C.muted, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 12 } }, "Muscles Targeted"),
@@ -1074,6 +1074,58 @@ function ExerciseCard({ ex, workoutColor, completedSets, toggleSet, intensity, s
     const cfg = INTENSITY_CONFIG[intensity];
     const baseSets = Math.max(1, ex.sets + ((cfg === null || cfg === void 0 ? void 0 : cfg.sets) || 0));
     const adjSets = setCountOverride !== undefined ? setCountOverride : baseSets;
+    // Detect timed exercises — reps contains "sec"
+    const isTimed = String(ex.reps).toLowerCase().includes("sec");
+    const defaultHold = isTimed ? (parseInt(String(ex.reps)) || 30) : 0;
+    const [holdSecs, setHoldSecs] = useState(defaultHold);
+    // Timed set state
+    const [timedPhase, setTimedPhase] = useState("idle"); // idle | countdown | hold | done
+    const [timedCount, setTimedCount] = useState(10);
+    const timedRef = useRef(null);
+    const timedStartRef = useRef(null);
+    const timedBaseRef = useRef(0);
+    const startTimedSet = () => {
+        unlockAudio();
+        setTimedPhase("countdown");
+        setTimedCount(10);
+        timedBaseRef.current = 0;
+        timedStartRef.current = Date.now();
+        timedRef.current = setInterval(() => {
+            const elapsed = Math.floor((Date.now() - timedStartRef.current) / 1000);
+            const remaining = 10 - elapsed;
+            if (remaining <= 0) {
+                clearInterval(timedRef.current);
+                playChime(); // start chime
+                setTimedPhase("hold");
+                setTimedCount(holdSecs);
+                timedStartRef.current = Date.now();
+                timedRef.current = setInterval(() => {
+                    const holdElapsed = Math.floor((Date.now() - timedStartRef.current) / 1000);
+                    const holdRemaining = holdSecs - holdElapsed;
+                    if (holdRemaining <= 0) {
+                        clearInterval(timedRef.current);
+                        playChime();
+                        setTimeout(() => playChime(), 350); // double finish chime
+                        setTimedPhase("done");
+                        setTimedCount(0);
+                    }
+                    else {
+                        setTimedCount(holdRemaining);
+                    }
+                }, 200);
+            }
+            else {
+                setTimedCount(remaining);
+            }
+        }, 200);
+    };
+    const cancelTimedSet = () => {
+        clearInterval(timedRef.current);
+        setTimedPhase("idle");
+        setTimedCount(10);
+    };
+    // Clean up timer on unmount
+    useEffect(() => () => clearInterval(timedRef.current), []);
     const doneCount = Array.from({ length: adjSets }, (_, i) => completedSets[`${ex.name}-${i}`]).filter(Boolean).length;
     const allDone = doneCount === adjSets;
     const openSetForEdit = (idx) => {
@@ -1120,7 +1172,15 @@ function ExerciseCard({ ex, workoutColor, completedSets, toggleSet, intensity, s
         onSetCountChange === null || onSetCountChange === void 0 ? void 0 : onSetCountChange(ex.name, newCount);
     };
     return (React.createElement("div", { style: { background: C.card, borderRadius: 14, border: `1.5px solid ${allDone ? workoutColor + "55" : C.cardBorder}`, transition: "border-color 0.2s" } },
-        React.createElement("div", { style: { padding: "14px", cursor: "pointer" }, onClick: () => !allDone && (open ? setOpen(false) : handleOpen()) },
+        React.createElement("div", { style: { padding: "14px", cursor: "pointer" }, onClick: () => {
+                if (allDone)
+                    return;
+                if (isTimed) {
+                    setOpen(v => !v);
+                    return;
+                }
+                open ? setOpen(false) : handleOpen();
+            } },
             React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "flex-start" } },
                 React.createElement("div", { style: { flex: 1 } },
                     React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" } },
@@ -1138,19 +1198,19 @@ function ExerciseCard({ ex, workoutColor, completedSets, toggleSet, intensity, s
                             " sets"),
                         React.createElement("span", null, "\u00D7"),
                         React.createElement("span", null, ex.reps),
-                        React.createElement("span", { style: { color: C.muted } }, cfg === null || cfg === void 0 ? void 0 : cfg.restLabel),
-                        React.createElement("span", { onClick: e => { e.stopPropagation(); adjustSets(-1); }, style: { cursor: "pointer", color: C.muted, fontSize: 14, padding: "0 3px", lineHeight: 1, userSelect: "none", border: `1px solid ${C.btnBorder}`, borderRadius: 4 } }, "\u2212"),
-                        React.createElement("span", { onClick: e => { e.stopPropagation(); adjustSets(1); }, style: { cursor: "pointer", color: C.muted, fontSize: 14, padding: "0 3px", lineHeight: 1, userSelect: "none", border: `1px solid ${C.btnBorder}`, borderRadius: 4 } }, "+"))),
-                React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 8, marginLeft: 10, flexShrink: 0 } },
+                        React.createElement("span", { style: { color: C.muted } }, cfg === null || cfg === void 0 ? void 0 : cfg.restLabel))),
+                React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 6, marginLeft: 10, flexShrink: 0 } },
                     React.createElement("div", { style: { display: "flex", gap: 4 } }, Array.from({ length: adjSets }).map((_, i) => (React.createElement("div", { key: i, style: { width: 8, height: 8, borderRadius: "50%",
                             background: completedSets[`${ex.name}-${i}`] ? workoutColor : (open && i === currentSet ? workoutColor + "66" : C.btnBorder),
                             transition: "background 0.15s" } })))),
+                    React.createElement("span", { onClick: e => { e.stopPropagation(); adjustSets(-1); }, style: { cursor: "pointer", color: C.muted, fontSize: 13, width: 20, height: 20, display: "flex", alignItems: "center", justifyContent: "center", userSelect: "none", border: `1px solid ${C.btnBorder}`, borderRadius: 4, flexShrink: 0 } }, "\u2212"),
                     allDone
-                        ? React.createElement("div", { style: { fontSize: 12, color: workoutColor, fontWeight: 700 } }, "\u2713")
-                        : React.createElement("div", { style: { fontSize: 11, color: C.muted } },
+                        ? React.createElement("div", { style: { fontSize: 12, color: workoutColor, fontWeight: 700, minWidth: 24, textAlign: "center" } }, "\u2713")
+                        : React.createElement("div", { style: { fontSize: 11, color: C.muted, minWidth: 24, textAlign: "center" } },
                             doneCount,
                             "/",
                             adjSets),
+                    React.createElement("span", { onClick: e => { e.stopPropagation(); adjustSets(1); }, style: { cursor: "pointer", color: C.muted, fontSize: 13, width: 20, height: 20, display: "flex", alignItems: "center", justifyContent: "center", userSelect: "none", border: `1px solid ${C.btnBorder}`, borderRadius: 4, flexShrink: 0 } }, "+"),
                     guide && (React.createElement("button", { onClick: e => { e.stopPropagation(); setExpanded(v => !v); }, style: { background: expanded ? workoutColor + "22" : "none", border: `1px solid ${expanded ? workoutColor + "44" : C.btnBorder}`, borderRadius: 8, color: expanded ? workoutColor : "#444", fontSize: 11, cursor: "pointer", padding: "4px 10px", fontWeight: 500 } }, expanded ? "Hide" : "Form"))))),
         (open && (editingSet !== null || !allDone)) && (React.createElement("div", { style: { margin: "0 14px 14px", background: C.deep, borderRadius: 10, padding: "12px 14px", border: `1px solid ${workoutColor}33` } },
             React.createElement("div", { style: { fontSize: 11, color: workoutColor, fontWeight: 700, marginBottom: 10 } },
@@ -1161,6 +1221,52 @@ function ExerciseCard({ ex, workoutColor, completedSets, toggleSet, intensity, s
                         "\u2191 ",
                         suggestion.message)) : null;
                 })()),
+            isTimed ? (
+            /* ── TIMED SET UI ── */
+            React.createElement("div", { style: { textAlign: "center" } },
+                timedPhase === "idle" && (React.createElement(React.Fragment, null,
+                    React.createElement("div", { style: { fontSize: 13, color: C.muted, marginBottom: 16 } }, "10s countdown, then hold"),
+                    React.createElement("div", { style: { display: "flex", alignItems: "center", justifyContent: "center", gap: 16, marginBottom: 18 } },
+                        React.createElement("span", { onClick: () => setHoldSecs(s => Math.max(5, s - 5)), style: { cursor: "pointer", width: 32, height: 32, borderRadius: 8, background: C.btnBg, border: `1px solid ${C.btnBorder}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16, color: C.muted, userSelect: "none" } }, "\u2212"),
+                        React.createElement("span", { style: { fontSize: 28, fontWeight: 800, color: workoutColor, minWidth: 70, textAlign: "center" } },
+                            holdSecs,
+                            "s"),
+                        React.createElement("span", { onClick: () => setHoldSecs(s => Math.min(300, s + 5)), style: { cursor: "pointer", width: 32, height: 32, borderRadius: 8, background: C.btnBg, border: `1px solid ${C.btnBorder}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16, color: C.muted, userSelect: "none" } }, "+")),
+                    React.createElement("button", { onClick: startTimedSet, style: { width: "100%", padding: "12px", borderRadius: 10, background: workoutColor, border: "none", color: "#000", fontSize: 14, fontWeight: 700, cursor: "pointer" } }, "Start Set \u25B6"))),
+                timedPhase === "countdown" && (React.createElement(React.Fragment, null,
+                    React.createElement("div", { style: { fontSize: 11, color: C.muted, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 8 } }, "Get ready\u2026"),
+                    React.createElement("div", { style: { fontSize: 64, fontWeight: 900, color: workoutColor, lineHeight: 1, marginBottom: 16, fontVariantNumeric: "tabular-nums" } }, timedCount),
+                    React.createElement("div", { style: { background: C.btnBg, borderRadius: 4, height: 4, marginBottom: 14, overflow: "hidden" } },
+                        React.createElement("div", { style: { height: 4, borderRadius: 4, background: workoutColor, width: `${((10 - timedCount) / 10) * 100}%`, transition: "width 0.18s linear" } })),
+                    React.createElement("button", { onClick: cancelTimedSet, style: { padding: "8px 20px", borderRadius: 9, background: "transparent", border: `1px solid ${C.btnBorder}`, color: C.muted, fontSize: 12, cursor: "pointer" } }, "Cancel"))),
+                timedPhase === "hold" && (React.createElement(React.Fragment, null,
+                    React.createElement("div", { style: { fontSize: 11, color: workoutColor, letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 700, marginBottom: 8 } }, "Hold!"),
+                    React.createElement("div", { style: { fontSize: 64, fontWeight: 900, color: workoutColor, lineHeight: 1, marginBottom: 16, fontVariantNumeric: "tabular-nums" } }, timedCount),
+                    React.createElement("div", { style: { background: C.btnBg, borderRadius: 4, height: 6, marginBottom: 14, overflow: "hidden" } },
+                        React.createElement("div", { style: { height: 6, borderRadius: 4, background: workoutColor, width: `${(timedCount / holdSecs) * 100}%`, transition: "width 0.18s linear" } })),
+                    React.createElement("button", { onClick: cancelTimedSet, style: { padding: "8px 20px", borderRadius: 9, background: "transparent", border: `1px solid ${C.btnBorder}`, color: C.muted, fontSize: 12, cursor: "pointer" } }, "Cancel"))),
+                timedPhase === "done" && (React.createElement(React.Fragment, null,
+                    React.createElement("div", { style: { fontSize: 18, fontWeight: 800, color: workoutColor, marginBottom: 12 } }, "Set Complete \u2713"),
+                    React.createElement("button", { onClick: () => {
+                            setTimedPhase("idle");
+                            if (!completedSets[`${ex.name}-${currentSet}`])
+                                toggleSet(ex.name, currentSet);
+                            if (onSetLog)
+                                onSetLog(ex.name, currentSet, { weight: "BW", reps: `${holdSecs}s` });
+                            if (editingSet !== null) {
+                                setOpen(false);
+                                setEditingSet(null);
+                                return;
+                            }
+                            const nextIdx = Array.from({ length: adjSets }, (_, i) => i).find(i => i > currentSet && !completedSets[`${ex.name}-${i}`]);
+                            if (nextIdx !== undefined) {
+                                setCurrentSet(nextIdx);
+                            }
+                            else {
+                                setOpen(false);
+                            }
+                        }, style: { width: "100%", padding: "12px", borderRadius: 10, background: workoutColor, border: "none", color: "#000", fontSize: 14, fontWeight: 700, cursor: "pointer" } }, Array.from({ length: adjSets }, (_, i) => i).some(i => i > currentSet && !completedSets[`${ex.name}-${i}`]) ? "Next Set →" : "Done ✓"))))) : (
+            /* ── REGULAR WEIGHT/REPS UI ── */
             React.createElement("div", { style: { display: "flex", gap: 8, alignItems: "flex-end" } },
                 React.createElement("div", { style: { flex: 1 } },
                     React.createElement("div", { style: { fontSize: 9, color: C.muted, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 4 } }, "Weight (lbs)"),
@@ -1168,8 +1274,8 @@ function ExerciseCard({ ex, workoutColor, completedSets, toggleSet, intensity, s
                 React.createElement("div", { style: { flex: 1 } },
                     React.createElement("div", { style: { fontSize: 9, color: C.muted, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 4 } }, "Reps"),
                     React.createElement("input", { value: repsInput, onChange: e => setRepsInput(e.target.value), placeholder: "e.g. 8", type: "number", style: { width: "100%", padding: "9px 12px", borderRadius: 9, background: C.input, border: `1.5px solid ${C.inputBorder}`, color: C.text, fontSize: 15, outline: "none", fontFamily: "inherit" } })),
-                React.createElement("button", { onClick: logAndAdvance, style: { padding: "9px 16px", borderRadius: 9, background: workoutColor, border: "none", color: "#000", fontSize: 13, fontWeight: 700, cursor: "pointer", flexShrink: 0, marginBottom: 0 } }, currentSet + 1 < adjSets && Array.from({ length: adjSets }, (_, i) => i).some(i => i > currentSet && !completedSets[`${ex.name}-${i}`]) ? "Next →" : "Done ✓")),
-            ((_a = prData === null || prData === void 0 ? void 0 : prData.history) === null || _a === void 0 ? void 0 : _a.length) > 0 && (React.createElement("div", { style: { marginTop: 10, paddingTop: 10, borderTop: `1px solid #1e1e1e` } },
+                React.createElement("button", { onClick: logAndAdvance, style: { padding: "9px 16px", borderRadius: 9, background: workoutColor, border: "none", color: "#000", fontSize: 13, fontWeight: 700, cursor: "pointer", flexShrink: 0, marginBottom: 0 } }, currentSet + 1 < adjSets && Array.from({ length: adjSets }, (_, i) => i).some(i => i > currentSet && !completedSets[`${ex.name}-${i}`]) ? "Next →" : "Done ✓"))),
+            !isTimed && ((_a = prData === null || prData === void 0 ? void 0 : prData.history) === null || _a === void 0 ? void 0 : _a.length) > 0 && (React.createElement("div", { style: { marginTop: 10, paddingTop: 10, borderTop: `1px solid #1e1e1e` } },
                 React.createElement("div", { style: { fontSize: 9, color: C.muted, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 6 } }, "Session History"),
                 React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 4 } }, prData.history.slice(0, 4).map((h, i) => {
                     var _a;
@@ -1184,13 +1290,14 @@ function ExerciseCard({ ex, workoutColor, completedSets, toggleSet, intensity, s
                 const log = setLogs === null || setLogs === void 0 ? void 0 : setLogs[`${ex.name}-${i}`];
                 if (!log || !completedSets[`${ex.name}-${i}`])
                     return null;
-                return (React.createElement("div", { key: i, onClick: () => openSetForEdit(i), style: { fontSize: 10, padding: "3px 9px", borderRadius: 12, background: editingSet === i ? workoutColor : workoutColor + "22", color: editingSet === i ? "#000" : workoutColor, border: `1px solid ${workoutColor}44`, cursor: "pointer" } },
-                    "\u270E S",
+                return (React.createElement("div", { key: i, onClick: () => !isTimed && openSetForEdit(i), style: { fontSize: 10, padding: "3px 9px", borderRadius: 12, background: editingSet === i ? workoutColor : workoutColor + "22", color: editingSet === i ? "#000" : workoutColor, border: `1px solid ${workoutColor}44`, cursor: isTimed ? "default" : "pointer" } },
+                    isTimed ? "" : "✎ ",
+                    "S",
                     i + 1,
                     " ",
-                    log.weight && `${log.weight}lb`,
+                    log.weight && log.weight !== "BW" && `${log.weight}lb`,
                     " ",
-                    log.reps && `× ${log.reps}`));
+                    log.reps && `${log.reps}`));
             }))))),
         !open && doneCount > 0 && !allDone && (React.createElement("div", { style: { padding: "0 14px 12px", display: "flex", gap: 5, flexWrap: "wrap" } }, Array.from({ length: adjSets }).map((_, i) => {
             const log = setLogs === null || setLogs === void 0 ? void 0 : setLogs[`${ex.name}-${i}`];
@@ -1911,6 +2018,437 @@ function CardioLog({ cardioHistory, onClose, accentColor }) {
                         React.createElement("div", { style: { fontSize: 10, color: C.muted, marginTop: 2 } }, c.date)))));
         }))))));
 }
+const DAILY_QUOTES = [
+    { q: 'The secret of getting ahead is getting started.', a: 'Mark Twain' },
+    { q: 'We are what we repeatedly do. Excellence is not an act, but a habit.', a: 'Aristotle' },
+    { q: 'Motivation gets you started. Habit keeps you going.', a: 'Jim Ryun' },
+    { q: 'Small daily improvements are the key to staggering long-term results.', a: 'Unknown' },
+    { q: 'You don\'t have to be great to start, but you have to start to be great.', a: 'Zig Ziglar' },
+    { q: 'Success is the sum of small efforts repeated day in and day out.', a: 'Unknown' },
+    { q: 'The pain you feel today will be the strength you feel tomorrow.', a: 'Unknown' },
+    { q: 'Discipline is choosing between what you want now and what you want most.', a: 'Unknown' },
+    { q: 'Champions aren\'t made in gyms. They are made from something deep inside them.', a: 'Muhammad Ali' },
+    { q: 'It never gets easier. You just get better.', a: 'Unknown' },
+    { q: 'Show up every day. That\'s the secret.', a: 'Unknown' },
+    { q: 'Don\'t count the days. Make the days count.', a: 'Muhammad Ali' },
+    { q: 'Consistency is what transforms average into excellence.', a: 'Unknown' },
+    { q: 'Fall seven times. Stand up eight.', a: 'Japanese Proverb' },
+    { q: 'Do something today your future self will thank you for.', a: 'Unknown' },
+    { q: 'The difference between who you are and who you want to be is what you do.', a: 'Unknown' },
+    { q: 'Hard work beats talent when talent doesn\'t work hard.', a: 'Unknown' },
+    { q: 'One rep at a time. One day at a time.', a: 'Unknown' },
+    { q: 'Be so good they can\'t ignore you.', a: 'Unknown' },
+    { q: 'Show up. Do the work. Repeat.', a: 'Unknown' },
+    { q: 'The mind is the limit. As long as the mind can envision it, you can achieve it.', a: 'Arnold Schwarzenegger' },
+    { q: 'Whether you think you can or you think you can\'t, you\'re right.', a: 'Henry Ford' },
+    { q: 'Your mind will quit a thousand times before your body does.', a: 'Unknown' },
+    { q: 'Pain is temporary. Quitting lasts forever.', a: 'Unknown' },
+    { q: 'The only limits are the ones you place on yourself.', a: 'Unknown' },
+    { q: 'It always seems impossible until it\'s done.', a: 'Nelson Mandela' },
+    { q: 'Believe you can and you\'re halfway there.', a: 'Theodore Roosevelt' },
+    { q: 'What seems impossible today will one day be your warm-up.', a: 'Unknown' },
+    { q: 'The body achieves what the mind believes.', a: 'Unknown' },
+    { q: 'You are stronger than you think.', a: 'Unknown' },
+    { q: 'Doubt kills more dreams than failure ever will.', a: 'Unknown' },
+    { q: 'Train your mind to see the good in every situation.', a: 'Unknown' },
+    { q: 'Champions keep playing until they get it right.', a: 'Billie Jean King' },
+    { q: 'The hardest step is the first one out the door.', a: 'Unknown' },
+    { q: 'You\'ve survived 100% of your worst days.', a: 'Unknown' },
+    { q: 'Push yourself because no one else is going to do it for you.', a: 'Unknown' },
+    { q: 'Strength does not come from the body. It comes from the will of the soul.', a: 'Mahatma Gandhi' },
+    { q: 'Your attitude determines your direction.', a: 'Unknown' },
+    { q: 'You are capable of more than you know.', a: 'Unknown' },
+    { q: 'The strongest force in the universe is a human being living consistently with his identity.', a: 'Tony Robbins' },
+    { q: 'The only bad workout is the one that didn\'t happen.', a: 'Unknown' },
+    { q: 'If it doesn\'t challenge you, it doesn\'t change you.', a: 'Unknown' },
+    { q: 'Work hard in silence. Let success make the noise.', a: 'Unknown' },
+    { q: 'The harder the battle, the sweeter the victory.', a: 'Les Brown' },
+    { q: 'Don\'t stop when you\'re tired. Stop when you\'re done.', a: 'Unknown' },
+    { q: 'Go the extra mile. It\'s never crowded.', a: 'Unknown' },
+    { q: 'No shortcuts. No excuses.', a: 'Unknown' },
+    { q: 'Train insane or remain the same.', a: 'Unknown' },
+    { q: 'Make yourself proud.', a: 'Unknown' },
+    { q: 'The only way is through.', a: 'Robert Frost' },
+    { q: 'Do it now. Sometimes later becomes never.', a: 'Unknown' },
+    { q: 'You didn\'t come this far to only come this far.', a: 'Unknown' },
+    { q: 'Wake up. Work out. Be a better human.', a: 'Unknown' },
+    { q: 'Strength is built in the moments you want to quit but don\'t.', a: 'Unknown' },
+    { q: 'Results happen over time, not overnight.', a: 'Unknown' },
+    { q: 'One more rep. One more set. One more step.', a: 'Unknown' },
+    { q: 'Sweat is just fat crying.', a: 'Unknown' },
+    { q: 'Rise and grind.', a: 'Unknown' },
+    { q: 'Earn it.', a: 'Unknown' },
+    { q: 'No pain, no gain.', a: 'Unknown' },
+    { q: 'Progress, not perfection.', a: 'Unknown' },
+    { q: 'Be better than you were yesterday.', a: 'Unknown' },
+    { q: 'Every day is a new opportunity to improve yourself.', a: 'Unknown' },
+    { q: 'Don\'t compare your chapter one to someone else\'s chapter twenty.', a: 'Unknown' },
+    { q: 'The only competition is who you were yesterday.', a: 'Unknown' },
+    { q: 'Grow through what you go through.', a: 'Unknown' },
+    { q: 'A year from now you\'ll wish you had started today.', a: 'Unknown' },
+    { q: 'Small progress is still progress.', a: 'Unknown' },
+    { q: 'You\'re not behind. You\'re just on your own timeline.', a: 'Unknown' },
+    { q: 'Track your wins, no matter how small.', a: 'Unknown' },
+    { q: 'Every step forward is a step in the right direction.', a: 'Unknown' },
+    { q: 'Keep going. You\'re closer than you think.', a: 'Unknown' },
+    { q: 'The journey of a thousand miles begins with a single step.', a: 'Lao Tzu' },
+    { q: 'Stronger every single day.', a: 'Unknown' },
+    { q: 'Success is a journey, not a destination.', a: 'Arthur Ashe' },
+    { q: 'Great things are done by a series of small things brought together.', a: 'Vincent Van Gogh' },
+    { q: 'Every rep counts. Every set matters.', a: 'Unknown' },
+    { q: 'The goal is not to be perfect by the end. The goal is to be better today.', a: 'Unknown' },
+    { q: 'It\'s not about being the best. It\'s about being better than you were.', a: 'Unknown' },
+    { q: 'Every workout brings you one step closer to your goal.', a: 'Unknown' },
+    { q: 'It\'s not about how hard you hit. It\'s about how hard you can get hit and keep moving forward.', a: 'Unknown' },
+    { q: 'The greatest glory in living lies not in never falling, but in rising every time we fall.', a: 'Nelson Mandela' },
+    { q: 'You just can\'t beat the person who never gives up.', a: 'Babe Ruth' },
+    { q: 'Persistence is the twin sister of excellence.', a: 'Unknown' },
+    { q: 'Never give up on a dream just because of the time it will take.', a: 'Earl Nightingale' },
+    { q: 'If you\'re going through hell, keep going.', a: 'Winston Churchill' },
+    { q: 'Character is built one hard day at a time.', a: 'Unknown' },
+    { q: 'The man who moves a mountain begins by carrying away small stones.', a: 'Confucius' },
+    { q: 'Victory belongs to the most persevering.', a: 'Napoleon Bonaparte' },
+    { q: 'Don\'t quit. Suffer now and live the rest of your life as a champion.', a: 'Muhammad Ali' },
+    { q: 'A river cuts through rock not because of its power but because of its persistence.', a: 'Unknown' },
+    { q: 'When you feel like stopping, think about why you started.', a: 'Unknown' },
+    { q: 'Tough times never last, but tough people do.', a: 'Robert H. Schuller' },
+    { q: 'Keep showing up. That\'s the whole game.', a: 'Unknown' },
+    { q: 'You haven\'t failed until you quit.', a: 'Unknown' },
+    { q: 'Never, never, never give up.', a: 'Winston Churchill' },
+    { q: 'The comeback is always stronger than the setback.', a: 'Unknown' },
+    { q: 'Keep pushing. You have more strength than you think.', a: 'Unknown' },
+    { q: 'Endurance is the crowning quality.', a: 'Unknown' },
+    { q: 'A champion is someone who gets up when they can\'t.', a: 'Jack Dempsey' },
+    { q: 'A goal without a plan is just a wish.', a: 'Antoine de Saint-Exupery' },
+    { q: 'Set goals, not limits.', a: 'Unknown' },
+    { q: 'Dream big. Work hard. Stay focused.', a: 'Unknown' },
+    { q: 'Know what you want and why you want it.', a: 'Unknown' },
+    { q: 'Your goals don\'t care how you feel.', a: 'Unknown' },
+    { q: 'Think big. Start small. Act now.', a: 'Unknown' },
+    { q: 'Focus on where you want to go, not on what you fear.', a: 'Tony Robbins' },
+    { q: 'Set your goals high and don\'t stop until you get there.', a: 'Bo Jackson' },
+    { q: 'Goals are dreams with deadlines.', a: 'Unknown' },
+    { q: 'Vision without action is a daydream. Action without vision is a nightmare.', a: 'Japanese Proverb' },
+    { q: 'Decide. Commit. Succeed.', a: 'Unknown' },
+    { q: 'You become what you focus on.', a: 'Unknown' },
+    { q: 'Make today a building block for tomorrow.', a: 'Unknown' },
+    { q: 'The goal is to keep the goal the goal.', a: 'Dan John' },
+    { q: 'A clear vision is the roadmap to achievement.', a: 'Unknown' },
+    { q: 'Write your goals down. Read them every day.', a: 'Unknown' },
+    { q: 'Think about what you want, then go get it.', a: 'Unknown' },
+    { q: 'If you want something you\'ve never had, you must do something you\'ve never done.', a: 'Unknown' },
+    { q: 'Every day you either get better or worse. You never stay the same.', a: 'Unknown' },
+    { q: 'Today\'s goal: be 1% better than yesterday.', a: 'Unknown' },
+    { q: 'Strength doesn\'t come from what you can do. It comes from overcoming what you thought you couldn\'t.', a: 'Unknown' },
+    { q: 'The iron never lies to you.', a: 'Henry Rollins' },
+    { q: 'Lift more than yesterday.', a: 'Unknown' },
+    { q: 'Lift heavy. Live strong.', a: 'Unknown' },
+    { q: 'Strength is built through struggle.', a: 'Unknown' },
+    { q: 'The gym is the only place where you gain by losing.', a: 'Unknown' },
+    { q: 'In the gym, there are no shortcuts. Just sweat and results.', a: 'Unknown' },
+    { q: 'Every set is a chance to prove yourself to yourself.', a: 'Unknown' },
+    { q: 'The heaviest weight you\'ll ever lift is the gym door.', a: 'Unknown' },
+    { q: 'Strength grows in the moments you think you can\'t go on but you keep going.', a: 'Unknown' },
+    { q: 'Train like the best version of yourself already exists.', a: 'Unknown' },
+    { q: 'Get comfortable being uncomfortable.', a: 'Unknown' },
+    { q: 'Power is built, not born.', a: 'Unknown' },
+    { q: 'The bar doesn\'t care about your feelings.', a: 'Unknown' },
+    { q: 'Iron is the best therapy.', a: 'Henry Rollins' },
+    { q: 'Strong body, strong mind.', a: 'Unknown' },
+    { q: 'Be strong when you are weak, brave when you are scared.', a: 'Unknown' },
+    { q: 'Barbell in hand. Problems on hold.', a: 'Unknown' },
+    { q: 'You earn your body.', a: 'Unknown' },
+    { q: 'Lift until the weights feel light.', a: 'Unknown' },
+    { q: 'Take care of your body. It\'s the only place you have to live.', a: 'Jim Rohn' },
+    { q: 'To enjoy the glow of good health, you must exercise.', a: 'Gene Tunney' },
+    { q: 'Fitness is not a destination. It is a way of life.', a: 'Unknown' },
+    { q: 'Your body hears everything your mind says.', a: 'Naomi Judd' },
+    { q: 'Movement is medicine.', a: 'Unknown' },
+    { q: 'Healthy is not a size. Healthy is a feeling.', a: 'Unknown' },
+    { q: 'Eat well. Move daily. Sleep deeply.', a: 'Unknown' },
+    { q: 'A healthy outside starts from the inside.', a: 'Robert Urich' },
+    { q: 'The best project you\'ll ever work on is you.', a: 'Unknown' },
+    { q: 'Take care of your body so your soul has a great place to live.', a: 'Unknown' },
+    { q: 'Health is wealth.', a: 'Unknown' },
+    { q: 'Move every day. Even if it\'s just a little.', a: 'Unknown' },
+    { q: 'Rest is part of training. Recovery is how you grow.', a: 'Unknown' },
+    { q: 'Fuel your body, not just your ego.', a: 'Unknown' },
+    { q: 'Your body is not a before photo.', a: 'Unknown' },
+    { q: 'Respect the process. Respect your body.', a: 'Unknown' },
+    { q: 'The body you have is the result of choices you\'ve made.', a: 'Unknown' },
+    { q: 'Exercise is a celebration of what your body can do.', a: 'Unknown' },
+    { q: 'Healthy habits, healthy life.', a: 'Unknown' },
+    { q: 'Your health is an investment, not an expense.', a: 'Unknown' },
+    { q: 'Do not pray for an easy life, pray for the strength to endure a difficult one.', a: 'Bruce Lee' },
+    { q: 'Great things come from hard work and perseverance. No excuses.', a: 'Kobe Bryant' },
+    { q: 'I\'ve missed more than 9000 shots in my career. That\'s why I succeed.', a: 'Michael Jordan' },
+    { q: 'Some people want it to happen, some wish it would happen, others make it happen.', a: 'Michael Jordan' },
+    { q: 'Today I will do what others won\'t, so tomorrow I can do what others can\'t.', a: 'Jerry Rice' },
+    { q: 'If you want to be the best, you have to do things others are not willing to do.', a: 'Michael Phelps' },
+    { q: 'We all have the same 24 hours. Use yours wisely.', a: 'Unknown' },
+    { q: 'Don\'t wish it were easier. Wish you were better.', a: 'Jim Rohn' },
+    { q: 'Hard days are the best days because they make you stronger.', a: 'Unknown' },
+    { q: 'Show up. Work hard. Be humble.', a: 'Unknown' },
+    { q: 'Good things come to those who sweat.', a: 'Unknown' },
+    { q: 'Success isn\'t always about greatness. It\'s about consistency.', a: 'Dwayne Johnson' },
+    { q: 'Excellence is not a singular act but a habit. You are what you repeatedly do.', a: 'Unknown' },
+    { q: 'Be the hardest worker in the room.', a: 'Unknown' },
+    { q: 'Your effort is your character.', a: 'Unknown' },
+    { q: 'Action is the foundational key to all success.', a: 'Pablo Picasso' },
+    { q: 'Do more of what makes you feel alive.', a: 'Unknown' },
+    { q: 'You are who you choose to be.', a: 'Unknown' },
+    { q: 'Attitude is the difference between an ordeal and an adventure.', a: 'Unknown' },
+    { q: 'Be fearless in the pursuit of what sets your soul on fire.', a: 'Unknown' },
+    { q: 'Just one more.', a: 'Unknown' },
+    { q: 'Earn your rest.', a: 'Unknown' },
+    { q: 'Today\'s effort is tomorrow\'s result.', a: 'Unknown' },
+    { q: 'You got this.', a: 'Unknown' },
+    { q: 'Built not given.', a: 'Unknown' },
+    { q: 'Put in the work.', a: 'Unknown' },
+    { q: 'Level up.', a: 'Unknown' },
+    { q: 'Make it happen.', a: 'Unknown' },
+    { q: 'Progress over perfection.', a: 'Unknown' },
+    { q: 'Less talk. More action.', a: 'Unknown' },
+    { q: 'Earn today.', a: 'Unknown' },
+    { q: 'Show up for yourself.', a: 'Unknown' },
+    { q: 'Start before you\'re ready.', a: 'Unknown' },
+    { q: 'Trust the process.', a: 'Unknown' },
+    { q: 'Keep the promise you made to yourself.', a: 'Unknown' },
+    { q: 'Your only job is to not quit.', a: 'Unknown' },
+    { q: 'Grind. Grow. Glow.', a: 'Unknown' },
+    { q: 'No regrets.', a: 'Unknown' },
+    { q: 'Train. Rest. Repeat.', a: 'Unknown' },
+    { q: 'Own it.', a: 'Unknown' },
+    { q: 'Every day you train, you level up.', a: 'Unknown' },
+    { q: 'Every hunter started as a novice.', a: 'Unknown' },
+    { q: 'The strongest version of you is built rep by rep.', a: 'Unknown' },
+    { q: 'Arise. No one is coming to save you.', a: 'Unknown' },
+    { q: 'Every limitation exists only in your mind.', a: 'Unknown' },
+    { q: 'Today\'s training is tomorrow\'s power.', a: 'Unknown' },
+    { q: 'Rank up or go home.', a: 'Unknown' },
+    { q: 'The grind is the dungeon. Results are the reward.', a: 'Unknown' },
+    { q: 'You can\'t skip the grind and expect the glory.', a: 'Unknown' },
+    { q: 'The mission never ends. The grind is daily.', a: 'Unknown' },
+    { q: 'The secret of change is to focus all energy on building the new, not fighting the old.', a: 'Socrates' },
+    { q: 'It is not the mountain we conquer, but ourselves.', a: 'Edmund Hillary' },
+    { q: 'In the middle of every difficulty lies opportunity.', a: 'Albert Einstein' },
+    { q: 'Life is 10% what happens to you and 90% how you respond.', a: 'Unknown' },
+    { q: 'We suffer more in imagination than in reality.', a: 'Seneca' },
+    { q: 'He who is not courageous enough to take risks will accomplish nothing.', a: 'Muhammad Ali' },
+    { q: 'It does not matter how slowly you go as long as you do not stop.', a: 'Confucius' },
+    { q: 'The cave you fear to enter holds the treasure you seek.', a: 'Joseph Campbell' },
+    { q: 'You don\'t rise to the level of your goals. You fall to the level of your systems.', a: 'James Clear' },
+    { q: 'Identity drives behavior. Become the person who works out.', a: 'Unknown' },
+    { q: 'The quality of your life is the quality of your habits.', a: 'Unknown' },
+    { q: 'Comparison is the thief of joy.', a: 'Theodore Roosevelt' },
+    { q: 'First say to yourself what you would be, then do what you have to do.', a: 'Epictetus' },
+    { q: 'Pressure makes diamonds.', a: 'George S. Patton' },
+    { q: 'Suffer the pain of discipline or suffer the pain of regret.', a: 'Unknown' },
+    { q: 'The person who says it cannot be done should not interrupt the person doing it.', a: 'Chinese Proverb' },
+    { q: 'An obstacle is often a stepping stone.', a: 'Unknown' },
+    { q: 'Your habits define your future.', a: 'Unknown' },
+    { q: 'Atomic habits, massive results.', a: 'James Clear' },
+    { q: 'We become what we think about.', a: 'Earl Nightingale' },
+    { q: 'Be the energy you want to attract.', a: 'Unknown' },
+    { q: 'The first step to getting somewhere is deciding not to stay where you are.', a: 'Unknown' },
+    { q: 'Nothing worth having comes easy.', a: 'Theodore Roosevelt' },
+    { q: 'Believe in yourself and all that you are.', a: 'Christian D. Larson' },
+    { q: 'There is no substitute for hard work.', a: 'Thomas Edison' },
+    { q: 'You don\'t need motivation. You need discipline.', a: 'Unknown' },
+    { q: 'All progress takes place outside the comfort zone.', a: 'Unknown' },
+    { q: 'What you do every day matters more than what you do once in a while.', a: 'Gretchen Rubin' },
+    { q: 'The expert in anything was once a beginner.', a: 'Helen Hayes' },
+    { q: 'Be stubborn about your goals and flexible about your methods.', a: 'Unknown' },
+    { q: 'You were made to do hard things. Believe in yourself.', a: 'Unknown' },
+    { q: 'Big results require big ambitions.', a: 'Heraclitus' },
+    { q: 'The best time to plant a tree was 20 years ago. The second best time is now.', a: 'Chinese Proverb' },
+    { q: 'Run your own race.', a: 'Unknown' },
+    { q: 'One day you will look back and be glad you didn\'t quit.', a: 'Unknown' },
+    { q: 'When it gets hard, that\'s when you find out who you really are.', a: 'Unknown' },
+    { q: 'Your potential is limitless.', a: 'Unknown' },
+    { q: 'Success demands sacrifice.', a: 'Unknown' },
+    { q: 'Fuel the hunger inside you.', a: 'Unknown' },
+    { q: 'Strive for progress, not perfection.', a: 'Unknown' },
+    { q: 'Your sweat is your signature.', a: 'Unknown' },
+    { q: 'Fitness is not about being better than someone else. It\'s about being better than you used to be.', a: 'Unknown' },
+    { q: 'The will to win means nothing without the will to prepare.', a: 'Unknown' },
+    { q: 'If you want to change your body, change your mind first.', a: 'Unknown' },
+    { q: 'Every day is a chance to be better.', a: 'Unknown' },
+    { q: 'Work until your idols become your rivals.', a: 'Unknown' },
+    { q: 'The pain of discipline weighs ounces. The pain of regret weighs tons.', a: 'Jim Rohn' },
+    { q: 'Your body can stand almost anything. It\'s your mind you have to convince.', a: 'Unknown' },
+    { q: 'Be patient. Good things take time.', a: 'Unknown' },
+    { q: 'You are one decision away from a totally different life.', a: 'Unknown' },
+    { q: 'Train hard or go home.', a: 'Unknown' },
+    { q: 'Don\'t let the fear of the time it will take to accomplish something stop you.', a: 'Earl Nightingale' },
+    { q: 'The only person you should try to be better than is the person you were yesterday.', a: 'Unknown' },
+    { q: 'Muscles are torn in the gym, fed in the kitchen, built in bed.', a: 'Unknown' },
+    { q: 'Your body is your most priceless possession. Take care of it.', a: 'Jack LaLanne' },
+    { q: 'Success comes to those who are too busy to be looking for it.', a: 'Unknown' },
+    { q: 'If you don\'t make time for exercise, you\'ll probably have to make time for illness.', a: 'Robin Sharma' },
+    { q: 'Strength doesn\'t come from physical capacity. It comes from an indomitable will.', a: 'Mahatma Gandhi' },
+    { q: 'You can feel sore tomorrow or you can feel sorry tomorrow. Your choice.', a: 'Unknown' },
+    { q: 'The secret is to work less as individuals and more as a team.', a: 'Unknown' },
+    { q: 'Champions train. Losers complain.', a: 'Unknown' },
+    { q: 'Push past the point where others stop.', a: 'Unknown' },
+    { q: 'Your limitation is only your imagination.', a: 'Unknown' },
+    { q: 'Sweat now. Shine later.', a: 'Unknown' },
+    { q: 'Be the version of yourself that future you will be proud of.', a: 'Unknown' },
+    { q: 'One small step can change your entire trajectory.', a: 'Unknown' },
+    { q: 'Eat. Sleep. Train. Repeat.', a: 'Unknown' },
+    { q: 'The gym is my church.', a: 'Unknown' },
+    { q: 'You have to want it as much as you want to breathe.', a: 'Unknown' },
+    { q: 'Hard work always beats talent when talent doesn\'t work hard.', a: 'Unknown' },
+    { q: 'The more you sweat in training, the less you bleed in battle.', a: 'Unknown' },
+    { q: 'Stay the course. The finish line is closer than you think.', a: 'Unknown' },
+    { q: 'You\'re not tired. You\'re just not mentally strong enough yet.', a: 'Unknown' },
+    { q: 'Mind over matter. If you don\'t mind, it doesn\'t matter.', a: 'Unknown' },
+    { q: 'Winning isn\'t everything, but wanting to win is.', a: 'Vince Lombardi' },
+    { q: 'How bad do you want it?', a: 'Unknown' },
+    { q: 'The tragedy is not that you failed, but that you almost succeeded.', a: 'Unknown' },
+    { q: 'Every great achievement was once considered impossible.', a: 'Unknown' },
+    { q: 'Work until you no longer have to introduce yourself.', a: 'Unknown' },
+    { q: 'Strive not to be a success, but rather to be of value.', a: 'Albert Einstein' },
+    { q: 'If you\'re not willing to work for it, don\'t wish for it.', a: 'Unknown' },
+    { q: 'Never let a stumble in the road be the end of the journey.', a: 'Unknown' },
+    { q: 'Energy and persistence conquer all things.', a: 'Benjamin Franklin' },
+    { q: 'You\'re always one workout away from a better mood.', a: 'Unknown' },
+    { q: 'Don\'t be afraid to start over. It\'s a chance to build something better.', a: 'Unknown' },
+    { q: 'Be driven. Be focused. Be awesome.', a: 'Unknown' },
+    { q: 'Make the rest of your life the best of your life.', a: 'Unknown' },
+    { q: 'No matter how slow you go, you\'re still lapping everyone on the couch.', a: 'Unknown' },
+    { q: 'You are your only limit.', a: 'Unknown' },
+    { q: 'If you can dream it, you can achieve it.', a: 'Zig Ziglar' },
+    { q: 'Success is no accident. It is hard work, perseverance, learning, studying, sacrifice.', a: 'Pele' },
+    { q: 'Believe in the power of yet.', a: 'Carol Dweck' },
+    { q: 'You\'ve got what it takes, but it will take everything you\'ve got.', a: 'Unknown' },
+    { q: 'Invest in yourself. It pays the best interest.', a: 'Benjamin Franklin' },
+    { q: 'Your future depends on what you do today.', a: 'Mahatma Gandhi' },
+    { q: 'Failure is not the opposite of success. It\'s part of it.', a: 'Arianna Huffington' },
+    { q: 'Life begins at the end of your comfort zone.', a: 'Neale Donald Walsch' },
+    { q: 'It\'s not whether you get knocked down. It\'s whether you get up.', a: 'Vince Lombardi' },
+    { q: 'Today\'s preparation determines tomorrow\'s achievement.', a: 'Unknown' },
+    { q: 'Do the work. The results will follow.', a: 'Unknown' },
+    { q: 'Just because it\'s hard doesn\'t mean it\'s not worth it.', a: 'Unknown' },
+    { q: 'Earn what you want. Nothing is given.', a: 'Unknown' },
+    { q: 'Be hungry. Stay humble.', a: 'Unknown' },
+    { q: 'Outwork everyone.', a: 'Unknown' },
+    { q: 'The only time success comes before work is in the dictionary.', a: 'Unknown' },
+    { q: 'Work harder than you think you did yesterday.', a: 'Unknown' },
+    { q: 'Stop dreaming. Start doing.', a: 'Unknown' },
+    { q: 'Excuses don\'t burn calories.', a: 'Unknown' },
+    { q: 'You become what you believe.', a: 'Oprah Winfrey' },
+    { q: 'Don\'t give up on yourself.', a: 'Unknown' },
+    { q: 'Remember why you started on the days you want to quit.', a: 'Unknown' },
+    { q: 'Embrace the grind.', a: 'Unknown' },
+    { q: 'Results speak louder than excuses.', a: 'Unknown' },
+    { q: 'Your story isn\'t over yet.', a: 'Unknown' },
+    { q: 'Get after it.', a: 'Unknown' },
+    { q: 'Be the reason someone believes in themselves.', a: 'Unknown' },
+    { q: 'The real workout starts when you want to stop.', a: 'Unknown' },
+    { q: 'You never regret a workout.', a: 'Unknown' },
+    { q: 'Every rep builds the life you want.', a: 'Unknown' },
+    { q: 'No excuses. Only results.', a: 'Unknown' },
+    { q: 'This is your sign to go to the gym.', a: 'Unknown' },
+    { q: 'Hustle harder.', a: 'Unknown' },
+    { q: 'Nothing great was ever achieved without enthusiasm.', a: 'Ralph Waldo Emerson' },
+    { q: 'If it was easy, everyone would do it.', a: 'Unknown' },
+    { q: 'Pain is weakness leaving the body.', a: 'Unknown' },
+    { q: 'Turn your can\'ts into cans and your dreams into plans.', a: 'Unknown' },
+    { q: 'Be so focused that nothing can distract you.', a: 'Unknown' },
+    { q: 'Your greatest opponent is the voice in your head.', a: 'Unknown' },
+    { q: 'The fire inside you burns brighter than the fire around you.', a: 'Unknown' },
+    { q: 'One more day. One more rep. One more step.', a: 'Unknown' },
+    { q: 'If you\'re breathing, you can do one more.', a: 'Unknown' },
+    { q: 'The will to win is nothing without the will to prepare to win.', a: 'Unknown' },
+    { q: 'If you want to change your body, change your mind first.', a: 'Unknown' },
+    { q: 'Work until your idols become your rivals.', a: 'Unknown' },
+    { q: 'The pain of discipline weighs ounces. The pain of regret weighs tons.', a: 'Jim Rohn' },
+    { q: 'Be patient. Good things take time.', a: 'Unknown' },
+    { q: 'You are one decision away from a totally different life.', a: 'Unknown' },
+    { q: 'Your body can stand almost anything. It\'s your mind you have to convince.', a: 'Unknown' },
+    { q: 'Muscles are torn in the gym, fed in the kitchen, built in bed.', a: 'Unknown' },
+    { q: 'You can feel sore tomorrow or feel sorry tomorrow. Your choice.', a: 'Unknown' },
+    { q: 'If you don\'t make time for exercise, you\'ll have to make time for illness.', a: 'Robin Sharma' },
+    { q: 'The more you sweat in training, the less you bleed in battle.', a: 'Unknown' },
+    { q: 'Stay the course. The finish line is closer than you think.', a: 'Unknown' },
+    { q: 'Winning isn\'t everything, but wanting to win is.', a: 'Vince Lombardi' },
+    { q: 'How bad do you want it?', a: 'Unknown' },
+    { q: 'Every great achievement was once considered impossible.', a: 'Unknown' },
+    { q: 'Energy and persistence conquer all things.', a: 'Benjamin Franklin' },
+    { q: 'No matter how slow you go, you\'re still lapping everyone on the couch.', a: 'Unknown' },
+    { q: 'Success is no accident. It is hard work, perseverance, and sacrifice.', a: 'Pele' },
+    { q: 'Your future depends on what you do today.', a: 'Mahatma Gandhi' },
+    { q: 'Failure is not the opposite of success. It\'s part of success.', a: 'Arianna Huffington' },
+    { q: 'Life begins at the end of your comfort zone.', a: 'Neale Donald Walsch' },
+    { q: 'It\'s not whether you get knocked down. It\'s whether you get up.', a: 'Vince Lombardi' },
+    { q: 'The only time success comes before work is in the dictionary.', a: 'Unknown' },
+    { q: 'Excuses don\'t burn calories.', a: 'Unknown' },
+];
+// ── QUOTE SPLASH ──────────────────────────────────────────────────────────────
+// Shows a daily motivational quote on app open for ~3 seconds
+function QuoteSplash({ onDone }) {
+    const [visible, setVisible] = useState(true);
+    const [fadeOut, setFadeOut] = useState(false);
+    // Pick quote by day of year so everyone sees the same one each day
+    const dayOfYear = () => {
+        const now = new Date();
+        const start = new Date(now.getFullYear(), 0, 0);
+        const diff = now - start;
+        return Math.floor(diff / (1000 * 60 * 60 * 24)) % 365;
+    };
+    const quote = DAILY_QUOTES[dayOfYear()];
+    useEffect(() => {
+        // Start fade-out after 3.2s, dismiss after 3.7s
+        const fadeTimer = setTimeout(() => setFadeOut(true), 3200);
+        const doneTimer = setTimeout(() => { setVisible(false); onDone(); }, 3700);
+        return () => { clearTimeout(fadeTimer); clearTimeout(doneTimer); };
+    }, []);
+    if (!visible)
+        return null;
+    return (React.createElement("div", { onClick: () => { setFadeOut(true); setTimeout(onDone, 400); }, style: {
+            position: "fixed", inset: 0, zIndex: 500,
+            background: "#05050F",
+            display: "flex", flexDirection: "column",
+            alignItems: "center", justifyContent: "center",
+            padding: "48px 36px",
+            fontFamily: "'DM Sans','Helvetica Neue',sans-serif",
+            opacity: fadeOut ? 0 : 1,
+            transition: "opacity 0.5s ease",
+            cursor: "pointer",
+        } },
+        React.createElement("div", { style: { marginBottom: 48, textAlign: "center" } },
+            React.createElement("div", { style: { fontSize: 13, color: "#555", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 6 } }, "Level Up"),
+            React.createElement("div", { style: { width: 40, height: 1, background: "#333", margin: "0 auto" } })),
+        React.createElement("div", { style: { flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", maxWidth: 340, textAlign: "center" } },
+            React.createElement("div", { style: { fontSize: 11, color: "#555", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 20 } }, "Daily Motivation"),
+            React.createElement("div", { style: {
+                    fontSize: 22, fontWeight: 700, color: "#F0EDE8",
+                    lineHeight: 1.4, letterSpacing: "-0.01em",
+                    marginBottom: 24,
+                } },
+                "\u201C",
+                quote.q,
+                "\u201D"),
+            quote.a !== "Unknown" && (React.createElement("div", { style: { fontSize: 12, color: "#555", letterSpacing: "0.08em" } },
+                "\u2014 ",
+                quote.a))),
+        React.createElement("div", { style: { width: "100%", maxWidth: 200, marginBottom: 48 } },
+            React.createElement("div", { style: { height: 2, background: "#111", borderRadius: 2, overflow: "hidden" } },
+                React.createElement("div", { style: {
+                        height: 2, borderRadius: 2,
+                        background: "linear-gradient(90deg, #00E5FF, #A855F7)",
+                        animation: "xpLoad 3.2s linear forwards",
+                        width: "0%",
+                    } })),
+            React.createElement("style", null, `
+          @keyframes xpLoad {
+            from { width: 0% }
+            to { width: 100% }
+          }
+        `)),
+        React.createElement("div", { style: { fontSize: 10, color: "#333", letterSpacing: "0.1em" } }, "TAP TO SKIP")));
+}
 // ── WELCOME SCREEN ────────────────────────────────────────────────────────────
 // ── BROWSER DETECTION ────────────────────────────────────────────────────────
 function getBrowserInfo() {
@@ -2116,6 +2654,7 @@ function WelcomeScreen({ onComplete }) {
 function WorkoutApp() {
     var _a;
     const [storageReady, setStorageReady] = useState(false);
+    const [showSplash, setShowSplash] = useState(true);
     const [showWelcome, setShowWelcome] = useState(false);
     // ── PERSISTENT STATE ──────────────────────────────────────────────────────
     const [daysPerWeek, setDaysPerWeek] = useState(3);
@@ -2454,9 +2993,11 @@ function WorkoutApp() {
                     plan.exercises.length - 3))));
     };
     if (!storageReady) {
-        return (React.createElement("div", { style: { height: "100dvh", background: "#0A0A0A", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", fontFamily: "'DM Sans',sans-serif" } },
-            React.createElement("div", { style: { fontSize: 28, fontWeight: 900, color: "#FF6B35", letterSpacing: "-0.02em", marginBottom: 12 } }, "JBR"),
-            React.createElement("div", { style: { fontSize: 12, color: "#444", letterSpacing: "0.1em", textTransform: "uppercase" } }, "Loading...")));
+        return (React.createElement(React.Fragment, null,
+            React.createElement("div", { style: { height: "100dvh", background: "#0A0A0A", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", fontFamily: "'DM Sans',sans-serif" } },
+                React.createElement("div", { style: { fontSize: 28, fontWeight: 900, color: "#FF6B35", letterSpacing: "-0.02em", marginBottom: 12 } }, "JBR"),
+                React.createElement("div", { style: { fontSize: 12, color: "#444", letterSpacing: "0.1em", textTransform: "uppercase" } }, "Loading...")),
+            showSplash && React.createElement(QuoteSplash, { onDone: () => setShowSplash(false) })));
     }
     if (showWelcome) {
         return (React.createElement(React.Fragment, null,
@@ -2479,11 +3020,13 @@ function WorkoutApp() {
                     catch (e) { }
                     setShowWelcome(false);
                 } }),
-            React.createElement(BrowserBanner, null)));
+            React.createElement(BrowserBanner, null),
+            showSplash && React.createElement(QuoteSplash, { onDone: () => setShowSplash(false) })));
     }
     return (React.createElement("div", { style: { height: "100dvh", background: TH.bg, color: TH.text, fontFamily: "'DM Sans','Helvetica Neue',sans-serif", maxWidth: 420, margin: "0 auto", display: "flex", flexDirection: "column", position: "relative" } },
         React.createElement("div", { style: { position: "absolute", inset: 0, pointerEvents: "none", zIndex: 0, background: `radial-gradient(ellipse at 20% 0%, ${TH.accent}12 0%, transparent 60%), radial-gradient(ellipse at 80% 100%, ${TH.accent2}0d 0%, transparent 60%)` } }),
         React.createElement(BrowserBanner, null),
+        showSplash && React.createElement(QuoteSplash, { onDone: () => setShowSplash(false) }),
         editingPlan && (React.createElement(PlanEditor, { planName: editingPlan, exercises: getPlanExercises(editingPlan), onSave: (newList) => setPlanOverrides(prev => (Object.assign(Object.assign({}, prev), { [editingPlan]: newList }))), onClose: () => setEditingPlan(null) })),
         showWorkoutLog && (React.createElement(WorkoutLog, { workoutHistory: workoutHistory, onClose: () => setShowWorkoutLog(false), accentColor: TH.accent })),
         showCardioLog && (React.createElement(CardioLog, { cardioHistory: cardioHistory, onClose: () => setShowCardioLog(false), accentColor: TH.accent })),
