@@ -1,4 +1,4 @@
-<!DOCTYPE html><!-- v20260328-195909 -->
+<!DOCTYPE html><!-- v20260328-200836 -->
 
 <html lang="en">
 <head>
@@ -2604,48 +2604,67 @@ function WorkoutShareScreen({ summary, profile, onClose }) {
         setTimeout(() => setFlashAnim(false), 300);
         const vw = vid.videoWidth || window.innerWidth;
         const vh = vid.videoHeight || window.innerHeight;
-        canvas.width = vw;
-        canvas.height = vh;
+        // iOS returns landscape sensor dims for portrait video — detect and rotate
+        const screenIsPortrait = window.innerHeight > window.innerWidth;
+        const videoIsLandscape = vw > vh;
+        const needsRotation = screenIsPortrait && videoIsLandscape;
+        // Canvas output matches screen orientation
+        const cw = needsRotation ? vh : vw;
+        const ch = needsRotation ? vw : vh;
+        canvas.width = cw;
+        canvas.height = ch;
         const ctx = canvas.getContext("2d");
-        // Draw video frame
-        if (facing === "user") {
-            ctx.translate(vw, 0);
-            ctx.scale(-1, 1);
+        // Draw video — rotate 90° CCW if needed
+        if (needsRotation) {
+            ctx.save();
+            ctx.translate(0, cw); // cw = original vh
+            ctx.rotate(-Math.PI / 2);
+            if (facing === "user") {
+                ctx.translate(vh, 0);
+                ctx.scale(-1, 1);
+            }
+            ctx.drawImage(vid, 0, 0, vw, vh);
+            ctx.restore();
         }
-        ctx.drawImage(vid, 0, 0, vw, vh);
-        if (facing === "user") {
-            ctx.setTransform(1, 0, 0, 1, 0, 0);
+        else {
+            if (facing === "user") {
+                ctx.translate(cw, 0);
+                ctx.scale(-1, 1);
+            }
+            ctx.drawImage(vid, 0, 0, cw, ch);
+            if (facing === "user") {
+                ctx.setTransform(1, 0, 0, 1, 0, 0);
+            }
         }
-        // Scale helpers
-        const sx = vw / window.innerWidth;
-        const sy = vh / window.innerHeight;
+        // Scale helpers — always relative to screen dimensions
+        const sx = cw / window.innerWidth;
+        const sy = ch / window.innerHeight;
         const px = (n) => n * sx;
         const py = (n) => n * sy;
         ctx.textBaseline = "top";
         // Vignette
-        const vig = ctx.createRadialGradient(vw / 2, vh / 2, vh * 0.18, vw / 2, vh / 2, vh * 0.72);
+        const vig = ctx.createRadialGradient(cw / 2, ch / 2, ch * 0.18, cw / 2, ch / 2, ch * 0.72);
         vig.addColorStop(0, "rgba(0,0,0,0)");
         vig.addColorStop(1, "rgba(0,0,0,0.45)");
         ctx.fillStyle = vig;
-        ctx.fillRect(0, 0, vw, vh);
+        ctx.fillRect(0, 0, cw, ch);
         // Stats position
         const posMap = {
             tl: { x: px(20), y: py(110) },
-            tr: { x: vw - px(20), y: py(110) },
-            bl: { x: px(20), y: vh - py(240) },
-            br: { x: vw - px(20), y: vh - py(240) },
-            center: { x: vw / 2, y: vh / 2 - py(60) },
+            tr: { x: cw - px(20), y: py(110) },
+            bl: { x: px(20), y: ch - py(220) },
+            br: { x: cw - px(20), y: ch - py(220) },
+            center: { x: cw / 2, y: ch / 2 - py(60) },
         };
         const spos = posMap[position] || posMap.center;
         const isRight = ["tr", "br"].includes(position);
         const isCenter = position === "center";
-        ctx.textAlign = isCenter ? "center" : isRight ? "right" : "left";
         const dateSz = px(9 * sc);
         const nameSz = px(28 * sc);
         const valSz = px(22 * sc);
         const labelSz = px(8 * sc);
-        const statGap = px(20 * sc);
         // Date
+        ctx.textAlign = isCenter ? "center" : isRight ? "right" : "left";
         ctx.font = `600 ${dateSz}px 'Helvetica Neue',Arial,sans-serif`;
         ctx.fillStyle = "rgba(255,255,255,0.65)";
         ctx.shadowColor = "rgba(0,0,0,0.8)";
@@ -2655,36 +2674,39 @@ function WorkoutShareScreen({ summary, profile, onClose }) {
         ctx.font = `900 ${nameSz}px 'Helvetica Neue',Arial,sans-serif`;
         ctx.fillStyle = "#fff";
         ctx.shadowBlur = px(14);
-        ctx.fillText((workout || "").replace("Bodyweight ", "BW "), spos.x, spos.y + dateSz + py(6));
-        // Stats row
-        const statsY = spos.y + dateSz + py(6) + nameSz + py(14);
-        ctx.shadowBlur = px(10);
-        const stats = [{ label: "DURATION", value: formatDur }, { label: "XP EARNED", value: `+${xpEarned}` }];
-        let offsetX = 0;
-        for (const s of stats) {
-            const drawX = isCenter ? spos.x + offsetX - px(60) : isRight ? spos.x - offsetX : spos.x + offsetX;
-            const align = isCenter ? "left" : isRight ? "right" : "left";
-            ctx.textAlign = align;
+        ctx.fillText((workout || "").replace("Bodyweight ", "BW "), spos.x, spos.y + dateSz + py(5));
+        // Stats row — measure widths first, then draw side by side
+        const statsY = spos.y + dateSz + py(5) + nameSz + py(12);
+        ctx.shadowBlur = px(8);
+        const statsData = [{ label: "DURATION", value: formatDur }, { label: "XP EARNED", value: `+${xpEarned}` }];
+        ctx.font = `900 ${valSz}px 'Helvetica Neue',Arial,sans-serif`;
+        const w0 = ctx.measureText(statsData[0].value).width;
+        const w1 = ctx.measureText(statsData[1].value).width;
+        const gap = px(32 * sc);
+        const totalW = w0 + gap + w1;
+        const startX = isCenter ? cw / 2 - totalW / 2 : isRight ? spos.x - totalW : spos.x;
+        for (let i = 0; i < statsData.length; i++) {
+            const s = statsData[i];
+            const x = i === 0 ? startX : startX + w0 + gap;
+            ctx.textAlign = "left";
             ctx.font = `900 ${valSz}px 'Helvetica Neue',Arial,sans-serif`;
             ctx.fillStyle = "#fff";
-            ctx.fillText(s.value, drawX, statsY);
+            ctx.fillText(s.value, x, statsY);
             ctx.font = `600 ${labelSz}px 'Helvetica Neue',Arial,sans-serif`;
             ctx.fillStyle = "rgba(255,255,255,0.6)";
-            ctx.fillText(s.label, drawX, statsY + valSz + py(3));
-            const w = ctx.measureText(s.value).width;
-            offsetX += w + statGap + px(10);
+            ctx.fillText(s.label, x, statsY + valSz + py(3));
         }
         // Rank badge
-        ctx.textAlign = "center";
         const bx = px(20), by = py(56), bw = px(40), bh = py(40);
+        ctx.shadowBlur = 0;
         ctx.fillStyle = "rgba(0,0,0,0.55)";
         roundRect(ctx, bx, by, bw, bh, px(10));
         ctx.strokeStyle = ((rank === null || rank === void 0 ? void 0 : rank.color) || "#888") + "99";
         ctx.lineWidth = px(1.5);
         roundRect(ctx, bx, by, bw, bh, px(10), false);
+        ctx.textAlign = "center";
         ctx.font = `700 ${px(7)}px 'Helvetica Neue',Arial,sans-serif`;
         ctx.fillStyle = (rank === null || rank === void 0 ? void 0 : rank.color) || "#888";
-        ctx.shadowBlur = 0;
         ctx.fillText("LVL", bx + bw / 2, by + py(7));
         ctx.font = `900 ${px(16)}px 'Helvetica Neue',Arial,sans-serif`;
         ctx.fillText(String((rank === null || rank === void 0 ? void 0 : rank.level) || ""), bx + bw / 2, by + py(17));
@@ -2712,18 +2734,18 @@ function WorkoutShareScreen({ summary, profile, onClose }) {
         ctx.shadowBlur = px(8);
         ctx.font = `900 ${px(14)}px 'Helvetica Neue',Arial,sans-serif`;
         ctx.fillStyle = "#fff";
-        ctx.fillText("Level Up", px(20), vh - py(110));
+        ctx.textAlign = "left";
+        ctx.fillText("Level Up", px(20), ch - py(100));
         ctx.font = `400 ${px(9)}px 'Helvetica Neue',Arial,sans-serif`;
         ctx.fillStyle = "rgba(255,255,255,0.4)";
-        ctx.fillText(`WORKOUT TRACKER · ${(profile === null || profile === void 0 ? void 0 : profile.name) || ""}`, px(20), vh - py(96));
+        ctx.fillText(`WORKOUT TRACKER · ${(profile === null || profile === void 0 ? void 0 : profile.name) || ""}`, px(20), ch - py(86));
         ctx.shadowBlur = 0;
         canvas.toBlob(async (blob) => {
             var _a;
             if (!blob)
                 return;
             const file = new File([blob], "levelup-workout.jpg", { type: "image/jpeg" });
-            const canShare = (_a = navigator.canShare) === null || _a === void 0 ? void 0 : _a.call(navigator, { files: [file] });
-            if (navigator.share && canShare) {
+            if (navigator.share && ((_a = navigator.canShare) === null || _a === void 0 ? void 0 : _a.call(navigator, { files: [file] }))) {
                 try {
                     await navigator.share({ files: [file], title: "Level Up Workout" });
                 }
@@ -2735,7 +2757,6 @@ function WorkoutShareScreen({ summary, profile, onClose }) {
                 a.download = "levelup-workout.jpg";
                 a.click();
             }
-            // Resume camera after share sheet closes
             startCamera(facing);
         }, "image/jpeg", 0.92);
     };
