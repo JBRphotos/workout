@@ -2598,19 +2598,12 @@ function WorkoutShareScreen({ summary, profile, onClose }) {
     const capturePhoto = async () => {
         const vid = videoRef.current;
         const canvas = canvasRef.current;
-        if (!vid || !canvas) {
-            alert("Missing vid or canvas");
+        if (!vid || !canvas || !camReady)
             return;
-        }
-        if (!camReady) {
-            alert("Camera not ready");
-            return;
-        }
         setFlashAnim(true);
         setTimeout(() => setFlashAnim(false), 300);
         const vw = vid.videoWidth || window.innerWidth;
         const vh = vid.videoHeight || window.innerHeight;
-        alert(`Video size: ${vw}x${vh}`);
         canvas.width = vw;
         canvas.height = vh;
         const ctx = canvas.getContext("2d");
@@ -2628,28 +2621,21 @@ function WorkoutShareScreen({ summary, profile, onClose }) {
         ctx.fillRect(50, 50, 200, 200);
         canvas.toBlob(async (blob) => {
             var _a;
-            if (!blob) {
-                alert("toBlob failed — blob is null");
+            if (!blob)
                 return;
-            }
-            alert(`Blob size: ${blob.size} bytes. Attempting share...`);
             const file = new File([blob], "levelup-workout.jpg", { type: "image/jpeg" });
             const canShare = (_a = navigator.canShare) === null || _a === void 0 ? void 0 : _a.call(navigator, { files: [file] });
-            alert(`navigator.share exists: ${!!navigator.share}, canShare: ${canShare}`);
             if (navigator.share && canShare) {
                 try {
                     await navigator.share({ files: [file], title: "Level Up Workout" });
                     return;
                 }
-                catch (e) {
-                    alert("Share failed: " + e.message);
-                }
+                catch (e) { }
             }
             const a = document.createElement("a");
             a.href = URL.createObjectURL(blob);
             a.download = "levelup-workout.jpg";
             a.click();
-            alert("Download triggered");
         }, "image/jpeg", 0.92);
     };
     // Canvas roundRect helper for older Safari
