@@ -1,4 +1,4 @@
-<!DOCTYPE html><!-- v20260328-215655 -->
+<!DOCTYPE html><!-- v20260328-222129 -->
 
 <html lang="en">
 <head>
@@ -3290,36 +3290,37 @@ function PlanEditor({ planName, exercises, onSave, onClose }) {
             React.createElement("button", { onClick: () => setExList([...WORKOUT_PLANS[planName].exercises]), style: { marginTop: 20, width: "100%", padding: "11px", borderRadius: 10, background: "transparent", border: `1px solid ${C.btnBorder}`, color: C.muted, fontSize: 12, cursor: "pointer" } }, "\u21BA Reset to default"))));
 }
 function WelcomeScreen({ onComplete }) {
-    const C = useC();
+    var _a;
     const [name, setName] = useState("");
     const [days, setDays] = useState(3);
     const [goal, setGoal] = useState("Build Muscle");
-    const [step, setStep] = useState(1); // 1 = name, 2 = setup
+    const [themeId, setThemeId] = useState("solo");
+    const [step, setStep] = useState(1); // 1=name, 2=setup, 3=theme
     const [error, setError] = useState("");
     const goals = ["Build Muscle", "Lose Weight", "Get Stronger", "Stay Active", "All of the Above"];
-    const submitName = () => {
-        if (!name.trim()) {
-            setError("Enter your name to continue");
-            return;
-        }
-        setError("");
-        setStep(2);
-    };
-    const submitSetup = () => {
-        onComplete({ name: name.trim(), goal, days });
-    };
+    const ANIME_THEMES = ["solo", "pokemon", "naruto", "onepiece", "dragonball", "aot"];
+    const OTHER_THEMES = ["greek", "rpg", "space", "military", "sports"];
+    const submitName = () => { if (!name.trim()) {
+        setError("Enter your name to continue");
+        return;
+    } setError(""); setStep(2); };
+    const submitSetup = () => setStep(3);
+    const submitTheme = () => onComplete({ name: name.trim(), goal, days, themeId });
+    const accentColor = ((_a = APP_THEMES[themeId]) === null || _a === void 0 ? void 0 : _a.accent) || "#FF6B35";
     return (React.createElement("div", { style: { minHeight: "100dvh", background: "#0A0A0A", overflowY: "auto", fontFamily: "'DM Sans','Helvetica Neue',sans-serif", maxWidth: 420, margin: "0 auto" } },
         React.createElement("div", { style: { padding: "60px 28px 120px" } },
             React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 48 } },
                 React.createElement("div", null,
-                    React.createElement("div", { style: { fontSize: 36, fontWeight: 900, color: "#FF6B35", letterSpacing: "-0.03em" } }, "JBR"),
+                    React.createElement("div", { style: { fontSize: 36, fontWeight: 900, color: "#FF6B35", letterSpacing: "-0.03em" } }, "Level Up"),
                     React.createElement("div", { style: { fontSize: 13, color: "#444", letterSpacing: "0.12em", textTransform: "uppercase", marginTop: 2 } }, "Fitness")),
-                step === 1 && (React.createElement("button", { onClick: submitName, style: { padding: "10px 20px", borderRadius: 12, background: "#FF6B35", border: "none", color: "#000", fontSize: 14, fontWeight: 800, cursor: "pointer", letterSpacing: "0.02em", marginTop: 4 } }, "Continue \u2192")),
-                step === 2 && (React.createElement("button", { onClick: submitSetup, style: { padding: "10px 20px", borderRadius: 12, background: "#FF6B35", border: "none", color: "#000", fontSize: 14, fontWeight: 800, cursor: "pointer", letterSpacing: "0.02em", marginTop: 4 } }, "Start \u2192"))),
+                step === 1 && (React.createElement("button", { onClick: submitName, style: { padding: "10px 20px", borderRadius: 12, background: "#FF6B35", border: "none", color: "#000", fontSize: 14, fontWeight: 800, cursor: "pointer", marginTop: 4 } }, "Continue \u2192")),
+                step === 2 && (React.createElement("button", { onClick: submitSetup, style: { padding: "10px 20px", borderRadius: 12, background: "#FF6B35", border: "none", color: "#000", fontSize: 14, fontWeight: 800, cursor: "pointer", marginTop: 4 } }, "Next \u2192")),
+                step === 3 && (React.createElement("button", { onClick: submitTheme, style: { padding: "10px 20px", borderRadius: 12, background: accentColor, border: "none", color: "#fff", fontSize: 14, fontWeight: 800, cursor: "pointer", marginTop: 4 } }, "Let's Go \u2192"))),
+            React.createElement("div", { style: { display: "flex", gap: 6, marginBottom: 36 } }, [1, 2, 3].map(s => (React.createElement("div", { key: s, style: { height: 3, flex: 1, borderRadius: 2, background: s <= step ? "#FF6B35" : "#222", transition: "background 0.3s" } })))),
             step === 1 && (React.createElement(React.Fragment, null,
-                React.createElement("div", { style: { fontSize: 28, fontWeight: 800, color: "#F0EDE8", letterSpacing: "-0.02em", marginBottom: 8, lineHeight: 1.2 } }, "Welcome, Hunter."),
+                React.createElement("div", { style: { fontSize: 28, fontWeight: 800, color: "#F0EDE8", letterSpacing: "-0.02em", marginBottom: 8, lineHeight: 1.2 } }, "Welcome."),
                 React.createElement("div", { style: { fontSize: 14, color: "#555", marginBottom: 40, lineHeight: 1.6 } }, "What should we call you?"),
-                React.createElement("input", { value: name, onChange: e => { setName(e.target.value); setError(""); }, onKeyDown: e => e.key === "Enter" && submitName(), placeholder: "Your name", autoFocus: true, style: { width: "100%", padding: "16px 18px", borderRadius: 14, background: "#141414", border: `1.5px solid ${error ? "#F87171" : "#222"}`, color: "#F0EDE8", fontSize: 18, outline: "none", fontFamily: "inherit", marginBottom: 8, transition: "border-color 0.15s" } }),
+                React.createElement("input", { value: name, onChange: e => { setName(e.target.value); setError(""); }, onKeyDown: e => e.key === "Enter" && submitName(), placeholder: "Your name", autoFocus: true, style: { width: "100%", padding: "16px 18px", borderRadius: 14, background: "#141414", border: `1.5px solid ${error ? "#F87171" : "#222"}`, color: "#F0EDE8", fontSize: 18, outline: "none", fontFamily: "inherit", marginBottom: 8 } }),
                 error && React.createElement("div", { style: { fontSize: 12, color: "#F87171", marginBottom: 12 } }, error))),
             step === 2 && (React.createElement(React.Fragment, null,
                 React.createElement("div", { style: { fontSize: 28, fontWeight: 800, color: "#F0EDE8", letterSpacing: "-0.02em", marginBottom: 8, lineHeight: 1.2 } },
@@ -3332,14 +3333,61 @@ function WelcomeScreen({ onComplete }) {
                 React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 8, marginBottom: 28 } }, goals.map(g => (React.createElement("button", { key: g, onClick: () => setGoal(g), style: { padding: "12px 16px", borderRadius: 12, cursor: "pointer", textAlign: "left", fontSize: 14, fontWeight: 600,
                         background: goal === g ? "#FF6B3522" : "#141414",
                         border: `1.5px solid ${goal === g ? "#FF6B35" : "#222"}`,
-                        color: goal === g ? "#FF6B35" : "#666",
-                        transition: "all 0.15s" } }, g)))),
+                        color: goal === g ? "#FF6B35" : "#666", transition: "all 0.15s" } }, g)))),
                 React.createElement("div", { style: { fontSize: 10, color: "#555", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 10 } }, "Days Per Week"),
                 React.createElement("div", { style: { display: "flex", gap: 8 } }, [2, 3, 4, 5, 6].map(d => (React.createElement("button", { key: d, onClick: () => setDays(d), style: { flex: 1, padding: "12px 0", borderRadius: 12, cursor: "pointer", fontSize: 15, fontWeight: 700,
                         background: days === d ? "#FF6B3522" : "#141414",
                         border: `1.5px solid ${days === d ? "#FF6B35" : "#222"}`,
-                        color: days === d ? "#FF6B35" : "#555",
-                        transition: "all 0.15s" } }, d)))))))));
+                        color: days === d ? "#FF6B35" : "#555", transition: "all 0.15s" } }, d)))))),
+            step === 3 && (React.createElement(React.Fragment, null,
+                React.createElement("div", { style: { fontSize: 28, fontWeight: 800, color: "#F0EDE8", letterSpacing: "-0.02em", marginBottom: 8, lineHeight: 1.2 } },
+                    "Choose your",
+                    React.createElement("br", null),
+                    React.createElement("span", { style: { color: accentColor } }, "universe"),
+                    "."),
+                React.createElement("div", { style: { fontSize: 14, color: "#555", marginBottom: 28, lineHeight: 1.6 } }, "This sets your rank names and colors. Change it anytime in Profile."),
+                React.createElement("div", { style: { fontSize: 10, color: "#444", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 10 } }, "Anime"),
+                React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 8, marginBottom: 24 } }, ANIME_THEMES.map(id => {
+                    const theme = APP_THEMES[id];
+                    const isSelected = themeId === id;
+                    const topRank = theme.ranks[theme.ranks.length - 1];
+                    return (React.createElement("button", { key: id, onClick: () => setThemeId(id), style: { width: "100%", padding: "12px 14px", borderRadius: 14, cursor: "pointer", textAlign: "left",
+                            background: isSelected ? theme.accent + "22" : "#141414",
+                            border: `1.5px solid ${isSelected ? theme.accent : "#222"}`,
+                            transition: "all 0.15s", display: "flex", alignItems: "center", gap: 12 } },
+                        React.createElement("div", { style: { width: 4, height: 36, borderRadius: 4, background: theme.accent, flexShrink: 0 } }),
+                        React.createElement("div", { style: { flex: 1 } },
+                            React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 8, marginBottom: 3 } },
+                                React.createElement("span", { style: { fontSize: 13, fontWeight: 700, color: isSelected ? theme.accent : "#DDD" } }, theme.name),
+                                React.createElement("span", { style: { fontSize: 9, padding: "2px 7px", borderRadius: 6, background: theme.accent + "22", color: theme.accent, border: `1px solid ${theme.accent}33`, fontWeight: 600 } }, theme.tag)),
+                            React.createElement("div", { style: { fontSize: 10, color: "#555" } },
+                                theme.ranks[0].title,
+                                " \u2192 ",
+                                topRank.title)),
+                        isSelected && React.createElement("div", { style: { width: 8, height: 8, borderRadius: "50%", background: theme.accent, flexShrink: 0 } })));
+                })),
+                React.createElement("div", { style: { fontSize: 10, color: "#444", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 10 } }, "Other"),
+                React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 8 } }, OTHER_THEMES.map(id => {
+                    const theme = APP_THEMES[id];
+                    const isSelected = themeId === id;
+                    const allRanks = [...(theme.ranks || []), ...(theme.prestige || [])];
+                    const topRank = allRanks[allRanks.length - 1];
+                    return (React.createElement("button", { key: id, onClick: () => setThemeId(id), style: { width: "100%", padding: "12px 14px", borderRadius: 14, cursor: "pointer", textAlign: "left",
+                            background: isSelected ? theme.accent + "22" : "#141414",
+                            border: `1.5px solid ${isSelected ? theme.accent : "#222"}`,
+                            transition: "all 0.15s", display: "flex", alignItems: "center", gap: 12 } },
+                        React.createElement("div", { style: { width: 4, height: 36, borderRadius: 4, background: theme.accent, flexShrink: 0 } }),
+                        React.createElement("div", { style: { flex: 1 } },
+                            React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 8, marginBottom: 3 } },
+                                React.createElement("span", { style: { fontSize: 13, fontWeight: 700, color: isSelected ? theme.accent : "#DDD" } }, theme.name),
+                                React.createElement("span", { style: { fontSize: 9, padding: "2px 7px", borderRadius: 6, background: theme.accent + "22", color: theme.accent, border: `1px solid ${theme.accent}33`, fontWeight: 600 } }, theme.tag)),
+                            React.createElement("div", { style: { fontSize: 10, color: "#555" } },
+                                theme.ranks[0].title,
+                                " \u2192 ",
+                                topRank.title,
+                                theme.prestige ? " · Prestige" : "")),
+                        isSelected && React.createElement("div", { style: { width: 8, height: 8, borderRadius: "50%", background: theme.accent, flexShrink: 0 } })));
+                })))))));
 }
 function WorkoutApp() {
     var _a, _b;
@@ -3711,11 +3759,12 @@ function WorkoutApp() {
     }
     if (showWelcome) {
         return (React.createElement(React.Fragment, null,
-            React.createElement(WelcomeScreen, { onComplete: ({ name, goal, days }) => {
+            React.createElement(WelcomeScreen, { onComplete: ({ name, goal, days, themeId: chosenTheme }) => {
                     const newProfile = { name, goal, weight: "", height: "", age: "", bodyFat: "", chest: "", waist: "", arms: "", shoulders: "" };
                     setProfile(newProfile);
                     setDaysPerWeek(days);
                     setCustomSchedule(generateSchedule(days));
+                    setThemeId(chosenTheme || "solo");
                     try {
                         localStorage.setItem('jbr:profile', JSON.stringify(newProfile));
                     }
@@ -3728,8 +3777,12 @@ function WorkoutApp() {
                         localStorage.setItem('jbr:customSchedule', JSON.stringify(generateSchedule(days)));
                     }
                     catch (e) { }
+                    try {
+                        localStorage.setItem('jbr:themeId', JSON.stringify(chosenTheme || "solo"));
+                    }
+                    catch (e) { }
                     setShowWelcome(false);
-                    setShowSplash(true); // show quote after setup completes
+                    setShowSplash(true);
                 } }),
             React.createElement(BrowserBanner, null)));
     }
