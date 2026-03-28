@@ -1,4 +1,4 @@
-<!DOCTYPE html><!-- v20260328-200836 -->
+<!DOCTYPE html><!-- v20260328-215655 -->
 
 <html lang="en">
 <head>
@@ -40,63 +40,423 @@ const getXP = (id, intensity) => {
     const row = XP_TABLE.find(r => r.id === id);
     return row ? (row[intensity] || row.Moderate) : 0;
 };
-const RANKS = [
-    { level: 1, rank: "E", title: "Novice Hunter", color: "#555580", xpNeeded: 0 },
-    { level: 2, rank: "E", title: "Awakened", color: "#555580", xpNeeded: 300 },
-    { level: 3, rank: "E", title: "Iron Will", color: "#555580", xpNeeded: 700 },
-    { level: 4, rank: "D", title: "D-Rank Hunter", color: "#52E3A0", xpNeeded: 1300 },
-    { level: 5, rank: "D", title: "Seasoned Fighter", color: "#52E3A0", xpNeeded: 2100 },
-    { level: 6, rank: "D", title: "Gate Raider", color: "#52E3A0", xpNeeded: 3100 },
-    { level: 7, rank: "C", title: "C-Rank Hunter", color: "#64B5F6", xpNeeded: 4500 },
-    { level: 8, rank: "C", title: "Dungeon Breaker", color: "#64B5F6", xpNeeded: 6300 },
-    { level: 9, rank: "C", title: "Shadow Apprentice", color: "#64B5F6", xpNeeded: 8500 },
-    { level: 10, rank: "B", title: "B-Rank Hunter", color: "#A78BFA", xpNeeded: 11000 },
-    { level: 11, rank: "B", title: "Elite Soldier", color: "#A78BFA", xpNeeded: 14000 },
-    { level: 12, rank: "B", title: "Monarch's Eye", color: "#A78BFA", xpNeeded: 18000 },
-    { level: 13, rank: "A", title: "A-Rank Hunter", color: "#F7DC6F", xpNeeded: 23000 },
-    { level: 14, rank: "A", title: "Shadow Commander", color: "#F7DC6F", xpNeeded: 29000 },
-    { level: 15, rank: "A", title: "Ruler of Shadows", color: "#F7DC6F", xpNeeded: 36000 },
-    { level: 16, rank: "S", title: "S-Rank Hunter", color: "#FF6B35", xpNeeded: 45000 },
-    { level: 17, rank: "S", title: "National Level", color: "#FF6B35", xpNeeded: 56000 },
-    { level: 18, rank: "S", title: "Shadow Monarch", color: "#FF6B35", xpNeeded: 70000 },
-    { level: 19, rank: "SS", title: "Arise", color: "#FF6B35", xpNeeded: 88000 },
-    { level: 20, rank: "SS", title: "The Player", color: "#FF6B35", xpNeeded: 110000 },
-];
+// ── XP THRESHOLDS (same for all themes) ─────────────────────────────────────
+const XP_THRESHOLDS = [0, 300, 700, 1300, 2100, 3100, 4500, 6300, 8500, 11000, 14000, 18000, 23000, 29000, 36000, 45000, 56000, 70000, 88000, 110000];
+// ── FRANCHISE THEMES (color + rank flavor combined) ──────────────────────────
+const APP_THEMES = {
+    solo: {
+        id: "solo", name: "Solo Leveling", tag: "Hunter System",
+        bg: "#F0F0FF", surface: "#FFFFFF", border: "#DDDDF5",
+        card: "#F8F8FF", cardBorder: "#E0E0F5",
+        accent: "#5B4FE8", accent2: "#A855F7",
+        text: "#111111", muted: "#888899", sub: "#CCCCEE",
+        push: "#5B4FE8", pull: "#52C4A0", legs: "#A855F7",
+        green: "#2E7D32", yellow: "#E65100", red: "#C62828",
+        onAccent: "#FFFFFF",
+        ranks: [
+            { level: 1, rank: "E", title: "Novice Hunter", color: "#888899" },
+            { level: 2, rank: "E", title: "Weakest Hunter", color: "#888899" },
+            { level: 3, rank: "E", title: "Awakened", color: "#888899" },
+            { level: 4, rank: "D", title: "Gate Raider", color: "#2E7D32" },
+            { level: 5, rank: "D", title: "Dungeon Crawler", color: "#2E7D32" },
+            { level: 6, rank: "D", title: "Seasoned Fighter", color: "#2E7D32" },
+            { level: 7, rank: "C", title: "Shadow Apprentice", color: "#1565C0" },
+            { level: 8, rank: "C", title: "Dungeon Breaker", color: "#1565C0" },
+            { level: 9, rank: "C", title: "C-Rank Hunter", color: "#1565C0" },
+            { level: 10, rank: "B", title: "Elite Soldier", color: "#6A1B9A" },
+            { level: 11, rank: "B", title: "Monarch's Eye", color: "#6A1B9A" },
+            { level: 12, rank: "B", title: "B-Rank Hunter", color: "#6A1B9A" },
+            { level: 13, rank: "A", title: "Shadow Commander", color: "#E65100" },
+            { level: 14, rank: "A", title: "Ruler of Shadows", color: "#E65100" },
+            { level: 15, rank: "A", title: "A-Rank Hunter", color: "#E65100" },
+            { level: 16, rank: "S", title: "National Level", color: "#C62828" },
+            { level: 17, rank: "S", title: "S-Rank Hunter", color: "#C62828" },
+            { level: 18, rank: "S", title: "Shadow Monarch", color: "#C62828" },
+            { level: 19, rank: "SS", title: "Arise", color: "#5B4FE8" },
+            { level: 20, rank: "SS", title: "The Player", color: "#5B4FE8" },
+        ],
+        badgeLabel: "LVL",
+    },
+    pokemon: {
+        id: "pokemon", name: "Pokemon", tag: "Trainer Journey",
+        bg: "#F8F8F8", surface: "#FFFFFF", border: "#E0E0E0",
+        card: "#F8F8F8", cardBorder: "#E8E8E8",
+        accent: "#E3000B", accent2: "#222222",
+        text: "#111111", muted: "#888888", sub: "#CCCCCC",
+        push: "#E3000B", pull: "#1565C0", legs: "#2E7D32",
+        green: "#2E7D32", yellow: "#E65100", red: "#E3000B",
+        onAccent: "#FFFFFF",
+        ranks: [
+            { level: 1, rank: "W", title: "Youngster", color: "#888888" },
+            { level: 2, rank: "W", title: "Bug Catcher", color: "#888888" },
+            { level: 3, rank: "W", title: "Cool Trainer", color: "#888888" },
+            { level: 4, rank: "TR", title: "Trainer", color: "#2E7D32" },
+            { level: 5, rank: "TR", title: "Ace Trainer", color: "#2E7D32" },
+            { level: 6, rank: "TR", title: "Super Nerd", color: "#2E7D32" },
+            { level: 7, rank: "GL", title: "Gym Leader", color: "#1565C0" },
+            { level: 8, rank: "GL", title: "Badge Collector", color: "#1565C0" },
+            { level: 9, rank: "GL", title: "Gym Champion", color: "#1565C0" },
+            { level: 10, rank: "E4", title: "Elite Four", color: "#6A1B9A" },
+            { level: 11, rank: "E4", title: "Elite Challenger", color: "#6A1B9A" },
+            { level: 12, rank: "E4", title: "Elite Master", color: "#6A1B9A" },
+            { level: 13, rank: "C", title: "Champion", color: "#E65100" },
+            { level: 14, rank: "C", title: "Hall of Fame", color: "#E65100" },
+            { level: 15, rank: "C", title: "Undefeated", color: "#E65100" },
+            { level: 16, rank: "M", title: "Master", color: "#E3000B" },
+            { level: 17, rank: "M", title: "Grand Master", color: "#E3000B" },
+            { level: 18, rank: "M", title: "World Champion", color: "#E3000B" },
+            { level: 19, rank: "LG", title: "Mythic", color: "#B71C1C" },
+            { level: 20, rank: "LG", title: "Legend", color: "#B71C1C" },
+        ],
+        badgeLabel: "LV",
+    },
+    naruto: {
+        id: "naruto", name: "Naruto", tag: "Ninja Way",
+        bg: "#FFF8F0", surface: "#FFFFFF", border: "#F0E0CC",
+        card: "#FFF8F0", cardBorder: "#F0E0CC",
+        accent: "#E85C00", accent2: "#2C5282",
+        text: "#111111", muted: "#886644", sub: "#F0D0A0",
+        push: "#E85C00", pull: "#2C5282", legs: "#2E7D32",
+        green: "#2E7D32", yellow: "#E85C00", red: "#B71C1C",
+        onAccent: "#FFFFFF",
+        ranks: [
+            { level: 1, rank: "AC", title: "Academy Student", color: "#888888" },
+            { level: 2, rank: "AC", title: "Leaf Recruit", color: "#888888" },
+            { level: 3, rank: "AC", title: "Graduation", color: "#888888" },
+            { level: 4, rank: "GN", title: "Genin", color: "#2E7D32" },
+            { level: 5, rank: "GN", title: "Team Placed", color: "#2E7D32" },
+            { level: 6, rank: "GN", title: "D-Rank Missions", color: "#2E7D32" },
+            { level: 7, rank: "CN", title: "Chunin", color: "#1565C0" },
+            { level: 8, rank: "CN", title: "Shadow Clone", color: "#1565C0" },
+            { level: 9, rank: "CN", title: "C-Rank Missions", color: "#1565C0" },
+            { level: 10, rank: "JN", title: "Jonin", color: "#1B5E20" },
+            { level: 11, rank: "JN", title: "S-Rank Missions", color: "#1B5E20" },
+            { level: 12, rank: "JN", title: "Elite Jonin", color: "#1B5E20" },
+            { level: 13, rank: "AN", title: "Anbu", color: "#4A148C" },
+            { level: 14, rank: "AN", title: "Black Ops", color: "#4A148C" },
+            { level: 15, rank: "AN", title: "Anbu Captain", color: "#4A148C" },
+            { level: 16, rank: "KG", title: "Kage", color: "#B71C1C" },
+            { level: 17, rank: "KG", title: "Five Kage", color: "#B71C1C" },
+            { level: 18, rank: "KG", title: "Will of Fire", color: "#B71C1C" },
+            { level: 19, rank: "HK", title: "Hokage", color: "#E85C00" },
+            { level: 20, rank: "HK", title: "God of Shinobi", color: "#E85C00" },
+        ],
+        badgeLabel: "LVL",
+    },
+    onepiece: {
+        id: "onepiece", name: "One Piece", tag: "Pirate Crew",
+        bg: "#F0F6FF", surface: "#FFFFFF", border: "#D0E0F0",
+        card: "#F0F6FF", cardBorder: "#D0E8FF",
+        accent: "#C0392B", accent2: "#D4A017",
+        text: "#111111", muted: "#556677", sub: "#A0C0D0",
+        push: "#C0392B", pull: "#1565C0", legs: "#2E7D32",
+        green: "#2E7D32", yellow: "#D4A017", red: "#C0392B",
+        onAccent: "#FFFFFF",
+        ranks: [
+            { level: 1, rank: "CB", title: "Cabin Boy", color: "#888888" },
+            { level: 2, rank: "CB", title: "East Blue Rookie", color: "#888888" },
+            { level: 3, rank: "CB", title: "Bounty Earned", color: "#888888" },
+            { level: 4, rank: "RP", title: "Rookie Pirate", color: "#2E7D32" },
+            { level: 5, rank: "RP", title: "Grand Line Entry", color: "#2E7D32" },
+            { level: 6, rank: "RP", title: "Pirate Crew Named", color: "#2E7D32" },
+            { level: 7, rank: "SN", title: "Supernova", color: "#1565C0" },
+            { level: 8, rank: "SN", title: "Worst Generation", color: "#1565C0" },
+            { level: 9, rank: "SN", title: "New World Entry", color: "#1565C0" },
+            { level: 10, rank: "WL", title: "Warlord", color: "#6A1B9A" },
+            { level: 11, rank: "WL", title: "Sea Tyrant", color: "#6A1B9A" },
+            { level: 12, rank: "WL", title: "Devil Fruit User", color: "#6A1B9A" },
+            { level: 13, rank: "YK", title: "Yonko Commander", color: "#D4A017" },
+            { level: 14, rank: "YK", title: "Yonko", color: "#D4A017" },
+            { level: 15, rank: "YK", title: "Conqueror's Haki", color: "#D4A017" },
+            { level: 16, rank: "PK", title: "Pirate King", color: "#C0392B" },
+            { level: 17, rank: "PK", title: "King of Pirates", color: "#C0392B" },
+            { level: 18, rank: "PK", title: "Will of D.", color: "#C0392B" },
+            { level: 19, rank: "LG", title: "Legend of Sea", color: "#7B1818" },
+            { level: 20, rank: "LG", title: "Joy Boy", color: "#7B1818" },
+        ],
+        badgeLabel: "LVL",
+    },
+    dragonball: {
+        id: "dragonball", name: "Dragon Ball", tag: "Power Level",
+        bg: "#FFFAF0", surface: "#FFFFFF", border: "#F0E8D0",
+        card: "#FFFAF0", cardBorder: "#F0E8CC",
+        accent: "#E65100", accent2: "#F9A825",
+        text: "#111111", muted: "#886633", sub: "#F0D090",
+        push: "#E65100", pull: "#1565C0", legs: "#2E7D32",
+        green: "#2E7D32", yellow: "#F9A825", red: "#C62828",
+        onAccent: "#FFFFFF",
+        ranks: [
+            { level: 1, rank: "E", title: "Earthling", color: "#888888" },
+            { level: 2, rank: "E", title: "Trained Fighter", color: "#888888" },
+            { level: 3, rank: "E", title: "Tournament Vet", color: "#888888" },
+            { level: 4, rank: "ZF", title: "Z-Fighter", color: "#2E7D32" },
+            { level: 5, rank: "ZF", title: "Kai Student", color: "#2E7D32" },
+            { level: 6, rank: "ZF", title: "Elite Warrior", color: "#2E7D32" },
+            { level: 7, rank: "SS1", title: "Super Saiyan", color: "#F9A825" },
+            { level: 8, rank: "SS1", title: "Ascended SS", color: "#F9A825" },
+            { level: 9, rank: "SS1", title: "Full Power SS", color: "#F9A825" },
+            { level: 10, rank: "SS2", title: "Super Saiyan 2", color: "#1565C0" },
+            { level: 11, rank: "SS2", title: "Legendary Power", color: "#1565C0" },
+            { level: 12, rank: "SS3", title: "Super Saiyan 3", color: "#6A1B9A" },
+            { level: 13, rank: "SS3", title: "Mystic Form", color: "#6A1B9A" },
+            { level: 14, rank: "G", title: "Super Saiyan God", color: "#C62828" },
+            { level: 15, rank: "G", title: "SS Blue", color: "#C62828" },
+            { level: 16, rank: "G", title: "SS Blue Evolved", color: "#C62828" },
+            { level: 17, rank: "UI", title: "Ultra Instinct", color: "#546E7A" },
+            { level: 18, rank: "UI", title: "Mastered UI", color: "#546E7A" },
+            { level: 19, rank: "UI", title: "True Ultra", color: "#546E7A" },
+            { level: 20, rank: "UI", title: "Beyond Limit", color: "#546E7A" },
+        ],
+        badgeLabel: "PL",
+    },
+    aot: {
+        id: "aot", name: "Attack on Titan", tag: "Survey Corps",
+        bg: "#F4F1EC", surface: "#FFFFFF", border: "#DDD8CC",
+        card: "#F4F1EC", cardBorder: "#DDD8CC",
+        accent: "#5C6B3A", accent2: "#8B7355",
+        text: "#111111", muted: "#6B6B5A", sub: "#C8C0A8",
+        push: "#8B7355", pull: "#5C6B3A", legs: "#37474F",
+        green: "#5C6B3A", yellow: "#8B7355", red: "#C62828",
+        onAccent: "#FFFFFF",
+        ranks: [
+            { level: 1, rank: "CD", title: "Cadet", color: "#888888" },
+            { level: 2, rank: "CD", title: "Wall Recruit", color: "#888888" },
+            { level: 3, rank: "CD", title: "104th Graduate", color: "#888888" },
+            { level: 4, rank: "SC", title: "Scout", color: "#5C6B3A" },
+            { level: 5, rank: "SC", title: "Survey Corps", color: "#5C6B3A" },
+            { level: 6, rank: "SC", title: "Vertical Maneuver", color: "#5C6B3A" },
+            { level: 7, rank: "SE", title: "Corps Elite", color: "#8B7355" },
+            { level: 8, rank: "SE", title: "Titan Slayer", color: "#8B7355" },
+            { level: 9, rank: "SE", title: "Wall Guardian", color: "#8B7355" },
+            { level: 10, rank: "AK", title: "Ackerman", color: "#1565C0" },
+            { level: 11, rank: "AK", title: "Path Awakened", color: "#1565C0" },
+            { level: 12, rank: "AK", title: "Combat Prodigy", color: "#1565C0" },
+            { level: 13, rank: "TS", title: "Titan Shifter", color: "#6A1B9A" },
+            { level: 14, rank: "TS", title: "Attack Titan", color: "#6A1B9A" },
+            { level: 15, rank: "TS", title: "War Hammer", color: "#6A1B9A" },
+            { level: 16, rank: "FT", title: "Founding Titan", color: "#C62828" },
+            { level: 17, rank: "FT", title: "Paths Master", color: "#C62828" },
+            { level: 18, rank: "FT", title: "Memory Keeper", color: "#C62828" },
+            { level: 19, rank: "RB", title: "The Rumbling", color: "#37474F" },
+            { level: 20, rank: "RB", title: "Last Eldian", color: "#37474F" },
+        ],
+        badgeLabel: "LVL",
+    },
+    greek: {
+        id: "greek", name: "Greek Mythology", tag: "Path of the Gods",
+        bg: "#FAFAF5", surface: "#FFFFFF", border: "#E8E8D8",
+        card: "#FAFAF5", cardBorder: "#E8E8D8",
+        accent: "#B8860B", accent2: "#1A3A5C",
+        text: "#111111", muted: "#7A7A6A", sub: "#D8D8C0",
+        push: "#B8860B", pull: "#1A3A5C", legs: "#6A1B9A",
+        green: "#2E7D32", yellow: "#B8860B", red: "#C62828",
+        onAccent: "#FFFFFF",
+        ranks: [
+            { level: 1, rank: "MT", title: "Mortal", color: "#888888" },
+            { level: 2, rank: "MT", title: "Common Folk", color: "#888888" },
+            { level: 3, rank: "MT", title: "Blessed Mortal", color: "#888888" },
+            { level: 4, rank: "HR", title: "Hero", color: "#2E7D32" },
+            { level: 5, rank: "HR", title: "Warrior of Troy", color: "#2E7D32" },
+            { level: 6, rank: "HR", title: "Legendary Hero", color: "#2E7D32" },
+            { level: 7, rank: "DG", title: "Demigod", color: "#1565C0" },
+            { level: 8, rank: "DG", title: "Favored of Zeus", color: "#1565C0" },
+            { level: 9, rank: "DG", title: "Blessed Demigod", color: "#1565C0" },
+            { level: 10, rank: "CH", title: "Champion", color: "#6A1B9A" },
+            { level: 11, rank: "CH", title: "Oracle", color: "#6A1B9A" },
+            { level: 12, rank: "CH", title: "Fated One", color: "#6A1B9A" },
+            { level: 13, rank: "TT", title: "Titan", color: "#E65100" },
+            { level: 14, rank: "TT", title: "Titan Lord", color: "#E65100" },
+            { level: 15, rank: "TT", title: "Cronus Guard", color: "#E65100" },
+            { level: 16, rank: "OL", title: "Olympian", color: "#B8860B" },
+            { level: 17, rank: "OL", title: "God of Olympus", color: "#B8860B" },
+            { level: 18, rank: "OL", title: "Zeus Favored", color: "#B8860B" },
+            { level: 19, rank: "OL", title: "Primordial", color: "#C62828" },
+            { level: 20, rank: "OL", title: "Chaos Incarnate", color: "#C62828" },
+        ],
+        badgeLabel: "LVL",
+    },
+    rpg: {
+        id: "rpg", name: "RPG / Fantasy", tag: "The Ancient Order",
+        bg: "#FAF7F0", surface: "#FFFFFF", border: "#E8E0D0",
+        card: "#FAF7F0", cardBorder: "#E8E0D0",
+        accent: "#8B1A1A", accent2: "#6B4C11",
+        text: "#111111", muted: "#7A6A55", sub: "#D0C8A8",
+        push: "#8B1A1A", pull: "#1565C0", legs: "#2E7D32",
+        green: "#2E7D32", yellow: "#6B4C11", red: "#8B1A1A",
+        onAccent: "#FFFFFF",
+        ranks: [
+            { level: 1, rank: "PG", title: "Peasant", color: "#888888" },
+            { level: 2, rank: "PG", title: "Farmhand", color: "#888888" },
+            { level: 3, rank: "PG", title: "Village Defender", color: "#888888" },
+            { level: 4, rank: "SQ", title: "Squire", color: "#2E7D32" },
+            { level: 5, rank: "SQ", title: "Shield Bearer", color: "#2E7D32" },
+            { level: 6, rank: "SQ", title: "Sworn Squire", color: "#2E7D32" },
+            { level: 7, rank: "KN", title: "Knight", color: "#1565C0" },
+            { level: 8, rank: "KN", title: "Crusader", color: "#1565C0" },
+            { level: 9, rank: "KN", title: "Silver Knight", color: "#1565C0" },
+            { level: 10, rank: "PL", title: "Paladin", color: "#6B4C11" },
+            { level: 11, rank: "PL", title: "Holy Warrior", color: "#6B4C11" },
+            { level: 12, rank: "PL", title: "Dragon Slayer", color: "#6B4C11" },
+            { level: 13, rank: "AM", title: "Archmage", color: "#6A1B9A" },
+            { level: 14, rank: "AM", title: "Spellweaver", color: "#6A1B9A" },
+            { level: 15, rank: "AM", title: "Grand Sorcerer", color: "#6A1B9A" },
+            { level: 16, rank: "WL", title: "Warlord", color: "#C62828" },
+            { level: 17, rank: "WL", title: "Siege Master", color: "#C62828" },
+            { level: 18, rank: "WL", title: "Dark General", color: "#C62828" },
+            { level: 19, rank: "LB", title: "Legendborn", color: "#8B1A1A" },
+            { level: 20, rank: "LB", title: "The Undying", color: "#8B1A1A" },
+        ],
+        badgeLabel: "LVL",
+    },
+    space: {
+        id: "space", name: "Space / Sci-Fi", tag: "Galactic Command",
+        bg: "#F0F4FF", surface: "#FFFFFF", border: "#D0DCFF",
+        card: "#F0F4FF", cardBorder: "#D0DCFF",
+        accent: "#1A3A8F", accent2: "#00ACC1",
+        text: "#111111", muted: "#556688", sub: "#A0B8E0",
+        push: "#1A3A8F", pull: "#00ACC1", legs: "#2E7D32",
+        green: "#2E7D32", yellow: "#E65100", red: "#C62828",
+        onAccent: "#FFFFFF",
+        ranks: [
+            { level: 1, rank: "CD", title: "Cadet", color: "#888888" },
+            { level: 2, rank: "CD", title: "Recruit", color: "#888888" },
+            { level: 3, rank: "CD", title: "Flight Trainee", color: "#888888" },
+            { level: 4, rank: "EN", title: "Ensign", color: "#2E7D32" },
+            { level: 5, rank: "EN", title: "Junior Officer", color: "#2E7D32" },
+            { level: 6, rank: "EN", title: "Bridge Crew", color: "#2E7D32" },
+            { level: 7, rank: "LT", title: "Lieutenant", color: "#1565C0" },
+            { level: 8, rank: "LT", title: "Lt. Commander", color: "#1565C0" },
+            { level: 9, rank: "LT", title: "Tactical Officer", color: "#1565C0" },
+            { level: 10, rank: "CM", title: "Commander", color: "#00838F" },
+            { level: 11, rank: "CM", title: "Strike Leader", color: "#00838F" },
+            { level: 12, rank: "CM", title: "Vanguard", color: "#00838F" },
+            { level: 13, rank: "CP", title: "Captain", color: "#6A1B9A" },
+            { level: 14, rank: "CP", title: "Fleet Captain", color: "#6A1B9A" },
+            { level: 15, rank: "CP", title: "Starship Command", color: "#6A1B9A" },
+            { level: 16, rank: "AD", title: "Admiral", color: "#C62828" },
+            { level: 17, rank: "AD", title: "Fleet Admiral", color: "#C62828" },
+            { level: 18, rank: "AD", title: "Supreme Command", color: "#C62828" },
+            { level: 19, rank: "GL", title: "Galactic", color: "#1A3A8F" },
+            { level: 20, rank: "GL", title: "Galactic Sovereign", color: "#1A3A8F" },
+        ],
+        badgeLabel: "LVL",
+    },
+    military: {
+        id: "military", name: "Special Ops", tag: "Call of Duty",
+        bg: "#F2F4F0", surface: "#FFFFFF", border: "#D8DCD0",
+        card: "#F2F4F0", cardBorder: "#D8DCD0",
+        accent: "#2C3E1A", accent2: "#8B8B6B",
+        text: "#111111", muted: "#6B7055", sub: "#C0C8A8",
+        push: "#2C3E1A", pull: "#1565C0", legs: "#5C7A3E",
+        green: "#5C7A3E", yellow: "#8B8B6B", red: "#C62828",
+        onAccent: "#FFFFFF",
+        ranks: [
+            { level: 1, rank: "RC", title: "Recruit", color: "#888888" },
+            { level: 2, rank: "PV", title: "Private", color: "#5C7A3E" },
+            { level: 3, rank: "PV2", title: "Private II", color: "#5C7A3E" },
+            { level: 4, rank: "PFC", title: "Private 1st Class", color: "#4A6741" },
+            { level: 5, rank: "SPC", title: "Specialist", color: "#4A6741" },
+            { level: 6, rank: "CP", title: "Corporal", color: "#4A6741" },
+            { level: 7, rank: "SG", title: "Sergeant", color: "#1565C0" },
+            { level: 8, rank: "SSG", title: "Staff Sergeant", color: "#1565C0" },
+            { level: 9, rank: "SFC", title: "Sgt. First Class", color: "#1565C0" },
+            { level: 10, rank: "MSG", title: "Master Sergeant", color: "#6A1B9A" },
+            { level: 11, rank: "1SG", title: "First Sergeant", color: "#6A1B9A" },
+            { level: 12, rank: "SGM", title: "Sgt. Major", color: "#6A1B9A" },
+            { level: 13, rank: "WO", title: "Warrant Officer", color: "#8B8B6B" },
+            { level: 14, rank: "LT", title: "Lieutenant", color: "#8B8B6B" },
+            { level: 15, rank: "CPT", title: "Captain", color: "#8B8B6B" },
+            { level: 16, rank: "MAJ", title: "Major", color: "#C62828" },
+            { level: 17, rank: "LTC", title: "Lt. Colonel", color: "#C62828" },
+            { level: 18, rank: "COL", title: "Colonel", color: "#C62828" },
+            { level: 19, rank: "GN", title: "General", color: "#2C3E1A" },
+            { level: 20, rank: "GN4", title: "General of Army", color: "#2C3E1A" },
+        ],
+        prestige: [
+            { level: 21, rank: "P1", title: "Prestige I", color: "#8B8B6B" },
+            { level: 22, rank: "P2", title: "Prestige II", color: "#CD853F" },
+            { level: 23, rank: "P3", title: "Prestige III", color: "#B8860B" },
+            { level: 24, rank: "P4", title: "Prestige IV", color: "#888888" },
+            { level: 25, rank: "PM", title: "Prestige Master", color: "#DAA520" },
+        ],
+        badgeLabel: "LVL",
+    },
+    sports: {
+        id: "sports", name: "The Grind", tag: "Athlete Journey",
+        bg: "#F8FAFF", surface: "#FFFFFF", border: "#D8E4F8",
+        card: "#F8FAFF", cardBorder: "#D8E4F8",
+        accent: "#003087", accent2: "#C4CED4",
+        text: "#111111", muted: "#556688", sub: "#A8C0E0",
+        push: "#003087", pull: "#1565C0", legs: "#2E7D32",
+        green: "#2E7D32", yellow: "#E65100", red: "#C62828",
+        onAccent: "#FFFFFF",
+        ranks: [
+            { level: 1, rank: "RK", title: "Rookie", color: "#888888" },
+            { level: 2, rank: "RK", title: "Walk-On", color: "#888888" },
+            { level: 3, rank: "RK", title: "Practice Squad", color: "#888888" },
+            { level: 4, rank: "PR", title: "Prospect", color: "#2E7D32" },
+            { level: 5, rank: "PR", title: "Minor League", color: "#2E7D32" },
+            { level: 6, rank: "PR", title: "Top Prospect", color: "#2E7D32" },
+            { level: 7, rank: "ST", title: "Starter", color: "#1565C0" },
+            { level: 8, rank: "ST", title: "Rotation Player", color: "#1565C0" },
+            { level: 9, rank: "ST", title: "Impact Player", color: "#1565C0" },
+            { level: 10, rank: "VT", title: "Veteran", color: "#6A1B9A" },
+            { level: 11, rank: "VT", title: "Team Leader", color: "#6A1B9A" },
+            { level: 12, rank: "VT", title: "Franchise Player", color: "#6A1B9A" },
+            { level: 13, rank: "AS", title: "All-Star", color: "#E65100" },
+            { level: 14, rank: "AS", title: "All-Pro", color: "#E65100" },
+            { level: 15, rank: "AS", title: "Perennial All-Star", color: "#E65100" },
+            { level: 16, rank: "MV", title: "MVP", color: "#C62828" },
+            { level: 17, rank: "MV", title: "Back-to-Back MVP", color: "#C62828" },
+            { level: 18, rank: "MV", title: "Dynasty Builder", color: "#C62828" },
+            { level: 19, rank: "HF", title: "Hall of Fame", color: "#003087" },
+            { level: 20, rank: "HF", title: "Greatest of All Time", color: "#003087" },
+        ],
+        badgeLabel: "LVL",
+    },
+};
 // ── THEME COLOR HELPER — call getC(theme) to get context-aware colors ─────────
-const getC = (TH) => ({
-    card: TH.card || TH.surface,
-    cardBorder: TH.cardBorder || TH.border,
-    surface: TH.surface,
-    border: TH.border,
-    text: TH.text,
-    muted: TH.muted,
-    sub: TH.sub,
-    accent: TH.accent,
-    input: TH.id === "mono" ? "#FFFFFF" : "#141414",
-    inputBorder: TH.id === "mono" ? "#CCCCCC" : "#222222",
-    inputText: TH.text,
-    btnBg: TH.id === "mono" ? "#EFEFEF" : "#1a1a1a",
-    btnBorder: TH.id === "mono" ? "#CCCCCC" : "#2a2a2a",
-    btnText: TH.id === "mono" ? "#333333" : "#666666",
-    deep: TH.id === "mono" ? "#EBEBEB" : "#0d0d0d",
-    deepBorder: TH.id === "mono" ? "#D0D0D0" : "#1a1a1a",
-});
+const getC = (TH) => {
+    // Detect light theme by background luminance
+    const isLight = TH.bg && (TH.bg.startsWith("#F") || TH.bg.startsWith("#f") || TH.bg === "#FFFFFF" || TH.bg === "#ffffff");
+    return {
+        card: TH.card || TH.surface,
+        cardBorder: TH.cardBorder || TH.border,
+        surface: TH.surface,
+        border: TH.border,
+        text: TH.text,
+        muted: TH.muted,
+        sub: TH.sub,
+        accent: TH.accent,
+        input: isLight ? "#FFFFFF" : "#141414",
+        inputBorder: isLight ? "#CCCCCC" : "#222222",
+        inputText: TH.text,
+        btnBg: isLight ? "#EFEFEF" : "#1a1a1a",
+        btnBorder: isLight ? "#CCCCCC" : "#2a2a2a",
+        btnText: isLight ? "#333333" : "#666666",
+        deep: isLight ? "#EBEBEB" : "#0d0d0d",
+        deepBorder: isLight ? "#D0D0D0" : "#1a1a1a",
+    };
+};
 // Module-level color context — initialized after APP_THEMES, updated by WorkoutApp
 let _C = null;
-const useC = () => _C || getC({ id: "dark", bg: "#0A0A0A", surface: "#141414", border: "#222222", card: "#111111", cardBorder: "#1e1e1e", accent: "#FF6B35", accent2: "#F7DC6F", text: "#F0EDE8", muted: "#555555", sub: "#333333" });
-const getRankInfo = (totalXP) => {
+const useC = () => _C || getC(APP_THEMES.solo);
+const getRankInfo = (totalXP, themeId) => {
+    const theme = APP_THEMES[themeId] || APP_THEMES.solo;
+    const allRanks = [...(theme.ranks || []), ...(theme.prestige || [])];
+    const ranks = allRanks.map((r, i) => (Object.assign(Object.assign({}, r), { xpNeeded: XP_THRESHOLDS[i] || XP_THRESHOLDS[XP_THRESHOLDS.length - 1] })));
     let idx = 0;
-    for (let i = RANKS.length - 1; i >= 0; i--) {
-        if (totalXP >= RANKS[i].xpNeeded) {
+    for (let i = ranks.length - 1; i >= 0; i--) {
+        if (totalXP >= ranks[i].xpNeeded) {
             idx = i;
             break;
         }
     }
-    const current = RANKS[idx];
-    const next = RANKS[Math.min(idx + 1, RANKS.length - 1)];
+    const current = ranks[idx];
+    const next = ranks[Math.min(idx + 1, ranks.length - 1)];
     const xpInto = totalXP - current.xpNeeded;
-    const xpSpan = next.xpNeeded - current.xpNeeded;
-    const progress = current.level === 20 ? 1 : xpInto / xpSpan;
+    const xpSpan = next.xpNeeded - current.xpNeeded || 1;
+    const progress = idx >= ranks.length - 1 ? 1 : xpInto / xpSpan;
     return { current, next, xpInto, xpSpan, progress };
 };
 const getWeekKey = () => {
@@ -293,48 +653,6 @@ const PLAN_ICON = {
     Rest: "Rest", Custom: "Active",
 };
 // ── THEMES ────────────────────────────────────────────────────────────────────
-const APP_THEMES = {
-    cyber: {
-        id: "cyber", name: "Cyber", tag: "Solo Leveling",
-        bg: "#05050F", surface: "#0D0D1A", border: "#1A1A3A",
-        card: "#0D0D1A", cardBorder: "#1A1A3A",
-        accent: "#00E5FF", accent2: "#A855F7",
-        text: "#E0E8FF", muted: "#4A4A7A", sub: "#2A2A5A",
-        push: "#FF6B35", pull: "#00E5FF", legs: "#A855F7",
-        green: "#52E3A0", yellow: "#F7DC6F", red: "#F87171",
-        onAccent: "#000000",
-    },
-    dark: {
-        id: "dark", name: "Dark", tag: "Classic",
-        bg: "#0A0A0A", surface: "#141414", border: "#222222",
-        card: "#111111", cardBorder: "#1e1e1e",
-        accent: "#FF6B35", accent2: "#F7DC6F",
-        text: "#F0EDE8", muted: "#555555", sub: "#333333",
-        push: "#FF6B35", pull: "#52E3A0", legs: "#A78BFA",
-        green: "#52E3A0", yellow: "#F7DC6F", red: "#F87171",
-        onAccent: "#000000",
-    },
-    military: {
-        id: "military", name: "Military", tag: "Tactical",
-        bg: "#0A0B07", surface: "#131508", border: "#2A3210",
-        card: "#131508", cardBorder: "#2A3210",
-        accent: "#8B9B2E", accent2: "#D4850A",
-        text: "#D8D4C0", muted: "#4A4D38", sub: "#2A2D1A",
-        push: "#D4850A", pull: "#8B9B2E", legs: "#C04A2A",
-        green: "#8B9B2E", yellow: "#D4850A", red: "#C04A2A",
-        onAccent: "#000000",
-    },
-    mono: {
-        id: "mono", name: "Mono", tag: "Clean B&W",
-        bg: "#FFFFFF", surface: "#F2F2F2", border: "#DDDDDD",
-        card: "#F8F8F8", cardBorder: "#E0E0E0",
-        accent: "#111111", accent2: "#444444",
-        text: "#111111", muted: "#777777", sub: "#AAAAAA",
-        push: "#111111", pull: "#333333", legs: "#222222",
-        green: "#111111", yellow: "#333333", red: "#111111",
-        onAccent: "#FFFFFF",
-    },
-};
 const INTENSITY_CONFIG = {
     Light: { color: "#52E3A0", sets: -1, desc: "Lower volume · Easy on joints", restLabel: "90s rest" },
     Moderate: { color: "#F7DC6F", sets: 0, desc: "Balanced challenge · Default", restLabel: "60s rest" },
@@ -935,7 +1253,7 @@ function MuscleVisual({ muscles, color }) {
 // ── FORM GUIDE BODY ───────────────────────────────────────────────────────────
 function FormGuideBody({ guide, color }) {
     const C = useC();
-    return (React.createElement("div", { style: { borderTop: "1px solid #1a1a1a", padding: "14px", background: C.deep } },
+    return (React.createElement("div", { style: { borderTop: `1px solid ${C.cardBorder}`, padding: "14px", background: C.deep } },
         React.createElement("div", { style: { display: "flex", gap: 14, marginBottom: 14, alignItems: "flex-start" } },
             React.createElement(MuscleVisual, { muscles: guide.muscles, color: color }),
             React.createElement("div", { style: { flex: 1 } },
@@ -1051,7 +1369,7 @@ function StretchCard({ stretch, color, defaultDur }) {
                     React.createElement("path", { d: "M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" }),
                     React.createElement("polyline", { points: "3 3 3 8 8 8" })),
                 "Redo")))),
-        expanded && muscles.length > 0 && (React.createElement("div", { style: { borderTop: "1px solid #1a1a1a", padding: "14px", background: C.deep } },
+        expanded && muscles.length > 0 && (React.createElement("div", { style: { borderTop: `1px solid ${C.cardBorder}`, padding: "14px", background: C.deep } },
             React.createElement("div", { style: { fontSize: 10, color: C.muted, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 12 } }, "Muscles Targeted"),
             React.createElement("div", { style: { display: "flex", gap: 16, alignItems: "flex-start" } },
                 React.createElement(MuscleVisual, { muscles: muscles, color: color }),
@@ -1364,7 +1682,7 @@ function PTExerciseCard({ ex, color }) {
                         React.createElement("span", { style: { color: C.btnBorder } }, "\u00B7"),
                         React.createElement("span", null, ex.equipment))),
                 React.createElement("button", { onClick: () => setExpanded(v => !v), style: { background: expanded ? color + "22" : C.btnBg, border: `1px solid ${expanded ? color + "55" : C.btnBorder}`, borderRadius: 8, color: expanded ? color : C.muted, fontSize: 11, cursor: "pointer", padding: "5px 11px", flexShrink: 0, fontWeight: 500, marginLeft: 10 } }, expanded ? "Hide" : "Why ▼"))),
-        expanded && (React.createElement("div", { style: { borderTop: "1px solid #1a1a1a", padding: "14px", background: C.deep } },
+        expanded && (React.createElement("div", { style: { borderTop: `1px solid ${C.cardBorder}`, padding: "14px", background: C.deep } },
             React.createElement("div", { style: { fontSize: 10, color: C.muted, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 8 } }, "How & Why"),
             React.createElement("div", { style: { fontSize: 13, color: C.text, lineHeight: 1.65 } }, ex.cue)))));
 }
@@ -1566,7 +1884,7 @@ function XPRow({ row, i, intensity }) {
             ["Light", "Moderate", "Hard"].map(lvl => (React.createElement("div", { key: lvl, style: { width: 44, textAlign: "center", fontSize: 12, fontWeight: 700, color: intensity === lvl ? INTENSITY_CONFIG[lvl].color : "#444" } },
                 "+",
                 row[lvl])))),
-        showDesc && (React.createElement("div", { style: { padding: "8px 14px 12px 36px", background: C.deep, borderBottom: i < XP_TABLE.length - 1 ? "1px solid #141414" : "none" } },
+        showDesc && (React.createElement("div", { style: { padding: "8px 14px 12px 36px", background: C.deep, borderBottom: i < XP_TABLE.length - 1 ? `1px solid ${C.cardBorder}` : "none" } },
             React.createElement("div", { style: { fontSize: 12, color: C.muted, lineHeight: 1.55 } }, row.desc)))));
 }
 // ── HUNTER PROFILE COMPONENT ─────────────────────────────────────────────────
@@ -1755,7 +2073,7 @@ function HunterProfile({ rankInfo, totalXP, profile, setProfile, checkIns, setCh
                     React.createElement("div", { style: { flex: 1, fontSize: 10, color: C.muted, textTransform: "uppercase", letterSpacing: "0.08em" } }, "Action"),
                     ["Light", "Moderate", "Hard"].map(lvl => (React.createElement("div", { key: lvl, style: { width: 44, textAlign: "center", fontSize: 10, color: INTENSITY_CONFIG[lvl].color, textTransform: "uppercase", letterSpacing: "0.06em", fontWeight: 600 } }, lvl[0])))),
                 XP_TABLE.map((row, i) => (React.createElement(XPRow, { key: row.id, row: row, i: i, intensity: intensity }))),
-                React.createElement("div", { style: { padding: "10px 14px", background: `${INTENSITY_CONFIG[intensity].color}10`, borderTop: "1px solid #1a1a1a" } },
+                React.createElement("div", { style: { padding: "10px 14px", background: `${INTENSITY_CONFIG[intensity].color}10`, borderTop: `1px solid ${C.cardBorder}` } },
                     React.createElement("div", { style: { fontSize: 11, color: INTENSITY_CONFIG[intensity].color } },
                         "Your intensity: ",
                         React.createElement("strong", null, intensity),
@@ -1830,37 +2148,72 @@ function HunterProfile({ rankInfo, totalXP, profile, setProfile, checkIns, setCh
             })))),
         React.createElement("div", { style: { padding: "0 24px" } },
             React.createElement("div", { style: { fontSize: 10, color: C.muted, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 10 } }, "Rank Progression"),
-            React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 6 } }, RANKS.map(r => {
-                const isCurrent = r.level === current.level;
-                const unlocked = totalXP >= r.xpNeeded;
-                return (React.createElement("div", { key: r.level, style: { background: isCurrent ? r.color + "18" : C.deep, borderRadius: 12, padding: "10px 14px", border: `1px solid ${isCurrent ? r.color + "55" : C.cardBorder}`, display: "flex", alignItems: "center", gap: 12 } },
-                    React.createElement("div", { style: { width: 32, height: 32, borderRadius: 8, background: unlocked ? r.color + "22" : C.input, border: `1.5px solid ${unlocked ? r.color + "44" : "#222"}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 10, fontWeight: 800, color: unlocked ? r.color : C.btnBorder, flexShrink: 0 } }, r.rank),
-                    React.createElement("div", { style: { flex: 1 } },
-                        React.createElement("div", { style: { fontSize: 13, fontWeight: 600, color: unlocked ? "#D8D5D0" : "#2e2e2e" } },
-                            "Lv.",
-                            r.level,
-                            " \u00B7 ",
-                            r.title),
-                        React.createElement("div", { style: { fontSize: 10, color: unlocked ? "#555" : "#252525", marginTop: 1 } },
-                            r.xpNeeded.toLocaleString(),
-                            " XP")),
-                    isCurrent && React.createElement("div", { style: { fontSize: 10, color: r.color, fontWeight: 800, letterSpacing: "0.05em" } }, "YOU"),
-                    !isCurrent && unlocked && React.createElement("div", { style: { fontSize: 12, color: C.muted } }, "\u2713")));
-            }))),
+            React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 6 } }, (() => {
+                const theme = APP_THEMES[themeId] || APP_THEMES.solo;
+                const allRanks = [...(theme.ranks || []), ...(theme.prestige || [])];
+                const ranked = allRanks.map((r, i) => (Object.assign(Object.assign({}, r), { xpNeeded: XP_THRESHOLDS[i] || XP_THRESHOLDS[XP_THRESHOLDS.length - 1] })));
+                return ranked.map(r => {
+                    const isCurrent = r.level === current.level;
+                    const unlocked = totalXP >= r.xpNeeded;
+                    return (React.createElement("div", { key: r.level, style: { background: isCurrent ? r.color + "18" : C.deep, borderRadius: 12, padding: "10px 14px", border: `1px solid ${isCurrent ? r.color + "55" : C.cardBorder}`, display: "flex", alignItems: "center", gap: 12 } },
+                        React.createElement("div", { style: { width: 32, height: 32, borderRadius: 8, background: unlocked ? r.color + "22" : C.input, border: `1.5px solid ${unlocked ? r.color + "44" : C.btnBorder}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 10, fontWeight: 800, color: unlocked ? r.color : C.btnBorder, flexShrink: 0 } }, r.rank),
+                        React.createElement("div", { style: { flex: 1 } },
+                            React.createElement("div", { style: { fontSize: 13, fontWeight: 600, color: unlocked ? C.text : C.muted } },
+                                "Lv.",
+                                r.level,
+                                " \u00B7 ",
+                                r.title),
+                            React.createElement("div", { style: { fontSize: 10, color: C.muted, marginTop: 1 } },
+                                r.xpNeeded.toLocaleString(),
+                                " XP")),
+                        isCurrent && React.createElement("div", { style: { fontSize: 10, color: r.color, fontWeight: 800, letterSpacing: "0.05em" } }, "YOU"),
+                        !isCurrent && unlocked && React.createElement("div", { style: { fontSize: 12, color: C.muted } }, "\u2713")));
+                });
+            })())),
         React.createElement("div", { style: { padding: "20px 24px 32px" } },
-            React.createElement("div", { style: { fontSize: 10, color: current.color, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 12 } }, "App Theme"),
-            React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 8 } }, Object.values(APP_THEMES).map(theme => {
-                const isSelected = themeId === theme.id;
-                return (React.createElement("button", { key: theme.id, onClick: () => setThemeId(theme.id), style: { width: "100%", padding: "14px 16px", borderRadius: 14, cursor: "pointer", textAlign: "left",
-                        background: isSelected ? theme.accent + "20" : theme.bg === "FFFFFF" || theme.bg === "#FFFFFF" ? "#F0F0F0" : C.deep,
-                        border: `1.5px solid ${isSelected ? theme.accent + "99" : C.btnBorder}`,
-                        transition: "all 0.2s", display: "flex", alignItems: "center", gap: 14 } },
-                    React.createElement("div", { style: { display: "flex", gap: 3, flexShrink: 0 } }, [theme.bg, theme.accent, theme.accent2, theme.push].map((col, i) => (React.createElement("div", { key: i, style: { width: 10, height: 28, borderRadius: 4, background: col, border: "1px solid #00000022" } })))),
-                    React.createElement("div", { style: { flex: 1, minWidth: 0 } },
-                        React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 8 } },
-                            React.createElement("span", { style: { fontSize: 14, fontWeight: 700, color: isSelected ? theme.accent : "#DDD" } }, theme.name),
-                            React.createElement("span", { style: { fontSize: 10, padding: "2px 7px", borderRadius: 8, background: C.btnBg, color: C.muted, border: `1px solid ${C.inputBorder}` } }, theme.tag))),
-                    isSelected && (React.createElement("div", { style: { width: 8, height: 8, borderRadius: "50%", background: theme.accent, flexShrink: 0, boxShadow: `0 0 8px ${theme.accent}` } }))));
+            React.createElement("div", { style: { fontSize: 10, color: current.color, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 4 } }, "Universe Theme"),
+            React.createElement("div", { style: { fontSize: 12, color: C.muted, marginBottom: 16 } }, "Changes your rank names, titles and colors."),
+            React.createElement("div", { style: { fontSize: 9, color: C.muted, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 8 } }, "Anime"),
+            React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 8, marginBottom: 20 } }, ["solo", "pokemon", "naruto", "onepiece", "dragonball", "aot"].map(id => {
+                const theme = APP_THEMES[id];
+                const isSelected = themeId === id;
+                const topRank = theme.ranks[theme.ranks.length - 1];
+                return (React.createElement("button", { key: id, onClick: () => setThemeId(id), style: { width: "100%", padding: "12px 14px", borderRadius: 14, cursor: "pointer", textAlign: "left",
+                        background: isSelected ? theme.accent + "18" : C.card,
+                        border: `1.5px solid ${isSelected ? theme.accent + "88" : C.cardBorder}`,
+                        transition: "all 0.15s", display: "flex", alignItems: "center", gap: 12 } },
+                    React.createElement("div", { style: { width: 4, height: 36, borderRadius: 4, background: theme.accent, flexShrink: 0 } }),
+                    React.createElement("div", { style: { flex: 1 } },
+                        React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 8, marginBottom: 3 } },
+                            React.createElement("span", { style: { fontSize: 13, fontWeight: 700, color: isSelected ? theme.accent : C.text } }, theme.name),
+                            React.createElement("span", { style: { fontSize: 9, padding: "2px 7px", borderRadius: 6, background: theme.accent + "18", color: theme.accent, border: `1px solid ${theme.accent}33`, fontWeight: 600 } }, theme.tag)),
+                        React.createElement("div", { style: { fontSize: 10, color: C.muted } },
+                            theme.ranks[0].title,
+                            " \u2192 ",
+                            topRank.title)),
+                    isSelected && React.createElement("div", { style: { width: 8, height: 8, borderRadius: "50%", background: theme.accent, flexShrink: 0 } })));
+            })),
+            React.createElement("div", { style: { fontSize: 9, color: C.muted, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 8 } }, "Other"),
+            React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 8 } }, ["greek", "rpg", "space", "military", "sports"].map(id => {
+                const theme = APP_THEMES[id];
+                const isSelected = themeId === id;
+                const allRanks = [...(theme.ranks || []), ...(theme.prestige || [])];
+                const topRank = allRanks[allRanks.length - 1];
+                return (React.createElement("button", { key: id, onClick: () => setThemeId(id), style: { width: "100%", padding: "12px 14px", borderRadius: 14, cursor: "pointer", textAlign: "left",
+                        background: isSelected ? theme.accent + "18" : C.card,
+                        border: `1.5px solid ${isSelected ? theme.accent + "88" : C.cardBorder}`,
+                        transition: "all 0.15s", display: "flex", alignItems: "center", gap: 12 } },
+                    React.createElement("div", { style: { width: 4, height: 36, borderRadius: 4, background: theme.accent, flexShrink: 0 } }),
+                    React.createElement("div", { style: { flex: 1 } },
+                        React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 8, marginBottom: 3 } },
+                            React.createElement("span", { style: { fontSize: 13, fontWeight: 700, color: isSelected ? theme.accent : C.text } }, theme.name),
+                            React.createElement("span", { style: { fontSize: 9, padding: "2px 7px", borderRadius: 6, background: theme.accent + "18", color: theme.accent, border: `1px solid ${theme.accent}33`, fontWeight: 600 } }, theme.tag)),
+                        React.createElement("div", { style: { fontSize: 10, color: C.muted } },
+                            theme.ranks[0].title,
+                            " \u2192 ",
+                            topRank.title,
+                            theme.prestige ? " · Prestige" : "")),
+                    isSelected && React.createElement("div", { style: { width: 8, height: 8, borderRadius: "50%", background: theme.accent, flexShrink: 0 } })));
             }))),
         React.createElement("div", { style: { padding: "0 24px 60px" } },
             React.createElement("div", { style: { borderTop: `1px solid ${C.cardBorder}`, paddingTop: 20 } },
@@ -1881,7 +2234,7 @@ function WorkoutLog({ workoutHistory, onClose, accentColor, onShare }) {
     const totalSets = workoutHistory.reduce((a, s) => a + (s.setsCompleted || 0), 0);
     const totalMinutes = workoutHistory.reduce((a, s) => a + (s.duration || 0), 0);
     const totalXPEarned = workoutHistory.reduce((a, s) => a + (s.xpEarned || 0), 0);
-    return (React.createElement("div", { style: { position: "fixed", inset: 0, background: C.surface, zIndex: 200, display: "flex", flexDirection: "column", maxWidth: 420, margin: "0 auto" } },
+    return (React.createElement("div", { style: { position: "fixed", inset: 0, background: C.surface, zIndex: 200, display: "flex", flexDirection: "column" } },
         React.createElement("div", { style: { padding: "52px 24px 16px", borderBottom: `1px solid ${C.border}`, flexShrink: 0 } },
             React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "flex-start" } },
                 React.createElement("div", null,
@@ -1956,7 +2309,7 @@ function CardioLog({ cardioHistory, onClose, accentColor }) {
         return toSec(a.pace) < toSec(b.pace) ? a : b;
     }).pace : null;
     const accent = accentColor || "#52E3A0";
-    return (React.createElement("div", { style: { position: "fixed", inset: 0, background: "#0A0A0A", zIndex: 200, display: "flex", flexDirection: "column", maxWidth: 420, margin: "0 auto" } },
+    return (React.createElement("div", { style: { position: "fixed", inset: 0, background: C.surface, zIndex: 200, display: "flex", flexDirection: "column", maxWidth: 420, margin: "0 auto" } },
         React.createElement("div", { style: { padding: "52px 24px 16px", borderBottom: "1px solid #1a1a1a", flexShrink: 0 } },
             React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "flex-start" } },
                 React.createElement("div", null,
@@ -1982,7 +2335,7 @@ function CardioLog({ cardioHistory, onClose, accentColor }) {
             const col = (ct === null || ct === void 0 ? void 0 : ct.color) || accent;
             return (React.createElement("button", { key: f, onClick: () => setFilter(f), style: { whiteSpace: "nowrap", padding: "6px 14px", borderRadius: 20, cursor: "pointer", fontSize: 11, fontWeight: 600,
                     border: `1.5px solid ${isActive ? col + "88" : C.cardBorder}`,
-                    background: isActive ? col + "22" : "#111",
+                    background: isActive ? col + "22" : C.card,
                     color: isActive ? col : "#555", transition: "all 0.15s" } }, f === "all" ? "All" : ct === null || ct === void 0 ? void 0 : ct.label));
         })),
         React.createElement("div", { style: { flex: 1, overflowY: "auto", padding: "0 24px 40px" } }, filtered.length === 0 ? (React.createElement("div", { style: { textAlign: "center", padding: "40px 0", color: C.muted, fontSize: 13 } },
@@ -2393,6 +2746,7 @@ const DAILY_QUOTES = [
 // ── QUOTE SPLASH ──────────────────────────────────────────────────────────────
 // Shows a daily motivational quote on app open for ~3 seconds
 function QuoteSplash({ onDone }) {
+    const C = useC();
     const [visible, setVisible] = useState(true);
     const [fadeOut, setFadeOut] = useState(false);
     // Pick quote by day of year so everyone sees the same one each day
@@ -2439,7 +2793,7 @@ function QuoteSplash({ onDone }) {
                 "\u2014 ",
                 quote.a))),
         React.createElement("div", { style: { width: "100%", maxWidth: 200, marginBottom: 48 } },
-            React.createElement("div", { style: { height: 2, background: "#111", borderRadius: 2, overflow: "hidden" } },
+            React.createElement("div", { style: { height: 2, background: "rgba(255,255,255,0.15)", borderRadius: 2, overflow: "hidden" } },
                 React.createElement("div", { style: {
                         height: 2, borderRadius: 2,
                         background: "linear-gradient(90deg, #00E5FF, #A855F7)",
@@ -2486,7 +2840,7 @@ function BrowserBanner() {
     }
     // iOS Safari — not yet installed
     if (isIOS && isSafari) {
-        return (React.createElement("div", { style: { position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 9999, background: "#001a0a", borderTop: "2px solid #52E3A0", padding: "16px 20px", fontFamily: "'DM Sans',sans-serif", maxWidth: 420, margin: "0 auto" } },
+        return (React.createElement("div", { style: { position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 9999, background: TH.surface, borderTop: "2px solid #52E3A0", padding: "16px 20px", fontFamily: "'DM Sans',sans-serif", maxWidth: 420, margin: "0 auto" } },
             React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 12 } },
                 React.createElement("div", { style: { flex: 1 } },
                     React.createElement("div", { style: { fontSize: 13, fontWeight: 700, color: "#52E3A0", marginBottom: 4 } }, "Install to home screen"),
@@ -2500,7 +2854,7 @@ function BrowserBanner() {
     }
     // Android Chrome — can install directly
     if (isAndroid && isChrome) {
-        return (React.createElement("div", { style: { position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 9999, background: "#001a0a", borderTop: "2px solid #52E3A0", padding: "16px 20px", fontFamily: "'DM Sans',sans-serif", maxWidth: 420, margin: "0 auto" } },
+        return (React.createElement("div", { style: { position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 9999, background: TH.surface, borderTop: "2px solid #52E3A0", padding: "16px 20px", fontFamily: "'DM Sans',sans-serif", maxWidth: 420, margin: "0 auto" } },
             React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 12 } },
                 React.createElement("div", { style: { flex: 1 } },
                     React.createElement("div", { style: { fontSize: 13, fontWeight: 700, color: "#52E3A0", marginBottom: 4 } }, "Install to home screen"),
@@ -2988,13 +3342,13 @@ function WelcomeScreen({ onComplete }) {
                         transition: "all 0.15s" } }, d)))))))));
 }
 function WorkoutApp() {
-    var _a;
+    var _a, _b;
     const [storageReady, setStorageReady] = useState(false);
     const [showSplash, setShowSplash] = useState(false); // starts false, set true after load or after welcome
     const [showWelcome, setShowWelcome] = useState(false);
     // ── PERSISTENT STATE ──────────────────────────────────────────────────────
     const [daysPerWeek, setDaysPerWeek] = useState(3);
-    const [themeId, setThemeId] = useState("mono");
+    const [themeId, setThemeId] = useState("solo");
     const [intensity, setIntensity] = useState("Moderate");
     const [totalXP, setTotalXP] = useState(0);
     const [profile, setProfile] = useState({ name: "Jesse", weight: "", height: "", age: "", bodyFat: "", chest: "", waist: "", arms: "", shoulders: "" });
@@ -3067,7 +3421,7 @@ function WorkoutApp() {
         save("customSchedule", customSchedule); }, [customSchedule, storageReady]);
     useEffect(() => { if (storageReady)
         save("currentWeekKey", currentWeekKey); }, [currentWeekKey, storageReady]);
-    const TH = APP_THEMES[themeId] || APP_THEMES.dark;
+    const TH = APP_THEMES[themeId] || APP_THEMES.solo;
     const C = getC(TH);
     _C = C; // update module-level context for child components
     // Settings
@@ -3251,7 +3605,7 @@ function WorkoutApp() {
                 setsCompleted,
                 xpEarned,
                 intensity,
-                rankInfo: getRankInfo(totalXP),
+                rankInfo: getRankInfo(totalXP, themeId),
             });
             setShowSharePrompt(true);
             setShowXPToast(null); // dismiss XP toast when share prompt appears
@@ -3323,7 +3677,7 @@ function WorkoutApp() {
         ? ALL_STRETCHES.filter(s => s.days.includes(selectedWorkout))
         : [];
     const intensityCfg = INTENSITY_CONFIG[intensity];
-    const rankInfo = getRankInfo(totalXP);
+    const rankInfo = getRankInfo(totalXP, themeId);
     // ── PLAN CARD HELPER ──────────────────────────────────────────────────────
     const PlanCard = ({ type, onClick }) => {
         const plan = WORKOUT_PLANS[type];
@@ -3414,7 +3768,7 @@ function WorkoutApp() {
                     setsCompleted: session.setsCompleted,
                     xpEarned: session.xpEarned,
                     intensity: session.intensity,
-                    rankInfo: getRankInfo(totalXP),
+                    rankInfo: getRankInfo(totalXP, themeId),
                 });
                 setShowWorkoutLog(false);
                 setShowShareScreen(true);
@@ -3480,7 +3834,7 @@ function WorkoutApp() {
                     const isEditing = editingDay === i;
                     const c = ((_a = WORKOUT_PLANS[plan]) === null || _a === void 0 ? void 0 : _a.color) || (plan === "Rest" ? "#555580" : "#555");
                     return (React.createElement("div", { key: i, onClick: () => setEditingDay(isEditing ? null : i), style: { flex: 1, textAlign: "center", padding: "9px 2px", borderRadius: 10, cursor: "pointer",
-                            background: isEditing ? c + "40" : isToday ? c : "#111",
+                            background: isEditing ? c + "40" : isToday ? c : C.card,
                             border: `1.5px solid ${isEditing ? c : isToday ? c : C.btnBg}`,
                             transition: "all 0.15s"
                         } },
@@ -3604,7 +3958,7 @@ function WorkoutApp() {
             })))) : (
         // Standalone cardio logger
         React.createElement("div", { style: { flex: 1, display: "flex", flexDirection: "column", overflow: "hidden" } },
-            React.createElement("div", { style: { flexShrink: 0, padding: "52px 24px 12px", borderBottom: "1px solid #181818" } },
+            React.createElement("div", { style: { flexShrink: 0, padding: "52px 24px 12px", borderBottom: `1px solid ${C.border}` } },
                 React.createElement("div", { style: { fontSize: 10, color: C.muted, letterSpacing: "0.1em", textTransform: "uppercase" } }, "Cardio Session"),
                 React.createElement("div", { style: { fontSize: 24, fontWeight: 700, marginTop: 3 } }, "Log Cardio")),
             React.createElement(CardioLogger, { workoutColor: "#FF6B35", onComplete: (data) => {
@@ -3632,7 +3986,7 @@ function WorkoutApp() {
                     { id: "cardio", label: "Cardio" },
                 ].map(phase => (React.createElement("button", { key: phase.id, onClick: () => { setWorkoutPhase(phase.id); setCardioMode(phase.id === "cardio"); }, style: { flex: 1, padding: "9px", borderRadius: 10, cursor: "pointer", fontSize: 11, fontWeight: 600,
                         border: `1.5px solid ${workoutPhase === phase.id ? activeColor + "66" : C.cardBorder}`,
-                        background: workoutPhase === phase.id ? activeColor + "18" : "#111",
+                        background: workoutPhase === phase.id ? activeColor + "18" : C.card,
                         color: workoutPhase === phase.id ? activeColor : "#555" } }, phase.label))))),
             workoutPhase === "stretch" && (React.createElement("div", { style: { flex: 1, overflowY: "auto", padding: "12px 24px 20px" } },
                 React.createElement("div", { style: { fontSize: 11, color: C.muted, marginBottom: 14, lineHeight: 1.5 } },
@@ -3710,7 +4064,7 @@ function WorkoutApp() {
                         React.createElement("div", { style: { display: "flex", gap: 8, alignItems: "center" } },
                             checkedCount > 0 && React.createElement("div", { style: { fontSize: 12, color: "#52E3A0", fontWeight: 600 } }, checkedCount),
                             React.createElement("button", { onClick: () => setShowFilters(v => !v), style: { padding: "6px 12px", borderRadius: 10, cursor: "pointer", fontSize: 12, fontWeight: 600, background: showFilters || activeFilterCount > 0 ? "#52E3A022" : C.btnBg, border: `1.5px solid ${showFilters || activeFilterCount > 0 ? "#52E3A066" : "#222"}`, color: showFilters || activeFilterCount > 0 ? "#52E3A0" : "#555", whiteSpace: "nowrap" } }, activeFilterCount > 0 ? `Filters (${activeFilterCount})` : "Filter ▼")))),
-                showFilters && (React.createElement("div", { style: { flexShrink: 0, padding: "0 24px 14px", borderBottom: "1px solid #181818" } },
+                showFilters && (React.createElement("div", { style: { flexShrink: 0, padding: "0 24px 14px", borderBottom: `1px solid ${C.border}` } },
                     React.createElement("div", { style: { fontSize: 10, color: C.muted, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 8 } }, "Muscle Group"),
                     React.createElement("div", { style: { display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 14 } }, GROUPS.map(g => { const active = libFilter === g; const c = GROUP_COLORS[g]; return React.createElement("button", { key: g, onClick: () => setLibFilter(g), style: { padding: "6px 13px", borderRadius: 20, background: active ? c + "33" : C.input, border: `1.5px solid ${active ? c : "#222"}`, color: active ? c : "#666", fontSize: 12, fontWeight: active ? 600 : 400, cursor: "pointer" } }, g); })),
                     React.createElement("div", { style: { fontSize: 10, color: C.muted, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 8 } }, "Equipment"),
@@ -3725,7 +4079,7 @@ function WorkoutApp() {
                     filteredLibrary.length === 0 && React.createElement("div", { style: { textAlign: "center", color: C.muted, marginTop: 40, fontSize: 14 } }, "No exercises match these filters"),
                     filteredLibrary.map(ex => (React.createElement(LibraryCard, { key: `${ex.group}-${ex.name}`, ex: ex, checked: !!checked[`${ex.group}-${ex.name}`], onToggle: () => setChecked(prev => { const k = `${ex.group}-${ex.name}`; return Object.assign(Object.assign({}, prev), { [k]: !prev[k] }); }) }))),
                     React.createElement("div", { style: { height: 8 } })),
-                checkedCount > 0 && (React.createElement("div", { style: { flexShrink: 0, padding: "10px 24px 14px", background: "#0A0A0A", borderTop: "1px solid #181818" } },
+                checkedCount > 0 && (React.createElement("div", { style: { flexShrink: 0, padding: "10px 24px 14px", background: TH.bg, borderTop: `1px solid ${TH.border}` } },
                     React.createElement("div", { style: { fontSize: 11, color: C.muted, marginBottom: 8, textAlign: "center" } },
                         checkedCount,
                         " exercise",
@@ -3753,7 +4107,7 @@ function WorkoutApp() {
                             "Start Custom Workout")),
                         React.createElement("button", { onClick: () => setChecked({}), style: { padding: "13px 16px", borderRadius: 12, background: C.card, border: "1.5px solid #1f1f1f", color: C.muted, fontSize: 13, cursor: "pointer" } }, "Clear")))))))),
         activeTab === "coach" && (React.createElement("div", { style: { flex: 1, display: "flex", flexDirection: "column", overflow: "hidden", position: "relative", zIndex: 1 } },
-            React.createElement("div", { style: { flexShrink: 0, padding: "52px 24px 14px", borderBottom: "1px solid #181818" } },
+            React.createElement("div", { style: { flexShrink: 0, padding: "52px 24px 14px", borderBottom: `1px solid ${C.border}` } },
                 React.createElement("div", { style: { fontSize: 10, color: C.muted, letterSpacing: "0.1em", textTransform: "uppercase" } }, "AI Coach"),
                 React.createElement("div", { style: { fontSize: 24, fontWeight: 700, marginTop: 3 } }, "Ask Anything")),
             React.createElement("div", { style: { flex: 1, overflowY: "auto", padding: "14px 20px", display: "flex", flexDirection: "column", gap: 10 } },
@@ -3764,7 +4118,7 @@ function WorkoutApp() {
                         React.createElement("div", { style: { display: "flex", gap: 5 } }, [0, 1, 2].map(i => React.createElement("div", { key: i, style: { width: 6, height: 6, borderRadius: "50%", background: "#FF6B35", animation: `bounce 1.2s ease-in-out ${i * 0.2}s infinite` } })))))),
                 React.createElement("div", { ref: chatEndRef })),
             React.createElement("div", { style: { flexShrink: 0, padding: "8px 20px 6px", display: "flex", gap: 8, overflowX: "auto" } }, ["What to train today?", "Best stretches for legs", "How do I progress?", "Bodyweight alternatives"].map(q => (React.createElement("button", { key: q, onClick: () => { var _a; setInput(q); (_a = inputRef.current) === null || _a === void 0 ? void 0 : _a.focus(); }, style: { whiteSpace: "nowrap", padding: "6px 13px", borderRadius: 20, background: C.card, border: "1px solid #1f1f1f", color: C.muted, fontSize: 12, cursor: "pointer", flexShrink: 0 } }, q)))),
-            React.createElement("div", { style: { flexShrink: 0, padding: "8px 16px 12px", background: "#0A0A0A", borderTop: "1px solid #181818" } },
+            React.createElement("div", { style: { flexShrink: 0, padding: "8px 16px 12px", background: TH.bg, borderTop: `1px solid ${TH.border}` } },
                 React.createElement("div", { style: { display: "flex", gap: 10, alignItems: "center" } },
                     React.createElement("input", { ref: inputRef, value: input, onChange: e => setInput(e.target.value), onKeyDown: e => { if (e.key === "Enter" && !e.shiftKey) {
                             e.preventDefault();
@@ -3788,7 +4142,7 @@ function WorkoutApp() {
                 setExercisePRs({});
                 setWorkoutHistory([]);
             }, themeId: themeId, setThemeId: setThemeId })),
-        React.createElement("div", { style: { flexShrink: 0, position: "relative", zIndex: 100, background: TH.bg === "FFFFFF" || TH.bg === "#FFFFFF" ? "rgba(255,255,255,0.97)" : `rgba(10,10,10,0.98)`, backdropFilter: "blur(20px)", borderTop: `1px solid ${TH.border}`, display: "flex", justifyContent: "space-around", paddingTop: "10px", paddingBottom: "calc(16px + env(safe-area-inset-bottom))" } }, [
+        React.createElement("div", { style: { flexShrink: 0, position: "relative", zIndex: 100, background: ((_b = TH.bg) === null || _b === void 0 ? void 0 : _b.startsWith("#F")) ? "rgba(255,255,255,0.97)" : `rgba(10,10,10,0.98)`, backdropFilter: "blur(20px)", borderTop: `1px solid ${TH.border}`, display: "flex", justifyContent: "space-around", paddingTop: "10px", paddingBottom: "calc(16px + env(safe-area-inset-bottom))" } }, [
             { id: "home", key: "Home", label: "Home" },
             { id: "active", key: "Active", label: "Active" },
             { id: "library", key: "Library", label: "Library" },
