@@ -1041,38 +1041,49 @@ function StretchCard({ stretch, color, defaultDur }) {
                     React.createElement("div", { style: { fontSize: 13, color: C.text, lineHeight: 1.6 } }, stretch.cue)))))));
 }
 // ── EXERCISE CARD (active workout) ────────────────────────────────────────────
-function ExerciseCard({ ex, workoutColor, completedSets, toggleSet, intensity, setLogs, onSetLog, prData }) {
+function ExerciseCard({ ex, workoutColor, completedSets, toggleSet, intensity, setLogs, onSetLog, prData, setCountOverride, onSetCountChange }) {
     var _a;
     const C = useC();
     const [expanded, setExpanded] = useState(false);
-    const [open, setOpen] = useState(false); // card expanded for logging
-    const [currentSet, setCurrentSet] = useState(0); // which set we're on (0-indexed)
+    const [open, setOpen] = useState(false);
+    const [currentSet, setCurrentSet] = useState(0);
     const [weightInput, setWeightInput] = useState("");
     const [repsInput, setRepsInput] = useState("");
+    const [editingSet, setEditingSet] = useState(null); // index of set being re-edited
     const guide = FORM_GUIDES[ex.name];
     const cfg = INTENSITY_CONFIG[intensity];
-    const adjSets = Math.max(1, ex.sets + ((cfg === null || cfg === void 0 ? void 0 : cfg.sets) || 0));
-    // Count completed sets for this exercise
+    const baseSets = Math.max(1, ex.sets + ((cfg === null || cfg === void 0 ? void 0 : cfg.sets) || 0));
+    const adjSets = setCountOverride !== undefined ? setCountOverride : baseSets;
     const doneCount = Array.from({ length: adjSets }, (_, i) => completedSets[`${ex.name}-${i}`]).filter(Boolean).length;
     const allDone = doneCount === adjSets;
-    // When card opens, jump to the next uncompleted set
+    const openSetForEdit = (idx) => {
+        const existing = setLogs === null || setLogs === void 0 ? void 0 : setLogs[`${ex.name}-${idx}`];
+        setWeightInput((existing === null || existing === void 0 ? void 0 : existing.weight) || "");
+        setRepsInput((existing === null || existing === void 0 ? void 0 : existing.reps) || "");
+        setEditingSet(idx);
+        setCurrentSet(idx);
+        setOpen(true);
+    };
     const handleOpen = () => {
         var _a;
         const nextIdx = (_a = Array.from({ length: adjSets }, (_, i) => i).find(i => !completedSets[`${ex.name}-${i}`])) !== null && _a !== void 0 ? _a : 0;
         setCurrentSet(nextIdx);
+        setEditingSet(null);
         const existing = setLogs === null || setLogs === void 0 ? void 0 : setLogs[`${ex.name}-${nextIdx}`];
         setWeightInput((existing === null || existing === void 0 ? void 0 : existing.weight) || "");
         setRepsInput((existing === null || existing === void 0 ? void 0 : existing.reps) || String(ex.reps).split("-")[0] || "");
         setOpen(true);
     };
     const logAndAdvance = () => {
-        // Mark set complete
         if (!completedSets[`${ex.name}-${currentSet}`])
             toggleSet(ex.name, currentSet);
-        // Save log
         if (onSetLog)
             onSetLog(ex.name, currentSet, { weight: weightInput, reps: repsInput });
-        // Advance to next uncompleted set
+        if (editingSet !== null) {
+            setOpen(false);
+            setEditingSet(null);
+            return;
+        }
         const nextIdx = Array.from({ length: adjSets }, (_, i) => i).find(i => i > currentSet && !completedSets[`${ex.name}-${i}`]);
         if (nextIdx !== undefined) {
             setCurrentSet(nextIdx);
@@ -1081,8 +1092,12 @@ function ExerciseCard({ ex, workoutColor, completedSets, toggleSet, intensity, s
             setRepsInput((existing === null || existing === void 0 ? void 0 : existing.reps) || String(ex.reps).split("-")[0] || "");
         }
         else {
-            setOpen(false); // all sets done
+            setOpen(false);
         }
+    };
+    const adjustSets = (delta) => {
+        const newCount = Math.max(1, Math.min(10, adjSets + delta));
+        onSetCountChange === null || onSetCountChange === void 0 ? void 0 : onSetCountChange(ex.name, newCount);
     };
     return (React.createElement("div", { style: { background: C.card, borderRadius: 14, border: `1.5px solid ${allDone ? workoutColor + "55" : C.cardBorder}`, transition: "border-color 0.2s" } },
         React.createElement("div", { style: { padding: "14px", cursor: "pointer" }, onClick: () => !allDone && (open ? setOpen(false) : handleOpen()) },
@@ -1095,15 +1110,17 @@ function ExerciseCard({ ex, workoutColor, completedSets, toggleSet, intensity, s
                                 color: prData.isNew ? workoutColor : "#555",
                                 border: `1px solid ${prData.isNew ? workoutColor + "55" : C.btnBorder}`,
                                 fontWeight: 600 } }, prData.isNew ? "★ NEW PR" : `PR ${prData.weight}lb × ${prData.reps}`))),
-                    React.createElement("div", { style: { fontSize: 11, color: C.muted, marginTop: 2 } },
-                        ex.muscle,
-                        " \u00B7 ",
+                    React.createElement("div", { style: { fontSize: 11, color: C.muted, marginTop: 2, display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" } },
+                        React.createElement("span", null, ex.muscle),
+                        React.createElement("span", null, "\u00B7"),
                         React.createElement("span", { style: { color: cfg === null || cfg === void 0 ? void 0 : cfg.color } },
                             adjSets,
                             " sets"),
-                        " \u00D7 ",
-                        ex.reps,
-                        React.createElement("span", { style: { color: C.muted, marginLeft: 8 } }, cfg === null || cfg === void 0 ? void 0 : cfg.restLabel))),
+                        React.createElement("span", null, "\u00D7"),
+                        React.createElement("span", null, ex.reps),
+                        React.createElement("span", { style: { color: C.muted } }, cfg === null || cfg === void 0 ? void 0 : cfg.restLabel),
+                        React.createElement("span", { onClick: e => { e.stopPropagation(); adjustSets(-1); }, style: { cursor: "pointer", color: C.muted, fontSize: 14, padding: "0 3px", lineHeight: 1, userSelect: "none", border: `1px solid ${C.btnBorder}`, borderRadius: 4 } }, "\u2212"),
+                        React.createElement("span", { onClick: e => { e.stopPropagation(); adjustSets(1); }, style: { cursor: "pointer", color: C.muted, fontSize: 14, padding: "0 3px", lineHeight: 1, userSelect: "none", border: `1px solid ${C.btnBorder}`, borderRadius: 4 } }, "+"))),
                 React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 8, marginLeft: 10, flexShrink: 0 } },
                     React.createElement("div", { style: { display: "flex", gap: 4 } }, Array.from({ length: adjSets }).map((_, i) => (React.createElement("div", { key: i, style: { width: 8, height: 8, borderRadius: "50%",
                             background: completedSets[`${ex.name}-${i}`] ? workoutColor : (open && i === currentSet ? workoutColor + "66" : C.btnBorder),
@@ -1115,12 +1132,9 @@ function ExerciseCard({ ex, workoutColor, completedSets, toggleSet, intensity, s
                             "/",
                             adjSets),
                     guide && (React.createElement("button", { onClick: e => { e.stopPropagation(); setExpanded(v => !v); }, style: { background: expanded ? workoutColor + "22" : "none", border: `1px solid ${expanded ? workoutColor + "44" : C.btnBorder}`, borderRadius: 8, color: expanded ? workoutColor : "#444", fontSize: 11, cursor: "pointer", padding: "4px 10px", fontWeight: 500 } }, expanded ? "Hide" : "Form"))))),
-        open && !allDone && (React.createElement("div", { style: { margin: "0 14px 14px", background: C.deep, borderRadius: 10, padding: "12px 14px", border: `1px solid ${workoutColor}33` } },
+        (open && (editingSet !== null || !allDone)) && (React.createElement("div", { style: { margin: "0 14px 14px", background: C.deep, borderRadius: 10, padding: "12px 14px", border: `1px solid ${workoutColor}33` } },
             React.createElement("div", { style: { fontSize: 11, color: workoutColor, fontWeight: 700, marginBottom: 10 } },
-                "Set ",
-                currentSet + 1,
-                " of ",
-                adjSets,
+                editingSet !== null ? `Edit Set ${editingSet + 1}` : `Set ${currentSet + 1} of ${adjSets}`,
                 (() => {
                     const suggestion = getOverloadSuggestion(prData, ex.name);
                     return suggestion ? (React.createElement("span", { style: { fontSize: 10, color: "#52E3A0", fontWeight: 600, marginLeft: 10, background: "#52E3A022", padding: "2px 8px", borderRadius: 8, border: "1px solid #52E3A044" } },
@@ -1150,8 +1164,8 @@ function ExerciseCard({ ex, workoutColor, completedSets, toggleSet, intensity, s
                 const log = setLogs === null || setLogs === void 0 ? void 0 : setLogs[`${ex.name}-${i}`];
                 if (!log || !completedSets[`${ex.name}-${i}`])
                     return null;
-                return (React.createElement("div", { key: i, style: { fontSize: 10, padding: "3px 9px", borderRadius: 12, background: workoutColor + "22", color: workoutColor, border: `1px solid ${workoutColor}44` } },
-                    "S",
+                return (React.createElement("div", { key: i, onClick: () => openSetForEdit(i), style: { fontSize: 10, padding: "3px 9px", borderRadius: 12, background: editingSet === i ? workoutColor : workoutColor + "22", color: editingSet === i ? "#000" : workoutColor, border: `1px solid ${workoutColor}44`, cursor: "pointer" } },
+                    "\u270E S",
                     i + 1,
                     " ",
                     log.weight && `${log.weight}lb`,
@@ -1172,8 +1186,8 @@ function ExerciseCard({ ex, workoutColor, completedSets, toggleSet, intensity, s
         }))),
         allDone && (React.createElement("div", { style: { padding: "0 14px 12px", display: "flex", gap: 5, flexWrap: "wrap" } }, Array.from({ length: adjSets }).map((_, i) => {
             const log = setLogs === null || setLogs === void 0 ? void 0 : setLogs[`${ex.name}-${i}`];
-            return (React.createElement("div", { key: i, style: { fontSize: 10, padding: "2px 8px", borderRadius: 10, background: workoutColor + "18", color: workoutColor, border: `1px solid ${workoutColor}33` } },
-                "S",
+            return (React.createElement("div", { key: i, onClick: () => openSetForEdit(i), style: { fontSize: 10, padding: "2px 8px", borderRadius: 10, background: editingSet === i ? workoutColor : workoutColor + "18", color: editingSet === i ? "#000" : workoutColor, border: `1px solid ${workoutColor}33`, cursor: "pointer" } },
+                "\u270E S",
                 i + 1,
                 " ",
                 (log === null || log === void 0 ? void 0 : log.weight) && `${log.weight}lb`,
@@ -1951,6 +1965,82 @@ function BrowserBanner() {
     }
     return null;
 }
+// ── PLAN EDITOR ───────────────────────────────────────────────────────────────
+function PlanEditor({ planName, exercises, onSave, onClose }) {
+    const C = useC();
+    const plan = WORKOUT_PLANS[planName];
+    const color = (plan === null || plan === void 0 ? void 0 : plan.color) || "#FF6B35";
+    const [exList, setExList] = useState([...exercises]);
+    const [swappingIdx, setSwappingIdx] = useState(null); // index being swapped
+    const [search, setSearch] = useState("");
+    const filteredLib = LIBRARY.filter(ex => !exList.some(e => e.name === ex.name) &&
+        (search === "" || ex.name.toLowerCase().includes(search.toLowerCase()) || ex.group.toLowerCase().includes(search.toLowerCase())));
+    const removeEx = (idx) => setExList(prev => prev.filter((_, i) => i !== idx));
+    const swapEx = (idx, newEx) => {
+        setExList(prev => prev.map((e, i) => i === idx
+            ? { name: newEx.name, sets: newEx.sets, reps: newEx.reps, muscle: newEx.group }
+            : e));
+        setSwappingIdx(null);
+        setSearch("");
+    };
+    const addEx = (ex) => {
+        setExList(prev => [...prev, { name: ex.name, sets: ex.sets, reps: ex.reps, muscle: ex.group }]);
+        setSearch("");
+    };
+    return (React.createElement("div", { style: { position: "fixed", inset: 0, background: C.surface, zIndex: 300, display: "flex", flexDirection: "column", maxWidth: 420, margin: "0 auto" } },
+        React.createElement("div", { style: { padding: "52px 24px 16px", borderBottom: `1px solid ${C.border}`, flexShrink: 0 } },
+            React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "flex-start" } },
+                React.createElement("div", null,
+                    React.createElement("div", { style: { fontSize: 10, color: C.muted, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 4 } }, "Edit Plan"),
+                    React.createElement("div", { style: { fontSize: 24, fontWeight: 800, color: color } }, planName)),
+                React.createElement("div", { style: { display: "flex", gap: 8 } },
+                    React.createElement("button", { onClick: () => { onSave(exList); onClose(); }, style: { padding: "8px 16px", borderRadius: 10, background: color, border: "none", color: "#000", fontSize: 13, fontWeight: 700, cursor: "pointer" } }, "Save"),
+                    React.createElement("button", { onClick: onClose, style: { width: 36, height: 36, borderRadius: 10, background: C.btnBg, border: `1px solid ${C.btnBorder}`, color: C.muted, fontSize: 18, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" } }, "\u2715")))),
+        React.createElement("div", { style: { flex: 1, overflowY: "auto", padding: "12px 24px 24px" } },
+            React.createElement("div", { style: { fontSize: 10, color: C.muted, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 10 } },
+                "Exercises (",
+                exList.length,
+                ")"),
+            React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 7, marginBottom: 20 } }, exList.map((ex, idx) => (React.createElement("div", { key: idx },
+                React.createElement("div", { style: { background: C.card, borderRadius: 12, padding: "11px 14px", border: `1px solid ${swappingIdx === idx ? color + "66" : C.cardBorder}`, display: "flex", alignItems: "center", gap: 10 } },
+                    React.createElement("div", { style: { flex: 1 } },
+                        React.createElement("div", { style: { fontSize: 13, fontWeight: 600, color: C.text } }, ex.name),
+                        React.createElement("div", { style: { fontSize: 11, color: C.muted, marginTop: 2 } },
+                            ex.muscle,
+                            " \u00B7 ",
+                            ex.sets,
+                            " sets \u00D7 ",
+                            ex.reps)),
+                    React.createElement("button", { onClick: () => { setSwappingIdx(swappingIdx === idx ? null : idx); setSearch(""); }, style: { padding: "5px 10px", borderRadius: 8, background: swappingIdx === idx ? color + "22" : C.btnBg, border: `1px solid ${swappingIdx === idx ? color : C.btnBorder}`, color: swappingIdx === idx ? color : C.muted, fontSize: 11, cursor: "pointer", fontWeight: 600 } }, "\u21C4 Swap"),
+                    React.createElement("button", { onClick: () => removeEx(idx), style: { width: 28, height: 28, borderRadius: 8, background: "#F8717112", border: "1px solid #F8717133", color: "#F87171", fontSize: 14, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 } }, "\u2715")),
+                swappingIdx === idx && (React.createElement("div", { style: { background: C.deep, borderRadius: 12, padding: "10px 12px", border: `1px solid ${color}33`, marginTop: 4 } },
+                    React.createElement("input", { value: search, onChange: e => setSearch(e.target.value), placeholder: "Search exercises...", style: { width: "100%", padding: "8px 12px", borderRadius: 8, background: C.input, border: `1px solid ${C.inputBorder}`, color: C.text, fontSize: 13, outline: "none", fontFamily: "inherit", marginBottom: 8 } }),
+                    React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 5, maxHeight: 180, overflowY: "auto" } },
+                        filteredLib.slice(0, 12).map(ex => (React.createElement("div", { key: ex.name, onClick: () => swapEx(idx, ex), style: { padding: "8px 10px", borderRadius: 8, background: C.card, border: `1px solid ${C.cardBorder}`, cursor: "pointer", display: "flex", justifyContent: "space-between", alignItems: "center" } },
+                            React.createElement("div", null,
+                                React.createElement("div", { style: { fontSize: 12, fontWeight: 600, color: C.text } }, ex.name),
+                                React.createElement("div", { style: { fontSize: 10, color: C.muted } },
+                                    ex.group,
+                                    " \u00B7 ",
+                                    ex.sets,
+                                    "\u00D7",
+                                    ex.reps)),
+                            React.createElement("div", { style: { fontSize: 11, color: color, fontWeight: 700 } }, "\u21C4")))),
+                        filteredLib.length === 0 && React.createElement("div", { style: { fontSize: 12, color: C.muted, textAlign: "center", padding: "8px 0" } }, "No matches")))))))),
+            React.createElement("div", { style: { fontSize: 10, color: C.muted, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 10 } }, "Add Exercise"),
+            React.createElement("input", { value: search, onChange: e => setSearch(e.target.value), placeholder: "Search to add...", style: { width: "100%", padding: "10px 14px", borderRadius: 10, background: C.input, border: `1px solid ${C.inputBorder}`, color: C.text, fontSize: 13, outline: "none", fontFamily: "inherit", marginBottom: 8 } }),
+            search.length > 0 && (React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 5 } }, LIBRARY.filter(ex => !exList.some(e => e.name === ex.name) && (ex.name.toLowerCase().includes(search.toLowerCase()) || ex.group.toLowerCase().includes(search.toLowerCase()))).slice(0, 8).map(ex => (React.createElement("div", { key: ex.name, onClick: () => addEx(ex), style: { padding: "9px 12px", borderRadius: 10, background: C.card, border: `1px solid ${C.cardBorder}`, cursor: "pointer", display: "flex", justifyContent: "space-between", alignItems: "center" } },
+                React.createElement("div", null,
+                    React.createElement("div", { style: { fontSize: 13, fontWeight: 600, color: C.text } }, ex.name),
+                    React.createElement("div", { style: { fontSize: 11, color: C.muted } },
+                        ex.group,
+                        " \u00B7 ",
+                        ex.sets,
+                        "\u00D7",
+                        ex.reps)),
+                React.createElement("div", { style: { fontSize: 16, color: color, fontWeight: 700 } }, "+")))))),
+            React.createElement("button", { onClick: () => setExList([...WORKOUT_PLANS[planName].exercises]), style: { marginTop: 20, width: "100%", padding: "11px", borderRadius: 10, background: "transparent", border: `1px solid ${C.btnBorder}`, color: C.muted, fontSize: 12, cursor: "pointer" } }, "\u21BA Reset to default"))));
+}
 function WelcomeScreen({ onComplete }) {
     const C = useC();
     const [name, setName] = useState("");
@@ -2102,6 +2192,8 @@ function WorkoutApp() {
     const [checked, setChecked] = useState({});
     const [showFilters, setShowFilters] = useState(false);
     const [customExercises, setCustomExercises] = useState([]);
+    const [setCountOverrides, setSetCountOverrides] = useState({}); // { "ExName": adjSetsCount }
+    const [planOverrides, setPlanOverrides] = useState({}); // { "Push": [exerciseList] }
     // Coach
     const [messages, setMessages] = useState([{ role: "assistant", content: "Hey — I'm your AI coach. Ask me anything about workouts, form, intensity, or how to structure your week." }]);
     const [input, setInput] = useState("");
@@ -2111,6 +2203,7 @@ function WorkoutApp() {
     const [weeklyCheckinDone, setWeeklyCheckinDone] = useState(false);
     const [showCardioLog, setShowCardioLog] = useState(false);
     const [showWorkoutLog, setShowWorkoutLog] = useState(false);
+    const [editingPlan, setEditingPlan] = useState(null); // plan name being edited
     // Check if this week's check-in already done
     useEffect(() => {
         const thisWeek = getWeekKey();
@@ -2156,6 +2249,7 @@ function WorkoutApp() {
         setWorkoutTimer(0);
         setCompletedSets({});
         setSetLogs({});
+        setSetCountOverrides({});
         setCardioMode(false);
         setWorkoutPhase("stretch");
         setActiveTab("active");
@@ -2171,6 +2265,7 @@ function WorkoutApp() {
         setWorkoutTimer(0);
         setCompletedSets({});
         setSetLogs({});
+        setSetCountOverrides({});
         setCardioMode(false);
         setWorkoutPhase("workout"); // skip stretch for custom
         setChecked({});
@@ -2300,12 +2395,14 @@ function WorkoutApp() {
         ? { exercises: customExercises, color: "#52E3A0", icon: "✦", badge: null }
         : WORKOUT_PLANS[selectedWorkout];
     const activeColor = (activePlan === null || activePlan === void 0 ? void 0 : activePlan.color) || "#FF6B35";
+    // Helper — get effective exercises for a plan (respecting user overrides)
+    const getPlanExercises = (planName) => { var _a; return planOverrides[planName] || ((_a = WORKOUT_PLANS[planName]) === null || _a === void 0 ? void 0 : _a.exercises) || []; };
     // For plan sessions, merge plan exercises with any appended library exercises
     const activeExercises = selectedWorkout === "Custom"
         ? customExercises
         : [
-            ...((activePlan === null || activePlan === void 0 ? void 0 : activePlan.exercises) || []),
-            ...customExercises.filter(ce => !((activePlan === null || activePlan === void 0 ? void 0 : activePlan.exercises) || []).some(pe => pe.name === ce.name)),
+            ...getPlanExercises(selectedWorkout),
+            ...customExercises.filter(ce => !getPlanExercises(selectedWorkout).some(pe => pe.name === ce.name)),
         ];
     const workoutStretches = selectedWorkout && selectedWorkout !== "Custom"
         ? ALL_STRETCHES.filter(s => s.days.includes(selectedWorkout))
@@ -2367,6 +2464,7 @@ function WorkoutApp() {
     return (React.createElement("div", { style: { height: "100dvh", background: TH.bg, color: TH.text, fontFamily: "'DM Sans','Helvetica Neue',sans-serif", maxWidth: 420, margin: "0 auto", display: "flex", flexDirection: "column", position: "relative" } },
         React.createElement("div", { style: { position: "absolute", inset: 0, pointerEvents: "none", zIndex: 0, background: `radial-gradient(ellipse at 20% 0%, ${TH.accent}12 0%, transparent 60%), radial-gradient(ellipse at 80% 100%, ${TH.accent2}0d 0%, transparent 60%)` } }),
         React.createElement(BrowserBanner, null),
+        editingPlan && (React.createElement(PlanEditor, { planName: editingPlan, exercises: getPlanExercises(editingPlan), onSave: (newList) => setPlanOverrides(prev => (Object.assign(Object.assign({}, prev), { [editingPlan]: newList }))), onClose: () => setEditingPlan(null) })),
         showWorkoutLog && (React.createElement(WorkoutLog, { workoutHistory: workoutHistory, onClose: () => setShowWorkoutLog(false), accentColor: TH.accent })),
         showCardioLog && (React.createElement(CardioLog, { cardioHistory: cardioHistory, onClose: () => setShowCardioLog(false), accentColor: TH.accent })),
         activeTab === "home" && (React.createElement("div", { style: { flex: 1, overflowY: "auto", position: "relative", zIndex: 1, paddingBottom: 80 } },
@@ -2534,20 +2632,22 @@ function WorkoutApp() {
                 var _a;
                 const plan = WORKOUT_PLANS[t];
                 const displayName = t.replace("Bodyweight ", "");
-                return (React.createElement("div", { key: t, onClick: () => startWorkout(t), style: { background: C.card, borderRadius: 14, padding: "14px 16px", border: `1.5px solid ${plan.color}28`, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "space-between", transition: "border-color 0.15s" } },
-                    React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 12 } },
+                return (React.createElement("div", { key: t, style: { background: C.card, borderRadius: 14, padding: "14px 16px", border: `1.5px solid ${plan.color}28`, display: "flex", alignItems: "center", justifyContent: "space-between", transition: "border-color 0.15s" } },
+                    React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 12, flex: 1, cursor: "pointer" }, onClick: () => startWorkout(t) },
                         React.createElement("div", { style: { width: 42, height: 42, borderRadius: 11, background: plan.color + "22", border: `1.5px solid ${plan.color}44`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, color: plan.color } }, ((_a = IC[PLAN_ICON[t]]) === null || _a === void 0 ? void 0 : _a.call(IC, plan.color, 18)) || null),
                         React.createElement("div", null,
                             React.createElement("div", { style: { fontWeight: 600, fontSize: 15, color: C.text } },
                                 displayName,
                                 " Day"),
                             React.createElement("div", { style: { fontSize: 11, color: C.muted, marginTop: 2 } },
-                                plan.exercises.length,
+                                getPlanExercises(t).length,
                                 " exercises \u00B7 ",
                                 workoutEquipment === "bodyweight" ? "No equipment needed" : "Full gym"))),
-                    React.createElement("div", { style: { display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 4 } },
-                        React.createElement("div", { style: { fontSize: 10, padding: "3px 8px", borderRadius: 8, background: plan.color + "22", color: plan.color, fontWeight: 600, border: `1px solid ${plan.color}44` } }, workoutEquipment === "gym" ? "Gym" : "BW"),
-                        React.createElement("div", { style: { fontSize: 18, color: C.muted } }, "\u203A"))));
+                    React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 8 } },
+                        React.createElement("button", { onClick: e => { e.stopPropagation(); setEditingPlan(t); }, style: { padding: "5px 10px", borderRadius: 8, background: C.btnBg, border: `1px solid ${C.btnBorder}`, color: C.muted, fontSize: 11, cursor: "pointer", fontWeight: 600 } }, "Edit"),
+                        React.createElement("div", { onClick: () => startWorkout(t), style: { cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 4 } },
+                            React.createElement("div", { style: { fontSize: 10, padding: "3px 8px", borderRadius: 8, background: plan.color + "22", color: plan.color, fontWeight: 600, border: `1px solid ${plan.color}44` } }, workoutEquipment === "gym" ? "Gym" : "BW"),
+                            React.createElement("div", { style: { fontSize: 18, color: C.muted } }, "\u203A")))));
             })))) : (
         // Standalone cardio logger
         React.createElement("div", { style: { flex: 1, display: "flex", flexDirection: "column", overflow: "hidden" } },
@@ -2600,7 +2700,7 @@ function WorkoutApp() {
                         " \u00B7 ",
                         intensityCfg.restLabel)),
                 React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 8 } },
-                    activeExercises.map(ex => (React.createElement(ExerciseCard, { key: ex.name, ex: ex, workoutColor: activeColor, completedSets: completedSets, toggleSet: toggleSet, intensity: intensity, setLogs: setLogs, onSetLog: handleSetLog, prData: exercisePRs[ex.name] }))),
+                    activeExercises.map(ex => (React.createElement(ExerciseCard, { key: ex.name, ex: ex, workoutColor: activeColor, completedSets: completedSets, toggleSet: toggleSet, intensity: intensity, setLogs: setLogs, onSetLog: handleSetLog, prData: exercisePRs[ex.name], setCountOverride: setCountOverrides[ex.name], onSetCountChange: (name, count) => setSetCountOverrides(prev => (Object.assign(Object.assign({}, prev), { [name]: count }))) }))),
                     React.createElement("button", { onClick: endWorkout, style: { width: "100%", padding: "14px", borderRadius: 12, marginTop: 4, background: C.card, border: `1.5px solid ${C.cardBorder}`, color: C.muted, fontSize: 14, fontWeight: 600, cursor: "pointer" } }, "Finish Workout")))),
             workoutPhase === "cardio" && (React.createElement(CardioLogger, { workoutColor: activeColor, onComplete: (data) => {
                     setCardioHistory(prev => [Object.assign(Object.assign({}, data), { date: new Date().toLocaleDateString(), workoutContext: selectedWorkout }), ...prev]);
