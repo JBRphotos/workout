@@ -1,4 +1,4 @@
-<!DOCTYPE html><!-- v20260329-205029 -->
+<!DOCTYPE html><!-- v20260329-205423 -->
 
 <html lang="en">
 <head>
@@ -16,11 +16,26 @@
   <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%;touch-action:manipulation}
-    body{overflow-x:hidden;background:#FFFFFF}
-    #root{min-height:100%;display:flex;flex-direction:column}
+    html{height:100%;touch-action:manipulation}
+    body{height:100%;background:#FFFFFF;touch-action:manipulation}
+    #root{height:100%}
     ::-webkit-scrollbar{display:none}
     input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
+
+```
+/* PWA fullscreen — locks scroll to root */
+@media all and (display-mode: standalone) {
+  body { overflow: hidden; }
+  #root { overflow: hidden; }
+}
+
+/* Browser fallback — allow normal scroll */
+@media not all and (display-mode: standalone) {
+  body { overflow-x: hidden; overflow-y: auto; min-height: 100%; height: auto; }
+  #root { height: auto; min-height: 100vh; }
+}
+```
+
   </style>
 </head>
 <body>
