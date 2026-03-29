@@ -1,4 +1,4 @@
-<!DOCTYPE html><!-- v20260329-212220 -->
+<!DOCTYPE html><!-- v20260329-212805 -->
 
 <html lang="en">
 <head>
@@ -16,11 +16,30 @@
   <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html,body{touch-action:manipulation;background:#FFFFFF}
-    /* #root fills viewport via position:fixed — works in both PWA and browser */
-    #root{position:fixed;inset:0;overflow:hidden}
+    html{
+      height:100%;
+      height:-webkit-fill-available;
+      touch-action:manipulation;
+      background:#FFFFFF;
+    }
+    body{
+      min-height:100%;
+      min-height:-webkit-fill-available;
+      touch-action:manipulation;
+      background:#FFFFFF;
+      overflow:hidden;
+    }
+    #root{
+      position:fixed;
+      top:0;
+      left:0;
+      right:0;
+      bottom:0;
+      overflow:hidden;
+    }
     ::-webkit-scrollbar{display:none}
-    input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
   </style>
 </head>
 <body>
