@@ -1,4 +1,4 @@
-<!DOCTYPE html><!-- v20260329-152402 -->
+<!DOCTYPE html><!-- v20260329-153207 -->
 
 <html lang="en">
 <head>
@@ -45,7 +45,7 @@ const XP_THRESHOLDS = [0, 300, 700, 1300, 2100, 3100, 4500, 6300, 8500, 11000, 1
 // ── FRANCHISE THEMES (color + rank flavor combined) ──────────────────────────
 const APP_THEMES = {
     solo: {
-        id: "solo", name: "Solo Leveling", tag: "Hunter System",
+        id: "solo", profileLabel: "Hunter Profile", name: "Solo Leveling", tag: "Hunter System",
         bg: "#F0F0FF", surface: "#FFFFFF", border: "#DDDDF5",
         card: "#F8F8FF", cardBorder: "#E0E0F5",
         accent: "#5B4FE8", accent2: "#A855F7",
@@ -78,7 +78,7 @@ const APP_THEMES = {
         badgeLabel: "LVL",
     },
     pokemon: {
-        id: "pokemon", name: "Pokemon", tag: "Trainer Journey",
+        id: "pokemon", profileLabel: "Trainer Profile", name: "Pokemon", tag: "Trainer Journey",
         bg: "#F8F8F8", surface: "#FFFFFF", border: "#E0E0E0",
         card: "#F8F8F8", cardBorder: "#E8E8E8",
         accent: "#E3000B", accent2: "#222222",
@@ -111,7 +111,7 @@ const APP_THEMES = {
         badgeLabel: "LV",
     },
     naruto: {
-        id: "naruto", name: "Naruto", tag: "Ninja Way",
+        id: "naruto", profileLabel: "Shinobi Profile", name: "Naruto", tag: "Ninja Way",
         bg: "#FFF8F0", surface: "#FFFFFF", border: "#F0E0CC",
         card: "#FFF8F0", cardBorder: "#F0E0CC",
         accent: "#E85C00", accent2: "#2C5282",
@@ -144,7 +144,7 @@ const APP_THEMES = {
         badgeLabel: "LVL",
     },
     onepiece: {
-        id: "onepiece", name: "One Piece", tag: "Pirate Crew",
+        id: "onepiece", profileLabel: "Pirate Profile", name: "One Piece", tag: "Pirate Crew",
         bg: "#F0F6FF", surface: "#FFFFFF", border: "#D0E0F0",
         card: "#F0F6FF", cardBorder: "#D0E8FF",
         accent: "#C0392B", accent2: "#D4A017",
@@ -177,7 +177,7 @@ const APP_THEMES = {
         badgeLabel: "LVL",
     },
     dragonball: {
-        id: "dragonball", name: "Dragon Ball", tag: "Power Level",
+        id: "dragonball", profileLabel: "Warrior Profile", name: "Dragon Ball", tag: "Power Level",
         bg: "#FFFAF0", surface: "#FFFFFF", border: "#F0E8D0",
         card: "#FFFAF0", cardBorder: "#F0E8CC",
         accent: "#E65100", accent2: "#F9A825",
@@ -210,7 +210,7 @@ const APP_THEMES = {
         badgeLabel: "PL",
     },
     aot: {
-        id: "aot", name: "Attack on Titan", tag: "Survey Corps",
+        id: "aot", profileLabel: "Scout Profile", name: "Attack on Titan", tag: "Survey Corps",
         bg: "#F4F1EC", surface: "#FFFFFF", border: "#DDD8CC",
         card: "#F4F1EC", cardBorder: "#DDD8CC",
         accent: "#5C6B3A", accent2: "#8B7355",
@@ -243,7 +243,7 @@ const APP_THEMES = {
         badgeLabel: "LVL",
     },
     greek: {
-        id: "greek", name: "Greek Mythology", tag: "Path of the Gods",
+        id: "greek", profileLabel: "Hero Profile", name: "Greek Mythology", tag: "Path of the Gods",
         bg: "#FAFAF5", surface: "#FFFFFF", border: "#E8E8D8",
         card: "#FAFAF5", cardBorder: "#E8E8D8",
         accent: "#B8860B", accent2: "#1A3A5C",
@@ -276,7 +276,7 @@ const APP_THEMES = {
         badgeLabel: "LVL",
     },
     rpg: {
-        id: "rpg", name: "RPG / Fantasy", tag: "The Ancient Order",
+        id: "rpg", profileLabel: "Adventurer Profile", name: "RPG / Fantasy", tag: "The Ancient Order",
         bg: "#FAF7F0", surface: "#FFFFFF", border: "#E8E0D0",
         card: "#FAF7F0", cardBorder: "#E8E0D0",
         accent: "#8B1A1A", accent2: "#6B4C11",
@@ -309,7 +309,7 @@ const APP_THEMES = {
         badgeLabel: "LVL",
     },
     space: {
-        id: "space", name: "Space / Sci-Fi", tag: "Galactic Command",
+        id: "space", profileLabel: "Commander Profile", name: "Space / Sci-Fi", tag: "Galactic Command",
         bg: "#F0F4FF", surface: "#FFFFFF", border: "#D0DCFF",
         card: "#F0F4FF", cardBorder: "#D0DCFF",
         accent: "#1A3A8F", accent2: "#00ACC1",
@@ -342,7 +342,7 @@ const APP_THEMES = {
         badgeLabel: "LVL",
     },
     military: {
-        id: "military", name: "Special Ops", tag: "Call of Duty",
+        id: "military", profileLabel: "Operator Profile", name: "Special Ops", tag: "Call of Duty",
         bg: "#F2F4F0", surface: "#FFFFFF", border: "#D8DCD0",
         card: "#F2F4F0", cardBorder: "#D8DCD0",
         accent: "#2C3E1A", accent2: "#8B8B6B",
@@ -382,7 +382,7 @@ const APP_THEMES = {
         badgeLabel: "LVL",
     },
     sports: {
-        id: "sports", name: "The Grind", tag: "Athlete Journey",
+        id: "sports", profileLabel: "Athlete Profile", name: "The Grind", tag: "Athlete Journey",
         bg: "#F8FAFF", surface: "#FFFFFF", border: "#D8E4F8",
         card: "#F8FAFF", cardBorder: "#D8E4F8",
         accent: "#003087", accent2: "#C4CED4",
@@ -1976,7 +1976,7 @@ function HunterProfile({ rankInfo, totalXP, profile, setProfile, checkIns, setCh
         React.createElement("div", { style: { padding: "52px 24px 20px", background: `linear-gradient(180deg, ${current.color}15 0%, transparent 100%)` } },
             React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "flex-start" } },
                 React.createElement("div", null,
-                    React.createElement("div", { style: { fontSize: 11, color: C.muted, letterSpacing: "0.1em", textTransform: "uppercase" } }, "Hunter Profile"),
+                    React.createElement("div", { style: { fontSize: 11, color: C.muted, letterSpacing: "0.1em", textTransform: "uppercase" } }, (APP_THEMES[themeId] || APP_THEMES.solo).profileLabel),
                     React.createElement("div", { style: { fontSize: 28, fontWeight: 800, marginTop: 4, letterSpacing: "-0.02em" } }, profile.name || "Jesse"),
                     React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 8, marginTop: 6 } },
                         React.createElement("span", { style: { fontSize: 12, padding: "3px 10px", borderRadius: 20, background: current.color + "33", color: current.color, fontWeight: 700, border: `1px solid ${current.color}55` } },
@@ -2015,12 +2015,12 @@ function HunterProfile({ rankInfo, totalXP, profile, setProfile, checkIns, setCh
                     React.createElement("div", { style: { fontSize: 10, color: C.muted, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 5 } }, lbl),
                     React.createElement("input", { value: draft[k] || "", onChange: e => setDraft(p => (Object.assign(Object.assign({}, p), { [k]: e.target.value }))), placeholder: `Enter ${lbl.toLowerCase()}`, style: { width: "100%", padding: "10px 14px", borderRadius: 10, background: C.input, border: `1.5px solid ${C.inputBorder}`, color: C.text, fontSize: 14, outline: "none", fontFamily: "inherit" } })))),
                 React.createElement("div", { style: { fontSize: 10, color: current.color, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 10, marginTop: 16 } }, "Body"),
-                [["weight", "Weight (lbs)"], ["bodyFat", "Body Fat %"], ["chest", "Chest (in)"], ["waist", "Waist (in)"], ["arms", "Arms (in)"], ["shoulders", "Shoulders (in)"]].map(([k, lbl]) => (React.createElement("div", { key: k, style: { marginBottom: 10 } },
+                [["weight", "Weight (lbs)"], ["chest", "Chest (in)"], ["waist", "Waist (in)"], ["arms", "Arms (in)"], ["shoulders", "Shoulders (in)"]].map(([k, lbl]) => (React.createElement("div", { key: k, style: { marginBottom: 10 } },
                     React.createElement("div", { style: { fontSize: 10, color: C.muted, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 5 } }, lbl),
-                    React.createElement("input", { value: draft[k] || "", onChange: e => setDraft(p => (Object.assign(Object.assign({}, p), { [k]: e.target.value }))), placeholder: `Enter ${lbl.toLowerCase()}`, type: k === "weight" || k === "bodyFat" ? "number" : "text", style: { width: "100%", padding: "10px 14px", borderRadius: 10, background: C.input, border: `1.5px solid ${C.inputBorder}`, color: C.text, fontSize: 14, outline: "none", fontFamily: "inherit" } })))),
+                    React.createElement("input", { value: draft[k] || "", onChange: e => setDraft(p => (Object.assign(Object.assign({}, p), { [k]: e.target.value }))), placeholder: `Enter ${lbl.toLowerCase()}`, type: k === "weight" ? "number" : "text", style: { width: "100%", padding: "10px 14px", borderRadius: 10, background: C.input, border: `1.5px solid ${C.inputBorder}`, color: C.text, fontSize: 14, outline: "none", fontFamily: "inherit" } })))),
                 React.createElement("div", { style: { fontSize: 11, color: C.muted, padding: "10px 0 4px", lineHeight: 1.5 } }, "Strength PRs are tracked automatically when you log sets during a workout."),
                 React.createElement("button", { onClick: () => { setProfile(draft); setEditingProfile(false); }, style: { width: "100%", padding: "12px", borderRadius: 10, background: current.color, border: "none", color: "#000", fontSize: 14, fontWeight: 700, cursor: "pointer", marginTop: 6 } }, "Save Stats"))) : (React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 10 } },
-                React.createElement("div", { style: { display: "flex", gap: 8 } }, [["weight", "lbs", "Weight"], ["bodyFat", "%", "Body Fat"], ["age", "yrs", "Age"]].map(([k, unit, lbl]) => (React.createElement("div", { key: k, style: { flex: 1, background: C.card, borderRadius: 14, padding: "12px 10px", border: "1.5px solid #1e1e1e", textAlign: "center" } },
+                React.createElement("div", { style: { display: "flex", gap: 8 } }, [["weight", "lbs", "Weight"], ["age", "yrs", "Age"]].map(([k, unit, lbl]) => (React.createElement("div", { key: k, style: { flex: 1, background: C.card, borderRadius: 14, padding: "12px 10px", border: "1.5px solid #1e1e1e", textAlign: "center" } },
                     React.createElement("div", { style: { fontSize: profile[k] ? 18 : 13, fontWeight: 700, color: profile[k] ? current.color : C.sub } }, profile[k] || "—"),
                     React.createElement("div", { style: { fontSize: 9, color: C.muted, marginTop: 2, textTransform: "uppercase", letterSpacing: "0.06em" } },
                         profile[k] ? unit + " " : "",
@@ -3413,7 +3413,7 @@ function WorkoutApp() {
     const [themeId, setThemeId] = useState("solo");
     const [intensity, setIntensity] = useState("Moderate");
     const [totalXP, setTotalXP] = useState(0);
-    const [profile, setProfile] = useState({ name: "Jesse", weight: "", height: "", age: "", bodyFat: "", chest: "", waist: "", arms: "", shoulders: "" });
+    const [profile, setProfile] = useState({ name: "Jesse", weight: "", height: "", age: "", chest: "", waist: "", arms: "", shoulders: "" });
     const [checkIns, setCheckIns] = useState([]);
     const [xpEvents, setXpEvents] = useState([]);
     const [cardioHistory, setCardioHistory] = useState([]);
@@ -3774,7 +3774,7 @@ function WorkoutApp() {
     if (showWelcome) {
         return (React.createElement(React.Fragment, null,
             React.createElement(WelcomeScreen, { onComplete: ({ name, goal, days, themeId: chosenTheme }) => {
-                    const newProfile = { name, goal, weight: "", height: "", age: "", bodyFat: "", chest: "", waist: "", arms: "", shoulders: "" };
+                    const newProfile = { name, goal, weight: "", height: "", age: "", chest: "", waist: "", arms: "", shoulders: "" };
                     setProfile(newProfile);
                     setDaysPerWeek(days);
                     setCustomSchedule(generateSchedule(days));
@@ -4202,7 +4202,7 @@ function WorkoutApp() {
                 React.createElement("div", { style: { fontSize: 11, color: C.muted, marginTop: 2 } }, showXPToast.label)))),
         activeTab === "profile" && (React.createElement(HunterProfile, { rankInfo: rankInfo, totalXP: totalXP, profile: profile, setProfile: setProfile, checkIns: checkIns, setCheckIns: setCheckIns, weeklyCheckinDone: weeklyCheckinDone, xpEvents: xpEvents, awardXP: awardXP, intensity: intensity, cardioHistory: cardioHistory, exercisePRs: exercisePRs, workoutHistory: workoutHistory, setShowCardioLog: setShowCardioLog, setShowWorkoutLog: setShowWorkoutLog, onResetStats: () => {
                 setTotalXP(0);
-                setProfile({ name: profile.name, goal: profile.goal, weight: "", height: "", age: "", bodyFat: "", chest: "", waist: "", arms: "", shoulders: "" });
+                setProfile({ name: profile.name, goal: profile.goal, weight: "", height: "", age: "", chest: "", waist: "", arms: "", shoulders: "" });
                 setCheckIns([]);
                 setXpEvents([]);
                 setCardioHistory([]);
