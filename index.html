@@ -1,4 +1,4 @@
-<!DOCTYPE html><!-- v20260329-153207 -->
+<!DOCTYPE html><!-- v20260329-205029 -->
 
 <html lang="en">
 <head>
@@ -16,9 +16,9 @@
   <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{height:100%;touch-action:manipulation}
-    body{height:100%;overflow:hidden;background:#FFFFFF;touch-action:manipulation}
-    #root{height:100%}
+    html,body{height:100%;touch-action:manipulation}
+    body{overflow-x:hidden;background:#FFFFFF}
+    #root{min-height:100%;display:flex;flex-direction:column}
     ::-webkit-scrollbar{display:none}
     input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
   </style>
@@ -3322,7 +3322,7 @@ function WelcomeScreen({ onComplete }) {
     const submitSetup = () => setStep(3);
     const submitTheme = () => onComplete({ name: name.trim(), goal, days, themeId });
     const accentColor = ((_a = APP_THEMES[themeId]) === null || _a === void 0 ? void 0 : _a.accent) || "#FF6B35";
-    return (React.createElement("div", { style: { minHeight: "100dvh", background: "#0A0A0A", overflowY: "auto", fontFamily: "'DM Sans','Helvetica Neue',sans-serif", maxWidth: 420, margin: "0 auto" } },
+    return (React.createElement("div", { style: { minHeight: "100vh", background: "#0A0A0A", overflowY: "auto", fontFamily: "'DM Sans','Helvetica Neue',sans-serif", maxWidth: 420, margin: "0 auto" } },
         React.createElement("div", { style: { padding: "60px 28px 120px" } },
             React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 48 } },
                 React.createElement("div", null,
@@ -3766,7 +3766,7 @@ function WorkoutApp() {
     };
     if (!storageReady) {
         return (React.createElement(React.Fragment, null,
-            React.createElement("div", { style: { height: "100dvh", background: "#0A0A0A", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", fontFamily: "'DM Sans',sans-serif" } },
+            React.createElement("div", { style: { height: "100vh", background: "#0A0A0A", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", fontFamily: "'DM Sans',sans-serif" } },
                 React.createElement(LevelUpLogo, { accent: "#FF6B35", size: 0.9, showTagline: false }),
                 React.createElement("div", { style: { fontSize: 12, color: "#444", letterSpacing: "0.1em", textTransform: "uppercase" } }, "Loading...")),
             showSplash && React.createElement(QuoteSplash, { onDone: () => setShowSplash(false) })));
@@ -3800,7 +3800,7 @@ function WorkoutApp() {
                 } }),
             React.createElement(BrowserBanner, null)));
     }
-    return (React.createElement("div", { style: { height: "100dvh", background: TH.bg, color: TH.text, fontFamily: "'DM Sans','Helvetica Neue',sans-serif", maxWidth: 420, margin: "0 auto", display: "flex", flexDirection: "column", position: "relative" } },
+    return (React.createElement("div", { style: { height: "100vh", background: TH.bg, color: TH.text, fontFamily: "'DM Sans','Helvetica Neue',sans-serif", maxWidth: 420, margin: "0 auto", display: "flex", flexDirection: "column", position: "relative" } },
         React.createElement("div", { style: { position: "absolute", inset: 0, pointerEvents: "none", zIndex: 0, background: `radial-gradient(ellipse at 20% 0%, ${TH.accent}12 0%, transparent 60%), radial-gradient(ellipse at 80% 100%, ${TH.accent2}0d 0%, transparent 60%)` } }),
         React.createElement(BrowserBanner, null),
         showSharePrompt && lastWorkoutSummary && (React.createElement("div", { style: { position: "fixed", inset: 0, zIndex: 500, display: "flex", alignItems: "flex-end", justifyContent: "center", background: "rgba(0,0,0,0.5)", backdropFilter: "blur(6px)", maxWidth: 420, margin: "0 auto" } },
