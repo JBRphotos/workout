@@ -1,4 +1,4 @@
-<!DOCTYPE html><!-- v20260329-205901 -->
+<!DOCTYPE html><!-- v20260329-212220 -->
 
 <html lang="en">
 <head>
@@ -16,22 +16,15 @@
   <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%;touch-action:manipulation;background:#FFFFFF}
-    #root{height:100%;display:flex;flex-direction:column}
-    @media all and (display-mode:standalone){
-      body{overflow:hidden}
-      #root{overflow:hidden}
-    }
-    @media not all and (display-mode:standalone){
-      html,body{height:auto;min-height:100%}
-      #root{height:auto;min-height:100vh}
-    }
+    html,body{touch-action:manipulation;background:#FFFFFF}
+    /* #root fills viewport via position:fixed — works in both PWA and browser */
+    #root{position:fixed;inset:0;overflow:hidden}
     ::-webkit-scrollbar{display:none}
     input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
   </style>
 </head>
 <body>
-  <div id="root"><div style="padding:40px;font-family:sans-serif;color:#999">Loading...</div></div>
+  <div id="root"></div>
   <script>const { useState, useRef, useEffect } = React;
 // ── XP + LEVEL SYSTEM ────────────────────────────────────────────────────────
 // XP rewards scale with intensity. Each entry: { Light, Moderate, Hard, description }
@@ -4239,7 +4232,7 @@ try {
     ReactDOM.createRoot(document.getElementById("root")).render(React.createElement(WorkoutApp));
 }
 catch (e) {
-    document.getElementById("root").innerHTML = "<pre style='padding:20px;color:red'>Error: " + e.message + "\n" + e.stack + "</pre>";
+    document.getElementById("root").innerHTML = "<pre style='padding:20px;color:red;white-space:pre-wrap'>Error: " + e.message + "</pre>";
 }
 </script>
 </body>
