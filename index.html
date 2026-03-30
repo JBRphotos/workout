@@ -1,4 +1,4 @@
-<!DOCTYPE html><!-- v20260330-195350 -->
+<!DOCTYPE html><!-- v20260330-200227 -->
 
 <html lang="en">
 <head>
@@ -17,7 +17,14 @@
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     html,body{touch-action:manipulation;background:#0A0A0A}
-    #root{position:fixed;top:0;left:0;right:0;bottom:0;overflow:hidden}
+    /* PWA: fixed fullscreen */
+    @media all and (display-mode:standalone){
+      #root{position:fixed;top:0;left:0;right:0;bottom:0;overflow:hidden}
+    }
+    /* Browser: normal flow so nav bar visible */
+    @media not all and (display-mode:standalone){
+      #root{position:relative;min-height:100vh;overflow:hidden}
+    }
     ::-webkit-scrollbar{display:none}
     input[type=number]::-webkit-inner-spin-button,
     input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
