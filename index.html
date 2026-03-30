@@ -1,4 +1,4 @@
-<!DOCTYPE html><!-- v20260330-193308 -->
+<!DOCTYPE html><!-- v20260330-194229 -->
 
 <html lang="en">
 <head>
@@ -16,14 +16,84 @@
   <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html,body{touch-action:manipulation;background:#0A0A0A}
-    #root{position:fixed;top:0;left:0;right:0;bottom:0;overflow:hidden}
+    html{background:#0A0A0A;touch-action:manipulation}
+    body{
+      background:#0A0A0A;
+      touch-action:manipulation;
+      /* Extend background into safe areas */
+      padding-bottom:env(safe-area-inset-bottom);
+    }
+    #root{
+      position:fixed;
+      top:0;
+      left:0;
+      right:0;
+      /* Extend to bottom of screen including home indicator area */
+      bottom:0;
+      overflow:hidden;
+      background:#0A0A0A;
+    }
     ::-webkit-scrollbar{display:none}
-    input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
+
+```
+/* Fallback screen */
+#fallback{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:#0A0A0A;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  font-family:'DM Sans','Helvetica Neue',sans-serif;
+  padding:40px 32px;
+  text-align:center;
+  color:#fff;
+}
+```
+
   </style>
 </head>
 <body>
   <div id="root"></div>
+
+  <!-- Fallback shown if React fails to mount (Safari browser mode) -->
+
+  <div id="fallback">
+    <svg width="52" height="52" viewBox="0 0 34 34" fill="none" stroke="#FF6B35" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style="margin-bottom:24px">
+      <line x1="17" y1="28" x2="17" y2="6"/>
+      <polyline points="12,11 17,5 22,11"/>
+      <path d="M6 18 Q17 14 28 18"/>
+      <rect x="1" y="14" width="5" height="8" rx="2" fill="#FF6B35" stroke="none"/>
+      <rect x="28" y="14" width="5" height="8" rx="2" fill="#FF6B35" stroke="none"/>
+    </svg>
+    <div style="font-size:24px;font-weight:900;letter-spacing:-0.02em;margin-bottom:10px">Level Up</div>
+    <div style="font-size:15px;color:#888;line-height:1.6;margin-bottom:36px">
+      This app works best installed to your home screen. Open this page in <strong style="color:#ccc">Safari</strong>, then tap the share button and select <strong style="color:#ccc">Add to Home Screen</strong>.
+    </div>
+    <div style="background:#1a1a1a;border-radius:16px;padding:20px 24px;border:1px solid #333;margin-bottom:16px;width:100%">
+      <div style="font-size:12px;color:#555;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px">Step 1</div>
+      <div style="font-size:14px;color:#ccc">Open in <strong style="color:#fff">Safari</strong> on your iPhone</div>
+    </div>
+    <div style="background:#1a1a1a;border-radius:16px;padding:20px 24px;border:1px solid #333;margin-bottom:16px;width:100%">
+      <div style="font-size:12px;color:#555;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px">Step 2</div>
+      <div style="font-size:14px;color:#ccc">Tap <strong style="color:#fff">Share</strong> → <strong style="color:#fff">Add to Home Screen</strong></div>
+    </div>
+    <div style="background:#1a1a1a;border-radius:16px;padding:20px 24px;border:1px solid #333;width:100%">
+      <div style="font-size:12px;color:#555;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px">Step 3</div>
+      <div style="font-size:14px;color:#ccc">Launch from your <strong style="color:#fff">Home Screen</strong></div>
+    </div>
+  </div>
+
+  <script>
+    // If React CDN failed to load, show fallback immediately
+    if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
+      document.getElementById('fallback').style.display = 'flex';
+    }
+  </script>
+
   <script>const { useState, useRef, useEffect } = React;
 // ── XP + LEVEL SYSTEM ────────────────────────────────────────────────────────
 // XP rewards scale with intensity. Each entry: { Light, Moderate, Hard, description }
@@ -4806,8 +4876,10 @@ try {
     ReactDOM.createRoot(document.getElementById("root")).render(React.createElement(WorkoutApp));
 }
 catch (e) {
-    document.getElementById("root").innerHTML = "<pre style='padding:20px;color:red;white-space:pre-wrap'>Error: " + e.message + "</pre>";
+    document.getElementById("root").innerHTML = "";
+    document.getElementById("fallback").style.display = "flex";
 }
 </script>
+
 </body>
 </html>
