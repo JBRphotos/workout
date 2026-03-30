@@ -1,4 +1,4 @@
-<!DOCTYPE html><!-- v20260330-130052 -->
+<!DOCTYPE html><!-- v20260330-182825 -->
 
 <html lang="en">
 <head>
@@ -2419,9 +2419,13 @@ function HunterProfile({ rankInfo, totalXP, profile, setProfile, checkIns, setCh
                         React.createElement("button", { onClick: () => { onResetStats === null || onResetStats === void 0 ? void 0 : onResetStats(); setResetConfirm(false); }, style: { flex: 1, padding: "11px", borderRadius: 10, background: "#F87171", border: "none", color: "#000", fontSize: 13, fontWeight: 700, cursor: "pointer" } }, "Yes, Reset"))))))));
 }
 // ── WORKOUT LOG ───────────────────────────────────────────────────────────────
-function WorkoutLog({ workoutHistory, onClose, accentColor, onShare }) {
+function WorkoutLog({ workoutHistory, onClose, accentColor, onShare, onUpdateNote }) {
     const C = useC();
     const [expanded, setExpanded] = useState(null);
+    const [editingNote, setEditingNote] = useState(null); // index being edited
+    const [noteText, setNoteText] = useState("");
+    const [noteSearch, setNoteSearch] = useState("");
+    const [showNoteSug, setShowNoteSug] = useState(false);
     const accent = accentColor || "#FF6B35";
     const totalSessions = workoutHistory.length;
     const totalSets = workoutHistory.reduce((a, s) => a + (s.setsCompleted || 0), 0);
@@ -2473,10 +2477,56 @@ function WorkoutLog({ workoutHistory, onClose, accentColor, onShare }) {
                             set.weight > 0 ? `${set.weight}lb` : "",
                             set.weight > 0 && set.reps > 0 ? " × " : "",
                             set.reps > 0 ? `${set.reps}` : ""))))))))),
+                    s.note && editingNote !== i && (React.createElement("div", { style: { marginTop: 10, padding: "9px 12px", background: color + "12", borderRadius: 10, border: `1px solid ${color}22` } },
+                        React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 } },
+                            React.createElement("div", { style: { fontSize: 10, color: color, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em" } }, "Note"),
+                            onUpdateNote && React.createElement("button", { onClick: () => { setEditingNote(i); setNoteText(s.note || ""); }, style: { background: "none", border: "none", color: C.muted, fontSize: 10, cursor: "pointer", textDecoration: "underline" } }, "Edit")),
+                        React.createElement("div", { style: { fontSize: 12, color: C.text, lineHeight: 1.6 } }, s.note))),
+                    onUpdateNote && (editingNote === i || !s.note) && (React.createElement("div", { style: { marginTop: 10, position: "relative" } },
+                        React.createElement("div", { style: { fontSize: 10, color: C.muted, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 6 } }, s.note ? "Edit Note" : "Add Note"),
+                        React.createElement("div", { onClick: () => { setEditingNote(i); setNoteText(s.note || ""); setShowNoteSug(false); }, style: { width: "100%", padding: "9px 12px", borderRadius: 10, background: C.input, border: `1.5px solid ${C.inputBorder}`, color: (editingNote === i ? noteText : s.note) ? C.text : C.muted, fontSize: 12, lineHeight: 1.5, minHeight: 38, cursor: "text", whiteSpace: "pre-wrap", wordBreak: "break-word" } }, (editingNote === i ? noteText : s.note) || "Add a note about this session..."),
+                        editingNote === i && (React.createElement("div", { style: { position: "fixed", top: 0, left: 0, right: 0, bottom: 0, zIndex: 600, background: "rgba(0,0,0,0.5)", display: "flex", flexDirection: "column", justifyContent: "flex-end" }, onClick: e => { if (e.target === e.currentTarget)
+                                setEditingNote(null); } },
+                            React.createElement("div", { style: { background: C.surface, borderRadius: "20px 20px 0 0", padding: "20px 20px calc(20px + env(safe-area-inset-bottom))", maxHeight: "70vh", display: "flex", flexDirection: "column" } },
+                                React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 } },
+                                    React.createElement("div", { style: { fontSize: 13, fontWeight: 700, color: C.text } }, s.note ? "Edit Note" : "Add Note"),
+                                    React.createElement("button", { onClick: () => { onUpdateNote(i, noteText.trim()); setEditingNote(null); }, style: { background: accent, border: "none", color: "#fff", fontSize: 13, fontWeight: 700, cursor: "pointer", padding: "6px 16px", borderRadius: 8 } }, "Save")),
+                                React.createElement("textarea", { autoFocus: true, value: noteText, onChange: e => {
+                                        setNoteText(e.target.value);
+                                        const words = e.target.value.split(/\s+/);
+                                        const last = words[words.length - 1];
+                                        setNoteSearch(last);
+                                        setShowNoteSug(last.length > 1);
+                                    }, onBlur: () => setTimeout(() => setShowNoteSug(false), 150), placeholder: "Add a note about this session...", style: { flex: 1, width: "100%", padding: "12px", borderRadius: 10, background: C.input, border: `1.5px solid ${C.inputBorder}`, color: C.text, fontSize: 14, outline: "none", fontFamily: "inherit", resize: "none", lineHeight: 1.6, minHeight: 160 } }),
+                                showNoteSug && noteSearch.length > 1 && (() => {
+                                    const sug = LIBRARY.map(e => e.name).filter(n => n.toLowerCase().includes(noteSearch.toLowerCase())).slice(0, 4);
+                                    return sug.length > 0 ? (React.createElement("div", { style: { background: C.card, border: `1px solid ${C.cardBorder}`, borderRadius: 10, marginTop: 8, overflow: "hidden" } }, sug.map(name => (React.createElement("button", { key: name, onMouseDown: () => {
+                                            const words = noteText.split(/\s+/);
+                                            words[words.length - 1] = name;
+                                            setNoteText(words.join(" ") + " ");
+                                            setShowNoteSug(false);
+                                        }, style: { width: "100%", padding: "8px 12px", background: "none", border: "none", borderBottom: `1px solid ${C.cardBorder}`, color: C.text, fontSize: 13, cursor: "pointer", textAlign: "left" } }, name))))) : null;
+                                })(),
+                                React.createElement("button", { onClick: () => setEditingNote(null), style: { marginTop: 10, padding: "10px", borderRadius: 10, background: C.btnBg, border: `1px solid ${C.btnBorder}`, color: C.muted, fontSize: 13, cursor: "pointer", width: "100%" } }, "Cancel")))),
+                        showNoteSug && editingNote === i && noteSearch.length > 1 && (() => {
+                            const sug = LIBRARY.map(e => e.name).filter(n => n.toLowerCase().includes(noteSearch.toLowerCase())).slice(0, 4);
+                            return sug.length > 0 ? (React.createElement("div", { style: { position: "absolute", bottom: "calc(100% - 30px)", left: 0, right: 0, background: C.surface, border: `1.5px solid ${C.cardBorder}`, borderRadius: 10, overflow: "hidden", zIndex: 10, boxShadow: "0 4px 20px rgba(0,0,0,0.15)" } }, sug.map(name => (React.createElement("button", { key: name, onMouseDown: () => {
+                                    const words = noteText.split(/\s+/);
+                                    words[words.length - 1] = name;
+                                    setNoteText(words.join(" ") + " ");
+                                    setShowNoteSug(false);
+                                }, style: { width: "100%", padding: "8px 12px", background: "none", border: "none", borderBottom: `1px solid ${C.cardBorder}`, color: C.text, fontSize: 12, cursor: "pointer", textAlign: "left" } }, name))))) : null;
+                        })(),
+                        editingNote === i && (React.createElement("div", { style: { display: "flex", gap: 8, marginTop: 8 } },
+                            React.createElement("button", { onClick: () => { onUpdateNote(i, noteText.trim()); setEditingNote(null); }, style: { flex: 1, padding: "8px", borderRadius: 9, background: color, border: "none", color: "#fff", fontSize: 12, fontWeight: 700, cursor: "pointer" } }, "Save"),
+                            React.createElement("button", { onClick: () => setEditingNote(null), style: { flex: 1, padding: "8px", borderRadius: 9, background: C.btnBg, border: `1px solid ${C.btnBorder}`, color: C.muted, fontSize: 12, cursor: "pointer" } }, "Cancel"))))),
                     React.createElement("div", { style: { fontSize: 10, color: C.muted, marginTop: 10 } },
                         s.time,
                         " \u00B7 ",
                         s.date),
+                    s.note && (React.createElement("div", { style: { marginTop: 10, padding: "9px 12px", background: color + "12", borderRadius: 10, border: `1px solid ${color}22` } },
+                        React.createElement("div", { style: { fontSize: 10, color: color, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 4 } }, "Note"),
+                        React.createElement("div", { style: { fontSize: 12, color: C.text, lineHeight: 1.6 } }, s.note))),
                     onShare && (React.createElement("button", { onClick: () => onShare(s), style: { marginTop: 12, width: "100%", padding: "9px", borderRadius: 10, background: color + "22", border: `1px solid ${color}44`, color, fontSize: 12, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 6 } },
                         React.createElement("svg", { width: "13", height: "13", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round" },
                             React.createElement("path", { d: "M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" }),
@@ -3936,6 +3986,10 @@ function WorkoutApp() {
     const [workoutTimer, setWorkoutTimer] = useState(0);
     const [workoutEquipment, setWorkoutEquipment] = useState("gym");
     const [cardioMode, setCardioMode] = useState(false);
+    const [manualNote, setManualNote] = useState("");
+    const [noteSearch, setNoteSearch] = useState("");
+    const [showNoteSuggestions, setShowNoteSuggestions] = useState(false);
+    const [noteExpanded, setNoteExpanded] = useState(false);
     // Library
     const [libMode, setLibMode] = useState("exercises");
     const [ptArea, setPtArea] = useState(null);
@@ -4083,6 +4137,8 @@ function WorkoutApp() {
         setWorkoutActive(false);
         setSelectedWorkout(null);
         setActiveTab("home");
+        setManualNote("");
+        setNoteSearch("");
         // ── Save session to workout history ──
         const xpEarned = setsCompleted > 0 ? getXP("WORKOUT_COMPLETE", intensity) + setsCompleted * getXP("SET_COMPLETE", intensity) : 0;
         if (setsCompleted > 0) {
@@ -4097,6 +4153,7 @@ function WorkoutApp() {
                 exercises: Object.keys(byExercise).length > 0 ? byExercise : {},
                 setLogs: Object.assign({}, setLogs),
                 xpEarned,
+                note: manualNote.trim() || null,
             };
             setWorkoutHistory(prev => [sessionRecord, ...prev].slice(0, 50));
             // Show share screen
@@ -4282,7 +4339,9 @@ function WorkoutApp() {
                 setWorkoutHistory(prev => [session, ...prev]);
                 setActiveGuidedWorkout(null);
             } })),
-        showWorkoutLog && (React.createElement(WorkoutLog, { workoutHistory: workoutHistory, onClose: () => setShowWorkoutLog(false), accentColor: TH.accent, onShare: (session) => {
+        showWorkoutLog && (React.createElement(WorkoutLog, { workoutHistory: workoutHistory, onClose: () => setShowWorkoutLog(false), accentColor: TH.accent, onUpdateNote: (idx, note) => {
+                setWorkoutHistory(prev => prev.map((s, i) => i === idx ? Object.assign(Object.assign({}, s), { note }) : s));
+            }, onShare: (session) => {
                 setLastWorkoutSummary({
                     workout: session.workout,
                     duration: session.duration,
@@ -4529,7 +4588,46 @@ function WorkoutApp() {
                         intensityCfg.restLabel)),
                 React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 8 } },
                     activeExercises.map(ex => (React.createElement(ExerciseCard, { key: ex.name, ex: ex, workoutColor: activeColor, completedSets: completedSets, toggleSet: toggleSet, intensity: intensity, setLogs: setLogs, onSetLog: handleSetLog, prData: exercisePRs[ex.name], setCountOverride: setCountOverrides[ex.name], onSetCountChange: (name, count) => setSetCountOverrides(prev => (Object.assign(Object.assign({}, prev), { [name]: count }))) }))),
-                    React.createElement("button", { onClick: endWorkout, style: { width: "100%", padding: "14px", borderRadius: 12, marginTop: 4, background: C.card, border: `1.5px solid ${C.cardBorder}`, color: C.muted, fontSize: 14, fontWeight: 600, cursor: "pointer" } }, "Finish Workout")))),
+                    (() => {
+                        const allNames = LIBRARY.map(e => e.name);
+                        const suggestions = noteSearch.length > 1
+                            ? allNames.filter(n => n.toLowerCase().includes(noteSearch.toLowerCase())).slice(0, 5)
+                            : [];
+                        return (React.createElement("div", { style: { marginTop: 8, position: "relative" } },
+                            React.createElement("div", { style: { fontSize: 10, color: C.muted, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 6 } }, "Session Note"),
+                            React.createElement("div", { onClick: () => setNoteExpanded(true), style: { width: "100%", padding: "10px 12px", borderRadius: 10, background: C.input, border: `1.5px solid ${C.inputBorder}`, color: manualNote ? C.text : C.muted, fontSize: 13, lineHeight: 1.5, minHeight: 44, cursor: "text", whiteSpace: "pre-wrap", wordBreak: "break-word" } }, manualNote || "Add a note — tap to expand..."),
+                            noteExpanded && (React.createElement("div", { style: { position: "fixed", top: 0, left: 0, right: 0, bottom: 0, zIndex: 600, background: "rgba(0,0,0,0.5)", display: "flex", flexDirection: "column", justifyContent: "flex-end" }, onClick: e => { if (e.target === e.currentTarget)
+                                    setNoteExpanded(false); } },
+                                React.createElement("div", { style: { background: C.surface, borderRadius: "20px 20px 0 0", padding: "20px 20px calc(20px + env(safe-area-inset-bottom))", maxHeight: "70vh", display: "flex", flexDirection: "column" } },
+                                    React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 } },
+                                        React.createElement("div", { style: { fontSize: 13, fontWeight: 700, color: C.text } }, "Session Note"),
+                                        React.createElement("button", { onClick: () => setNoteExpanded(false), style: { background: TH.accent, border: "none", color: "#fff", fontSize: 13, fontWeight: 700, cursor: "pointer", padding: "6px 16px", borderRadius: 8 } }, "Done")),
+                                    React.createElement("textarea", { autoFocus: true, value: manualNote, onChange: e => {
+                                            setManualNote(e.target.value);
+                                            const words = e.target.value.split(/\s+/);
+                                            const last = words[words.length - 1];
+                                            setNoteSearch(last);
+                                            setShowNoteSuggestions(last.length > 1);
+                                        }, onBlur: () => setTimeout(() => setShowNoteSuggestions(false), 150), placeholder: "Add a note \u2014 e.g. 'Felt strong on bench, went up 5lb on Bench Press...'", style: { flex: 1, width: "100%", padding: "12px", borderRadius: 10, background: C.input, border: `1.5px solid ${C.inputBorder}`, color: C.text, fontSize: 14, outline: "none", fontFamily: "inherit", resize: "none", lineHeight: 1.6, minHeight: 160 } }),
+                                    showNoteSuggestions && noteSearch.length > 1 && (() => {
+                                        const sug = LIBRARY.map(e => e.name).filter(n => n.toLowerCase().includes(noteSearch.toLowerCase())).slice(0, 5);
+                                        return sug.length > 0 ? (React.createElement("div", { style: { background: C.card, border: `1px solid ${C.cardBorder}`, borderRadius: 10, marginTop: 8, overflow: "hidden" } }, sug.map(name => (React.createElement("button", { key: name, onMouseDown: () => {
+                                                const words = manualNote.split(/\s+/);
+                                                words[words.length - 1] = name;
+                                                setManualNote(words.join(" ") + " ");
+                                                setShowNoteSuggestions(false);
+                                            }, style: { width: "100%", padding: "9px 12px", background: "none", border: "none", borderBottom: `1px solid ${C.cardBorder}`, color: C.text, fontSize: 13, cursor: "pointer", textAlign: "left" } }, name))))) : null;
+                                    })()))),
+                            showNoteSuggestions && suggestions.length > 0 && (React.createElement("div", { style: { position: "absolute", bottom: "calc(100% - 36px)", left: 0, right: 0, background: C.surface, border: `1.5px solid ${C.cardBorder}`, borderRadius: 10, overflow: "hidden", zIndex: 10, boxShadow: "0 4px 20px rgba(0,0,0,0.15)" } }, suggestions.map(name => (React.createElement("button", { key: name, onMouseDown: () => {
+                                    // Replace last partial word with the suggestion
+                                    const words = manualNote.split(/\s+/);
+                                    words[words.length - 1] = name;
+                                    setManualNote(words.join(" ") + " ");
+                                    setShowNoteSuggestions(false);
+                                    setNoteSearch("");
+                                }, style: { width: "100%", padding: "9px 12px", background: "none", border: "none", borderBottom: `1px solid ${C.cardBorder}`, color: C.text, fontSize: 12, cursor: "pointer", textAlign: "left", display: "block" } }, name)))))));
+                    })(),
+                    React.createElement("button", { onClick: endWorkout, style: { width: "100%", padding: "14px", borderRadius: 12, marginTop: 8, background: C.card, border: `1.5px solid ${C.cardBorder}`, color: C.muted, fontSize: 14, fontWeight: 600, cursor: "pointer" } }, "Finish Workout")))),
             workoutPhase === "cardio" && (React.createElement(CardioLogger, { workoutColor: activeColor, onComplete: (data) => {
                     setCardioHistory(prev => [Object.assign(Object.assign({}, data), { date: new Date().toLocaleDateString(), workoutContext: selectedWorkout }), ...prev]);
                     awardXP(data.xp, `${data.type} — ${data.distance || "?"} mi ${data.location}`);
