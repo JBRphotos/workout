@@ -1,4 +1,4 @@
-<!DOCTYPE html><!-- v20260329-212805 -->
+<!DOCTYPE html><!-- v20260330-130052 -->
 
 <html lang="en">
 <head>
@@ -16,30 +16,10 @@
   <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{
-      height:100%;
-      height:-webkit-fill-available;
-      touch-action:manipulation;
-      background:#FFFFFF;
-    }
-    body{
-      min-height:100%;
-      min-height:-webkit-fill-available;
-      touch-action:manipulation;
-      background:#FFFFFF;
-      overflow:hidden;
-    }
-    #root{
-      position:fixed;
-      top:0;
-      left:0;
-      right:0;
-      bottom:0;
-      overflow:hidden;
-    }
+    html,body{touch-action:manipulation;background:#FFFFFF}
+    #root{position:fixed;top:0;left:0;right:0;bottom:0;overflow:hidden}
     ::-webkit-scrollbar{display:none}
-    input[type=number]::-webkit-inner-spin-button,
-    input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
+    input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
   </style>
 </head>
 <body>
@@ -705,6 +685,161 @@ const GROUP_COLORS = {
 };
 const GROUPS = ["All", "Chest", "Back", "Shoulders", "Biceps", "Triceps", "Legs", "Core"];
 const EQUIPMENTS = ["Any", "Barbell", "Dumbbell", "Kettlebell", "Cable", "Machine", "Bodyweight"];
+// ── PREBUILT WORKOUT TEMPLATES ───────────────────────────────────────────────
+const WORKOUT_TEMPLATES = {
+    circuit: {
+        id: "circuit", label: "Circuit", color: "#52E3A0",
+        description: "Back-to-back exercises with minimal rest. Builds strength and endurance simultaneously.",
+        icon: (c, s = 22) => React.createElement("svg", { width: s, height: s, viewBox: "0 0 24 24", fill: "none", stroke: c, strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" },
+            React.createElement("path", { d: "M17 2l4 4-4 4" }),
+            React.createElement("path", { d: "M3 11V9a4 4 0 0 1 4-4h14" }),
+            React.createElement("path", { d: "M7 22l-4-4 4-4" }),
+            React.createElement("path", { d: "M21 13v2a4 4 0 0 1-4 4H3" })),
+        restBetweenExercises: 15,
+        restBetweenRounds: 60,
+        templates: [
+            { id: "circuit-fullbody", name: "Full Body Circuit", difficulty: "Intermediate", duration: "25-35 min", rounds: 4,
+                exercises: [
+                    { name: "Push-Ups", work: 40, unit: "sec" },
+                    { name: "Squat", work: 40, unit: "sec" },
+                    { name: "Plank", work: 30, unit: "sec" },
+                    { name: "Lunge", work: 40, unit: "sec" },
+                    { name: "Mountain Climbers", work: 30, unit: "sec" },
+                    { name: "Glute Bridge", work: 40, unit: "sec" },
+                ] },
+            { id: "circuit-upper", name: "Upper Body Circuit", difficulty: "Intermediate", duration: "20-25 min", rounds: 4,
+                exercises: [
+                    { name: "Push-Ups", work: 40, unit: "sec" },
+                    { name: "Pike Push-Ups", work: 30, unit: "sec" },
+                    { name: "Tricep Dips (Chair)", work: 40, unit: "sec" },
+                    { name: "Superman Hold", work: 30, unit: "sec" },
+                    { name: "Shoulder Tap", work: 40, unit: "sec" },
+                ] },
+            { id: "circuit-lower", name: "Lower Body Circuit", difficulty: "Intermediate", duration: "20-25 min", rounds: 4,
+                exercises: [
+                    { name: "Squat", work: 45, unit: "sec" },
+                    { name: "Lunge", work: 40, unit: "sec" },
+                    { name: "Glute Bridge", work: 40, unit: "sec" },
+                    { name: "Wall Sit", work: 45, unit: "sec" },
+                    { name: "Calf Raises", work: 40, unit: "sec" },
+                ] },
+            { id: "circuit-core", name: "Core Blast Circuit", difficulty: "Intermediate", duration: "15-20 min", rounds: 3,
+                exercises: [
+                    { name: "Plank", work: 45, unit: "sec" },
+                    { name: "Crunch", work: 40, unit: "sec" },
+                    { name: "Bicycle Crunch", work: 40, unit: "sec" },
+                    { name: "Leg Raise", work: 40, unit: "sec" },
+                    { name: "Russian Twists", work: 40, unit: "sec" },
+                    { name: "Dead Bug", work: 30, unit: "sec" },
+                ] },
+            { id: "circuit-dumbbell", name: "Dumbbell Circuit", difficulty: "Advanced", duration: "30-40 min", rounds: 4,
+                exercises: [
+                    { name: "Dumbbell Thruster", work: 40, unit: "sec" },
+                    { name: "Renegade Row", work: 40, unit: "sec" },
+                    { name: "Romanian Deadlift", work: 40, unit: "sec" },
+                    { name: "Lateral Raises", work: 30, unit: "sec" },
+                    { name: "DB Curl to Press", work: 40, unit: "sec" },
+                ] },
+        ]
+    },
+    hiit: {
+        id: "hiit", label: "HIIT", color: "#FF6B35",
+        description: "High intensity work intervals followed by short rest. Maximum calorie burn in minimum time.",
+        icon: (c, s = 22) => React.createElement("svg", { width: s, height: s, viewBox: "0 0 24 24", fill: "none", stroke: c, strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" },
+            React.createElement("polyline", { points: "13 2 3 14 12 14 11 22 21 10 12 10 13 2" })),
+        workTime: 20, restTime: 10,
+        templates: [
+            { id: "hiit-bodyweight", name: "Bodyweight Burn", difficulty: "Intermediate", duration: "20 min", rounds: 8,
+                exercises: [
+                    { name: "Burpee", work: 20, rest: 10 },
+                    { name: "High Knees", work: 20, rest: 10 },
+                    { name: "Jump Squat", work: 20, rest: 10 },
+                    { name: "Push-Ups", work: 20, rest: 10 },
+                    { name: "Mountain Climbers", work: 20, rest: 10 },
+                    { name: "Jumping Lunge", work: 20, rest: 10 },
+                ] },
+            { id: "hiit-cardio", name: "Cardio Sprint", difficulty: "Advanced", duration: "20 min", rounds: 8,
+                exercises: [
+                    { name: "Sprint in Place", work: 30, rest: 15 },
+                    { name: "Jump Rope", work: 30, rest: 15 },
+                    { name: "Broad Jump", work: 30, rest: 15 },
+                    { name: "Lateral Shuffle", work: 30, rest: 15 },
+                    { name: "Box Jump", work: 30, rest: 15 },
+                ] },
+            { id: "hiit-athletic", name: "Athletic Power", difficulty: "Advanced", duration: "25 min", rounds: 6,
+                exercises: [
+                    { name: "Power Clean", work: 30, rest: 15 },
+                    { name: "Jump Squat", work: 30, rest: 15 },
+                    { name: "Plyometric Push-Ups", work: 30, rest: 15 },
+                    { name: "Broad Jump", work: 30, rest: 15 },
+                    { name: "Tuck Jump", work: 30, rest: 15 },
+                    { name: "Explosive Row", work: 30, rest: 15 },
+                ] },
+            { id: "hiit-noequip", name: "No Equipment", difficulty: "Beginner", duration: "15 min", rounds: 6,
+                exercises: [
+                    { name: "Jumping Jack", work: 20, rest: 10 },
+                    { name: "Squat", work: 20, rest: 10 },
+                    { name: "Push-Ups", work: 20, rest: 10 },
+                    { name: "High Knees", work: 20, rest: 10 },
+                    { name: "Plank", work: 20, rest: 10 },
+                ] },
+            { id: "hiit-kettlebell", name: "Kettlebell HIIT", difficulty: "Advanced", duration: "25 min", rounds: 6,
+                exercises: [
+                    { name: "KB Swing", work: 30, rest: 15 },
+                    { name: "KB Clean and Press", work: 30, rest: 15 },
+                    { name: "KB Goblet Squat", work: 30, rest: 15 },
+                    { name: "KB Snatch", work: 30, rest: 15 },
+                    { name: "KB Turkish Get-Up", work: 40, rest: 20 },
+                ] },
+        ]
+    },
+    norwegian: {
+        id: "norwegian", label: "Norwegian 4x4", color: "#A855F7",
+        description: "4 minutes at 85-95% max HR, 3 minutes active recovery at ~70% max HR. Repeat 4 times. One of the most effective cardio protocols for VO2 max.",
+        icon: (c, s = 22) => React.createElement("svg", { width: s, height: s, viewBox: "0 0 24 24", fill: "none", stroke: c, strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" },
+            React.createElement("path", { d: "M22 12h-4l-3 9L9 3l-3 9H2" })),
+        workTime: 240, restTime: 180, rounds: 4,
+        templates: [
+            { id: "norw-running", name: "Running", difficulty: "Advanced", duration: "28 min", cardioType: "running", equipment: "Outdoor or treadmill" },
+            { id: "norw-bike", name: "Bike / Row", difficulty: "Advanced", duration: "28 min", cardioType: "cycling", equipment: "Stationary bike or rowing machine" },
+            { id: "norw-elliptical", name: "Elliptical", difficulty: "Intermediate", duration: "28 min", cardioType: "elliptical", equipment: "Elliptical machine" },
+            { id: "norw-incline", name: "Treadmill Incline", difficulty: "Advanced", duration: "28 min", cardioType: "walking", equipment: "Treadmill at 8-12% incline" },
+            { id: "norw-jumprope", name: "Jump Rope", difficulty: "Advanced", duration: "28 min", cardioType: "jumping", equipment: "Jump rope" },
+        ]
+    },
+    tabata: {
+        id: "tabata", label: "Tabata", color: "#F7DC6F",
+        description: "20 seconds maximum effort, 10 seconds rest, 8 rounds = 4 minutes. Pure intensity.",
+        icon: (c, s = 22) => React.createElement("svg", { width: s, height: s, viewBox: "0 0 24 24", fill: "none", stroke: c, strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" },
+            React.createElement("circle", { cx: "12", cy: "13", r: "8" }),
+            React.createElement("polyline", { points: "12 9 12 13 15 15" }),
+            React.createElement("path", { d: "M9 2h6" }),
+            React.createElement("line", { x1: "12", y1: "2", x2: "12", y2: "5" })),
+        workTime: 20, restTime: 10, rounds: 8,
+        templates: [
+            { id: "tab-classic", name: "Classic Bodyweight", difficulty: "Intermediate", duration: "20 min", sets: [
+                    { name: "Burpee" }, { name: "Mountain Climbers" }, { name: "Jump Squat" }, { name: "Push-Ups" },
+                    { name: "High Knees" }, { name: "Plank Tap" },
+                ] },
+            { id: "tab-core", name: "Core Focus", difficulty: "Intermediate", duration: "16 min", sets: [
+                    { name: "Crunch" }, { name: "Bicycle Crunch" }, { name: "Leg Raise" }, { name: "Plank" },
+                    { name: "Russian Twists" }, { name: "V-Ups" },
+                ] },
+            { id: "tab-lower", name: "Lower Body", difficulty: "Intermediate", duration: "16 min", sets: [
+                    { name: "Jump Squat" }, { name: "Lunge" }, { name: "Glute Bridge" }, { name: "Wall Sit" },
+                    { name: "Calf Raises" }, { name: "Sumo Squat" },
+                ] },
+            { id: "tab-upper", name: "Upper Body", difficulty: "Intermediate", duration: "16 min", sets: [
+                    { name: "Push-Ups" }, { name: "Pike Push-Ups" }, { name: "Tricep Dips (Chair)" }, { name: "Shoulder Tap" },
+                    { name: "Diamond Push-Ups" }, { name: "Superman Hold" },
+                ] },
+            { id: "tab-fullbody", name: "Full Body Burn", difficulty: "Advanced", duration: "24 min", sets: [
+                    { name: "Burpee" }, { name: "Jump Squat" }, { name: "Push-Ups" }, { name: "Mountain Climbers" },
+                    { name: "Jumping Lunge" }, { name: "Plank to Downdog" },
+                ] },
+        ]
+    },
+};
 // ── PHYSICAL THERAPY DATA ────────────────────────────────────────────────────
 const PT_ICONS = {
     shoulder: (c, s = 24) => React.createElement("svg", { width: s, height: s, viewBox: "0 0 28 28", fill: "none", stroke: c, strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" },
@@ -1026,6 +1161,30 @@ const FORM_GUIDES = {
     "V-Ups": { cues: ["Lie flat, arms and legs extended", "Simultaneously lift legs and upper body — meet in the middle", "Keep legs straight — bend at the hip not the knee", "Lower both slowly to complete one rep"], muscles: ["Abs", "Hip Flexors"], tip: "A progression from crunches — if your lower back lifts off when you lower, reduce range" },
     "Russian Twists": { cues: ["Sit with knees bent, lean back to 45°", "Rotate the torso from side to side", "Feet can be on floor or raised for more difficulty", "Touch hands or a plate to the floor on each side"], muscles: ["Obliques", "Abs", "Core"], tip: "Add a pause on each side to increase the challenge — the rotation should come from the torso, not just the arms" },
     "L-Sit Pull-Ups": { cues: ["Hang from bar and raise legs to parallel with floor", "Hold the L position throughout the pull", "Pull chin to bar while keeping legs up", "Start with just the L-sit hold before combining"], muscles: ["Lats", "Biceps", "Abs", "Hip Flexors"], tip: "One movement that trains pulling strength and core simultaneously — extremely efficient" },
+    "Bicycle Crunch": { cues: ["Lie on back, hands behind head, knees bent", "Bring opposite elbow to opposite knee", "Extend the other leg straight and low", "Rotate from the torso — not just the elbow"], muscles: ["Obliques", "Abs"], tip: "Slow the movement down — speed kills the stimulus and lets momentum take over" },
+    "Crunch": { cues: ["Lie on back, knees bent, feet flat", "Hands behind head or crossed on chest", "Lift shoulder blades off the floor — not your full back", "Lower with control — don't just drop"], muscles: ["Abs"], tip: "Think about shortening the distance between your ribcage and hips, not sitting up" },
+    "High Knees": { cues: ["Run in place, driving knees to hip height", "Pump arms in opposition to legs", "Stay on the balls of your feet", "Keep your core braced throughout"], muscles: ["Hip Flexors", "Quads", "Core", "Cardio"], tip: "The faster the pace, the higher the heart rate — great as a warm-up or work interval" },
+    "Jumping Jack": { cues: ["Start with feet together, arms at sides", "Jump feet out and raise arms overhead simultaneously", "Jump back to starting position", "Keep a soft bend in the knees on landing"], muscles: ["Full Body", "Cardio"], tip: "Classic warm-up movement — focus on landing softly to protect your knees" },
+    "Jumping Lunge": { cues: ["Start in a split stance lunge position", "Jump and switch legs in the air", "Land in lunge with opposite leg forward", "Absorb landing through the heel and midfoot"], muscles: ["Quads", "Glutes", "Hamstrings", "Cardio"], tip: "Keep your torso upright and land as quietly as possible to protect the knees" },
+    "Lunge": { cues: ["Step forward, lower back knee toward the floor", "Front shin stays vertical — knee over ankle", "Push off the front heel to return", "Keep your torso tall and upright throughout"], muscles: ["Quads", "Glutes", "Hamstrings"], tip: "Think about dropping down, not stepping forward — it keeps the knee safer" },
+    "Leg Raise": { cues: ["Lie flat, hands under your lower back for support", "Raise legs to 90° keeping them straight", "Lower slowly — stop just before they touch the floor", "Press lower back into the floor throughout"], muscles: ["Abs", "Hip Flexors"], tip: "The slower the lower, the harder the ab work — don't rush the descent" },
+    "Plank Tap": { cues: ["Start in high plank position", "Tap opposite shoulder with one hand, then switch", "Keep hips completely still — no rotation", "Squeeze your core and glutes to stabilize"], muscles: ["Core", "Shoulders", "Anti-Rotation"], tip: "The challenge is resisting rotation — if your hips are swaying, widen your feet" },
+    "Plank to Downdog": { cues: ["Start in high plank, core braced", "Push hips up and back into downward dog", "Hold briefly at the top, then return to plank", "Keep arms straight throughout"], muscles: ["Core", "Shoulders", "Hamstrings", "Lats"], tip: "The transition is the point — it challenges shoulder stability and core control simultaneously" },
+    "Shoulder Tap": { cues: ["High plank position, hands under shoulders", "Tap one shoulder with the opposite hand", "Return and repeat on the other side", "Keep hips completely square to the floor"], muscles: ["Core", "Shoulders", "Obliques"], tip: "Wider foot stance makes it easier — narrow it as you get stronger" },
+    "Sumo Squat": { cues: ["Feet wider than shoulder width, toes turned out 45°", "Sit straight down — keep chest up", "Knees track over toes throughout", "Drive up through the heels"], muscles: ["Glutes", "Inner Thighs", "Quads"], tip: "The wide stance shifts more emphasis to the inner thighs and glutes vs a regular squat" },
+    "Tuck Jump": { cues: ["Start standing, slight bend in knees", "Jump and pull knees toward chest", "Land softly on the balls of your feet", "Immediately absorb and repeat"], muscles: ["Quads", "Glutes", "Calves", "Cardio"], tip: "Land as quietly as possible — loud landings mean you're not absorbing the impact properly" },
+    "Box Jump": { cues: ["Stand facing the box, feet hip-width", "Bend knees, swing arms back, then jump", "Land with both feet on top, knees soft", "Step down — don't jump down to protect the knees"], muscles: ["Quads", "Glutes", "Calves", "Power"], tip: "Focus on sticking the landing — power is useless without control" },
+    "Broad Jump": { cues: ["Start with feet hip-width, slight knee bend", "Swing arms back then drive forward", "Land with both feet simultaneously, knees soft", "Measure from takeoff line to heel landing"], muscles: ["Glutes", "Quads", "Hamstrings", "Power"], tip: "Think about driving your hips forward, not just jumping up — horizontal power is the goal" },
+    "Lateral Shuffle": { cues: ["Athletic stance, knees slightly bent", "Push off the outside foot to shuffle sideways", "Stay low throughout — don't bounce up", "Touch the ground at each end to mark the distance"], muscles: ["Glutes", "Quads", "Adductors", "Cardio"], tip: "The lower you stay, the more glute and quad activation — resist the urge to stand up" },
+    "Sprint in Place": { cues: ["Drive knees up as high and fast as possible", "Pump arms aggressively in opposition", "Stay on the balls of your feet — heels don't touch", "Maintain a slight forward lean"], muscles: ["Hip Flexors", "Quads", "Calves", "Cardio"], tip: "Maximum effort is the whole point — short bursts at 100% are more effective than long moderate ones" },
+    "Jump Rope": { cues: ["Keep elbows close to your sides", "Rotate the rope with your wrists — not your shoulders", "Jump just high enough to clear the rope", "Land softly on the balls of your feet"], muscles: ["Calves", "Cardio", "Coordination"], tip: "Consistent rhythm beats high jumps — focus on timing over height" },
+    "Power Clean": { cues: ["Bar starts over mid-foot, hip-width stance", "First pull: push floor away, bar stays close to legs", "Second pull: extend hips explosively, shrug and pull", "Catch in quarter squat, elbows forward"], muscles: ["Full Body", "Power", "Traps", "Glutes"], tip: "The power comes from the hip extension — the arms just guide the bar up" },
+    "Dumbbell Thruster": { cues: ["Hold dumbbells at shoulder height", "Squat down keeping chest up and knees out", "Drive up explosively and press overhead in one motion", "Lock out arms at the top before descending"], muscles: ["Quads", "Glutes", "Shoulders", "Triceps"], tip: "The squat drives the press — use leg power to initiate the press, don't do them as two separate movements" },
+    "Renegade Row": { cues: ["High plank with dumbbells as handles", "Row one dumbbell to your hip, keeping hips level", "Return and repeat on the other side", "Brace hard to prevent rotation"], muscles: ["Back", "Biceps", "Core", "Anti-Rotation"], tip: "Start with lighter weight than you think — stabilizing with one hand is much harder than it looks" },
+    "Explosive Row": { cues: ["Hinge at hips, dumbbells hanging down", "Drive elbows back powerfully and explosively", "Allow dumbbells to travel slightly higher than normal", "Control the return — only the pull is explosive"], muscles: ["Back", "Biceps", "Rear Delts"], tip: "Think about trying to touch your elbows behind your back — creates full retraction" },
+    "DB Curl to Press": { cues: ["Start with dumbbells at sides, palms forward", "Curl to shoulders, then rotate and press overhead", "Lower from overhead back to shoulders, then curl down", "Control every phase — 4 movements in one"], muscles: ["Biceps", "Shoulders", "Triceps"], tip: "The rotation at the top engages more shoulder muscle than a neutral press" },
+    "KB Snatch": { cues: ["Start with KB between legs, hinge position", "Drive hips forward explosively", "Guide the bell overhead in a smooth arc — not a swing", "Lock arm at the top with wrist straight"], muscles: ["Glutes", "Traps", "Shoulders", "Full Body"], tip: "The bell should float up, not be muscled up — hip power does the work" },
+    "KB Turkish Get-Up": { cues: ["Lie flat, KB pressed overhead, eye on the bell", "Rise to elbow, then to hand, then to kneeling", "Stand up fully, then reverse every step to lie back down", "Keep the KB locked overhead throughout every transition"], muscles: ["Full Body", "Core", "Shoulder Stability"], tip: "Go slow — this is a technique exercise, not a conditioning one. Speed comes after mastery" },
 };
 // ── GYM WORKOUT PLANS ────────────────────────────────────────────────────────
 const WORKOUT_PLANS = {
@@ -1536,7 +1695,7 @@ function ExerciseCard({ ex, workoutColor, completedSets, toggleSet, intensity, s
             React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "flex-start" } },
                 React.createElement("div", { style: { flex: 1 } },
                     React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" } },
-                        React.createElement("div", { style: { fontWeight: 600, fontSize: 14, color: allDone ? workoutColor : "#F0EDE8" } }, ex.name),
+                        React.createElement("div", { style: { fontWeight: 600, fontSize: 14, color: allDone ? workoutColor : C.text } }, ex.name),
                         prData && (React.createElement("div", { style: { fontSize: 10, padding: "2px 8px", borderRadius: 8,
                                 background: prData.isNew ? workoutColor + "33" : C.btnBg,
                                 color: prData.isNew ? workoutColor : "#555",
@@ -2324,6 +2483,266 @@ function WorkoutLog({ workoutHistory, onClose, accentColor, onShare }) {
                             React.createElement("circle", { cx: "12", cy: "13", r: "4" })),
                         "Share Stats"))))));
         }))))));
+}
+// ── GUIDED WORKOUT TIMER ─────────────────────────────────────────────────────
+const FORMAT_ICONS = {
+    circuit: (c, s = 28) => React.createElement("svg", { width: s, height: s, viewBox: "0 0 24 24", fill: "none", stroke: c, strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" },
+        React.createElement("path", { d: "M17 2l4 4-4 4" }),
+        React.createElement("path", { d: "M3 11V9a4 4 0 0 1 4-4h14" }),
+        React.createElement("path", { d: "M7 22l-4-4 4-4" }),
+        React.createElement("path", { d: "M21 13v2a4 4 0 0 1-4 4H3" })),
+    hiit: (c, s = 28) => React.createElement("svg", { width: s, height: s, viewBox: "0 0 24 24", fill: "none", stroke: c, strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" },
+        React.createElement("polyline", { points: "13 2 3 14 12 14 11 22 21 10 12 10 13 2" })),
+    norwegian: (c, s = 28) => React.createElement("svg", { width: s, height: s, viewBox: "0 0 24 24", fill: "none", stroke: c, strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" },
+        React.createElement("path", { d: "M22 12h-4l-3 9L9 3l-3 9H2" })),
+    tabata: (c, s = 28) => React.createElement("svg", { width: s, height: s, viewBox: "0 0 24 24", fill: "none", stroke: c, strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" },
+        React.createElement("circle", { cx: "12", cy: "13", r: "8" }),
+        React.createElement("polyline", { points: "12 9 12 13 15 15" }),
+        React.createElement("path", { d: "M9 2h6" }),
+        React.createElement("line", { x1: "12", y1: "2", x2: "12", y2: "5" })),
+};
+function GuidedWorkout({ template, format, onClose, onComplete }) {
+    var _a, _b, _c;
+    const C = useC();
+    const TH = (() => { try {
+        return APP_THEMES[JSON.parse(localStorage.getItem('jbr:themeId') || '"solo"')] || APP_THEMES.solo;
+    }
+    catch (e) {
+        return APP_THEMES.solo;
+    } })();
+    const color = format.color;
+    const [phase, setPhase] = useState("intro");
+    const [round, setRound] = useState(1);
+    const [exIdx, setExIdx] = useState(0);
+    const [timeLeft, setTimeLeft] = useState(0);
+    const [running, setRunning] = useState(false);
+    const [maxHR, setMaxHR] = useState("");
+    const [maxHRSet, setMaxHRSet] = useState(false);
+    const [showForm, setShowForm] = useState(false);
+    const timerRef = useRef(null);
+    const totalRounds = format.id === "norwegian" ? 4 : (template.rounds || format.rounds || 8);
+    const exercises = template.exercises || template.sets || [];
+    const isNorwegian = format.id === "norwegian";
+    const isCircuit = format.id === "circuit";
+    const isTabata = format.id === "tabata";
+    const isHiit = format.id === "hiit";
+    const hrWork = maxHR ? Math.round(parseInt(maxHR) * 0.90) : null;
+    const hrWorkLow = maxHR ? Math.round(parseInt(maxHR) * 0.85) : null;
+    const hrRest = maxHR ? Math.round(parseInt(maxHR) * 0.70) : null;
+    const currentExName = isNorwegian ? template.name : (((_a = exercises[exIdx]) === null || _a === void 0 ? void 0 : _a.name) || "");
+    const formGuide = FORM_GUIDES[currentExName];
+    const beep = (times = 1, freq = 880) => {
+        try {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            let t = ctx.currentTime;
+            for (let i = 0; i < times; i++) {
+                const o = ctx.createOscillator();
+                const g = ctx.createGain();
+                o.connect(g);
+                g.connect(ctx.destination);
+                o.frequency.value = freq;
+                g.gain.setValueAtTime(0.3, t);
+                g.gain.exponentialRampToValueAtTime(0.001, t + 0.15);
+                o.start(t);
+                o.stop(t + 0.15);
+                t += 0.2;
+            }
+        }
+        catch (e) { }
+    };
+    const getWorkTime = () => {
+        var _a, _b;
+        if (isNorwegian)
+            return 240;
+        if (isCircuit)
+            return ((_a = exercises[exIdx]) === null || _a === void 0 ? void 0 : _a.work) || 40;
+        if (isTabata)
+            return 20;
+        if (isHiit)
+            return ((_b = exercises[exIdx]) === null || _b === void 0 ? void 0 : _b.work) || 20;
+        return 20;
+    };
+    const getRestTime = () => {
+        var _a;
+        if (isNorwegian)
+            return 180;
+        if (isCircuit) {
+            const isLastEx = exIdx >= exercises.length - 1;
+            return isLastEx ? (format.restBetweenRounds || 60) : (format.restBetweenExercises || 15);
+        }
+        if (isTabata)
+            return 10;
+        if (isHiit)
+            return ((_a = exercises[exIdx]) === null || _a === void 0 ? void 0 : _a.rest) || 10;
+        return 10;
+    };
+    const getNextLabel = () => {
+        var _a, _b;
+        if (isNorwegian)
+            return phase === "work" ? "Active Recovery" : round < totalRounds ? "Work Interval" : null;
+        if (isCircuit && phase === "rest") {
+            const isLastEx = exIdx >= exercises.length - 1;
+            return isLastEx ? (round < totalRounds ? `Round ${round + 1}` : null) : (_a = exercises[exIdx + 1]) === null || _a === void 0 ? void 0 : _a.name;
+        }
+        if (isTabata || isHiit) {
+            if (phase === "work")
+                return "Rest";
+            const nextEx = (exIdx + 1) % exercises.length;
+            return ((_b = exercises[nextEx]) === null || _b === void 0 ? void 0 : _b.name) || "Rest";
+        }
+        return null;
+    };
+    useEffect(() => {
+        if (!running || phase === "intro" || phase === "done")
+            return;
+        timerRef.current = setInterval(() => {
+            setTimeLeft(t => {
+                if (t <= 1) {
+                    clearInterval(timerRef.current);
+                    handlePhaseEnd();
+                    return 0;
+                }
+                if (t <= 4)
+                    beep(1, 660);
+                return t - 1;
+            });
+        }, 1000);
+        return () => clearInterval(timerRef.current);
+    }, [running, phase, exIdx, round]);
+    const handlePhaseEnd = () => {
+        setShowForm(false);
+        if (phase === "work") {
+            beep(2, 880);
+            setPhase("rest");
+            setTimeLeft(getRestTime());
+            setRunning(true);
+        }
+        else if (phase === "rest") {
+            beep(1, 660);
+            if (isCircuit) {
+                const isLastEx = exIdx >= exercises.length - 1;
+                if (isLastEx) {
+                    if (round >= totalRounds) {
+                        finish();
+                        return;
+                    }
+                    setRound(r => r + 1);
+                    setExIdx(0);
+                }
+                else {
+                    setExIdx(i => i + 1);
+                }
+                setPhase("work");
+                setTimeLeft(getWorkTime());
+                setRunning(true);
+            }
+            else if (isNorwegian) {
+                if (round >= totalRounds) {
+                    finish();
+                    return;
+                }
+                setRound(r => r + 1);
+                setPhase("work");
+                setTimeLeft(240);
+                setRunning(true);
+            }
+            else {
+                const nextIdx = (exIdx + 1) % exercises.length;
+                const completedCycle = nextIdx === 0;
+                if (completedCycle) {
+                    const nextRound = round + 1;
+                    if (nextRound > totalRounds) {
+                        finish();
+                        return;
+                    }
+                    setRound(nextRound);
+                }
+                setExIdx(nextIdx);
+                setPhase("work");
+                setTimeLeft(getWorkTime());
+                setRunning(true);
+            }
+        }
+    };
+    const finish = () => { beep(3, 880); setPhase("done"); setRunning(false); };
+    const startWorkout = () => {
+        beep(1, 880);
+        setPhase("work");
+        setTimeLeft(getWorkTime());
+        setRunning(true);
+    };
+    const formatTime = (s) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
+    const progress = (() => {
+        const total = phase === "work" ? getWorkTime() : getRestTime();
+        return total > 0 ? 1 - (timeLeft / total) : 0;
+    })();
+    const isWorkPhase = phase === "work";
+    const phaseColor = isWorkPhase ? color : "#52E3A0";
+    const xpEarned = format.id === "norwegian" ? 200 : format.id === "hiit" ? 120 : format.id === "circuit" ? 100 : 80;
+    return (React.createElement("div", { style: { position: "fixed", top: 0, left: 0, right: 0, bottom: 0, background: TH.bg, zIndex: 500, display: "flex", flexDirection: "column", fontFamily: "'DM Sans',sans-serif" } },
+        React.createElement("div", { style: { padding: "52px 24px 16px", borderBottom: `1px solid ${C.border}`, display: "flex", alignItems: "flex-start", justifyContent: "space-between", flexShrink: 0 } },
+            React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 12 } },
+                React.createElement("div", { style: { width: 36, height: 36, borderRadius: 10, background: color + "22", border: `1px solid ${color}44`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 } }, (_b = FORMAT_ICONS[format.id]) === null || _b === void 0 ? void 0 : _b.call(FORMAT_ICONS, color, 20)),
+                React.createElement("div", null,
+                    React.createElement("div", { style: { fontSize: 10, color: color, letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 700 } }, format.label),
+                    React.createElement("div", { style: { fontSize: 18, fontWeight: 800, color: C.text, letterSpacing: "-0.02em" } }, template.name))),
+            React.createElement("button", { onClick: onClose, style: { background: "none", border: "none", cursor: "pointer", fontSize: 22, color: C.muted, padding: 4, lineHeight: 1 } }, "\u2715")),
+        React.createElement("div", { style: { flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "24px 32px", overflowY: "auto" } },
+            phase === "intro" && (React.createElement("div", { style: { width: "100%", maxWidth: 340, textAlign: "center" } },
+                React.createElement("div", { style: { fontSize: 15, color: C.muted, lineHeight: 1.6, marginBottom: 28 } }, format.description),
+                isNorwegian && !maxHRSet && (React.createElement("div", { style: { background: C.card, borderRadius: 14, padding: "20px", border: `1.5px solid ${color}44`, marginBottom: 24, textAlign: "left" } },
+                    React.createElement("div", { style: { fontSize: 12, color: color, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 8 } }, "Max Heart Rate"),
+                    React.createElement("div", { style: { fontSize: 12, color: C.muted, marginBottom: 12, lineHeight: 1.5 } }, "Enter your max HR for zone guidance, or skip to see % targets only."),
+                    React.createElement("div", { style: { display: "flex", gap: 8 } },
+                        React.createElement("input", { value: maxHR, onChange: e => setMaxHR(e.target.value), placeholder: "e.g. 185", type: "number", style: { flex: 1, padding: "10px 14px", borderRadius: 10, background: C.input, border: `1.5px solid ${C.inputBorder}`, color: C.text, fontSize: 16, outline: "none", fontFamily: "inherit" } }),
+                        React.createElement("button", { onClick: () => setMaxHRSet(true), style: { padding: "10px 16px", borderRadius: 10, background: color, border: "none", color: "#fff", fontWeight: 700, cursor: "pointer", fontSize: 14 } }, "Set")),
+                    React.createElement("button", { onClick: () => setMaxHRSet(true), style: { marginTop: 10, background: "none", border: "none", color: C.muted, fontSize: 12, cursor: "pointer", textDecoration: "underline", width: "100%", textAlign: "center" } }, "Skip \u2014 show % only"))),
+                React.createElement("div", { style: { display: "flex", gap: 10, marginBottom: 28, justifyContent: "center" } }, [["Rounds", totalRounds], ["Duration", template.duration], ["Level", template.difficulty]].map(([l, v]) => (React.createElement("div", { key: l, style: { flex: 1, background: color + "18", borderRadius: 12, padding: "12px 6px", border: `1px solid ${color}33`, textAlign: "center" } },
+                    React.createElement("div", { style: { fontSize: 15, fontWeight: 800, color } }, v),
+                    React.createElement("div", { style: { fontSize: 9, color: C.muted, marginTop: 2, textTransform: "uppercase", letterSpacing: "0.08em" } }, l))))),
+                (!isNorwegian || maxHRSet) && (React.createElement("button", { onClick: startWorkout, style: { width: "100%", padding: "18px", borderRadius: 16, background: color, border: "none", color: "#fff", fontSize: 18, fontWeight: 900, cursor: "pointer" } }, "Start Workout \u2192")))),
+            (phase === "work" || phase === "rest") && (React.createElement("div", { style: { width: "100%", maxWidth: 340, textAlign: "center" } },
+                React.createElement("div", { style: { display: "flex", gap: 5, justifyContent: "center", marginBottom: 20 } }, Array.from({ length: totalRounds }).map((_, i) => (React.createElement("div", { key: i, style: { flex: 1, maxWidth: 36, height: 4, borderRadius: 2, background: i < round - 1 ? color : i === round - 1 ? color + "99" : C.btnBg, transition: "background 0.3s" } })))),
+                React.createElement("div", { style: { fontSize: 10, color: phaseColor, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: 6 } },
+                    isWorkPhase ? (isNorwegian ? "Work Interval" : "GO") : (isNorwegian ? "Active Recovery" : "Rest"),
+                    " \u00B7 Round ",
+                    round,
+                    "/",
+                    totalRounds),
+                React.createElement("div", { style: { fontSize: 24, fontWeight: 800, color: C.text, letterSpacing: "-0.02em", marginBottom: 6, minHeight: 58, display: "flex", alignItems: "center", justifyContent: "center" } }, currentExName),
+                isNorwegian && (React.createElement("div", { style: { background: phaseColor + "18", borderRadius: 10, padding: "8px 14px", border: `1px solid ${phaseColor}33`, marginBottom: 12, fontSize: 12, color: phaseColor, fontWeight: 600 } }, isWorkPhase
+                    ? (hrWorkLow ? `Target: ${hrWorkLow}–${hrWork} BPM  (85–95% max HR)` : "Target: 85–95% Max HR")
+                    : (hrRest ? `Recovery: ~${hrRest} BPM  (~70% max HR)` : "Recovery: ~70% Max HR"))),
+                React.createElement("div", { style: { position: "relative", width: 190, height: 190, margin: "0 auto 16px" } },
+                    React.createElement("svg", { width: 190, height: 190, style: { position: "absolute", top: 0, left: 0, transform: "rotate(-90deg)" } },
+                        React.createElement("circle", { cx: 95, cy: 95, r: 84, fill: "none", stroke: C.btnBg, strokeWidth: 7 }),
+                        React.createElement("circle", { cx: 95, cy: 95, r: 84, fill: "none", stroke: phaseColor, strokeWidth: 7, strokeDasharray: 528, strokeDashoffset: 528 * (1 - progress), strokeLinecap: "round", style: { transition: "stroke-dashoffset 0.9s linear" } })),
+                    React.createElement("div", { style: { position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" } },
+                        React.createElement("div", { style: { fontSize: 48, fontWeight: 900, color: phaseColor, lineHeight: 1, fontVariantNumeric: "tabular-nums" } }, formatTime(timeLeft)),
+                        React.createElement("div", { style: { fontSize: 10, color: C.muted, marginTop: 4, textTransform: "uppercase", letterSpacing: "0.08em" } }, isWorkPhase ? "remaining" : "rest"))),
+                getNextLabel() && (React.createElement("div", { style: { fontSize: 11, color: C.muted, marginBottom: 14 } },
+                    "Next: ",
+                    React.createElement("span", { style: { color: C.text, fontWeight: 600 } }, getNextLabel()))),
+                React.createElement("div", { style: { display: "flex", gap: 10, marginBottom: 12 } },
+                    React.createElement("button", { onClick: () => { clearInterval(timerRef.current); setRunning(false); setPhase("intro"); setRound(1); setExIdx(0); setShowForm(false); }, style: { flex: 1, padding: "11px", borderRadius: 12, background: C.btnBg, border: `1px solid ${C.btnBorder}`, color: C.muted, fontSize: 12, cursor: "pointer" } }, "Restart"),
+                    React.createElement("button", { onClick: () => { clearInterval(timerRef.current); handlePhaseEnd(); }, style: { flex: 2, padding: "11px", borderRadius: 12, background: phaseColor, border: "none", color: "#fff", fontSize: 13, fontWeight: 700, cursor: "pointer" } }, "Skip \u2192")),
+                isWorkPhase && formGuide && (React.createElement("button", { onClick: () => setShowForm(v => !v), style: { width: "100%", padding: "10px 14px", borderRadius: 12, background: showForm ? color + "22" : C.card, border: `1.5px solid ${showForm ? color + "66" : C.cardBorder}`, color: showForm ? color : C.muted, fontSize: 12, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 8, transition: "all 0.15s" } },
+                    React.createElement("svg", { width: "14", height: "14", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round" },
+                        React.createElement("circle", { cx: "12", cy: "12", r: "10" }),
+                        React.createElement("line", { x1: "12", y1: "8", x2: "12", y2: "12" }),
+                        React.createElement("line", { x1: "12", y1: "16", x2: "12.01", y2: "16" })),
+                    showForm ? "Hide Form Notes" : "Form Notes")),
+                showForm && formGuide && (React.createElement("div", { style: { marginTop: 12, background: C.card, borderRadius: 14, padding: "16px", border: `1.5px solid ${color}33`, textAlign: "left" } },
+                    React.createElement("div", { style: { fontSize: 10, color: color, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 10 } },
+                        "Form Cues \u00B7 ",
+                        currentExName),
+                    formGuide.cues.map((cue, i) => (React.createElement("div", { key: i, style: { display: "flex", gap: 8, marginBottom: 7, alignItems: "flex-start" } },
+                        React.createElement("div", { style: { width: 5, height: 5, borderRadius: "50%", background: color, flexShrink: 0, marginTop: 5 } }),
+                        React.createElement("div", { style: { fontSize: 12, color: C.text, lineHeight: 1.5 } }, cue)))),
+                    formGuide.tip && (React.createElement("div", { style: { marginTop: 10, padding: "8px 12px", background: color + "12", borderRadius: 8, border: `1px solid ${color}22` } },
+                        React.createElement("div", { style: { fontSize: 11, color: color, fontWeight: 600, marginBottom: 2 } }, "Pro tip"),
+                        React.createElement("div", { style: { fontSize: 11, color: C.muted, lineHeight: 1.5 } }, formGuide.tip))),
+                    React.createElement("div", { style: { marginTop: 10, display: "flex", gap: 6, flexWrap: "wrap" } }, (_c = formGuide.muscles) === null || _c === void 0 ? void 0 : _c.map(m => (React.createElement("span", { key: m, style: { fontSize: 10, padding: "2px 8px", borderRadius: 8, background: color + "18", color: color, border: `1px solid ${color}33` } }, m)))))))))));
 }
 function CardioLog({ cardioHistory, onClose, accentColor }) {
     const C = useC();
@@ -3527,8 +3946,9 @@ function WorkoutApp() {
     const [checked, setChecked] = useState({});
     const [showFilters, setShowFilters] = useState(false);
     const [customExercises, setCustomExercises] = useState([]);
-    const [setCountOverrides, setSetCountOverrides] = useState({}); // { "ExName": adjSetsCount }
-    const [planOverrides, setPlanOverrides] = useState({}); // { "Push": [exerciseList] }
+    const [setCountOverrides, setSetCountOverrides] = useState({});
+    const [planOverrides, setPlanOverrides] = useState({});
+    const [activeGuidedWorkout, setActiveGuidedWorkout] = useState(null);
     // Coach
     const [messages, setMessages] = useState([{ role: "assistant", content: "Hey — I'm your AI coach. Ask me anything about workouts, form, intensity, or how to structure your week." }]);
     const [input, setInput] = useState("");
@@ -3847,6 +4267,21 @@ function WorkoutApp() {
         showShareScreen && lastWorkoutSummary && (React.createElement(WorkoutShareScreen, { summary: lastWorkoutSummary, profile: profile, onClose: () => setShowShareScreen(false) })),
         showSplash && React.createElement(QuoteSplash, { onDone: () => setShowSplash(false) }),
         editingPlan && (React.createElement(PlanEditor, { planName: editingPlan, exercises: getPlanExercises(editingPlan), onSave: (newList) => setPlanOverrides(prev => (Object.assign(Object.assign({}, prev), { [editingPlan]: newList }))), onClose: () => setEditingPlan(null) })),
+        activeGuidedWorkout && (React.createElement(GuidedWorkout, { template: activeGuidedWorkout.template, format: activeGuidedWorkout.format, onClose: () => setActiveGuidedWorkout(null), onComplete: (xp, name, type) => {
+                awardXP(xp, `${type}: ${name}`);
+                const session = {
+                    workout: name,
+                    type: type,
+                    duration: 0,
+                    setsCompleted: 0,
+                    xpEarned: xp,
+                    intensity,
+                    date: new Date().toLocaleDateString(),
+                    rankInfo: getRankInfo(totalXP + xp, themeId),
+                };
+                setWorkoutHistory(prev => [session, ...prev]);
+                setActiveGuidedWorkout(null);
+            } })),
         showWorkoutLog && (React.createElement(WorkoutLog, { workoutHistory: workoutHistory, onClose: () => setShowWorkoutLog(false), accentColor: TH.accent, onShare: (session) => {
                 setLastWorkoutSummary({
                     workout: session.workout,
@@ -4107,7 +4542,29 @@ function WorkoutApp() {
                     libMode === "pt" && ptArea ? (_a = PT_AREAS.find(a => a.id === ptArea)) === null || _a === void 0 ? void 0 : _a.label : libMode === "pt" ? "Physical Therapy" : "Pick & Go",
                     "\u00A0",
                     React.createElement("span", { style: { color: libMode === "pt" ? "#F87171" : "#52E3A0" } }, libMode === "pt" ? "PT" : "+")),
-                React.createElement("div", { style: { display: "flex", gap: 8, marginTop: 12 } }, [{ id: "exercises", label: "Exercises" }, { id: "pt", label: "Physical Therapy" }].map(m => (React.createElement("button", { key: m.id, onClick: () => { setLibMode(m.id); setPtArea(null); }, style: { flex: 1, padding: "8px", borderRadius: 10, cursor: "pointer", fontSize: 12, fontWeight: 600, border: `1.5px solid ${libMode === m.id ? (m.id === "pt" ? "#F87171" : "#52E3A0") : C.cardBorder}`, background: libMode === m.id ? (m.id === "pt" ? "#F8717118" : "#52E3A018") : "#111", color: libMode === m.id ? (m.id === "pt" ? "#F87171" : "#52E3A0") : "#555" } }, m.label))))),
+                React.createElement("div", { style: { display: "flex", gap: 8, marginTop: 12 } }, [{ id: "exercises", label: "Exercises" }, { id: "workouts", label: "Workouts" }, { id: "pt", label: "PT" }].map(m => (React.createElement("button", { key: m.id, onClick: () => { setLibMode(m.id); setPtArea(null); }, style: { flex: 1, padding: "8px", borderRadius: 10, cursor: "pointer", fontSize: 12, fontWeight: 600, border: `1.5px solid ${libMode === m.id ? (m.id === "pt" ? "#F87171" : m.id === "workouts" ? TH.accent : "#52E3A0") : C.cardBorder}`, background: libMode === m.id ? (m.id === "pt" ? "#F8717118" : m.id === "workouts" ? TH.accent + "18" : "#52E3A018") : C.card, color: libMode === m.id ? (m.id === "pt" ? "#F87171" : m.id === "workouts" ? TH.accent : "#52E3A0") : C.muted } }, m.label))))),
+            libMode === "workouts" && (React.createElement("div", { style: { flex: 1, overflowY: "auto", padding: "0 24px 20px" } },
+                React.createElement("div", { style: { fontSize: 12, color: C.muted, lineHeight: 1.6, marginBottom: 20, marginTop: 4 } }, "Guided timer workouts. Tap a template to preview and start."),
+                Object.values(WORKOUT_TEMPLATES).map(format => (React.createElement("div", { key: format.id, style: { marginBottom: 28 } },
+                    React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 10, marginBottom: 12 } },
+                        React.createElement("div", { style: { width: 32, height: 32, borderRadius: 10, background: format.color + "22", border: `1px solid ${format.color}44`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 } }, format.icon(format.color, 18)),
+                        React.createElement("div", null,
+                            React.createElement("div", { style: { fontSize: 15, fontWeight: 800, color: C.text } }, format.label),
+                            React.createElement("div", { style: { fontSize: 11, color: C.muted } },
+                                format.templates.length,
+                                " workouts"))),
+                    React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 10 } }, format.templates.map(tmpl => (React.createElement("button", { key: tmpl.id, onClick: () => setActiveGuidedWorkout({ template: tmpl, format }), style: { background: C.card, borderRadius: 14, padding: "14px 16px", border: `1.5px solid ${C.cardBorder}`, cursor: "pointer", textAlign: "left", display: "flex", alignItems: "center", justifyContent: "space-between", transition: "border-color 0.15s" } },
+                        React.createElement("div", { style: { flex: 1 } },
+                            React.createElement("div", { style: { fontSize: 14, fontWeight: 700, color: C.text, marginBottom: 4 } }, tmpl.name),
+                            React.createElement("div", { style: { display: "flex", gap: 8, flexWrap: "wrap" } },
+                                React.createElement("span", { style: { fontSize: 10, padding: "2px 8px", borderRadius: 8, background: format.color + "18", color: format.color, border: `1px solid ${format.color}33`, fontWeight: 600 } }, tmpl.difficulty),
+                                React.createElement("span", { style: { fontSize: 10, padding: "2px 8px", borderRadius: 8, background: C.btnBg, color: C.muted, border: `1px solid ${C.btnBorder}` } },
+                                    "\u23F1 ",
+                                    tmpl.duration),
+                                tmpl.rounds && React.createElement("span", { style: { fontSize: 10, padding: "2px 8px", borderRadius: 8, background: C.btnBg, color: C.muted, border: `1px solid ${C.btnBorder}` } },
+                                    tmpl.rounds,
+                                    " rounds"))),
+                        React.createElement("div", { style: { fontSize: 20, color: format.color + "88", marginLeft: 12 } }, "\u203A")))))))))),
             libMode === "pt" && (React.createElement("div", { style: { flex: 1, overflowY: "auto", padding: "0 24px 20px" } }, !ptArea ? (
             // Body part grid
             React.createElement("div", null,
