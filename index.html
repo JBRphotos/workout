@@ -1,4 +1,4 @@
-<!DOCTYPE html><!-- v20260330-200227 -->
+<!DOCTYPE html><!-- v20260331-122517 -->
 
 <html lang="en">
 <head>
@@ -17,23 +17,16 @@
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     html,body{touch-action:manipulation;background:#0A0A0A}
-    /* PWA: fixed fullscreen */
     @media all and (display-mode:standalone){
       #root{position:fixed;top:0;left:0;right:0;bottom:0;overflow:hidden}
     }
-    /* Browser: normal flow so nav bar visible */
     @media not all and (display-mode:standalone){
       #root{position:relative;min-height:100vh;overflow:hidden}
     }
     ::-webkit-scrollbar{display:none}
     input[type=number]::-webkit-inner-spin-button,
     input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
-    #fallback{
-      display:none;position:fixed;inset:0;background:#0A0A0A;
-      flex-direction:column;align-items:center;justify-content:center;
-      font-family:'DM Sans','Helvetica Neue',sans-serif;
-      padding:40px 32px;text-align:center;color:#fff;z-index:9999;
-    }
+    #fallback{display:none;position:fixed;inset:0;background:#0A0A0A;flex-direction:column;align-items:center;justify-content:center;font-family:'DM Sans','Helvetica Neue',sans-serif;padding:40px 32px;text-align:center;color:#fff;z-index:9999}
   </style>
 </head>
 <body>
@@ -49,18 +42,9 @@
     <div style="font-size:22px;font-weight:900;letter-spacing:-0.02em;margin-bottom:8px">Level Up</div>
     <div style="font-size:14px;color:#666;line-height:1.6;margin-bottom:32px">Works best as an installed app.<br/>Follow the steps below.</div>
     <div style="width:100%;display:flex;flex-direction:column;gap:12px">
-      <div style="background:#1a1a1a;border-radius:14px;padding:16px 20px;border:1px solid #2a2a2a;text-align:left">
-        <div style="font-size:10px;color:#444;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px">Step 1</div>
-        <div style="font-size:14px;color:#ccc">Open this page in <strong style="color:#fff">Safari</strong></div>
-      </div>
-      <div style="background:#1a1a1a;border-radius:14px;padding:16px 20px;border:1px solid #2a2a2a;text-align:left">
-        <div style="font-size:10px;color:#444;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px">Step 2</div>
-        <div style="font-size:14px;color:#ccc">Tap <strong style="color:#fff">Share</strong> then <strong style="color:#fff">Add to Home Screen</strong></div>
-      </div>
-      <div style="background:#1a1a1a;border-radius:14px;padding:16px 20px;border:1px solid #2a2a2a;text-align:left">
-        <div style="font-size:10px;color:#444;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px">Step 3</div>
-        <div style="font-size:14px;color:#ccc">Launch from your <strong style="color:#fff">Home Screen</strong></div>
-      </div>
+      <div style="background:#1a1a1a;border-radius:14px;padding:16px 20px;border:1px solid #2a2a2a;text-align:left"><div style="font-size:10px;color:#444;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px">Step 1</div><div style="font-size:14px;color:#ccc">Open this page in <strong style="color:#fff">Safari</strong></div></div>
+      <div style="background:#1a1a1a;border-radius:14px;padding:16px 20px;border:1px solid #2a2a2a;text-align:left"><div style="font-size:10px;color:#444;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px">Step 2</div><div style="font-size:14px;color:#ccc">Tap <strong style="color:#fff">Share</strong> then <strong style="color:#fff">Add to Home Screen</strong></div></div>
+      <div style="background:#1a1a1a;border-radius:14px;padding:16px 20px;border:1px solid #2a2a2a;text-align:left"><div style="font-size:10px;color:#444;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px">Step 3</div><div style="font-size:14px;color:#ccc">Launch from your <strong style="color:#fff">Home Screen</strong></div></div>
     </div>
   </div>
   <script>
@@ -4514,35 +4498,78 @@ function WorkoutApp() {
                 todayPlan !== "Rest" && WORKOUT_PLANS[todayPlan] ? (React.createElement(PlanCard, { type: todayPlan, onClick: () => startWorkout(todayPlan) })) : (React.createElement("div", { style: { background: C.card, borderRadius: 16, padding: "20px", border: `1.5px solid ${C.cardBorder}`, textAlign: "center" } },
                     React.createElement("div", { style: { display: "flex", justifyContent: "center" } }, IC.Rest("#444", 28)),
                     React.createElement("div", { style: { color: C.muted, marginTop: 8, fontSize: 14 } }, "Rest day. Recover well.")))),
-            React.createElement("div", { style: { padding: "0 24px" } },
-                React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 } },
-                    React.createElement("div", { style: { fontSize: 10, color: C.muted, letterSpacing: "0.1em", textTransform: "uppercase" } }, "All Plans"),
-                    React.createElement("div", { style: { display: "flex", background: C.card, borderRadius: 10, padding: "3px", border: "1px solid #1e1e1e" } }, [{ id: "gym", label: "Gym" }, { id: "bodyweight", label: "Bodyweight" }].map(opt => (React.createElement("button", { key: opt.id, onClick: () => setWorkoutEquipment(opt.id), style: { padding: "5px 12px", borderRadius: 8, cursor: "pointer", fontSize: 11, fontWeight: 600, border: "none",
-                            background: workoutEquipment === opt.id ? "#FF6B35" : "transparent",
-                            color: workoutEquipment === opt.id ? "#000" : "#555",
-                            transition: "all 0.15s" } }, opt.label))))),
-                React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 8 } }, (workoutEquipment === "gym"
-                    ? ["Push", "Pull", "Legs"]
-                    : ["Bodyweight Push", "Bodyweight Pull", "Bodyweight Legs"]).map(t => {
-                    var _a;
-                    const plan = WORKOUT_PLANS[t];
-                    const displayName = t.replace("Bodyweight ", "");
-                    const isBW = workoutEquipment === "bodyweight";
-                    return (React.createElement("div", { key: t, onClick: () => startWorkout(t), style: { background: C.card, borderRadius: 14, padding: "13px 16px", border: `1.5px solid ${plan.color}28`, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "space-between" } },
-                        React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 12 } },
-                            React.createElement("div", { style: { width: 36, height: 36, borderRadius: 9, background: plan.color + "22", border: `1px solid ${plan.color}44`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 15, color: plan.color } }, ((_a = IC[PLAN_ICON[t]]) === null || _a === void 0 ? void 0 : _a.call(IC, plan.color, 18)) || null),
-                            React.createElement("div", null,
-                                React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 6 } },
-                                    React.createElement("div", { style: { fontWeight: 600, fontSize: 14 } },
-                                        displayName,
-                                        " Day"),
-                                    isBW && React.createElement("span", { style: { fontSize: 9, padding: "2px 6px", borderRadius: 8, background: C.cardBorder, border: `1px solid ${C.btnBorder}`, color: C.muted } }, "BW")),
-                                React.createElement("div", { style: { fontSize: 11, color: C.muted, marginTop: 1 } },
-                                    plan.exercises.length,
-                                    " exercises \u00B7 ",
-                                    isBW ? "No equipment" : "Full gym"))),
-                        React.createElement("div", { style: { fontSize: 18, color: C.btnBorder } }, "\u203A")));
-                }))))),
+            (() => {
+                // Filter to current week
+                const now = new Date();
+                const weekStart = new Date(now);
+                weekStart.setDate(now.getDate() - ((now.getDay() + 6) % 7));
+                weekStart.setHours(0, 0, 0, 0);
+                const weekStartStr = weekStart.toLocaleDateString();
+                const thisWeekWorkouts = workoutHistory.filter(s => {
+                    const d = new Date(s.date);
+                    return d >= weekStart;
+                });
+                const thisWeekCardio = cardioHistory.filter(c => {
+                    const d = new Date(c.date);
+                    return d >= weekStart;
+                });
+                const thisWeekXP = xpEvents.filter(e => {
+                    const d = new Date(e.date || e.timestamp || 0);
+                    return d >= weekStart;
+                }).reduce((a, e) => a + (e.amount || 0), 0);
+                const totalSets = thisWeekWorkouts.reduce((a, s) => a + (s.setsCompleted || 0), 0);
+                const totalMiles = thisWeekCardio.reduce((a, c) => a + (parseFloat(c.distance) || 0), 0);
+                const cardioSessions = thisWeekCardio.length;
+                // Top exercise — most sets across all sessions this week
+                const exCounts = {};
+                thisWeekWorkouts.forEach(s => {
+                    Object.keys(s.exercises || {}).forEach(name => {
+                        var _a;
+                        exCounts[name] = (exCounts[name] || 0) + (((_a = s.exercises[name]) === null || _a === void 0 ? void 0 : _a.length) || 0);
+                    });
+                });
+                const topEx = Object.entries(exCounts).sort((a, b) => b[1] - a[1])[0];
+                // Progress bars — targets based on days/week setting
+                const setTarget = daysPerWeek * 20;
+                const xpTarget = daysPerWeek * (getXP("WORKOUT_COMPLETE", intensity) + 15 * getXP("SET_COMPLETE", intensity));
+                const cardioTarget = Math.max(1, Math.round(daysPerWeek * 0.5));
+                const StatCard = ({ label, value, sub, progress, color, icon }) => (React.createElement("div", { style: { background: C.card, borderRadius: 14, padding: "14px 16px", border: `1.5px solid ${C.cardBorder}`, flex: 1 } },
+                    React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 8, marginBottom: 8 } },
+                        React.createElement("div", { style: { width: 28, height: 28, borderRadius: 8, background: color + "22", border: `1px solid ${color}33`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 } }, icon),
+                        React.createElement("div", { style: { fontSize: 9, color: C.muted, textTransform: "uppercase", letterSpacing: "0.08em", fontWeight: 600 } }, label)),
+                    React.createElement("div", { style: { fontSize: 22, fontWeight: 900, color: C.text, letterSpacing: "-0.02em", lineHeight: 1, marginBottom: 4 } }, value),
+                    sub && React.createElement("div", { style: { fontSize: 10, color: C.muted, marginBottom: 8 } }, sub),
+                    progress !== undefined && (React.createElement("div", { style: { height: 3, borderRadius: 2, background: C.btnBg, overflow: "hidden", marginTop: sub ? 0 : 8 } },
+                        React.createElement("div", { style: { height: "100%", borderRadius: 2, width: `${Math.min(100, progress * 100)}%`, background: `linear-gradient(90deg, ${color}, ${color}88)`, transition: "width 0.5s ease" } })))));
+                return (React.createElement("div", { style: { padding: "0 24px 32px" } },
+                    React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 } },
+                        React.createElement("div", { style: { fontSize: 10, color: C.muted, letterSpacing: "0.1em", textTransform: "uppercase" } }, "This Week"),
+                        React.createElement("div", { style: { fontSize: 10, color: C.muted } },
+                            weekStart.toLocaleDateString([], { month: "short", day: "numeric" }),
+                            " \u2013 ",
+                            now.toLocaleDateString([], { month: "short", day: "numeric" }))),
+                    React.createElement("div", { style: { display: "flex", gap: 10, marginBottom: 10 } },
+                        React.createElement(StatCard, { label: "Sets", value: totalSets, sub: `of ~${setTarget} target`, progress: setTarget > 0 ? totalSets / setTarget : 0, color: TH.accent, icon: React.createElement("svg", { width: "14", height: "14", viewBox: "0 0 24 24", fill: "none", stroke: TH.accent, strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round" },
+                                React.createElement("rect", { x: "4", y: "12", width: "16", height: "4", rx: "2" }),
+                                React.createElement("rect", { x: "2", y: "10", width: "4", height: "8", rx: "1" }),
+                                React.createElement("rect", { x: "18", y: "10", width: "4", height: "8", rx: "1" })) }),
+                        React.createElement(StatCard, { label: "XP Earned", value: `+${thisWeekXP}`, sub: `of ~${xpTarget} target`, progress: xpTarget > 0 ? thisWeekXP / xpTarget : 0, color: "#F7DC6F", icon: React.createElement("svg", { width: "14", height: "14", viewBox: "0 0 24 24", fill: "none", stroke: "#F7DC6F", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round" },
+                                React.createElement("polygon", { points: "12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" })) })),
+                    React.createElement("div", { style: { display: "flex", gap: 10 } },
+                        React.createElement(StatCard, { label: "Cardio", value: cardioSessions, sub: totalMiles > 0 ? `${totalMiles.toFixed(1)} mi logged` : "sessions this week", progress: cardioTarget > 0 ? cardioSessions / cardioTarget : 0, color: "#52E3A0", icon: React.createElement("svg", { width: "14", height: "14", viewBox: "0 0 24 24", fill: "none", stroke: "#52E3A0", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round" },
+                                React.createElement("polyline", { points: "2 14 6 8 10 18 14 10 18 16 22 12" })) }),
+                        React.createElement("div", { style: { background: C.card, borderRadius: 14, padding: "14px 16px", border: `1.5px solid ${C.cardBorder}`, flex: 1 } },
+                            React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 8, marginBottom: 8 } },
+                                React.createElement("div", { style: { width: 28, height: 28, borderRadius: 8, background: TH.accent + "22", border: `1px solid ${TH.accent}33`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 } },
+                                    React.createElement("svg", { width: "14", height: "14", viewBox: "0 0 24 24", fill: "none", stroke: TH.accent, strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round" },
+                                        React.createElement("path", { d: "M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z" }))),
+                                React.createElement("div", { style: { fontSize: 9, color: C.muted, textTransform: "uppercase", letterSpacing: "0.08em", fontWeight: 600 } }, "Top Exercise")),
+                            topEx ? (React.createElement(React.Fragment, null,
+                                React.createElement("div", { style: { fontSize: 13, fontWeight: 800, color: C.text, lineHeight: 1.2, marginBottom: 4 } }, topEx[0]),
+                                React.createElement("div", { style: { fontSize: 10, color: C.muted } },
+                                    topEx[1],
+                                    " sets this week"))) : (React.createElement("div", { style: { fontSize: 12, color: C.muted, lineHeight: 1.4 } }, "No workouts logged yet this week"))))));
+            })())),
         activeTab === "active" && !selectedWorkout && (React.createElement("div", { style: { flex: 1, display: "flex", flexDirection: "column", position: "relative", zIndex: 1, overflow: "hidden" } }, !cardioMode ? (React.createElement("div", { style: { flex: 1, overflowY: "auto", padding: "52px 24px 24px" } },
             React.createElement("div", { style: { fontSize: 12, color: C.muted, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 4 } }, "Active Session"),
             React.createElement("div", { style: { fontSize: 26, fontWeight: 700, marginBottom: 18 } }, "What's the plan?"),
