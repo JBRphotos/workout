@@ -1,4 +1,4 @@
-<!DOCTYPE html><!-- v20260331-122517 -->
+<!DOCTYPE html><!-- v20260331-125952 -->
 
 <html lang="en">
 <head>
@@ -17,15 +17,10 @@
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     html,body{touch-action:manipulation;background:#0A0A0A}
-    @media all and (display-mode:standalone){
-      #root{position:fixed;top:0;left:0;right:0;bottom:0;overflow:hidden}
-    }
-    @media not all and (display-mode:standalone){
-      #root{position:relative;min-height:100vh;overflow:hidden}
-    }
+    @media all and (display-mode:standalone){#root{position:fixed;top:0;left:0;right:0;bottom:0;overflow:hidden}}
+    @media not all and (display-mode:standalone){#root{position:relative;min-height:100vh;overflow:hidden}}
     ::-webkit-scrollbar{display:none}
-    input[type=number]::-webkit-inner-spin-button,
-    input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
+    input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
     #fallback{display:none;position:fixed;inset:0;background:#0A0A0A;flex-direction:column;align-items:center;justify-content:center;font-family:'DM Sans','Helvetica Neue',sans-serif;padding:40px 32px;text-align:center;color:#fff;z-index:9999}
   </style>
 </head>
@@ -47,15 +42,7 @@
       <div style="background:#1a1a1a;border-radius:14px;padding:16px 20px;border:1px solid #2a2a2a;text-align:left"><div style="font-size:10px;color:#444;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px">Step 3</div><div style="font-size:14px;color:#ccc">Launch from your <strong style="color:#fff">Home Screen</strong></div></div>
     </div>
   </div>
-  <script>
-    window.addEventListener('load', function() {
-      setTimeout(function() {
-        if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
-          document.getElementById('fallback').style.display = 'flex';
-        }
-      }, 2000);
-    });
-  </script>
+  <script>window.addEventListener('load',function(){setTimeout(function(){if(typeof React==='undefined'||typeof ReactDOM==='undefined'){document.getElementById('fallback').style.display='flex';}},2000);});</script>
   <script>const { useState, useRef, useEffect } = React;
 // ── XP + LEVEL SYSTEM ────────────────────────────────────────────────────────
 // XP rewards scale with intensity. Each entry: { Light, Moderate, Hard, description }
@@ -1604,7 +1591,7 @@ function StretchCard({ stretch, color, defaultDur }) {
                     React.createElement("div", { style: { fontSize: 13, color: C.text, lineHeight: 1.6 } }, stretch.cue)))))));
 }
 // ── EXERCISE CARD (active workout) ────────────────────────────────────────────
-function ExerciseCard({ ex, workoutColor, completedSets, toggleSet, intensity, setLogs, onSetLog, prData, setCountOverride, onSetCountChange }) {
+function ExerciseCard({ ex, workoutColor, completedSets, toggleSet, intensity, setLogs, onSetLog, prData, setCountOverride, onSetCountChange, lastSession }) {
     var _a;
     const C = useC();
     const [expanded, setExpanded] = useState(false);
@@ -1617,6 +1604,13 @@ function ExerciseCard({ ex, workoutColor, completedSets, toggleSet, intensity, s
     const cfg = INTENSITY_CONFIG[intensity];
     const baseSets = Math.max(1, ex.sets + ((cfg === null || cfg === void 0 ? void 0 : cfg.sets) || 0));
     const adjSets = setCountOverride !== undefined ? setCountOverride : baseSets;
+    // Rotation awareness — flag if not done in >14 days
+    const daysSinceLastDone = lastSession ? null : (() => {
+        // lastSession is null meaning we checked history but found nothing
+        // We signal "never done" by returning a large number
+        return 999;
+    })();
+    const isNeglected = !lastSession && prData; // has PR data but no recent session = been a while
     // Detect timed exercises — reps contains "sec"
     const isTimed = String(ex.reps).toLowerCase().includes("sec");
     const defaultHold = isTimed ? (parseInt(String(ex.reps)) || 30) : 0;
@@ -1685,8 +1679,9 @@ function ExerciseCard({ ex, workoutColor, completedSets, toggleSet, intensity, s
         setCurrentSet(nextIdx);
         setEditingSet(null);
         const existing = setLogs === null || setLogs === void 0 ? void 0 : setLogs[`${ex.name}-${nextIdx}`];
-        setWeightInput((existing === null || existing === void 0 ? void 0 : existing.weight) || "");
-        setRepsInput((existing === null || existing === void 0 ? void 0 : existing.reps) || String(ex.reps).split("-")[0] || "");
+        // Autofill: use existing log first, then last session, then default reps
+        setWeightInput((existing === null || existing === void 0 ? void 0 : existing.weight) || (lastSession === null || lastSession === void 0 ? void 0 : lastSession.weight) || "");
+        setRepsInput((existing === null || existing === void 0 ? void 0 : existing.reps) || (lastSession === null || lastSession === void 0 ? void 0 : lastSession.reps) || String(ex.reps).split("-")[0] || "");
         setOpen(true);
     };
     const logAndAdvance = () => {
@@ -1728,6 +1723,11 @@ function ExerciseCard({ ex, workoutColor, completedSets, toggleSet, intensity, s
                 React.createElement("div", { style: { flex: 1 } },
                     React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" } },
                         React.createElement("div", { style: { fontWeight: 600, fontSize: 14, color: allDone ? workoutColor : C.text } }, ex.name),
+                        isNeglected && !allDone && (React.createElement("span", { style: { fontSize: 9, padding: "2px 6px", borderRadius: 6, background: "#F7DC6F22", color: "#F7DC6F", border: "1px solid #F7DC6F44", fontWeight: 600, letterSpacing: "0.04em" } }, "LONG TIME")),
+                        (lastSession === null || lastSession === void 0 ? void 0 : lastSession.weight) && !allDone && (React.createElement("span", { style: { fontSize: 9, padding: "2px 6px", borderRadius: 6, background: C.btnBg, color: C.muted, border: `1px solid ${C.btnBorder}`, fontWeight: 500 } },
+                            "Last: ",
+                            lastSession.weight,
+                            "lb")),
                         prData && (React.createElement("div", { style: { fontSize: 10, padding: "2px 8px", borderRadius: 8,
                                 background: prData.isNew ? workoutColor + "33" : C.btnBg,
                                 color: prData.isNew ? workoutColor : "#555",
@@ -4493,6 +4493,43 @@ function WorkoutApp() {
                     })),
                     customSchedule && (React.createElement("div", { style: { padding: "8px 14px 10px", borderTop: "1px solid #141414" } },
                         React.createElement("button", { onClick: () => { setCustomSchedule(generateSchedule(daysPerWeek)); setEditingDay(null); }, style: { background: "none", border: "none", color: C.muted, fontSize: 12, cursor: "pointer", padding: 0 } }, "\u21BA Reset to smart default")))))),
+            (() => {
+                // Find what hasn't been done recently from the schedule
+                const recentWorkouts = workoutHistory.slice(0, 7).map(s => s.workout);
+                const scheduledTypes = [...new Set(schedule.filter(s => s !== "Rest"))];
+                const overdueType = scheduledTypes.find(t => !recentWorkouts.includes(t));
+                const lastWorkout = workoutHistory[0];
+                const daysSinceLast = lastWorkout ? Math.floor((Date.now() - new Date(lastWorkout.date)) / 86400000) : null;
+                // Only show if something meaningful to say
+                if (!overdueType && daysSinceLast === null)
+                    return null;
+                let msg = null, subMsg = null, suggestedType = null;
+                if (overdueType) {
+                    msg = `${overdueType} is overdue`;
+                    subMsg = `Not in your last 7 sessions — time to hit it`;
+                    suggestedType = overdueType;
+                }
+                else if (daysSinceLast !== null && daysSinceLast >= 2) {
+                    const nextType = scheduledTypes.find(t => t !== (lastWorkout === null || lastWorkout === void 0 ? void 0 : lastWorkout.workout)) || scheduledTypes[0];
+                    msg = `${daysSinceLast} days since last workout`;
+                    subMsg = `Ready to get back at it?`;
+                    suggestedType = nextType;
+                }
+                if (!msg || !suggestedType)
+                    return null;
+                return (React.createElement("div", { style: { padding: "0 24px 14px" } },
+                    React.createElement("div", { onClick: () => startWorkout(suggestedType), style: { background: `linear-gradient(135deg, ${TH.accent}22, ${TH.accent}08)`, borderRadius: 14, padding: "12px 16px", border: `1.5px solid ${TH.accent}44`, cursor: "pointer", display: "flex", alignItems: "center", gap: 12 } },
+                        React.createElement("div", { style: { width: 36, height: 36, borderRadius: 10, background: TH.accent + "22", border: `1px solid ${TH.accent}44`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 } },
+                            React.createElement("svg", { width: "18", height: "18", viewBox: "0 0 24 24", fill: "none", stroke: TH.accent, strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round" },
+                                React.createElement("polygon", { points: "13 2 3 14 12 14 11 22 21 10 12 10 13 2" }))),
+                        React.createElement("div", { style: { flex: 1 } },
+                            React.createElement("div", { style: { fontSize: 12, fontWeight: 700, color: TH.accent, marginBottom: 2 } }, msg),
+                            React.createElement("div", { style: { fontSize: 11, color: C.muted } },
+                                subMsg,
+                                " \u00B7 Tap to start ",
+                                suggestedType)),
+                        React.createElement("div", { style: { fontSize: 16, color: TH.accent + "66" } }, "\u203A"))));
+            })(),
             React.createElement("div", { style: { padding: "0 24px 18px" } },
                 React.createElement("div", { style: { fontSize: 10, color: C.muted, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 10 } }, "Today"),
                 todayPlan !== "Rest" && WORKOUT_PLANS[todayPlan] ? (React.createElement(PlanCard, { type: todayPlan, onClick: () => startWorkout(todayPlan) })) : (React.createElement("div", { style: { background: C.card, borderRadius: 16, padding: "20px", border: `1.5px solid ${C.cardBorder}`, textAlign: "center" } },
@@ -4662,7 +4699,21 @@ function WorkoutApp() {
                         " \u00B7 ",
                         intensityCfg.restLabel)),
                 React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 8 } },
-                    activeExercises.map(ex => (React.createElement(ExerciseCard, { key: ex.name, ex: ex, workoutColor: activeColor, completedSets: completedSets, toggleSet: toggleSet, intensity: intensity, setLogs: setLogs, onSetLog: handleSetLog, prData: exercisePRs[ex.name], setCountOverride: setCountOverrides[ex.name], onSetCountChange: (name, count) => setSetCountOverrides(prev => (Object.assign(Object.assign({}, prev), { [name]: count }))) }))),
+                    activeExercises.map(ex => {
+                        // Find last session data for this exercise for autofill
+                        const lastSessionData = (() => {
+                            var _a;
+                            for (const session of workoutHistory) {
+                                const sets = (_a = session.exercises) === null || _a === void 0 ? void 0 : _a[ex.name];
+                                if ((sets === null || sets === void 0 ? void 0 : sets.length) > 0) {
+                                    const best = sets.reduce((a, b) => (parseFloat(b.weight) || 0) >= (parseFloat(a.weight) || 0) ? b : a);
+                                    return best;
+                                }
+                            }
+                            return null;
+                        })();
+                        return (React.createElement(ExerciseCard, { key: ex.name, ex: ex, workoutColor: activeColor, completedSets: completedSets, toggleSet: toggleSet, intensity: intensity, setLogs: setLogs, onSetLog: handleSetLog, prData: exercisePRs[ex.name], lastSession: lastSessionData, setCountOverride: setCountOverrides[ex.name], onSetCountChange: (name, count) => setSetCountOverrides(prev => (Object.assign(Object.assign({}, prev), { [name]: count }))) }));
+                    }),
                     (() => {
                         const allNames = LIBRARY.map(e => e.name);
                         const suggestions = noteSearch.length > 1
@@ -4711,10 +4762,27 @@ function WorkoutApp() {
         activeTab === "library" && (React.createElement("div", { style: { flex: 1, display: "flex", flexDirection: "column", overflow: "hidden", position: "relative", zIndex: 1 } },
             React.createElement("div", { style: { flexShrink: 0, padding: "52px 24px 12px" } },
                 React.createElement("div", { style: { fontSize: 10, color: C.muted, letterSpacing: "0.1em", textTransform: "uppercase" } }, "Exercise Library"),
-                React.createElement("div", { style: { fontSize: 24, fontWeight: 700, marginTop: 3 } },
-                    libMode === "pt" && ptArea ? (_a = PT_AREAS.find(a => a.id === ptArea)) === null || _a === void 0 ? void 0 : _a.label : libMode === "pt" ? "Physical Therapy" : "Pick & Go",
-                    "\u00A0",
-                    React.createElement("span", { style: { color: libMode === "pt" ? "#F87171" : "#52E3A0" } }, libMode === "pt" ? "PT" : "+")),
+                React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginTop: 3 } },
+                    React.createElement("div", { style: { fontSize: 24, fontWeight: 700 } },
+                        libMode === "pt" && ptArea ? (_a = PT_AREAS.find(a => a.id === ptArea)) === null || _a === void 0 ? void 0 : _a.label : libMode === "pt" ? "Physical Therapy" : "Pick & Go",
+                        "\u00A0",
+                        React.createElement("span", { style: { color: libMode === "pt" ? "#F87171" : "#52E3A0" } }, libMode === "pt" ? "PT" : "+")),
+                    libMode === "exercises" && (React.createElement("button", { onClick: () => {
+                            // Surprise Me — pick 5-6 random exercises avoiding recently used
+                            const recentNames = new Set(workoutHistory.slice(0, 3).flatMap(s => Object.keys(s.exercises || {})));
+                            const pool = LIBRARY.filter(e => !recentNames.has(e.name));
+                            const source = pool.length >= 5 ? pool : LIBRARY;
+                            const shuffled = [...source].sort(() => Math.random() - 0.5).slice(0, 6);
+                            const newChecked = {};
+                            shuffled.forEach(e => { newChecked[`${e.group}-${e.name}`] = true; });
+                            setChecked(newChecked);
+                        }, style: { padding: "7px 12px", borderRadius: 10, background: TH.accent + "22", border: `1.5px solid ${TH.accent}44`, color: TH.accent, fontSize: 11, fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", gap: 5, flexShrink: 0, marginBottom: 4 } },
+                        React.createElement("svg", { width: "12", height: "12", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2.5", strokeLinecap: "round", strokeLinejoin: "round" },
+                            React.createElement("polyline", { points: "16 3 21 3 21 8" }),
+                            React.createElement("line", { x1: "4", y1: "20", x2: "21", y2: "3" }),
+                            React.createElement("polyline", { points: "21 16 21 21 16 21" }),
+                            React.createElement("line", { x1: "15", y1: "15", x2: "21", y2: "21" })),
+                        "Surprise Me"))),
                 React.createElement("div", { style: { display: "flex", gap: 8, marginTop: 12 } }, [{ id: "exercises", label: "Exercises" }, { id: "workouts", label: "Workouts" }, { id: "pt", label: "PT" }].map(m => (React.createElement("button", { key: m.id, onClick: () => { setLibMode(m.id); setPtArea(null); }, style: { flex: 1, padding: "8px", borderRadius: 10, cursor: "pointer", fontSize: 12, fontWeight: 600, border: `1.5px solid ${libMode === m.id ? (m.id === "pt" ? "#F87171" : m.id === "workouts" ? TH.accent : "#52E3A0") : C.cardBorder}`, background: libMode === m.id ? (m.id === "pt" ? "#F8717118" : m.id === "workouts" ? TH.accent + "18" : "#52E3A018") : C.card, color: libMode === m.id ? (m.id === "pt" ? "#F87171" : m.id === "workouts" ? TH.accent : "#52E3A0") : C.muted } }, m.label))))),
             libMode === "workouts" && (React.createElement("div", { style: { flex: 1, overflowY: "auto", padding: "0 24px 20px" } },
                 React.createElement("div", { style: { fontSize: 12, color: C.muted, lineHeight: 1.6, marginBottom: 20, marginTop: 4 } }, "Guided timer workouts. Tap a template to preview and start."),
