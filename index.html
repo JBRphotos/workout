@@ -1,4 +1,4 @@
-<!DOCTYPE html><!-- v20260331-125952 -->
+<!DOCTYPE html><!-- v20260402-012832 -->
 
 <html lang="en">
 <head>
@@ -486,8 +486,8 @@ const getWeekKey = () => {
 };
 // ── SMART SCHEDULE HELPERS ───────────────────────────────────────────────────
 // Workout types grouped by "heaviness" — used to avoid back-to-back heavy days
-const HEAVY = ["Push", "Pull", "Legs"];
-const LIGHT = ["Bodyweight Push", "Bodyweight Pull", "Bodyweight Legs"];
+const HEAVY = ["Push", "Pull", "Legs", "Full Body", "Full Body Burnout"];
+const LIGHT = ["Bodyweight Push", "Bodyweight Pull", "Bodyweight Legs", "Bodyweight Full Body"];
 const WORKOUT_DAYS = [...HEAVY, ...LIGHT];
 // Generate a semi-random but valid weekly schedule for N workout days
 // Rules: no two heavy compound days back-to-back, rest days spread evenly,
@@ -554,36 +554,66 @@ function getISOWeek(date) {
 }
 // ── PROGRESSIVE OVERLOAD SUGGESTIONS ─────────────────────────────────────────
 // Analyzes PR history and suggests next session target
-function getOverloadSuggestion(prData, exName) {
-    var _a, _b;
+// Week-of-month intensity profile (transparent to user)
+// Week A=baseline, B=heavy, C=volume, D=light
+function getWeekIntensityProfile() {
+    const weekOfMonth = Math.min(4, Math.ceil(new Date().getDate() / 7));
+    const profiles = {
+        1: { label: "Baseline", repMod: 0, setMod: 0, weightMod: 0 }, // Week A
+        2: { label: "Heavy", repMod: -1, setMod: 0, weightMod: 0.05 }, // Week B — fewer reps, more weight
+        3: { label: "Volume", repMod: 2, setMod: 1, weightMod: -0.05 }, // Week C — more reps, slight deload
+        4: { label: "Light", repMod: 2, setMod: -1, weightMod: -0.10 }, // Week D — deload/recovery
+    };
+    return profiles[weekOfMonth] || profiles[1];
+}
+function getOverloadSuggestion(prData, exName, intensity) {
     if (!(prData === null || prData === void 0 ? void 0 : prData.history) || prData.history.length < 1)
         return null;
-    const recent = prData.history[0]; // most recent session
-    const prev = prData.history[1]; // session before that
+    const recent = prData.history[0];
+    const prev = prData.history[1];
     const w = prData.weight || 0;
     const r = prData.reps || 0;
-    // Determine increment by exercise type
     const isBodyweight = w === 0;
-    const isUpperCompound = ["Bench Press", "Overhead Press", "Barbell Row", "Pull-Ups", "Chin-Ups"].includes(exName);
+    const isUpperCompound = ["Bench Press", "Overhead Press", "Barbell Row", "Pull-Ups", "Chin-Ups", "Incline Dumbbell Press"].includes(exName);
     const isLowerCompound = ["Squat", "Deadlift", "Romanian Deadlift", "Leg Press", "Hip Thrust", "Hack Squat"].includes(exName);
-    const weightIncrement = isLowerCompound ? 5 : isUpperCompound ? 2.5 : 2.5;
-    if (isBodyweight) {
-        // Suggest adding reps
-        if (r > 0)
-            return { type: "reps", message: `Try ${r + 1} reps this session`, value: r + 1 };
-        return null;
-    }
-    // If they hit the top of the rep range last session, suggest more weight
-    const topOfRange = parseInt(String(((_b = (_a = recent.allSets) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b.reps) || r));
+    // Base increment by exercise type
+    const baseIncrement = isLowerCompound ? 5 : 2.5;
+    // Scale increment by user intensity setting
+    const intensityMultiplier = intensity === "Light" ? 0.5 : intensity === "Hard" ? 1.5 : 1;
+    const weightIncrement = baseIncrement * intensityMultiplier;
+    // Week profile modifies the suggestion
+    const weekProfile = getWeekIntensityProfile();
+    // Rep thresholds adjusted by intensity
+    const progressThreshold = intensity === "Light" ? 10 : intensity === "Hard" ? 5 : 8;
     const isPR = !prev || recent.weight >= (prev.weight || 0);
-    if (isPR && r >= 8) {
+    if (isBodyweight) {
+        const suggestedReps = r + 1 + (weekProfile.repMod > 0 ? 1 : 0);
+        return { type: "reps", message: `Try ${suggestedReps} reps`, value: suggestedReps };
+    }
+    // Week B (heavy) — push weight even at lower reps
+    if (weekProfile.label === "Heavy" && isPR && r >= 5) {
+        const heavyWeight = Math.round((w * (1 + weekProfile.weightMod)) / 2.5) * 2.5;
+        return { type: "weight", message: `Heavy week — try ${heavyWeight}lb × ${Math.max(3, r - 2)} reps`, value: heavyWeight };
+    }
+    // Week C (volume) — more reps, slightly less weight
+    if (weekProfile.label === "Volume") {
+        const volWeight = Math.round((w * (1 + weekProfile.weightMod)) / 2.5) * 2.5;
+        return { type: "reps", message: `Volume week — ${volWeight}lb × ${r + weekProfile.repMod} reps`, value: r + weekProfile.repMod };
+    }
+    // Week D (light) — active recovery, don't push
+    if (weekProfile.label === "Light") {
+        const lightWeight = Math.round((w * (1 + weekProfile.weightMod)) / 2.5) * 2.5;
+        return { type: "weight", message: `Recovery week — ${lightWeight}lb, focus on form`, value: lightWeight };
+    }
+    // Week A (baseline) — standard progressive overload
+    if (isPR && r >= progressThreshold) {
         return { type: "weight", message: `Add ${weightIncrement}lb → ${w + weightIncrement}lb`, value: w + weightIncrement };
     }
-    if (isPR && r >= 6 && isUpperCompound) {
-        return { type: "weight", message: `Try ${w + weightIncrement}lb this session`, value: w + weightIncrement };
-    }
-    if (r < 6) {
+    if (isPR && r >= 5) {
         return { type: "reps", message: `Same weight, aim for ${r + 1} reps`, value: r + 1 };
+    }
+    if (r < 5) {
+        return { type: "reps", message: `Hold weight — build to ${r + 1} reps first`, value: r + 1 };
     }
     return null;
 }
@@ -682,7 +712,9 @@ function LevelUpLogo({ accent = "#5B4FE8", size = 1, showTagline = true }) {
 // Map plan names to icon keys
 const PLAN_ICON = {
     Push: "Push", Pull: "Pull", Legs: "Legs",
+    "Full Body": "Active", "Full Body Burnout": "Active",
     "Bodyweight Push": "Push", "Bodyweight Pull": "Pull", "Bodyweight Legs": "Legs",
+    "Bodyweight Full Body": "Active",
     Rest: "Rest", Custom: "Active",
 };
 // ── THEMES ────────────────────────────────────────────────────────────────────
@@ -1206,53 +1238,221 @@ const FORM_GUIDES = {
     "KB Turkish Get-Up": { cues: ["Lie flat, KB pressed overhead, eye on the bell", "Rise to elbow, then to hand, then to kneeling", "Stand up fully, then reverse every step to lie back down", "Keep the KB locked overhead throughout every transition"], muscles: ["Full Body", "Core", "Shoulder Stability"], tip: "Go slow — this is a technique exercise, not a conditioning one. Speed comes after mastery" },
 };
 // ── GYM WORKOUT PLANS ────────────────────────────────────────────────────────
+// ── WORKOUT PLANS ────────────────────────────────────────────────────────────
+// Each plan has base exercises + rotating slots for variety.
+// coreOptions: 3 core exercises rotated by ISO week number (auto-changes weekly)
+// accessoryOptions: alternate accessory picks so workouts don't feel identical
 const WORKOUT_PLANS = {
-    Push: { icon: "↑", color: "#FF6B35", exercises: [
-            { name: "Bench Press", sets: 4, reps: "6-8", muscle: "Chest" },
-            { name: "Incline Dumbbell Press", sets: 3, reps: "8-10", muscle: "Upper Chest" },
-            { name: "Overhead Press", sets: 4, reps: "6-8", muscle: "Shoulders" },
-            { name: "Lateral Raises", sets: 3, reps: "12-15", muscle: "Side Delts" },
-            { name: "Tricep Pushdowns", sets: 3, reps: "10-12", muscle: "Triceps" },
-            { name: "Overhead Tricep Ext", sets: 3, reps: "10-12", muscle: "Triceps" },
-        ] },
-    Pull: { icon: "↓", color: "#4ECDC4", exercises: [
-            { name: "Deadlift", sets: 4, reps: "4-6", muscle: "Back/Glutes" },
-            { name: "Barbell Row", sets: 4, reps: "6-8", muscle: "Back" },
-            { name: "Pull-Ups", sets: 3, reps: "6-10", muscle: "Lats" },
-            { name: "Face Pulls", sets: 3, reps: "12-15", muscle: "Rear Delts" },
-            { name: "Hammer Curls", sets: 3, reps: "10-12", muscle: "Biceps" },
-            { name: "Incline Dumbbell Curl", sets: 3, reps: "10-12", muscle: "Biceps" },
-        ] },
-    Legs: { icon: "⊕", color: "#A78BFA", exercises: [
-            { name: "Squat", sets: 4, reps: "6-8", muscle: "Quads/Glutes" },
-            { name: "Romanian Deadlift", sets: 3, reps: "8-10", muscle: "Hamstrings" },
-            { name: "Leg Press", sets: 3, reps: "10-12", muscle: "Quads" },
-            { name: "Walking Lunges", sets: 3, reps: "10 ea", muscle: "Quads/Glutes" },
-            { name: "Leg Curl", sets: 3, reps: "10-12", muscle: "Hamstrings" },
-            { name: "Calf Raises", sets: 4, reps: "15-20", muscle: "Calves" },
-        ] },
-    "Bodyweight Push": { icon: "↑", color: "#FF6B35", badge: "BW", exercises: [
-            { name: "Push-Ups", sets: 4, reps: "12-15", muscle: "Chest/Triceps" },
-            { name: "Pike Push-Ups", sets: 3, reps: "10-12", muscle: "Shoulders" },
-            { name: "Diamond Push-Ups", sets: 3, reps: "8-12", muscle: "Triceps" },
-            { name: "Dips", sets: 3, reps: "10-12", muscle: "Chest/Triceps" },
-            { name: "Lateral Raises", sets: 3, reps: "15-20", muscle: "Side Delts" },
-        ] },
-    "Bodyweight Pull": { icon: "↓", color: "#4ECDC4", badge: "BW", exercises: [
-            { name: "Pull-Ups", sets: 4, reps: "6-10", muscle: "Lats/Biceps" },
-            { name: "Chin-Ups", sets: 3, reps: "8-10", muscle: "Biceps/Lats" },
-            { name: "Inverted Row", sets: 3, reps: "10-12", muscle: "Back" },
-            { name: "Face Pulls", sets: 3, reps: "15-20", muscle: "Rear Delts" },
-            { name: "Hammer Curls", sets: 3, reps: "12-15", muscle: "Biceps" },
-        ] },
-    "Bodyweight Legs": { icon: "⊕", color: "#A78BFA", badge: "BW", exercises: [
-            { name: "Bodyweight Squat", sets: 4, reps: "15-20", muscle: "Quads/Glutes" },
-            { name: "Bulgarian Split Squat", sets: 3, reps: "10 ea", muscle: "Quads/Glutes" },
-            { name: "Jump Squat", sets: 3, reps: "12-15", muscle: "Quads/Calves" },
-            { name: "Glute Bridge", sets: 4, reps: "15-20", muscle: "Glutes/Hams" },
-            { name: "Mountain Climbers", sets: 3, reps: "30 sec", muscle: "Core/Full Body" },
-            { name: "Hollow Body Hold", sets: 3, reps: "30 sec", muscle: "Core" },
-        ] },
+    Push: { icon: "↑", color: "#FF6B35",
+        exercises: [
+            { name: "Bench Press", sets: 4, reps: "6-8", muscle: "Chest", note: "Primary compound — control the descent" },
+            { name: "Incline Dumbbell Press", sets: 3, reps: "8-10", muscle: "Upper Chest", note: "30-45° incline hits upper chest" },
+            { name: "Overhead Press", sets: 4, reps: "6-8", muscle: "Shoulders", note: "Brace core before every rep" },
+            { name: "Lateral Raises", sets: 3, reps: "12-15", muscle: "Side Delts", note: "Slow and controlled — no swinging" },
+        ],
+        accessoryOptions: [
+            // Tricep pair — rotates weekly
+            [
+                { name: "Tricep Pushdowns", sets: 3, reps: "10-12", muscle: "Triceps", note: "Elbows pinned to sides" },
+                { name: "Overhead Tricep Ext", sets: 3, reps: "10-12", muscle: "Triceps", note: "Full stretch at the bottom" },
+            ],
+            [
+                { name: "Skull Crushers", sets: 3, reps: "8-10", muscle: "Triceps", note: "Slight angle back for long head" },
+                { name: "Close-Grip Bench", sets: 3, reps: "8-10", muscle: "Chest/Triceps", note: "Elbows at 45° — not fully tucked" },
+            ],
+            [
+                { name: "Cable Fly", sets: 3, reps: "12-15", muscle: "Chest", note: "Squeeze hard at the centre" },
+                { name: "Tricep Kickbacks", sets: 3, reps: "12-15", muscle: "Triceps", note: "Upper arm parallel to floor" },
+            ],
+        ],
+        coreOptions: [
+            { name: "Plank", sets: 3, reps: "45 sec", muscle: "Core", note: "Squeeze glutes and brace abs" },
+            { name: "Ab Wheel Rollout", sets: 3, reps: "10-12", muscle: "Core", note: "Keep lower back flat — don't arch" },
+            { name: "Side Plank", sets: 3, reps: "30 sec ea", muscle: "Obliques", note: "Stack feet or stagger for stability" },
+        ],
+    },
+    Pull: { icon: "↓", color: "#4ECDC4",
+        exercises: [
+            { name: "Deadlift", sets: 4, reps: "4-6", muscle: "Back/Glutes", note: "Big breath and brace before every rep" },
+            { name: "Barbell Row", sets: 4, reps: "6-8", muscle: "Back", note: "Pull to lower chest — squeeze at top" },
+            { name: "Pull-Ups", sets: 3, reps: "6-10", muscle: "Lats", note: "Dead hang start, elbows to back pocket" },
+            { name: "Face Pulls", sets: 3, reps: "12-15", muscle: "Rear Delts", note: "Elbows high — pull to forehead" },
+        ],
+        accessoryOptions: [
+            [
+                { name: "Hammer Curls", sets: 3, reps: "10-12", muscle: "Biceps", note: "Neutral grip — hits brachialis" },
+                { name: "Incline Dumbbell Curl", sets: 3, reps: "10-12", muscle: "Biceps", note: "Full stretch at the bottom is the point" },
+            ],
+            [
+                { name: "Preacher Curl", sets: 3, reps: "8-10", muscle: "Biceps", note: "Full extension — don't cheat the range" },
+                { name: "Reverse Curl", sets: 3, reps: "12-15", muscle: "Forearms/Bis", note: "Builds the brachialis and forearm thickness" },
+            ],
+            [
+                { name: "Cable Curl", sets: 3, reps: "12-15", muscle: "Biceps", note: "Constant tension through the full arc" },
+                { name: "Concentration Curl", sets: 3, reps: "10-12", muscle: "Biceps", note: "Slow — no momentum here" },
+            ],
+        ],
+        coreOptions: [
+            { name: "Hanging Leg Raise", sets: 3, reps: "10-12", muscle: "Core", note: "Control the descent — don't swing" },
+            { name: "Dead Bug", sets: 3, reps: "10 ea", muscle: "Core", note: "Press lower back into floor throughout" },
+            { name: "Cable Crunch", sets: 3, reps: "12-15", muscle: "Abs", note: "Crunch from the abs — not the hip flexors" },
+        ],
+    },
+    Legs: { icon: "⊕", color: "#A78BFA",
+        exercises: [
+            { name: "Squat", sets: 4, reps: "6-8", muscle: "Quads/Glutes", note: "Hip crease below parallel — drive knees out" },
+            { name: "Romanian Deadlift", sets: 3, reps: "8-10", muscle: "Hamstrings", note: "Push hips back — feel the hamstring stretch" },
+            { name: "Leg Press", sets: 3, reps: "10-12", muscle: "Quads", note: "Don't lock knees — keep tension" },
+            { name: "Walking Lunges", sets: 3, reps: "10 ea", muscle: "Quads/Glutes", note: "Drop down, not forward — knee stays safe" },
+            { name: "Leg Curl", sets: 3, reps: "10-12", muscle: "Hamstrings", note: "1 second squeeze at the top" },
+            { name: "Calf Raises", sets: 4, reps: "15-20", muscle: "Calves", note: "Full stretch at the bottom every rep" },
+        ],
+        coreOptions: [
+            { name: "Ab Wheel Rollout", sets: 3, reps: "10-12", muscle: "Core", note: "Only go as far as your back stays flat" },
+            { name: "Hanging Leg Raise", sets: 3, reps: "10-12", muscle: "Core", note: "Start from dead hang — no swinging" },
+            { name: "Russian Twists", sets: 3, reps: "20", muscle: "Obliques", note: "Rotate from the torso — not just the arms" },
+        ],
+    },
+    "Full Body": { icon: "★", color: "#52E3A0",
+        exercises: [
+            { name: "Squat", sets: 4, reps: "6-8", muscle: "Quads/Glutes", note: "Priority compound — go heavy" },
+            { name: "Bench Press", sets: 3, reps: "8-10", muscle: "Chest", note: "Controlled descent — 2 seconds down" },
+            { name: "Barbell Row", sets: 3, reps: "8-10", muscle: "Back", note: "Hinge 45° — pull to lower chest" },
+            { name: "Overhead Press", sets: 3, reps: "8-10", muscle: "Shoulders", note: "Core braced — don't hyperextend" },
+            { name: "Romanian Deadlift", sets: 3, reps: "10-12", muscle: "Hamstrings", note: "Slow eccentric — the stretch matters" },
+        ],
+        accessoryOptions: [
+            [
+                { name: "Hammer Curls", sets: 2, reps: "12-15", muscle: "Biceps", note: "Neutral grip — keep elbows pinned" },
+                { name: "Tricep Pushdowns", sets: 2, reps: "12-15", muscle: "Triceps", note: "Elbows stay at your sides" },
+            ],
+            [
+                { name: "Cable Curl", sets: 2, reps: "12-15", muscle: "Biceps", note: "Constant tension" },
+                { name: "Skull Crushers", sets: 2, reps: "10-12", muscle: "Triceps", note: "Upper arms stay vertical" },
+            ],
+            [
+                { name: "Preacher Curl", sets: 2, reps: "10-12", muscle: "Biceps", note: "Full range — no half reps" },
+                { name: "Overhead Tricep Ext", sets: 2, reps: "12-15", muscle: "Triceps", note: "Full stretch at the bottom" },
+            ],
+        ],
+        coreOptions: [
+            { name: "Plank", sets: 3, reps: "45 sec", muscle: "Core", note: "Squeeze glutes — flat back" },
+            { name: "Dead Bug", sets: 3, reps: "10 ea", muscle: "Core", note: "Lower back stays on the floor" },
+            { name: "Side Plank", sets: 3, reps: "30 sec ea", muscle: "Obliques", note: "Don't let the hip sag" },
+        ],
+    },
+    "Full Body Burnout": { icon: "⚡", color: "#F7DC6F",
+        exercises: [
+            { name: "Deadlift", sets: 3, reps: "5", muscle: "Full Body", note: "Max effort — full reset each rep" },
+            { name: "Squat", sets: 3, reps: "8-10", muscle: "Quads/Glutes", note: "Stay tight — don't relax at the bottom" },
+            { name: "Dips", sets: 3, reps: "10-12", muscle: "Chest/Triceps", note: "Lean forward slightly for more chest" },
+            { name: "Pull-Ups", sets: 3, reps: "8-10", muscle: "Back/Biceps", note: "Dead hang — full range every rep" },
+            { name: "Lateral Raises", sets: 3, reps: "15-20", muscle: "Shoulders", note: "Slow — no momentum" },
+            { name: "Walking Lunges", sets: 3, reps: "12 ea", muscle: "Legs", note: "Keep torso upright throughout" },
+        ],
+        coreOptions: [
+            { name: "Ab Wheel Rollout", sets: 3, reps: "10-12", muscle: "Core", note: "The hardest ab exercise — earn it" },
+            { name: "Hanging Leg Raise", sets: 3, reps: "12-15", muscle: "Core", note: "Controlled — squeeze at the top" },
+            { name: "Russian Twists", sets: 3, reps: "20", muscle: "Obliques", note: "Add a plate when bodyweight is easy" },
+        ],
+    },
+    "Bodyweight Push": { icon: "↑", color: "#FF6B35", badge: "BW",
+        exercises: [
+            { name: "Push-Ups", sets: 4, reps: "12-15", muscle: "Chest/Triceps", note: "Full range — chest to floor" },
+            { name: "Pike Push-Ups", sets: 3, reps: "10-12", muscle: "Shoulders", note: "Hips high — nearly vertical torso" },
+            { name: "Diamond Push-Ups", sets: 3, reps: "8-12", muscle: "Triceps", note: "Hands form a diamond under chest" },
+            { name: "Dips", sets: 3, reps: "10-12", muscle: "Chest/Triceps", note: "Lean forward slightly for more chest" },
+        ],
+        accessoryOptions: [
+            [
+                { name: "Lateral Raises", sets: 3, reps: "15-20", muscle: "Side Delts", note: "No momentum — raise and lower slowly" },
+                { name: "Shoulder Taps", sets: 3, reps: "20 ea", muscle: "Core/Shoulders", note: "Keep hips completely still" },
+            ],
+            [
+                { name: "Decline Push-Ups", sets: 3, reps: "10-12", muscle: "Upper Chest", note: "Feet elevated — increases chest activation" },
+                { name: "Wide Push-Ups", sets: 3, reps: "12-15", muscle: "Chest", note: "Wide grip — maximises chest stretch" },
+            ],
+            [
+                { name: "Archer Push-Ups", sets: 3, reps: "6-8 ea", muscle: "Chest", note: "Unilateral — great chest isolation" },
+                { name: "T Push-Ups", sets: 3, reps: "8 ea", muscle: "Chest/Core", note: "Rotate fully — hip stays stacked" },
+            ],
+        ],
+        coreOptions: [
+            { name: "Plank", sets: 3, reps: "45 sec", muscle: "Core", note: "Brace hard — don't let hips sag" },
+            { name: "Side Plank", sets: 3, reps: "30 sec ea", muscle: "Obliques", note: "Stack feet or stagger for stability" },
+            { name: "Hollow Body Hold", sets: 3, reps: "30 sec", muscle: "Core", note: "Lower back pressed into floor" },
+        ],
+    },
+    "Bodyweight Pull": { icon: "↓", color: "#4ECDC4", badge: "BW",
+        exercises: [
+            { name: "Pull-Ups", sets: 4, reps: "6-10", muscle: "Lats/Biceps", note: "Dead hang start — full range" },
+            { name: "Chin-Ups", sets: 3, reps: "8-10", muscle: "Biceps/Lats", note: "Underhand grip — more bicep" },
+            { name: "Inverted Row", sets: 3, reps: "10-12", muscle: "Back", note: "Chest to bar — squeeze shoulder blades" },
+            { name: "Face Pulls", sets: 3, reps: "15-20", muscle: "Rear Delts", note: "Elbows high — pull to forehead" },
+        ],
+        accessoryOptions: [
+            [
+                { name: "Hammer Curls", sets: 3, reps: "12-15", muscle: "Biceps", note: "Neutral grip hits brachialis" },
+                { name: "Dead Bug", sets: 3, reps: "10 ea", muscle: "Core", note: "Back flat on floor throughout" },
+            ],
+            [
+                { name: "Neutral-Grip Pull-Ups", sets: 3, reps: "6-10", muscle: "Lats/Biceps", note: "Easier on the wrists" },
+                { name: "Scapular Pull-Ups", sets: 3, reps: "10-12", muscle: "Back", note: "Just the shoulder blade depression — great for health" },
+            ],
+            [
+                { name: "L-Sit Pull-Ups", sets: 3, reps: "5-8", muscle: "Lats/Core", note: "Hold the L throughout — brutal combo" },
+                { name: "Wide-Grip Pull-Ups", sets: 3, reps: "5-8", muscle: "Lats", note: "Wider = more lat isolation" },
+            ],
+        ],
+        coreOptions: [
+            { name: "Dead Bug", sets: 3, reps: "10 ea", muscle: "Core", note: "Exhale as you extend — stay controlled" },
+            { name: "Hanging Leg Raise", sets: 3, reps: "10-12", muscle: "Core", note: "From the pull-up bar — no swinging" },
+            { name: "Hollow Body Hold", sets: 3, reps: "30 sec", muscle: "Core", note: "Arms and legs low — back stays flat" },
+        ],
+    },
+    "Bodyweight Legs": { icon: "⊕", color: "#A78BFA", badge: "BW",
+        exercises: [
+            { name: "Bodyweight Squat", sets: 4, reps: "15-20", muscle: "Quads/Glutes", note: "Hip crease below parallel" },
+            { name: "Bulgarian Split Squat", sets: 3, reps: "10 ea", muscle: "Quads/Glutes", note: "Drop straight down — front shin vertical" },
+            { name: "Jump Squat", sets: 3, reps: "12-15", muscle: "Power/Legs", note: "Land softly — immediately repeat" },
+            { name: "Glute Bridge", sets: 4, reps: "15-20", muscle: "Glutes/Hams", note: "Squeeze glutes at the top" },
+            { name: "Walking Lunges", sets: 3, reps: "12 ea", muscle: "Quads/Glutes", note: "Long stride — back knee to floor" },
+        ],
+        coreOptions: [
+            { name: "Mountain Climbers", sets: 3, reps: "30 sec", muscle: "Core/Cardio", note: "Drive knees toward chest — stay flat" },
+            { name: "Hollow Body Hold", sets: 3, reps: "30 sec", muscle: "Core", note: "Arms overhead — lower back pressed flat" },
+            { name: "Russian Twists", sets: 3, reps: "20", muscle: "Obliques", note: "Feet raised makes it harder" },
+        ],
+    },
+    "Bodyweight Full Body": { icon: "★", color: "#52E3A0", badge: "BW",
+        exercises: [
+            { name: "Bodyweight Squat", sets: 3, reps: "15-20", muscle: "Quads/Glutes", note: "Full depth — controlled pace" },
+            { name: "Push-Ups", sets: 3, reps: "12-15", muscle: "Chest/Triceps", note: "Chest to floor — don't half rep" },
+            { name: "Inverted Row", sets: 3, reps: "10-12", muscle: "Back", note: "Chest to bar — squeeze at the top" },
+            { name: "Jump Squat", sets: 3, reps: "10-12", muscle: "Power/Legs", note: "Land softly — absorb through the knees" },
+            { name: "Pike Push-Ups", sets: 3, reps: "10-12", muscle: "Shoulders", note: "Hips high — vertical torso" },
+            { name: "Glute Bridge", sets: 3, reps: "15-20", muscle: "Glutes/Hams", note: "Full squeeze at the top" },
+        ],
+        accessoryOptions: [
+            [
+                { name: "Diamond Push-Ups", sets: 2, reps: "10-12", muscle: "Triceps", note: "Hands form a diamond" },
+                { name: "Chin-Ups", sets: 2, reps: "8-10", muscle: "Biceps/Back", note: "Underhand — more bicep activation" },
+            ],
+            [
+                { name: "Dips", sets: 2, reps: "10-12", muscle: "Chest/Triceps", note: "Lean forward for more chest" },
+                { name: "Hammer Curls", sets: 2, reps: "12-15", muscle: "Biceps", note: "Neutral grip" },
+            ],
+            [
+                { name: "Archer Push-Ups", sets: 2, reps: "6-8 ea", muscle: "Chest", note: "Slow and controlled" },
+                { name: "Wide-Grip Pull-Ups", sets: 2, reps: "6-8", muscle: "Lats", note: "Full hang to full pull" },
+            ],
+        ],
+        coreOptions: [
+            { name: "Mountain Climbers", sets: 3, reps: "30 sec", muscle: "Core/Cardio", note: "Fast pace — drive knees high" },
+            { name: "Plank", sets: 3, reps: "45 sec", muscle: "Core", note: "Squeeze everything — don't just hold" },
+            { name: "Dead Bug", sets: 3, reps: "10 ea", muscle: "Core", note: "Slow and deliberate — back flat" },
+        ],
+    },
 };
 // ── LIBRARY ──────────────────────────────────────────────────────────────────
 const LIBRARY = [
@@ -1759,11 +1959,25 @@ function ExerciseCard({ ex, workoutColor, completedSets, toggleSet, intensity, s
             React.createElement("div", { style: { fontSize: 11, color: workoutColor, fontWeight: 700, marginBottom: 10 } },
                 editingSet !== null ? `Edit Set ${editingSet + 1}` : `Set ${currentSet + 1} of ${adjSets}`,
                 (() => {
-                    const suggestion = getOverloadSuggestion(prData, ex.name);
+                    const suggestion = getOverloadSuggestion(prData, ex.name, intensity);
                     return suggestion ? (React.createElement("span", { style: { fontSize: 10, color: "#52E3A0", fontWeight: 600, marginLeft: 10, background: "#52E3A022", padding: "2px 8px", borderRadius: 8, border: "1px solid #52E3A044" } },
                         "\u2191 ",
                         suggestion.message)) : null;
                 })()),
+            lastSession && (React.createElement("div", { style: { display: "flex", gap: 8, marginBottom: 10 } },
+                React.createElement("div", { style: { flex: 1, background: C.btnBg, borderRadius: 8, padding: "6px 10px", border: `1px solid ${C.btnBorder}` } },
+                    React.createElement("div", { style: { fontSize: 9, color: C.muted, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 2 } }, "Last Session"),
+                    React.createElement("div", { style: { fontSize: 13, fontWeight: 700, color: C.text } },
+                        lastSession.weight ? `${lastSession.weight}lb` : "BW",
+                        lastSession.reps ? ` × ${lastSession.reps}` : "")),
+                (() => {
+                    const suggestion = getOverloadSuggestion(prData, ex.name, intensity);
+                    if (!suggestion)
+                        return null;
+                    return (React.createElement("div", { style: { flex: 1, background: "#52E3A012", borderRadius: 8, padding: "6px 10px", border: "1px solid #52E3A033" } },
+                        React.createElement("div", { style: { fontSize: 9, color: "#52E3A0", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 2 } }, "Target Today"),
+                        React.createElement("div", { style: { fontSize: 13, fontWeight: 700, color: "#52E3A0" } }, suggestion.type === "weight" ? `${suggestion.value}lb` : `${suggestion.value} reps`)));
+                })())),
             isTimed ? (
             /* ── TIMED SET UI ── */
             React.createElement("div", { style: { textAlign: "center" } },
@@ -1813,10 +2027,10 @@ function ExerciseCard({ ex, workoutColor, completedSets, toggleSet, intensity, s
             React.createElement("div", { style: { display: "flex", gap: 8, alignItems: "flex-end" } },
                 React.createElement("div", { style: { flex: 1 } },
                     React.createElement("div", { style: { fontSize: 9, color: C.muted, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 4 } }, "Weight (lbs)"),
-                    React.createElement("input", { value: weightInput, onChange: e => setWeightInput(e.target.value), placeholder: "e.g. 135", type: "number", autoFocus: true, style: { width: "100%", padding: "9px 12px", borderRadius: 9, background: C.input, border: `1.5px solid ${C.inputBorder}`, color: C.text, fontSize: 15, outline: "none", fontFamily: "inherit" } })),
+                    React.createElement("input", { value: weightInput, onChange: e => setWeightInput(e.target.value), placeholder: "e.g. 135", type: "number", inputMode: "decimal", autoFocus: true, style: { width: "100%", padding: "9px 12px", borderRadius: 9, background: C.input, border: `1.5px solid ${C.inputBorder}`, color: C.text, fontSize: 15, outline: "none", fontFamily: "inherit" } })),
                 React.createElement("div", { style: { flex: 1 } },
                     React.createElement("div", { style: { fontSize: 9, color: C.muted, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 4 } }, "Reps"),
-                    React.createElement("input", { value: repsInput, onChange: e => setRepsInput(e.target.value), placeholder: "e.g. 8", type: "number", style: { width: "100%", padding: "9px 12px", borderRadius: 9, background: C.input, border: `1.5px solid ${C.inputBorder}`, color: C.text, fontSize: 15, outline: "none", fontFamily: "inherit" } })),
+                    React.createElement("input", { value: repsInput, onChange: e => setRepsInput(e.target.value), placeholder: "e.g. 8", type: "number", inputMode: "decimal", style: { width: "100%", padding: "9px 12px", borderRadius: 9, background: C.input, border: `1.5px solid ${C.inputBorder}`, color: C.text, fontSize: 15, outline: "none", fontFamily: "inherit" } })),
                 React.createElement("button", { onClick: logAndAdvance, style: { padding: "9px 16px", borderRadius: 9, background: workoutColor, border: "none", color: "#000", fontSize: 13, fontWeight: 700, cursor: "pointer", flexShrink: 0, marginBottom: 0 } }, currentSet + 1 < adjSets && Array.from({ length: adjSets }, (_, i) => i).some(i => i > currentSet && !completedSets[`${ex.name}-${i}`]) ? "Next →" : "Done ✓"))),
             !isTimed && ((_a = prData === null || prData === void 0 ? void 0 : prData.history) === null || _a === void 0 ? void 0 : _a.length) > 0 && (React.createElement("div", { style: { marginTop: 10, paddingTop: 10, borderTop: `1px solid #1e1e1e` } },
                 React.createElement("div", { style: { fontSize: 9, color: C.muted, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 6 } }, "Session History"),
@@ -2068,18 +2282,18 @@ function CardioLogger({ workoutColor, onComplete, onCancel }) {
         React.createElement("div", { style: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 } },
             React.createElement("div", null,
                 React.createElement("span", { style: labelStyle }, ct.distLabel),
-                React.createElement("input", { value: distance, onChange: e => setDistance(e.target.value), placeholder: "0.0", type: "number", step: "0.01", style: inputStyle })),
+                React.createElement("input", { value: distance, onChange: e => setDistance(e.target.value), placeholder: "0.0", type: "number", inputMode: "decimal", step: "0.01", style: inputStyle })),
             React.createElement("div", null,
                 React.createElement("span", { style: labelStyle }, "Duration (min)"),
-                React.createElement("input", { value: duration, onChange: e => setDuration(e.target.value), placeholder: elapsed > 0 ? (elapsed / 60).toFixed(1) : "0", type: "number", step: "0.5", style: inputStyle })),
+                React.createElement("input", { value: duration, onChange: e => setDuration(e.target.value), placeholder: elapsed > 0 ? (elapsed / 60).toFixed(1) : "0", type: "number", inputMode: "decimal", step: "0.5", style: inputStyle })),
             React.createElement("div", null,
                 React.createElement("span", { style: labelStyle }, ct.speedLabel),
-                React.createElement("input", { value: pace, onChange: e => setPace(e.target.value), placeholder: "\u2014", type: "number", step: "0.1", style: inputStyle })),
+                React.createElement("input", { value: pace, onChange: e => setPace(e.target.value), placeholder: "\u2014", type: "number", inputMode: "decimal", step: "0.1", style: inputStyle })),
             ct.hasIncline ? (React.createElement("div", null,
                 React.createElement("span", { style: labelStyle }, "Incline (%)"),
-                React.createElement("input", { value: incline, onChange: e => setIncline(e.target.value), placeholder: "0", type: "number", step: "0.5", style: inputStyle }))) : (React.createElement("div", null,
+                React.createElement("input", { value: incline, onChange: e => setIncline(e.target.value), placeholder: "0", type: "number", inputMode: "decimal", step: "0.5", style: inputStyle }))) : (React.createElement("div", null,
                 React.createElement("span", { style: labelStyle }, "Resistance"),
-                React.createElement("input", { value: incline, onChange: e => setIncline(e.target.value), placeholder: "1-20", type: "number", style: inputStyle })))),
+                React.createElement("input", { value: incline, onChange: e => setIncline(e.target.value), placeholder: "1-20", type: "number", inputMode: "decimal", style: inputStyle })))),
         React.createElement("div", null,
             React.createElement("span", { style: labelStyle }, "Notes (optional)"),
             React.createElement("input", { value: notes, onChange: e => setNotes(e.target.value), placeholder: "Route, how you felt, conditions...", style: inputStyle })),
@@ -2227,7 +2441,7 @@ function HunterProfile({ rankInfo, totalXP, profile, setProfile, checkIns, setCh
                 React.createElement("div", { style: { fontSize: 10, color: current.color, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 10, marginTop: 16 } }, "Body"),
                 [["weight", "Weight (lbs)"], ["chest", "Chest (in)"], ["waist", "Waist (in)"], ["arms", "Arms (in)"], ["shoulders", "Shoulders (in)"]].map(([k, lbl]) => (React.createElement("div", { key: k, style: { marginBottom: 10 } },
                     React.createElement("div", { style: { fontSize: 10, color: C.muted, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 5 } }, lbl),
-                    React.createElement("input", { value: draft[k] || "", onChange: e => setDraft(p => (Object.assign(Object.assign({}, p), { [k]: e.target.value }))), placeholder: `Enter ${lbl.toLowerCase()}`, type: k === "weight" ? "number" : "text", style: { width: "100%", padding: "10px 14px", borderRadius: 10, background: C.input, border: `1.5px solid ${C.inputBorder}`, color: C.text, fontSize: 14, outline: "none", fontFamily: "inherit" } })))),
+                    React.createElement("input", { value: draft[k] || "", onChange: e => setDraft(p => (Object.assign(Object.assign({}, p), { [k]: e.target.value }))), placeholder: `Enter ${lbl.toLowerCase()}`, type: k === "weight" ? "number" : "text", inputMode: k === "weight" ? "decimal" : "text", style: { width: "100%", padding: "10px 14px", borderRadius: 10, background: C.input, border: `1.5px solid ${C.inputBorder}`, color: C.text, fontSize: 14, outline: "none", fontFamily: "inherit" } })))),
                 React.createElement("div", { style: { fontSize: 11, color: C.muted, padding: "10px 0 4px", lineHeight: 1.5 } }, "Strength PRs are tracked automatically when you log sets during a workout."),
                 React.createElement("button", { onClick: () => { setProfile(draft); setEditingProfile(false); }, style: { width: "100%", padding: "12px", borderRadius: 10, background: current.color, border: "none", color: "#000", fontSize: 14, fontWeight: 700, cursor: "pointer", marginTop: 6 } }, "Save Stats"))) : (React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 10 } },
                 React.createElement("div", { style: { display: "flex", gap: 8 } }, [["weight", "lbs", "Weight"], ["age", "yrs", "Age"]].map(([k, unit, lbl]) => (React.createElement("div", { key: k, style: { flex: 1, background: C.card, borderRadius: 14, padding: "12px 10px", border: "1.5px solid #1e1e1e", textAlign: "center" } },
@@ -2317,7 +2531,7 @@ function HunterProfile({ rankInfo, totalXP, profile, setProfile, checkIns, setCh
                     "Week of ",
                     new Date().toLocaleDateString([], { month: "short", day: "numeric", year: "numeric" })),
                 React.createElement("div", { style: { fontSize: 10, color: C.muted, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 6 } }, "Weight (lbs) *"),
-                React.createElement("input", { value: checkinWeight, onChange: e => setCheckinWeight(e.target.value), placeholder: "e.g. 178", type: "number", style: { width: "100%", padding: "10px 14px", borderRadius: 10, background: C.input, border: `1.5px solid ${C.inputBorder}`, color: C.text, fontSize: 14, outline: "none", fontFamily: "inherit", marginBottom: 12 } }),
+                React.createElement("input", { value: checkinWeight, onChange: e => setCheckinWeight(e.target.value), placeholder: "e.g. 178", type: "number", inputMode: "decimal", style: { width: "100%", padding: "10px 14px", borderRadius: 10, background: C.input, border: `1.5px solid ${C.inputBorder}`, color: C.text, fontSize: 14, outline: "none", fontFamily: "inherit", marginBottom: 12 } }),
                 React.createElement("div", { style: { fontSize: 10, color: C.muted, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 6 } }, "Notes (optional)"),
                 React.createElement("input", { value: checkinNote, onChange: e => setCheckinNote(e.target.value), placeholder: "Energy, sleep, diet, how you felt...", style: { width: "100%", padding: "10px 14px", borderRadius: 10, background: C.input, border: `1.5px solid ${C.inputBorder}`, color: C.text, fontSize: 13, outline: "none", fontFamily: "inherit", marginBottom: 14 } }),
                 React.createElement("div", { style: { display: "flex", gap: 8 } },
@@ -2776,7 +2990,7 @@ function GuidedWorkout({ template, format, onClose, onComplete }) {
                     React.createElement("div", { style: { fontSize: 12, color: color, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 8 } }, "Max Heart Rate"),
                     React.createElement("div", { style: { fontSize: 12, color: C.muted, marginBottom: 12, lineHeight: 1.5 } }, "Enter your max HR for zone guidance, or skip to see % targets only."),
                     React.createElement("div", { style: { display: "flex", gap: 8 } },
-                        React.createElement("input", { value: maxHR, onChange: e => setMaxHR(e.target.value), placeholder: "e.g. 185", type: "number", style: { flex: 1, padding: "10px 14px", borderRadius: 10, background: C.input, border: `1.5px solid ${C.inputBorder}`, color: C.text, fontSize: 16, outline: "none", fontFamily: "inherit" } }),
+                        React.createElement("input", { value: maxHR, onChange: e => setMaxHR(e.target.value), placeholder: "e.g. 185", type: "number", inputMode: "decimal", style: { flex: 1, padding: "10px 14px", borderRadius: 10, background: C.input, border: `1.5px solid ${C.inputBorder}`, color: C.text, fontSize: 16, outline: "none", fontFamily: "inherit" } }),
                         React.createElement("button", { onClick: () => setMaxHRSet(true), style: { padding: "10px 16px", borderRadius: 10, background: color, border: "none", color: "#fff", fontWeight: 700, cursor: "pointer", fontSize: 14 } }, "Set")),
                     React.createElement("button", { onClick: () => setMaxHRSet(true), style: { marginTop: 10, background: "none", border: "none", color: C.muted, fontSize: 12, cursor: "pointer", textDecoration: "underline", width: "100%", textAlign: "center" } }, "Skip \u2014 show % only"))),
                 React.createElement("div", { style: { display: "flex", gap: 10, marginBottom: 28, justifyContent: "center" } }, [["Rounds", totalRounds], ["Duration", template.duration], ["Level", template.difficulty]].map(([l, v]) => (React.createElement("div", { key: l, style: { flex: 1, background: color + "18", borderRadius: 12, padding: "12px 6px", border: `1px solid ${color}33`, textAlign: "center" } },
@@ -4123,7 +4337,7 @@ function WorkoutApp() {
         if (setsCompleted > 0) {
             const plan = WORKOUT_PLANS[selectedWorkout];
             const cfg = INTENSITY_CONFIG[intensity];
-            const totalPossibleSets = plan ? plan.exercises.reduce((a, e) => a + Math.max(1, e.sets + ((cfg === null || cfg === void 0 ? void 0 : cfg.sets) || 0)), 0) : 0;
+            const totalPossibleSets = plan ? getPlanExercises(selectedWorkout).reduce((a, e) => a + Math.max(1, e.sets + ((cfg === null || cfg === void 0 ? void 0 : cfg.sets) || 0)), 0) : 0;
             const allDone = totalPossibleSets > 0 && setsCompleted >= totalPossibleSets;
             const xpBase = getXP("WORKOUT_COMPLETE", intensity);
             const xpSets = setsCompleted * getXP("SET_COMPLETE", intensity);
@@ -4254,8 +4468,23 @@ function WorkoutApp() {
         ? { exercises: customExercises, color: "#52E3A0", icon: "✦", badge: null }
         : WORKOUT_PLANS[selectedWorkout];
     const activeColor = (activePlan === null || activePlan === void 0 ? void 0 : activePlan.color) || "#FF6B35";
-    // Helper — get effective exercises for a plan (respecting user overrides)
-    const getPlanExercises = (planName) => { var _a; return planOverrides[planName] || ((_a = WORKOUT_PLANS[planName]) === null || _a === void 0 ? void 0 : _a.exercises) || []; };
+    // Helper — resolve rotating plan exercises using ISO week number for variety
+    const getPlanExercises = (planName) => {
+        if (planOverrides[planName])
+            return planOverrides[planName];
+        const plan = WORKOUT_PLANS[planName];
+        if (!plan)
+            return [];
+        const weekNum = parseInt(getISOWeek(new Date()).split("-W")[1] || "1");
+        const base = plan.exercises || [];
+        const accessories = plan.accessoryOptions
+            ? plan.accessoryOptions[weekNum % plan.accessoryOptions.length]
+            : [];
+        const core = plan.coreOptions
+            ? [plan.coreOptions[weekNum % plan.coreOptions.length]]
+            : [];
+        return [...base, ...accessories, ...core];
+    };
     // For plan sessions, merge plan exercises with any appended library exercises
     const activeExercises = selectedWorkout === "Custom"
         ? customExercises
@@ -4281,16 +4510,16 @@ function WorkoutApp() {
                         React.createElement("div", { style: { fontSize: 20, fontWeight: 700, color: plan.color } }, type),
                         isBW && React.createElement("span", { style: { fontSize: 10, padding: "2px 8px", borderRadius: 10, background: C.btnBg, border: `1px solid ${C.btnBorder}`, color: C.muted } }, "Bodyweight")),
                     React.createElement("div", { style: { fontSize: 12, color: C.muted, marginTop: 3 } },
-                        plan.exercises.length,
+                        getPlanExercises(type).length,
                         " exercises \u00B7 ~",
                         isBW ? "40" : "60",
                         " min")),
                 React.createElement("div", { style: { width: 42, height: 42, borderRadius: "50%", background: plan.color, display: "flex", alignItems: "center", justifyContent: "center", color: "#000" } }, IC.Active("#000", 18))),
             React.createElement("div", { style: { marginTop: 10, display: "flex", gap: 6, flexWrap: "wrap" } },
-                plan.exercises.slice(0, 3).map(e => React.createElement("span", { key: e.name, style: { fontSize: 10, padding: "3px 8px", borderRadius: 20, background: C.btnBg, color: C.muted, border: "1px solid #1f1f1f" } }, e.name)),
-                plan.exercises.length > 3 && React.createElement("span", { style: { fontSize: 10, padding: "3px 8px", borderRadius: 20, background: C.btnBg, color: C.muted, border: "1px solid #1f1f1f" } },
+                getPlanExercises(type).slice(0, 3).map(e => React.createElement("span", { key: e.name, style: { fontSize: 10, padding: "3px 8px", borderRadius: 20, background: C.btnBg, color: C.muted, border: "1px solid #1f1f1f" } }, e.name)),
+                getPlanExercises(type).length > 3 && React.createElement("span", { style: { fontSize: 10, padding: "3px 8px", borderRadius: 20, background: C.btnBg, color: C.muted, border: "1px solid #1f1f1f" } },
                     "+",
-                    plan.exercises.length - 3))));
+                    getPlanExercises(type).length - 3))));
     };
     if (!storageReady) {
         return (React.createElement(React.Fragment, null,
@@ -4460,7 +4689,7 @@ function WorkoutApp() {
                     React.createElement("div", { style: { padding: "10px 14px", borderBottom: "1px solid #1a1a1a", display: "flex", justifyContent: "space-between", alignItems: "center" } },
                         React.createElement("div", { style: { fontSize: 12, fontWeight: 600, color: C.text } }, ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"][editingDay]),
                         React.createElement("button", { onClick: () => setEditingDay(null), style: { background: "none", border: "none", color: C.muted, fontSize: 16, cursor: "pointer", padding: 0 } }, "\u2715")),
-                    React.createElement("div", { style: { display: "flex", flexWrap: "wrap", gap: 6, padding: "10px 12px" } }, ["Push", "Pull", "Legs", "Bodyweight Push", "Bodyweight Pull", "Bodyweight Legs", "Rest"].map(opt => {
+                    React.createElement("div", { style: { display: "flex", flexWrap: "wrap", gap: 6, padding: "10px 12px" } }, ["Push", "Pull", "Legs", "Full Body", "Full Body Burnout", "Bodyweight Push", "Bodyweight Pull", "Bodyweight Legs", "Bodyweight Full Body", "Rest"].map(opt => {
                         var _a;
                         const isCurrent = schedule[editingDay] === opt;
                         const color = ((_a = WORKOUT_PLANS[opt]) === null || _a === void 0 ? void 0 : _a.color) || "#666";
