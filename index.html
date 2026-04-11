@@ -3992,6 +3992,11 @@ setShowSplash(true);
 }
 }
 catch (e) { }
+try{var _ws=localStorage.getItem(‘jbr:ws’);if(_ws){var _d=JSON.parse(_ws);
+if(_d&&_d.w){setSelectedWorkout(_d.w);setCompletedSets(_d.c||{});
+setSetLogs(_d.l||{});setWorkoutPhase(_d.p||‘stretch’);
+setWorkoutEquipment(_d.e||‘gym’);setWorkoutTimer(_d.t||0);
+setWorkoutActive(true);setActiveTab(‘workout’);}}}catch(_r){}
 setStorageReady(true);
 })();
 }, []);
@@ -4093,7 +4098,7 @@ useEffect(() => {
     if (workoutActive) {
         workoutStartRef.current = Date.now() - workoutBaseRef.current * 1000;
         timerRef.current = setInterval(() => {
-            setWorkoutTimer(Math.floor((Date.now() - workoutStartRef.current) / 1000));
+            var _t=Math.floor((Date.now()-workoutStartRef.current)/1000);setWorkoutTimer(_t);try{if(selectedWorkout)localStorage.setItem('jbr:ws',JSON.stringify({w:selectedWorkout,c:completedSets,l:setLogs,p:workoutPhase,t:_t,e:workoutEquipment}));}catch(_s){}
         }, 500);
         const onVisible = () => {
             if (!document.hidden && workoutStartRef.current) {
@@ -4105,7 +4110,7 @@ useEffect(() => {
     }
     else {
         workoutBaseRef.current = workoutTimer;
-        clearInterval(timerRef.current);
+        clearInterval(timerRef.current);try{localStorage.removeItem('jbr:ws');}catch(_s){}
     }
 }, [workoutActive]);
 const formatTime = s => `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
