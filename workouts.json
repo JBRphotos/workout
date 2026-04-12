@@ -1,0 +1,2144 @@
+{
+  "plans": {
+    "Push": {
+      "icon": "\u2191",
+      "color": "#FF6B35",
+      "variants": [
+        {
+          "label": "Week A \u2013 Chest Focus",
+          "exercises": [
+            {
+              "name": "Bench Press",
+              "sets": 4,
+              "reps": "6-8",
+              "muscle": "Chest"
+            },
+            {
+              "name": "Incline Dumbbell Press",
+              "sets": 3,
+              "reps": "8-10",
+              "muscle": "Upper Chest"
+            },
+            {
+              "name": "Overhead Press",
+              "sets": 4,
+              "reps": "6-8",
+              "muscle": "Shoulders"
+            },
+            {
+              "name": "Lateral Raises",
+              "sets": 3,
+              "reps": "12-15",
+              "muscle": "Side Delts"
+            },
+            {
+              "name": "Tricep Pushdowns",
+              "sets": 3,
+              "reps": "10-12",
+              "muscle": "Triceps"
+            },
+            {
+              "name": "Overhead Tricep Ext",
+              "sets": 3,
+              "reps": "10-12",
+              "muscle": "Triceps"
+            }
+          ],
+          "coreOptions": [
+            {
+              "name": "Tricep Dip Bar Hold",
+              "sets": 3,
+              "reps": "30 sec",
+              "muscle": "Core/Stability"
+            },
+            {
+              "name": "Plank",
+              "sets": 3,
+              "reps": "45 sec",
+              "muscle": "Core"
+            }
+          ]
+        },
+        {
+          "label": "Week B \u2013 Shoulder Focus",
+          "exercises": [
+            {
+              "name": "Overhead Press",
+              "sets": 4,
+              "reps": "5-7",
+              "muscle": "Shoulders"
+            },
+            {
+              "name": "Arnold Press",
+              "sets": 3,
+              "reps": "8-10",
+              "muscle": "Shoulders"
+            },
+            {
+              "name": "Incline Barbell Press",
+              "sets": 4,
+              "reps": "6-8",
+              "muscle": "Upper Chest"
+            },
+            {
+              "name": "Cable Fly",
+              "sets": 3,
+              "reps": "12-15",
+              "muscle": "Chest"
+            },
+            {
+              "name": "Lateral Raises",
+              "sets": 4,
+              "reps": "15-20",
+              "muscle": "Side Delts"
+            },
+            {
+              "name": "Skull Crushers",
+              "sets": 3,
+              "reps": "8-10",
+              "muscle": "Triceps"
+            }
+          ],
+          "coreOptions": [
+            {
+              "name": "Ab Wheel Rollout",
+              "sets": 3,
+              "reps": "8-10",
+              "muscle": "Core"
+            },
+            {
+              "name": "Dead Bug",
+              "sets": 3,
+              "reps": "10 ea",
+              "muscle": "Core"
+            }
+          ]
+        },
+        {
+          "label": "Week C \u2013 Volume",
+          "exercises": [
+            {
+              "name": "Dumbbell Press",
+              "sets": 4,
+              "reps": "10-12",
+              "muscle": "Chest"
+            },
+            {
+              "name": "Chest Fly",
+              "sets": 3,
+              "reps": "12-15",
+              "muscle": "Chest"
+            },
+            {
+              "name": "Landmine Press",
+              "sets": 3,
+              "reps": "10-12",
+              "muscle": "Shoulders"
+            },
+            {
+              "name": "Front Raises",
+              "sets": 3,
+              "reps": "12-15",
+              "muscle": "Front Delts"
+            },
+            {
+              "name": "Lateral Raises",
+              "sets": 3,
+              "reps": "15-20",
+              "muscle": "Side Delts"
+            },
+            {
+              "name": "Tricep Dips",
+              "sets": 4,
+              "reps": "10-12",
+              "muscle": "Triceps"
+            }
+          ],
+          "coreOptions": [
+            {
+              "name": "Hanging Knee Raise",
+              "sets": 3,
+              "reps": "12-15",
+              "muscle": "Core"
+            },
+            {
+              "name": "Plank",
+              "sets": 3,
+              "reps": "60 sec",
+              "muscle": "Core"
+            }
+          ]
+        },
+        {
+          "label": "Week D \u2013 Strength",
+          "exercises": [
+            {
+              "name": "Bench Press",
+              "sets": 5,
+              "reps": "4-5",
+              "muscle": "Chest"
+            },
+            {
+              "name": "Overhead Press",
+              "sets": 5,
+              "reps": "4-5",
+              "muscle": "Shoulders"
+            },
+            {
+              "name": "Close-Grip Bench Press",
+              "sets": 3,
+              "reps": "6-8",
+              "muscle": "Triceps/Chest"
+            },
+            {
+              "name": "Cable Lateral Raise",
+              "sets": 3,
+              "reps": "15-20",
+              "muscle": "Side Delts"
+            },
+            {
+              "name": "Incline Dumbbell Press",
+              "sets": 3,
+              "reps": "8-10",
+              "muscle": "Upper Chest"
+            },
+            {
+              "name": "Overhead Tricep Ext",
+              "sets": 3,
+              "reps": "10-12",
+              "muscle": "Triceps"
+            }
+          ],
+          "coreOptions": [
+            {
+              "name": "Cable Crunch",
+              "sets": 3,
+              "reps": "15-20",
+              "muscle": "Core"
+            },
+            {
+              "name": "Pallof Press",
+              "sets": 3,
+              "reps": "12 ea",
+              "muscle": "Core/Anti-Rotation"
+            }
+          ]
+        }
+      ]
+    },
+    "Pull": {
+      "icon": "\u2193",
+      "color": "#4ECDC4",
+      "variants": [
+        {
+          "label": "Week A \u2013 Deadlift Focus",
+          "exercises": [
+            {
+              "name": "Deadlift",
+              "sets": 4,
+              "reps": "4-6",
+              "muscle": "Back/Glutes"
+            },
+            {
+              "name": "Barbell Row",
+              "sets": 4,
+              "reps": "6-8",
+              "muscle": "Back"
+            },
+            {
+              "name": "Pull-Ups",
+              "sets": 3,
+              "reps": "6-10",
+              "muscle": "Lats"
+            },
+            {
+              "name": "Face Pulls",
+              "sets": 3,
+              "reps": "12-15",
+              "muscle": "Rear Delts"
+            },
+            {
+              "name": "Hammer Curls",
+              "sets": 3,
+              "reps": "10-12",
+              "muscle": "Biceps"
+            },
+            {
+              "name": "Incline Dumbbell Curl",
+              "sets": 3,
+              "reps": "10-12",
+              "muscle": "Biceps"
+            }
+          ],
+          "coreOptions": [
+            {
+              "name": "Hanging Leg Raise",
+              "sets": 3,
+              "reps": "10-12",
+              "muscle": "Core"
+            },
+            {
+              "name": "Dead Bug",
+              "sets": 3,
+              "reps": "10 ea",
+              "muscle": "Core"
+            }
+          ]
+        },
+        {
+          "label": "Week B \u2013 Width Focus",
+          "exercises": [
+            {
+              "name": "Pull-Ups",
+              "sets": 4,
+              "reps": "6-10",
+              "muscle": "Lats"
+            },
+            {
+              "name": "Lat Pulldown",
+              "sets": 4,
+              "reps": "8-10",
+              "muscle": "Lats"
+            },
+            {
+              "name": "Seated Cable Row",
+              "sets": 3,
+              "reps": "10-12",
+              "muscle": "Mid Back"
+            },
+            {
+              "name": "Straight-Arm Pulldown",
+              "sets": 3,
+              "reps": "12-15",
+              "muscle": "Lats"
+            },
+            {
+              "name": "Rear Delt Fly",
+              "sets": 3,
+              "reps": "15-20",
+              "muscle": "Rear Delts"
+            },
+            {
+              "name": "Barbell Curl",
+              "sets": 3,
+              "reps": "8-10",
+              "muscle": "Biceps"
+            }
+          ],
+          "coreOptions": [
+            {
+              "name": "Ab Wheel Rollout",
+              "sets": 3,
+              "reps": "8-10",
+              "muscle": "Core"
+            },
+            {
+              "name": "Plank Row Hold",
+              "sets": 3,
+              "reps": "30 sec",
+              "muscle": "Core/Back"
+            }
+          ]
+        },
+        {
+          "label": "Week C \u2013 Thickness Focus",
+          "exercises": [
+            {
+              "name": "T-Bar Row",
+              "sets": 4,
+              "reps": "6-8",
+              "muscle": "Back"
+            },
+            {
+              "name": "Chest-Supported Row",
+              "sets": 4,
+              "reps": "8-10",
+              "muscle": "Mid Back"
+            },
+            {
+              "name": "Rack Pull",
+              "sets": 3,
+              "reps": "5-6",
+              "muscle": "Upper Back"
+            },
+            {
+              "name": "Face Pulls",
+              "sets": 4,
+              "reps": "15-20",
+              "muscle": "Rear Delts"
+            },
+            {
+              "name": "Cable Curl",
+              "sets": 3,
+              "reps": "12-15",
+              "muscle": "Biceps"
+            },
+            {
+              "name": "Preacher Curl",
+              "sets": 3,
+              "reps": "10-12",
+              "muscle": "Biceps"
+            }
+          ],
+          "coreOptions": [
+            {
+              "name": "Dragon Flag Negatives",
+              "sets": 3,
+              "reps": "5-6",
+              "muscle": "Core"
+            },
+            {
+              "name": "Pallof Press",
+              "sets": 3,
+              "reps": "12 ea",
+              "muscle": "Core"
+            }
+          ]
+        },
+        {
+          "label": "Week D \u2013 Strength",
+          "exercises": [
+            {
+              "name": "Deadlift",
+              "sets": 5,
+              "reps": "3-5",
+              "muscle": "Back/Glutes"
+            },
+            {
+              "name": "Weighted Pull-Ups",
+              "sets": 4,
+              "reps": "5-8",
+              "muscle": "Lats"
+            },
+            {
+              "name": "Barbell Row",
+              "sets": 3,
+              "reps": "5-7",
+              "muscle": "Back"
+            },
+            {
+              "name": "Face Pulls",
+              "sets": 3,
+              "reps": "15-20",
+              "muscle": "Rear Delts"
+            },
+            {
+              "name": "Hammer Curls",
+              "sets": 4,
+              "reps": "10-12",
+              "muscle": "Biceps"
+            },
+            {
+              "name": "EZ Bar Curl",
+              "sets": 3,
+              "reps": "8-10",
+              "muscle": "Biceps"
+            }
+          ],
+          "coreOptions": [
+            {
+              "name": "Cable Crunch",
+              "sets": 3,
+              "reps": "15-20",
+              "muscle": "Core"
+            },
+            {
+              "name": "Hollow Body Hold",
+              "sets": 3,
+              "reps": "30 sec",
+              "muscle": "Core"
+            }
+          ]
+        }
+      ]
+    },
+    "Legs": {
+      "icon": "\u2295",
+      "color": "#A78BFA",
+      "variants": [
+        {
+          "label": "Week A \u2013 Quad Focus",
+          "exercises": [
+            {
+              "name": "Squat",
+              "sets": 4,
+              "reps": "6-8",
+              "muscle": "Quads/Glutes"
+            },
+            {
+              "name": "Romanian Deadlift",
+              "sets": 3,
+              "reps": "8-10",
+              "muscle": "Hamstrings"
+            },
+            {
+              "name": "Leg Press",
+              "sets": 3,
+              "reps": "10-12",
+              "muscle": "Quads"
+            },
+            {
+              "name": "Walking Lunges",
+              "sets": 3,
+              "reps": "10 ea",
+              "muscle": "Quads/Glutes"
+            },
+            {
+              "name": "Leg Curl",
+              "sets": 3,
+              "reps": "10-12",
+              "muscle": "Hamstrings"
+            },
+            {
+              "name": "Calf Raises",
+              "sets": 4,
+              "reps": "15-20",
+              "muscle": "Calves"
+            }
+          ],
+          "coreOptions": [
+            {
+              "name": "Plank",
+              "sets": 3,
+              "reps": "60 sec",
+              "muscle": "Core"
+            },
+            {
+              "name": "Dead Bug",
+              "sets": 3,
+              "reps": "10 ea",
+              "muscle": "Core"
+            }
+          ]
+        },
+        {
+          "label": "Week B \u2013 Posterior Focus",
+          "exercises": [
+            {
+              "name": "Romanian Deadlift",
+              "sets": 4,
+              "reps": "6-8",
+              "muscle": "Hamstrings/Glutes"
+            },
+            {
+              "name": "Hip Thrust",
+              "sets": 4,
+              "reps": "10-12",
+              "muscle": "Glutes"
+            },
+            {
+              "name": "Leg Curl",
+              "sets": 4,
+              "reps": "10-12",
+              "muscle": "Hamstrings"
+            },
+            {
+              "name": "Bulgarian Split Squat",
+              "sets": 3,
+              "reps": "8-10 ea",
+              "muscle": "Quads/Glutes"
+            },
+            {
+              "name": "Leg Extension",
+              "sets": 3,
+              "reps": "12-15",
+              "muscle": "Quads"
+            },
+            {
+              "name": "Seated Calf Raises",
+              "sets": 4,
+              "reps": "15-20",
+              "muscle": "Calves"
+            }
+          ],
+          "coreOptions": [
+            {
+              "name": "Ab Wheel Rollout",
+              "sets": 3,
+              "reps": "10-12",
+              "muscle": "Core"
+            },
+            {
+              "name": "Side Plank",
+              "sets": 3,
+              "reps": "30 sec ea",
+              "muscle": "Core/Obliques"
+            }
+          ]
+        },
+        {
+          "label": "Week C \u2013 Volume",
+          "exercises": [
+            {
+              "name": "Leg Press",
+              "sets": 4,
+              "reps": "12-15",
+              "muscle": "Quads"
+            },
+            {
+              "name": "Hack Squat",
+              "sets": 3,
+              "reps": "10-12",
+              "muscle": "Quads"
+            },
+            {
+              "name": "Walking Lunges",
+              "sets": 3,
+              "reps": "12 ea",
+              "muscle": "Quads/Glutes"
+            },
+            {
+              "name": "Stiff-Leg Deadlift",
+              "sets": 3,
+              "reps": "10-12",
+              "muscle": "Hamstrings"
+            },
+            {
+              "name": "Leg Curl",
+              "sets": 3,
+              "reps": "12-15",
+              "muscle": "Hamstrings"
+            },
+            {
+              "name": "Calf Raises",
+              "sets": 5,
+              "reps": "20-25",
+              "muscle": "Calves"
+            }
+          ],
+          "coreOptions": [
+            {
+              "name": "Hanging Knee Raise",
+              "sets": 3,
+              "reps": "12-15",
+              "muscle": "Core"
+            },
+            {
+              "name": "Plank",
+              "sets": 3,
+              "reps": "45 sec",
+              "muscle": "Core"
+            }
+          ]
+        },
+        {
+          "label": "Week D \u2013 Strength",
+          "exercises": [
+            {
+              "name": "Squat",
+              "sets": 5,
+              "reps": "4-5",
+              "muscle": "Quads/Glutes"
+            },
+            {
+              "name": "Romanian Deadlift",
+              "sets": 4,
+              "reps": "6-7",
+              "muscle": "Hamstrings"
+            },
+            {
+              "name": "Bulgarian Split Squat",
+              "sets": 3,
+              "reps": "6-8 ea",
+              "muscle": "Quads/Glutes"
+            },
+            {
+              "name": "Leg Press",
+              "sets": 3,
+              "reps": "8-10",
+              "muscle": "Quads"
+            },
+            {
+              "name": "Hip Thrust",
+              "sets": 3,
+              "reps": "10-12",
+              "muscle": "Glutes"
+            },
+            {
+              "name": "Standing Calf Raises",
+              "sets": 4,
+              "reps": "12-15",
+              "muscle": "Calves"
+            }
+          ],
+          "coreOptions": [
+            {
+              "name": "Pallof Press",
+              "sets": 3,
+              "reps": "12 ea",
+              "muscle": "Core/Anti-Rotation"
+            },
+            {
+              "name": "Hollow Body Hold",
+              "sets": 3,
+              "reps": "30 sec",
+              "muscle": "Core"
+            }
+          ]
+        }
+      ]
+    },
+    "Full Body": {
+      "icon": "FB",
+      "color": "#52E3A0",
+      "variants": [
+        {
+          "label": "Week A \u2013 Classic",
+          "exercises": [
+            {
+              "name": "Squat",
+              "sets": 4,
+              "reps": "6-8",
+              "muscle": "Quads/Glutes"
+            },
+            {
+              "name": "Bench Press",
+              "sets": 3,
+              "reps": "8-10",
+              "muscle": "Chest"
+            },
+            {
+              "name": "Barbell Row",
+              "sets": 3,
+              "reps": "8-10",
+              "muscle": "Back"
+            },
+            {
+              "name": "Overhead Press",
+              "sets": 3,
+              "reps": "8-10",
+              "muscle": "Shoulders"
+            },
+            {
+              "name": "Romanian Deadlift",
+              "sets": 3,
+              "reps": "10-12",
+              "muscle": "Hamstrings"
+            }
+          ],
+          "accessoryOptions": [
+            [
+              {
+                "name": "Hammer Curls",
+                "sets": 2,
+                "reps": "12-15",
+                "muscle": "Biceps"
+              },
+              {
+                "name": "Tricep Pushdowns",
+                "sets": 2,
+                "reps": "12-15",
+                "muscle": "Triceps"
+              }
+            ],
+            [
+              {
+                "name": "Cable Curl",
+                "sets": 2,
+                "reps": "12-15",
+                "muscle": "Biceps"
+              },
+              {
+                "name": "Skull Crushers",
+                "sets": 2,
+                "reps": "10-12",
+                "muscle": "Triceps"
+              }
+            ],
+            [
+              {
+                "name": "Preacher Curl",
+                "sets": 2,
+                "reps": "10-12",
+                "muscle": "Biceps"
+              },
+              {
+                "name": "Overhead Tricep Ext",
+                "sets": 2,
+                "reps": "12-15",
+                "muscle": "Triceps"
+              }
+            ]
+          ],
+          "coreOptions": [
+            {
+              "name": "Plank",
+              "sets": 3,
+              "reps": "45 sec",
+              "muscle": "Core"
+            },
+            {
+              "name": "Dead Bug",
+              "sets": 3,
+              "reps": "10 ea",
+              "muscle": "Core"
+            },
+            {
+              "name": "Ab Wheel Rollout",
+              "sets": 3,
+              "reps": "10-12",
+              "muscle": "Core"
+            }
+          ]
+        },
+        {
+          "label": "Week B \u2013 Deadlift Focus",
+          "exercises": [
+            {
+              "name": "Deadlift",
+              "sets": 4,
+              "reps": "5-6",
+              "muscle": "Full Body"
+            },
+            {
+              "name": "Incline Dumbbell Press",
+              "sets": 3,
+              "reps": "8-10",
+              "muscle": "Chest"
+            },
+            {
+              "name": "Pull-Ups",
+              "sets": 3,
+              "reps": "6-10",
+              "muscle": "Lats"
+            },
+            {
+              "name": "Dumbbell Shoulder Press",
+              "sets": 3,
+              "reps": "10-12",
+              "muscle": "Shoulders"
+            },
+            {
+              "name": "Leg Press",
+              "sets": 3,
+              "reps": "10-12",
+              "muscle": "Quads"
+            }
+          ],
+          "accessoryOptions": [
+            [
+              {
+                "name": "Incline Curl",
+                "sets": 2,
+                "reps": "12-15",
+                "muscle": "Biceps"
+              },
+              {
+                "name": "Tricep Dips",
+                "sets": 2,
+                "reps": "10-12",
+                "muscle": "Triceps"
+              }
+            ],
+            [
+              {
+                "name": "Barbell Curl",
+                "sets": 2,
+                "reps": "10-12",
+                "muscle": "Biceps"
+              },
+              {
+                "name": "Close-Grip Bench",
+                "sets": 2,
+                "reps": "8-10",
+                "muscle": "Triceps"
+              }
+            ],
+            [
+              {
+                "name": "Cable Curl",
+                "sets": 2,
+                "reps": "12-15",
+                "muscle": "Biceps"
+              },
+              {
+                "name": "Rope Pushdown",
+                "sets": 2,
+                "reps": "12-15",
+                "muscle": "Triceps"
+              }
+            ]
+          ],
+          "coreOptions": [
+            {
+              "name": "Cable Crunch",
+              "sets": 3,
+              "reps": "12-15",
+              "muscle": "Core"
+            },
+            {
+              "name": "Pallof Press",
+              "sets": 3,
+              "reps": "10 ea",
+              "muscle": "Core"
+            },
+            {
+              "name": "Hanging Leg Raise",
+              "sets": 3,
+              "reps": "10-12",
+              "muscle": "Core"
+            }
+          ]
+        },
+        {
+          "label": "Week C \u2013 Dumbbell Focus",
+          "exercises": [
+            {
+              "name": "Dumbbell Press",
+              "sets": 4,
+              "reps": "10-12",
+              "muscle": "Chest"
+            },
+            {
+              "name": "Dumbbell Row",
+              "sets": 4,
+              "reps": "10-12",
+              "muscle": "Back"
+            },
+            {
+              "name": "Goblet Squat",
+              "sets": 4,
+              "reps": "12-15",
+              "muscle": "Quads/Glutes"
+            },
+            {
+              "name": "Arnold Press",
+              "sets": 3,
+              "reps": "10-12",
+              "muscle": "Shoulders"
+            },
+            {
+              "name": "Romanian Deadlift",
+              "sets": 3,
+              "reps": "12-15",
+              "muscle": "Hamstrings"
+            }
+          ],
+          "accessoryOptions": [
+            [
+              {
+                "name": "Hammer Curls",
+                "sets": 2,
+                "reps": "15-20",
+                "muscle": "Biceps"
+              },
+              {
+                "name": "Overhead Tricep Ext",
+                "sets": 2,
+                "reps": "12-15",
+                "muscle": "Triceps"
+              }
+            ],
+            [
+              {
+                "name": "Concentration Curl",
+                "sets": 2,
+                "reps": "12-15",
+                "muscle": "Biceps"
+              },
+              {
+                "name": "Tricep Kickback",
+                "sets": 2,
+                "reps": "12-15",
+                "muscle": "Triceps"
+              }
+            ],
+            [
+              {
+                "name": "Cross-Body Curl",
+                "sets": 2,
+                "reps": "12-15",
+                "muscle": "Biceps"
+              },
+              {
+                "name": "Skull Crushers",
+                "sets": 2,
+                "reps": "10-12",
+                "muscle": "Triceps"
+              }
+            ]
+          ],
+          "coreOptions": [
+            {
+              "name": "Plank",
+              "sets": 3,
+              "reps": "60 sec",
+              "muscle": "Core"
+            },
+            {
+              "name": "Russian Twist",
+              "sets": 3,
+              "reps": "15 ea",
+              "muscle": "Core"
+            },
+            {
+              "name": "Dead Bug",
+              "sets": 3,
+              "reps": "10 ea",
+              "muscle": "Core"
+            }
+          ]
+        },
+        {
+          "label": "Week D \u2013 Power",
+          "exercises": [
+            {
+              "name": "Squat",
+              "sets": 5,
+              "reps": "4-5",
+              "muscle": "Quads/Glutes"
+            },
+            {
+              "name": "Bench Press",
+              "sets": 5,
+              "reps": "4-5",
+              "muscle": "Chest"
+            },
+            {
+              "name": "Barbell Row",
+              "sets": 4,
+              "reps": "5-6",
+              "muscle": "Back"
+            },
+            {
+              "name": "Overhead Press",
+              "sets": 3,
+              "reps": "6-8",
+              "muscle": "Shoulders"
+            },
+            {
+              "name": "Hip Thrust",
+              "sets": 3,
+              "reps": "10-12",
+              "muscle": "Glutes"
+            }
+          ],
+          "accessoryOptions": [
+            [
+              {
+                "name": "Barbell Curl",
+                "sets": 2,
+                "reps": "8-10",
+                "muscle": "Biceps"
+              },
+              {
+                "name": "Close-Grip Bench",
+                "sets": 2,
+                "reps": "8-10",
+                "muscle": "Triceps"
+              }
+            ],
+            [
+              {
+                "name": "EZ Bar Curl",
+                "sets": 2,
+                "reps": "8-10",
+                "muscle": "Biceps"
+              },
+              {
+                "name": "Tricep Pushdowns",
+                "sets": 2,
+                "reps": "12-15",
+                "muscle": "Triceps"
+              }
+            ],
+            [
+              {
+                "name": "Hammer Curls",
+                "sets": 2,
+                "reps": "10-12",
+                "muscle": "Biceps"
+              },
+              {
+                "name": "Overhead Tricep Ext",
+                "sets": 2,
+                "reps": "10-12",
+                "muscle": "Triceps"
+              }
+            ]
+          ],
+          "coreOptions": [
+            {
+              "name": "Ab Wheel Rollout",
+              "sets": 3,
+              "reps": "10-12",
+              "muscle": "Core"
+            },
+            {
+              "name": "Weighted Plank",
+              "sets": 3,
+              "reps": "30 sec",
+              "muscle": "Core"
+            },
+            {
+              "name": "Hanging Leg Raise",
+              "sets": 3,
+              "reps": "10-12",
+              "muscle": "Core"
+            }
+          ]
+        }
+      ]
+    },
+    "Bodyweight Push": {
+      "icon": "\u2191",
+      "color": "#FF6B35",
+      "badge": "BW",
+      "variants": [
+        {
+          "label": "Week A",
+          "exercises": [
+            {
+              "name": "Push-Ups",
+              "sets": 4,
+              "reps": "12-15",
+              "muscle": "Chest/Triceps"
+            },
+            {
+              "name": "Pike Push-Ups",
+              "sets": 3,
+              "reps": "10-12",
+              "muscle": "Shoulders"
+            },
+            {
+              "name": "Diamond Push-Ups",
+              "sets": 3,
+              "reps": "8-12",
+              "muscle": "Triceps"
+            },
+            {
+              "name": "Dips",
+              "sets": 3,
+              "reps": "10-12",
+              "muscle": "Chest/Triceps"
+            },
+            {
+              "name": "Lateral Raises",
+              "sets": 3,
+              "reps": "15-20",
+              "muscle": "Side Delts"
+            }
+          ],
+          "coreOptions": [
+            {
+              "name": "Plank",
+              "sets": 3,
+              "reps": "60 sec",
+              "muscle": "Core"
+            },
+            {
+              "name": "Mountain Climbers",
+              "sets": 3,
+              "reps": "30 sec",
+              "muscle": "Core/Cardio"
+            }
+          ]
+        },
+        {
+          "label": "Week B",
+          "exercises": [
+            {
+              "name": "Wide Push-Ups",
+              "sets": 4,
+              "reps": "15-20",
+              "muscle": "Chest"
+            },
+            {
+              "name": "Handstand Push-Up Negatives",
+              "sets": 3,
+              "reps": "5-8",
+              "muscle": "Shoulders"
+            },
+            {
+              "name": "Tricep Dips",
+              "sets": 4,
+              "reps": "12-15",
+              "muscle": "Triceps"
+            },
+            {
+              "name": "Archer Push-Ups",
+              "sets": 3,
+              "reps": "6-8 ea",
+              "muscle": "Chest"
+            },
+            {
+              "name": "Front Raises",
+              "sets": 3,
+              "reps": "15-20",
+              "muscle": "Front Delts"
+            }
+          ],
+          "coreOptions": [
+            {
+              "name": "Hollow Body Hold",
+              "sets": 3,
+              "reps": "30 sec",
+              "muscle": "Core"
+            },
+            {
+              "name": "Dead Bug",
+              "sets": 3,
+              "reps": "10 ea",
+              "muscle": "Core"
+            }
+          ]
+        },
+        {
+          "label": "Week C",
+          "exercises": [
+            {
+              "name": "Decline Push-Ups",
+              "sets": 4,
+              "reps": "12-15",
+              "muscle": "Upper Chest"
+            },
+            {
+              "name": "Pike Push-Ups",
+              "sets": 4,
+              "reps": "10-15",
+              "muscle": "Shoulders"
+            },
+            {
+              "name": "Diamond Push-Ups",
+              "sets": 3,
+              "reps": "10-15",
+              "muscle": "Triceps"
+            },
+            {
+              "name": "Dips",
+              "sets": 4,
+              "reps": "12-15",
+              "muscle": "Chest/Triceps"
+            },
+            {
+              "name": "Plank Shoulder Taps",
+              "sets": 3,
+              "reps": "20 ea",
+              "muscle": "Shoulders/Core"
+            }
+          ],
+          "coreOptions": [
+            {
+              "name": "L-Sit Hold",
+              "sets": 3,
+              "reps": "15-20 sec",
+              "muscle": "Core"
+            },
+            {
+              "name": "Side Plank",
+              "sets": 3,
+              "reps": "30 sec ea",
+              "muscle": "Core/Obliques"
+            }
+          ]
+        },
+        {
+          "label": "Week D",
+          "exercises": [
+            {
+              "name": "Push-Up Variations (AMRAP)",
+              "sets": 4,
+              "reps": "Max",
+              "muscle": "Chest/Triceps"
+            },
+            {
+              "name": "Pike Push-Ups",
+              "sets": 3,
+              "reps": "12-15",
+              "muscle": "Shoulders"
+            },
+            {
+              "name": "Tricep Dips",
+              "sets": 3,
+              "reps": "15-20",
+              "muscle": "Triceps"
+            },
+            {
+              "name": "Archer Push-Ups",
+              "sets": 3,
+              "reps": "8-10 ea",
+              "muscle": "Chest"
+            },
+            {
+              "name": "Lateral Raises",
+              "sets": 3,
+              "reps": "20-25",
+              "muscle": "Side Delts"
+            }
+          ],
+          "coreOptions": [
+            {
+              "name": "Ab Wheel Rollout",
+              "sets": 3,
+              "reps": "8-10",
+              "muscle": "Core"
+            },
+            {
+              "name": "Hanging Knee Raise",
+              "sets": 3,
+              "reps": "12-15",
+              "muscle": "Core"
+            }
+          ]
+        }
+      ]
+    },
+    "Bodyweight Pull": {
+      "icon": "\u2193",
+      "color": "#4ECDC4",
+      "badge": "BW",
+      "variants": [
+        {
+          "label": "Week A",
+          "exercises": [
+            {
+              "name": "Pull-Ups",
+              "sets": 4,
+              "reps": "6-10",
+              "muscle": "Lats/Biceps"
+            },
+            {
+              "name": "Chin-Ups",
+              "sets": 3,
+              "reps": "8-10",
+              "muscle": "Biceps/Lats"
+            },
+            {
+              "name": "Inverted Row",
+              "sets": 3,
+              "reps": "10-12",
+              "muscle": "Back"
+            },
+            {
+              "name": "Face Pulls",
+              "sets": 3,
+              "reps": "15-20",
+              "muscle": "Rear Delts"
+            },
+            {
+              "name": "Hammer Curls",
+              "sets": 3,
+              "reps": "12-15",
+              "muscle": "Biceps"
+            }
+          ],
+          "coreOptions": [
+            {
+              "name": "Plank",
+              "sets": 3,
+              "reps": "60 sec",
+              "muscle": "Core"
+            },
+            {
+              "name": "Mountain Climbers",
+              "sets": 3,
+              "reps": "30 sec",
+              "muscle": "Core/Cardio"
+            }
+          ]
+        },
+        {
+          "label": "Week B",
+          "exercises": [
+            {
+              "name": "Wide-Grip Pull-Ups",
+              "sets": 4,
+              "reps": "6-8",
+              "muscle": "Lats"
+            },
+            {
+              "name": "Neutral-Grip Pull-Ups",
+              "sets": 3,
+              "reps": "8-10",
+              "muscle": "Lats/Biceps"
+            },
+            {
+              "name": "Inverted Row (Close Grip)",
+              "sets": 3,
+              "reps": "12-15",
+              "muscle": "Mid Back"
+            },
+            {
+              "name": "Rear Delt Fly",
+              "sets": 3,
+              "reps": "15-20",
+              "muscle": "Rear Delts"
+            },
+            {
+              "name": "Chin-Ups",
+              "sets": 3,
+              "reps": "8-10",
+              "muscle": "Biceps"
+            }
+          ],
+          "coreOptions": [
+            {
+              "name": "Hollow Body Hold",
+              "sets": 3,
+              "reps": "30 sec",
+              "muscle": "Core"
+            },
+            {
+              "name": "Dead Bug",
+              "sets": 3,
+              "reps": "10 ea",
+              "muscle": "Core"
+            }
+          ]
+        },
+        {
+          "label": "Week C",
+          "exercises": [
+            {
+              "name": "Pull-Ups (AMRAP)",
+              "sets": 4,
+              "reps": "Max",
+              "muscle": "Lats/Biceps"
+            },
+            {
+              "name": "Towel Row",
+              "sets": 3,
+              "reps": "10-12",
+              "muscle": "Back"
+            },
+            {
+              "name": "Face Pulls",
+              "sets": 4,
+              "reps": "15-20",
+              "muscle": "Rear Delts"
+            },
+            {
+              "name": "Chin-Ups",
+              "sets": 3,
+              "reps": "6-8",
+              "muscle": "Biceps/Lats"
+            },
+            {
+              "name": "Band Pull-Apart",
+              "sets": 3,
+              "reps": "20-25",
+              "muscle": "Rear Delts"
+            }
+          ],
+          "coreOptions": [
+            {
+              "name": "L-Sit Hold",
+              "sets": 3,
+              "reps": "15-20 sec",
+              "muscle": "Core"
+            },
+            {
+              "name": "Side Plank",
+              "sets": 3,
+              "reps": "30 sec ea",
+              "muscle": "Core/Obliques"
+            }
+          ]
+        },
+        {
+          "label": "Week D",
+          "exercises": [
+            {
+              "name": "Weighted Pull-Ups",
+              "sets": 4,
+              "reps": "5-8",
+              "muscle": "Lats"
+            },
+            {
+              "name": "Chin-Ups",
+              "sets": 4,
+              "reps": "6-8",
+              "muscle": "Biceps/Lats"
+            },
+            {
+              "name": "Inverted Row",
+              "sets": 4,
+              "reps": "10-12",
+              "muscle": "Back"
+            },
+            {
+              "name": "Face Pulls",
+              "sets": 3,
+              "reps": "15-20",
+              "muscle": "Rear Delts"
+            },
+            {
+              "name": "Hammer Curls",
+              "sets": 3,
+              "reps": "15-20",
+              "muscle": "Biceps"
+            }
+          ],
+          "coreOptions": [
+            {
+              "name": "Ab Wheel Rollout",
+              "sets": 3,
+              "reps": "8-10",
+              "muscle": "Core"
+            },
+            {
+              "name": "Hanging Knee Raise",
+              "sets": 3,
+              "reps": "12-15",
+              "muscle": "Core"
+            }
+          ]
+        }
+      ]
+    },
+    "Bodyweight Legs": {
+      "icon": "\u2295",
+      "color": "#A78BFA",
+      "badge": "BW",
+      "variants": [
+        {
+          "label": "Week A",
+          "exercises": [
+            {
+              "name": "Bodyweight Squat",
+              "sets": 4,
+              "reps": "15-20",
+              "muscle": "Quads/Glutes"
+            },
+            {
+              "name": "Bulgarian Split Squat",
+              "sets": 3,
+              "reps": "10 ea",
+              "muscle": "Quads/Glutes"
+            },
+            {
+              "name": "Jump Squat",
+              "sets": 3,
+              "reps": "12-15",
+              "muscle": "Quads/Calves"
+            },
+            {
+              "name": "Glute Bridge",
+              "sets": 4,
+              "reps": "15-20",
+              "muscle": "Glutes/Hams"
+            },
+            {
+              "name": "Mountain Climbers",
+              "sets": 3,
+              "reps": "30 sec",
+              "muscle": "Core/Full Body"
+            },
+            {
+              "name": "Hollow Body Hold",
+              "sets": 3,
+              "reps": "30 sec",
+              "muscle": "Core"
+            }
+          ],
+          "coreOptions": [
+            {
+              "name": "Plank",
+              "sets": 3,
+              "reps": "60 sec",
+              "muscle": "Core"
+            },
+            {
+              "name": "Mountain Climbers",
+              "sets": 3,
+              "reps": "30 sec",
+              "muscle": "Core/Cardio"
+            }
+          ]
+        },
+        {
+          "label": "Week B",
+          "exercises": [
+            {
+              "name": "Pistol Squat Progressions",
+              "sets": 4,
+              "reps": "5-8 ea",
+              "muscle": "Quads/Glutes"
+            },
+            {
+              "name": "Nordic Hamstring Curl",
+              "sets": 3,
+              "reps": "5-8",
+              "muscle": "Hamstrings"
+            },
+            {
+              "name": "Step-Ups",
+              "sets": 3,
+              "reps": "12 ea",
+              "muscle": "Quads/Glutes"
+            },
+            {
+              "name": "Single-Leg Glute Bridge",
+              "sets": 4,
+              "reps": "15 ea",
+              "muscle": "Glutes"
+            },
+            {
+              "name": "Calf Raises",
+              "sets": 4,
+              "reps": "25-30",
+              "muscle": "Calves"
+            },
+            {
+              "name": "Plank",
+              "sets": 3,
+              "reps": "45 sec",
+              "muscle": "Core"
+            }
+          ],
+          "coreOptions": [
+            {
+              "name": "Hollow Body Hold",
+              "sets": 3,
+              "reps": "30 sec",
+              "muscle": "Core"
+            },
+            {
+              "name": "Dead Bug",
+              "sets": 3,
+              "reps": "10 ea",
+              "muscle": "Core"
+            }
+          ]
+        },
+        {
+          "label": "Week C",
+          "exercises": [
+            {
+              "name": "Jump Squat",
+              "sets": 4,
+              "reps": "15-20",
+              "muscle": "Power/Legs"
+            },
+            {
+              "name": "Walking Lunges",
+              "sets": 3,
+              "reps": "15 ea",
+              "muscle": "Quads/Glutes"
+            },
+            {
+              "name": "Glute Bridge",
+              "sets": 4,
+              "reps": "20-25",
+              "muscle": "Glutes/Hams"
+            },
+            {
+              "name": "Wall Sit",
+              "sets": 3,
+              "reps": "60 sec",
+              "muscle": "Quads"
+            },
+            {
+              "name": "Calf Raises",
+              "sets": 4,
+              "reps": "25-30",
+              "muscle": "Calves"
+            },
+            {
+              "name": "Dead Bug",
+              "sets": 3,
+              "reps": "10 ea",
+              "muscle": "Core"
+            }
+          ],
+          "coreOptions": [
+            {
+              "name": "L-Sit Hold",
+              "sets": 3,
+              "reps": "15-20 sec",
+              "muscle": "Core"
+            },
+            {
+              "name": "Side Plank",
+              "sets": 3,
+              "reps": "30 sec ea",
+              "muscle": "Core/Obliques"
+            }
+          ]
+        },
+        {
+          "label": "Week D",
+          "exercises": [
+            {
+              "name": "Bulgarian Split Squat",
+              "sets": 4,
+              "reps": "12 ea",
+              "muscle": "Quads/Glutes"
+            },
+            {
+              "name": "Single-Leg Deadlift",
+              "sets": 3,
+              "reps": "10 ea",
+              "muscle": "Hamstrings/Glutes"
+            },
+            {
+              "name": "Jump Lunge",
+              "sets": 3,
+              "reps": "10 ea",
+              "muscle": "Quads/Glutes"
+            },
+            {
+              "name": "Hip Thrust (Bodyweight)",
+              "sets": 4,
+              "reps": "20-25",
+              "muscle": "Glutes"
+            },
+            {
+              "name": "Box Jumps",
+              "sets": 3,
+              "reps": "10",
+              "muscle": "Power/Legs"
+            },
+            {
+              "name": "Hollow Body Hold",
+              "sets": 3,
+              "reps": "30-45 sec",
+              "muscle": "Core"
+            }
+          ],
+          "coreOptions": [
+            {
+              "name": "Ab Wheel Rollout",
+              "sets": 3,
+              "reps": "8-10",
+              "muscle": "Core"
+            },
+            {
+              "name": "Hanging Knee Raise",
+              "sets": 3,
+              "reps": "12-15",
+              "muscle": "Core"
+            }
+          ]
+        }
+      ]
+    },
+    "Bodyweight Full Body": {
+      "icon": "FB",
+      "color": "#52E3A0",
+      "badge": "BW",
+      "variants": [
+        {
+          "label": "Week A",
+          "exercises": [
+            {
+              "name": "Bodyweight Squat",
+              "sets": 3,
+              "reps": "15-20",
+              "muscle": "Quads/Glutes"
+            },
+            {
+              "name": "Push-Ups",
+              "sets": 3,
+              "reps": "12-15",
+              "muscle": "Chest/Triceps"
+            },
+            {
+              "name": "Inverted Row",
+              "sets": 3,
+              "reps": "10-12",
+              "muscle": "Back"
+            },
+            {
+              "name": "Jump Squat",
+              "sets": 3,
+              "reps": "10-12",
+              "muscle": "Power/Legs"
+            },
+            {
+              "name": "Pike Push-Ups",
+              "sets": 3,
+              "reps": "10-12",
+              "muscle": "Shoulders"
+            },
+            {
+              "name": "Glute Bridge",
+              "sets": 3,
+              "reps": "15-20",
+              "muscle": "Glutes/Hams"
+            }
+          ],
+          "accessoryOptions": [
+            [
+              {
+                "name": "Diamond Push-Ups",
+                "sets": 2,
+                "reps": "10-12",
+                "muscle": "Triceps"
+              },
+              {
+                "name": "Chin-Ups",
+                "sets": 2,
+                "reps": "8-10",
+                "muscle": "Biceps/Back"
+              }
+            ],
+            [
+              {
+                "name": "Dips",
+                "sets": 2,
+                "reps": "10-12",
+                "muscle": "Chest/Triceps"
+              },
+              {
+                "name": "Hammer Curls",
+                "sets": 2,
+                "reps": "12-15",
+                "muscle": "Biceps"
+              }
+            ],
+            [
+              {
+                "name": "Archer Push-Ups",
+                "sets": 2,
+                "reps": "6-8 ea",
+                "muscle": "Chest"
+              },
+              {
+                "name": "Wide-Grip Pull-Ups",
+                "sets": 2,
+                "reps": "6-8",
+                "muscle": "Lats"
+              }
+            ]
+          ],
+          "coreOptions": [
+            {
+              "name": "Mountain Climbers",
+              "sets": 3,
+              "reps": "30 sec",
+              "muscle": "Core/Cardio"
+            },
+            {
+              "name": "Plank",
+              "sets": 3,
+              "reps": "45 sec",
+              "muscle": "Core"
+            },
+            {
+              "name": "Dead Bug",
+              "sets": 3,
+              "reps": "10 ea",
+              "muscle": "Core"
+            }
+          ]
+        },
+        {
+          "label": "Week B",
+          "exercises": [
+            {
+              "name": "Bulgarian Split Squat",
+              "sets": 3,
+              "reps": "10 ea",
+              "muscle": "Quads/Glutes"
+            },
+            {
+              "name": "Wide Push-Ups",
+              "sets": 3,
+              "reps": "15-20",
+              "muscle": "Chest"
+            },
+            {
+              "name": "Pull-Ups",
+              "sets": 3,
+              "reps": "6-10",
+              "muscle": "Lats/Biceps"
+            },
+            {
+              "name": "Pike Push-Ups",
+              "sets": 3,
+              "reps": "12-15",
+              "muscle": "Shoulders"
+            },
+            {
+              "name": "Nordic Hamstring Curl",
+              "sets": 3,
+              "reps": "5-8",
+              "muscle": "Hamstrings"
+            },
+            {
+              "name": "Dips",
+              "sets": 3,
+              "reps": "10-15",
+              "muscle": "Chest/Triceps"
+            }
+          ],
+          "accessoryOptions": [
+            [
+              {
+                "name": "Tricep Dips",
+                "sets": 2,
+                "reps": "12-15",
+                "muscle": "Triceps"
+              },
+              {
+                "name": "Chin-Ups",
+                "sets": 2,
+                "reps": "8-10",
+                "muscle": "Biceps"
+              }
+            ],
+            [
+              {
+                "name": "Diamond Push-Ups",
+                "sets": 2,
+                "reps": "10-12",
+                "muscle": "Triceps"
+              },
+              {
+                "name": "Neutral Pull-Ups",
+                "sets": 2,
+                "reps": "6-8",
+                "muscle": "Lats"
+              }
+            ],
+            [
+              {
+                "name": "Decline Push-Ups",
+                "sets": 2,
+                "reps": "12-15",
+                "muscle": "Upper Chest"
+              },
+              {
+                "name": "Inverted Row",
+                "sets": 2,
+                "reps": "10-12",
+                "muscle": "Back"
+              }
+            ]
+          ],
+          "coreOptions": [
+            {
+              "name": "Hollow Body Hold",
+              "sets": 3,
+              "reps": "30 sec",
+              "muscle": "Core"
+            },
+            {
+              "name": "Plank",
+              "sets": 3,
+              "reps": "60 sec",
+              "muscle": "Core"
+            },
+            {
+              "name": "Mountain Climbers",
+              "sets": 3,
+              "reps": "30 sec",
+              "muscle": "Core/Cardio"
+            }
+          ]
+        },
+        {
+          "label": "Week C \u2013 HIIT Style",
+          "exercises": [
+            {
+              "name": "Jump Squat",
+              "sets": 4,
+              "reps": "15",
+              "muscle": "Power/Legs"
+            },
+            {
+              "name": "Push-Up Burpees",
+              "sets": 3,
+              "reps": "10",
+              "muscle": "Full Body"
+            },
+            {
+              "name": "Pull-Ups",
+              "sets": 3,
+              "reps": "Max",
+              "muscle": "Back/Biceps"
+            },
+            {
+              "name": "Jump Lunge",
+              "sets": 3,
+              "reps": "10 ea",
+              "muscle": "Legs/Glutes"
+            },
+            {
+              "name": "Pike Push-Ups",
+              "sets": 3,
+              "reps": "12-15",
+              "muscle": "Shoulders"
+            },
+            {
+              "name": "Glute Bridge",
+              "sets": 3,
+              "reps": "20-25",
+              "muscle": "Glutes"
+            }
+          ],
+          "accessoryOptions": [
+            [
+              {
+                "name": "Dips",
+                "sets": 2,
+                "reps": "Max",
+                "muscle": "Chest/Triceps"
+              },
+              {
+                "name": "Chin-Ups",
+                "sets": 2,
+                "reps": "Max",
+                "muscle": "Biceps/Back"
+              }
+            ],
+            [
+              {
+                "name": "Archer Push-Ups",
+                "sets": 2,
+                "reps": "8 ea",
+                "muscle": "Chest"
+              },
+              {
+                "name": "Wide Pull-Ups",
+                "sets": 2,
+                "reps": "6-8",
+                "muscle": "Lats"
+              }
+            ],
+            [
+              {
+                "name": "Diamond Push-Ups",
+                "sets": 2,
+                "reps": "12-15",
+                "muscle": "Triceps"
+              },
+              {
+                "name": "Inverted Row",
+                "sets": 2,
+                "reps": "12-15",
+                "muscle": "Back"
+              }
+            ]
+          ],
+          "coreOptions": [
+            {
+              "name": "Mountain Climbers",
+              "sets": 3,
+              "reps": "30 sec",
+              "muscle": "Core/Cardio"
+            },
+            {
+              "name": "Dead Bug",
+              "sets": 3,
+              "reps": "10 ea",
+              "muscle": "Core"
+            },
+            {
+              "name": "Hollow Body Hold",
+              "sets": 3,
+              "reps": "30-45 sec",
+              "muscle": "Core"
+            }
+          ]
+        },
+        {
+          "label": "Week D \u2013 Strength",
+          "exercises": [
+            {
+              "name": "Pistol Squat Progressions",
+              "sets": 4,
+              "reps": "5-8 ea",
+              "muscle": "Quads/Glutes"
+            },
+            {
+              "name": "Archer Push-Ups",
+              "sets": 4,
+              "reps": "6-8 ea",
+              "muscle": "Chest"
+            },
+            {
+              "name": "Weighted Pull-Ups",
+              "sets": 4,
+              "reps": "5-8",
+              "muscle": "Lats/Biceps"
+            },
+            {
+              "name": "Handstand Push-Up Neg.",
+              "sets": 3,
+              "reps": "5-6",
+              "muscle": "Shoulders"
+            },
+            {
+              "name": "Nordic Hamstring Curl",
+              "sets": 3,
+              "reps": "5-8",
+              "muscle": "Hamstrings"
+            },
+            {
+              "name": "Single-Leg Glute Bridge",
+              "sets": 3,
+              "reps": "15 ea",
+              "muscle": "Glutes"
+            }
+          ],
+          "accessoryOptions": [
+            [
+              {
+                "name": "Dips",
+                "sets": 2,
+                "reps": "10-12",
+                "muscle": "Chest/Triceps"
+              },
+              {
+                "name": "Chin-Ups",
+                "sets": 2,
+                "reps": "8-10",
+                "muscle": "Biceps"
+              }
+            ],
+            [
+              {
+                "name": "Diamond Push-Ups",
+                "sets": 2,
+                "reps": "10-12",
+                "muscle": "Triceps"
+              },
+              {
+                "name": "Neutral Pull-Ups",
+                "sets": 2,
+                "reps": "6-8",
+                "muscle": "Lats"
+              }
+            ],
+            [
+              {
+                "name": "Tricep Dips",
+                "sets": 2,
+                "reps": "12-15",
+                "muscle": "Triceps"
+              },
+              {
+                "name": "Inverted Row",
+                "sets": 2,
+                "reps": "10-12",
+                "muscle": "Back"
+              }
+            ]
+          ],
+          "coreOptions": [
+            {
+              "name": "Ab Wheel Rollout",
+              "sets": 3,
+              "reps": "8-10",
+              "muscle": "Core"
+            },
+            {
+              "name": "L-Sit Hold",
+              "sets": 3,
+              "reps": "15-20 sec",
+              "muscle": "Core"
+            },
+            {
+              "name": "Plank",
+              "sets": 3,
+              "reps": "60 sec",
+              "muscle": "Core"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
