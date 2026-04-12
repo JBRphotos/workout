@@ -1,4 +1,4 @@
-<!DOCTYPE html><!-- v20260331-122517 -->
+<!DOCTYPE html><!-- v20260411-009 -->
 
 <html lang="en">
 <head>
@@ -2227,7 +2227,7 @@ function PRList({ exercisePRs, color }) {
         hasMore && (React.createElement("button", { onClick: () => setShowAll(v => !v), style: { width: "100%", marginTop: 8, padding: "8px", borderRadius: 10, background: "none",
                 border: "1px solid #1e1e1e", color: C.muted, fontSize: 12, cursor: "pointer" } }, showAll ? `▲ Show less` : `▼ Show all ${filtered.length} exercises`))));
 }
-function HunterProfile({ rankInfo, totalXP, profile, setProfile, checkIns, setCheckIns, weeklyCheckinDone, xpEvents, awardXP, intensity, cardioHistory = [], themeId, setThemeId, exercisePRs = {}, setShowCardioLog, workoutHistory = [], setShowWorkoutLog, onResetStats }) {
+function HunterProfile({ rankInfo, totalXP, profile, setProfile, checkIns, setCheckIns, weeklyCheckinDone, xpEvents, awardXP, intensity, cardioHistory = [], themeId, setThemeId, exercisePRs = {}, setShowActivityLog, workoutHistory = [], onResetStats }) {
     const C = useC();
     const [resetConfirm, setResetConfirm] = useState(false);
     const [expandedSession, setExpandedSession] = useState(null);
@@ -2317,10 +2317,10 @@ function HunterProfile({ rankInfo, totalXP, profile, setProfile, checkIns, setCh
         React.createElement("div", { style: { padding: "0 24px 20px" } },
             React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 } },
                 React.createElement("div", { style: { fontSize: 10, color: C.muted, letterSpacing: "0.1em", textTransform: "uppercase" } }, "Workout Log"),
-                workoutHistory.length > 0 && (React.createElement("button", { onClick: () => setShowWorkoutLog === null || setShowWorkoutLog === void 0 ? void 0 : setShowWorkoutLog(true), style: { fontSize: 10, padding: "4px 10px", borderRadius: 8, background: C.btnBg, border: `1px solid ${C.btnBorder}`, color: C.muted, cursor: "pointer" } },
+                (workoutHistory.length > 0 || cardioHistory.length > 0) && (React.createElement("button", { onClick: () => setShowActivityLog(true), style: { fontSize: 10, padding: "4px 10px", borderRadius: 8, background: C.btnBg, border: `1px solid ${C.btnBorder}`, color: C.muted, cursor: "pointer" } },
                     "View All (",
-                    workoutHistory.length,
-                    ")"))),
+                    workoutHistory.length + (cardioHistory || []).length,
+                    " activities)"))),
             workoutHistory.length === 0 ? (React.createElement("div", { style: { fontSize: 12, color: C.muted, padding: "4px 0" } }, "No workouts logged yet")) : (React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 8 } }, workoutHistory.slice(0, 3).map((s, i) => {
                 var _a, _b;
                 const plan = WORKOUT_PLANS[s.workout];
@@ -2408,35 +2408,6 @@ function HunterProfile({ rankInfo, totalXP, profile, setProfile, checkIns, setCh
                 React.createElement("div", { style: { fontSize: 13, fontWeight: 700, color: current.color } },
                     "+",
                     ev.xp))))))),
-        cardioHistory.length > 0 && (React.createElement("div", { style: { padding: "0 24px 20px" } },
-            React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 } },
-                React.createElement("div", { style: { fontSize: 10, color: C.muted, letterSpacing: "0.1em", textTransform: "uppercase" } }, "Cardio Log"),
-                React.createElement("button", { onClick: () => setShowCardioLog === null || setShowCardioLog === void 0 ? void 0 : setShowCardioLog(true), style: { fontSize: 10, padding: "4px 10px", borderRadius: 8, background: C.card, border: `1px solid ${C.inputBorder}`, color: C.muted, cursor: "pointer" } },
-                    "View All (",
-                    cardioHistory.length,
-                    ")")),
-            React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 7 } }, cardioHistory.slice(0, 3).map((c, i) => {
-                var _a;
-                const ct = CARDIO_TYPES.find(t => t.id === c.type);
-                return (React.createElement("div", { key: i, style: { background: C.deep, borderRadius: 12, padding: "11px 14px", border: `1px solid ${C.cardBorder}`, display: "flex", alignItems: "center", justifyContent: "space-between" } },
-                    React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 10 } },
-                        React.createElement("div", { style: { width: 28, height: 28, borderRadius: 8, background: (ct === null || ct === void 0 ? void 0 : ct.color) + "22", border: `1px solid ${ct === null || ct === void 0 ? void 0 : ct.color}44`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 } }, ((_a = ct === null || ct === void 0 ? void 0 : ct.icon) === null || _a === void 0 ? void 0 : _a.call(ct, ct.color, 16)) || IC.Cardio((ct === null || ct === void 0 ? void 0 : ct.color) || "#52E3A0", 16)),
-                        React.createElement("div", null,
-                            React.createElement("div", { style: { fontSize: 12, fontWeight: 600, color: C.text, textTransform: "capitalize" } }, c.type),
-                            React.createElement("div", { style: { fontSize: 10, color: C.muted, display: "flex", gap: 6 } },
-                                c.distance && React.createElement("span", null,
-                                    c.distance,
-                                    " mi"),
-                                c.duration && React.createElement("span", null,
-                                    c.duration,
-                                    " min")))),
-                    React.createElement("div", { style: { textAlign: "right" } },
-                        React.createElement("div", { style: { fontSize: 12, fontWeight: 700, color: (ct === null || ct === void 0 ? void 0 : ct.color) || "#888" } },
-                            "+",
-                            c.xp,
-                            " XP"),
-                        React.createElement("div", { style: { fontSize: 9, color: C.muted } }, c.date))));
-            })))),
         React.createElement("div", { style: { padding: "0 24px" } },
             React.createElement("div", { style: { fontSize: 10, color: C.muted, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 10 } }, "Rank Progression"),
             React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 6 } }, (() => {
@@ -2977,373 +2948,192 @@ function CardioLog({ cardioHistory, onClose, accentColor }) {
                         React.createElement("div", { style: { fontSize: 10, color: C.muted, marginTop: 2 } }, c.date)))));
         }))))));
 }
-const DAILY_QUOTES = [
-    { q: 'The secret of getting ahead is getting started.', a: 'Mark Twain' },
-    { q: 'We are what we repeatedly do. Excellence is not an act, but a habit.', a: 'Aristotle' },
-    { q: 'Motivation gets you started. Habit keeps you going.', a: 'Jim Ryun' },
-    { q: 'Small daily improvements are the key to staggering long-term results.', a: 'Unknown' },
-    { q: 'You don\'t have to be great to start, but you have to start to be great.', a: 'Zig Ziglar' },
-    { q: 'Success is the sum of small efforts repeated day in and day out.', a: 'Unknown' },
-    { q: 'The pain you feel today will be the strength you feel tomorrow.', a: 'Unknown' },
-    { q: 'Discipline is choosing between what you want now and what you want most.', a: 'Unknown' },
-    { q: 'Champions aren\'t made in gyms. They are made from something deep inside them.', a: 'Muhammad Ali' },
-    { q: 'It never gets easier. You just get better.', a: 'Unknown' },
-    { q: 'Show up every day. That\'s the secret.', a: 'Unknown' },
-    { q: 'Don\'t count the days. Make the days count.', a: 'Muhammad Ali' },
-    { q: 'Consistency is what transforms average into excellence.', a: 'Unknown' },
-    { q: 'Fall seven times. Stand up eight.', a: 'Japanese Proverb' },
-    { q: 'Do something today your future self will thank you for.', a: 'Unknown' },
-    { q: 'The difference between who you are and who you want to be is what you do.', a: 'Unknown' },
-    { q: 'Hard work beats talent when talent doesn\'t work hard.', a: 'Unknown' },
-    { q: 'One rep at a time. One day at a time.', a: 'Unknown' },
-    { q: 'Be so good they can\'t ignore you.', a: 'Unknown' },
-    { q: 'Show up. Do the work. Repeat.', a: 'Unknown' },
-    { q: 'The mind is the limit. As long as the mind can envision it, you can achieve it.', a: 'Arnold Schwarzenegger' },
-    { q: 'Whether you think you can or you think you can\'t, you\'re right.', a: 'Henry Ford' },
-    { q: 'Your mind will quit a thousand times before your body does.', a: 'Unknown' },
-    { q: 'Pain is temporary. Quitting lasts forever.', a: 'Unknown' },
-    { q: 'The only limits are the ones you place on yourself.', a: 'Unknown' },
-    { q: 'It always seems impossible until it\'s done.', a: 'Nelson Mandela' },
-    { q: 'Believe you can and you\'re halfway there.', a: 'Theodore Roosevelt' },
-    { q: 'What seems impossible today will one day be your warm-up.', a: 'Unknown' },
-    { q: 'The body achieves what the mind believes.', a: 'Unknown' },
-    { q: 'You are stronger than you think.', a: 'Unknown' },
-    { q: 'Doubt kills more dreams than failure ever will.', a: 'Unknown' },
-    { q: 'Train your mind to see the good in every situation.', a: 'Unknown' },
-    { q: 'Champions keep playing until they get it right.', a: 'Billie Jean King' },
-    { q: 'The hardest step is the first one out the door.', a: 'Unknown' },
-    { q: 'You\'ve survived 100% of your worst days.', a: 'Unknown' },
-    { q: 'Push yourself because no one else is going to do it for you.', a: 'Unknown' },
-    { q: 'Strength does not come from the body. It comes from the will of the soul.', a: 'Mahatma Gandhi' },
-    { q: 'Your attitude determines your direction.', a: 'Unknown' },
-    { q: 'You are capable of more than you know.', a: 'Unknown' },
-    { q: 'The strongest force in the universe is a human being living consistently with his identity.', a: 'Tony Robbins' },
-    { q: 'The only bad workout is the one that didn\'t happen.', a: 'Unknown' },
-    { q: 'If it doesn\'t challenge you, it doesn\'t change you.', a: 'Unknown' },
-    { q: 'Work hard in silence. Let success make the noise.', a: 'Unknown' },
-    { q: 'The harder the battle, the sweeter the victory.', a: 'Les Brown' },
-    { q: 'Don\'t stop when you\'re tired. Stop when you\'re done.', a: 'Unknown' },
-    { q: 'Go the extra mile. It\'s never crowded.', a: 'Unknown' },
-    { q: 'No shortcuts. No excuses.', a: 'Unknown' },
-    { q: 'Train insane or remain the same.', a: 'Unknown' },
-    { q: 'Make yourself proud.', a: 'Unknown' },
-    { q: 'The only way is through.', a: 'Robert Frost' },
-    { q: 'Do it now. Sometimes later becomes never.', a: 'Unknown' },
-    { q: 'You didn\'t come this far to only come this far.', a: 'Unknown' },
-    { q: 'Wake up. Work out. Be a better human.', a: 'Unknown' },
-    { q: 'Strength is built in the moments you want to quit but don\'t.', a: 'Unknown' },
-    { q: 'Results happen over time, not overnight.', a: 'Unknown' },
-    { q: 'One more rep. One more set. One more step.', a: 'Unknown' },
-    { q: 'Sweat is just fat crying.', a: 'Unknown' },
-    { q: 'Rise and grind.', a: 'Unknown' },
-    { q: 'Earn it.', a: 'Unknown' },
-    { q: 'No pain, no gain.', a: 'Unknown' },
-    { q: 'Progress, not perfection.', a: 'Unknown' },
-    { q: 'Be better than you were yesterday.', a: 'Unknown' },
-    { q: 'Every day is a new opportunity to improve yourself.', a: 'Unknown' },
-    { q: 'Don\'t compare your chapter one to someone else\'s chapter twenty.', a: 'Unknown' },
-    { q: 'The only competition is who you were yesterday.', a: 'Unknown' },
-    { q: 'Grow through what you go through.', a: 'Unknown' },
-    { q: 'A year from now you\'ll wish you had started today.', a: 'Unknown' },
-    { q: 'Small progress is still progress.', a: 'Unknown' },
-    { q: 'You\'re not behind. You\'re just on your own timeline.', a: 'Unknown' },
-    { q: 'Track your wins, no matter how small.', a: 'Unknown' },
-    { q: 'Every step forward is a step in the right direction.', a: 'Unknown' },
-    { q: 'Keep going. You\'re closer than you think.', a: 'Unknown' },
-    { q: 'The journey of a thousand miles begins with a single step.', a: 'Lao Tzu' },
-    { q: 'Stronger every single day.', a: 'Unknown' },
-    { q: 'Success is a journey, not a destination.', a: 'Arthur Ashe' },
-    { q: 'Great things are done by a series of small things brought together.', a: 'Vincent Van Gogh' },
-    { q: 'Every rep counts. Every set matters.', a: 'Unknown' },
-    { q: 'The goal is not to be perfect by the end. The goal is to be better today.', a: 'Unknown' },
-    { q: 'It\'s not about being the best. It\'s about being better than you were.', a: 'Unknown' },
-    { q: 'Every workout brings you one step closer to your goal.', a: 'Unknown' },
-    { q: 'It\'s not about how hard you hit. It\'s about how hard you can get hit and keep moving forward.', a: 'Unknown' },
-    { q: 'The greatest glory in living lies not in never falling, but in rising every time we fall.', a: 'Nelson Mandela' },
-    { q: 'You just can\'t beat the person who never gives up.', a: 'Babe Ruth' },
-    { q: 'Persistence is the twin sister of excellence.', a: 'Unknown' },
-    { q: 'Never give up on a dream just because of the time it will take.', a: 'Earl Nightingale' },
-    { q: 'If you\'re going through hell, keep going.', a: 'Winston Churchill' },
-    { q: 'Character is built one hard day at a time.', a: 'Unknown' },
-    { q: 'The man who moves a mountain begins by carrying away small stones.', a: 'Confucius' },
-    { q: 'Victory belongs to the most persevering.', a: 'Napoleon Bonaparte' },
-    { q: 'Don\'t quit. Suffer now and live the rest of your life as a champion.', a: 'Muhammad Ali' },
-    { q: 'A river cuts through rock not because of its power but because of its persistence.', a: 'Unknown' },
-    { q: 'When you feel like stopping, think about why you started.', a: 'Unknown' },
-    { q: 'Tough times never last, but tough people do.', a: 'Robert H. Schuller' },
-    { q: 'Keep showing up. That\'s the whole game.', a: 'Unknown' },
-    { q: 'You haven\'t failed until you quit.', a: 'Unknown' },
-    { q: 'Never, never, never give up.', a: 'Winston Churchill' },
-    { q: 'The comeback is always stronger than the setback.', a: 'Unknown' },
-    { q: 'Keep pushing. You have more strength than you think.', a: 'Unknown' },
-    { q: 'Endurance is the crowning quality.', a: 'Unknown' },
-    { q: 'A champion is someone who gets up when they can\'t.', a: 'Jack Dempsey' },
-    { q: 'A goal without a plan is just a wish.', a: 'Antoine de Saint-Exupery' },
-    { q: 'Set goals, not limits.', a: 'Unknown' },
-    { q: 'Dream big. Work hard. Stay focused.', a: 'Unknown' },
-    { q: 'Know what you want and why you want it.', a: 'Unknown' },
-    { q: 'Your goals don\'t care how you feel.', a: 'Unknown' },
-    { q: 'Think big. Start small. Act now.', a: 'Unknown' },
-    { q: 'Focus on where you want to go, not on what you fear.', a: 'Tony Robbins' },
-    { q: 'Set your goals high and don\'t stop until you get there.', a: 'Bo Jackson' },
-    { q: 'Goals are dreams with deadlines.', a: 'Unknown' },
-    { q: 'Vision without action is a daydream. Action without vision is a nightmare.', a: 'Japanese Proverb' },
-    { q: 'Decide. Commit. Succeed.', a: 'Unknown' },
-    { q: 'You become what you focus on.', a: 'Unknown' },
-    { q: 'Make today a building block for tomorrow.', a: 'Unknown' },
-    { q: 'The goal is to keep the goal the goal.', a: 'Dan John' },
-    { q: 'A clear vision is the roadmap to achievement.', a: 'Unknown' },
-    { q: 'Write your goals down. Read them every day.', a: 'Unknown' },
-    { q: 'Think about what you want, then go get it.', a: 'Unknown' },
-    { q: 'If you want something you\'ve never had, you must do something you\'ve never done.', a: 'Unknown' },
-    { q: 'Every day you either get better or worse. You never stay the same.', a: 'Unknown' },
-    { q: 'Today\'s goal: be 1% better than yesterday.', a: 'Unknown' },
-    { q: 'Strength doesn\'t come from what you can do. It comes from overcoming what you thought you couldn\'t.', a: 'Unknown' },
-    { q: 'The iron never lies to you.', a: 'Henry Rollins' },
-    { q: 'Lift more than yesterday.', a: 'Unknown' },
-    { q: 'Lift heavy. Live strong.', a: 'Unknown' },
-    { q: 'Strength is built through struggle.', a: 'Unknown' },
-    { q: 'The gym is the only place where you gain by losing.', a: 'Unknown' },
-    { q: 'In the gym, there are no shortcuts. Just sweat and results.', a: 'Unknown' },
-    { q: 'Every set is a chance to prove yourself to yourself.', a: 'Unknown' },
-    { q: 'The heaviest weight you\'ll ever lift is the gym door.', a: 'Unknown' },
-    { q: 'Strength grows in the moments you think you can\'t go on but you keep going.', a: 'Unknown' },
-    { q: 'Train like the best version of yourself already exists.', a: 'Unknown' },
-    { q: 'Get comfortable being uncomfortable.', a: 'Unknown' },
-    { q: 'Power is built, not born.', a: 'Unknown' },
-    { q: 'The bar doesn\'t care about your feelings.', a: 'Unknown' },
-    { q: 'Iron is the best therapy.', a: 'Henry Rollins' },
-    { q: 'Strong body, strong mind.', a: 'Unknown' },
-    { q: 'Be strong when you are weak, brave when you are scared.', a: 'Unknown' },
-    { q: 'Barbell in hand. Problems on hold.', a: 'Unknown' },
-    { q: 'You earn your body.', a: 'Unknown' },
-    { q: 'Lift until the weights feel light.', a: 'Unknown' },
-    { q: 'Take care of your body. It\'s the only place you have to live.', a: 'Jim Rohn' },
-    { q: 'To enjoy the glow of good health, you must exercise.', a: 'Gene Tunney' },
-    { q: 'Fitness is not a destination. It is a way of life.', a: 'Unknown' },
-    { q: 'Your body hears everything your mind says.', a: 'Naomi Judd' },
-    { q: 'Movement is medicine.', a: 'Unknown' },
-    { q: 'Healthy is not a size. Healthy is a feeling.', a: 'Unknown' },
-    { q: 'Eat well. Move daily. Sleep deeply.', a: 'Unknown' },
-    { q: 'A healthy outside starts from the inside.', a: 'Robert Urich' },
-    { q: 'The best project you\'ll ever work on is you.', a: 'Unknown' },
-    { q: 'Take care of your body so your soul has a great place to live.', a: 'Unknown' },
-    { q: 'Health is wealth.', a: 'Unknown' },
-    { q: 'Move every day. Even if it\'s just a little.', a: 'Unknown' },
-    { q: 'Rest is part of training. Recovery is how you grow.', a: 'Unknown' },
-    { q: 'Fuel your body, not just your ego.', a: 'Unknown' },
-    { q: 'Your body is not a before photo.', a: 'Unknown' },
-    { q: 'Respect the process. Respect your body.', a: 'Unknown' },
-    { q: 'The body you have is the result of choices you\'ve made.', a: 'Unknown' },
-    { q: 'Exercise is a celebration of what your body can do.', a: 'Unknown' },
-    { q: 'Healthy habits, healthy life.', a: 'Unknown' },
-    { q: 'Your health is an investment, not an expense.', a: 'Unknown' },
-    { q: 'Do not pray for an easy life, pray for the strength to endure a difficult one.', a: 'Bruce Lee' },
-    { q: 'Great things come from hard work and perseverance. No excuses.', a: 'Kobe Bryant' },
-    { q: 'I\'ve missed more than 9000 shots in my career. That\'s why I succeed.', a: 'Michael Jordan' },
-    { q: 'Some people want it to happen, some wish it would happen, others make it happen.', a: 'Michael Jordan' },
-    { q: 'Today I will do what others won\'t, so tomorrow I can do what others can\'t.', a: 'Jerry Rice' },
-    { q: 'If you want to be the best, you have to do things others are not willing to do.', a: 'Michael Phelps' },
-    { q: 'We all have the same 24 hours. Use yours wisely.', a: 'Unknown' },
-    { q: 'Don\'t wish it were easier. Wish you were better.', a: 'Jim Rohn' },
-    { q: 'Hard days are the best days because they make you stronger.', a: 'Unknown' },
-    { q: 'Show up. Work hard. Be humble.', a: 'Unknown' },
-    { q: 'Good things come to those who sweat.', a: 'Unknown' },
-    { q: 'Success isn\'t always about greatness. It\'s about consistency.', a: 'Dwayne Johnson' },
-    { q: 'Excellence is not a singular act but a habit. You are what you repeatedly do.', a: 'Unknown' },
-    { q: 'Be the hardest worker in the room.', a: 'Unknown' },
-    { q: 'Your effort is your character.', a: 'Unknown' },
-    { q: 'Action is the foundational key to all success.', a: 'Pablo Picasso' },
-    { q: 'Do more of what makes you feel alive.', a: 'Unknown' },
-    { q: 'You are who you choose to be.', a: 'Unknown' },
-    { q: 'Attitude is the difference between an ordeal and an adventure.', a: 'Unknown' },
-    { q: 'Be fearless in the pursuit of what sets your soul on fire.', a: 'Unknown' },
-    { q: 'Just one more.', a: 'Unknown' },
-    { q: 'Earn your rest.', a: 'Unknown' },
-    { q: 'Today\'s effort is tomorrow\'s result.', a: 'Unknown' },
-    { q: 'You got this.', a: 'Unknown' },
-    { q: 'Built not given.', a: 'Unknown' },
-    { q: 'Put in the work.', a: 'Unknown' },
-    { q: 'Level up.', a: 'Unknown' },
-    { q: 'Make it happen.', a: 'Unknown' },
-    { q: 'Progress over perfection.', a: 'Unknown' },
-    { q: 'Less talk. More action.', a: 'Unknown' },
-    { q: 'Earn today.', a: 'Unknown' },
-    { q: 'Show up for yourself.', a: 'Unknown' },
-    { q: 'Start before you\'re ready.', a: 'Unknown' },
-    { q: 'Trust the process.', a: 'Unknown' },
-    { q: 'Keep the promise you made to yourself.', a: 'Unknown' },
-    { q: 'Your only job is to not quit.', a: 'Unknown' },
-    { q: 'Grind. Grow. Glow.', a: 'Unknown' },
-    { q: 'No regrets.', a: 'Unknown' },
-    { q: 'Train. Rest. Repeat.', a: 'Unknown' },
-    { q: 'Own it.', a: 'Unknown' },
-    { q: 'Every day you train, you level up.', a: 'Unknown' },
-    { q: 'Every hunter started as a novice.', a: 'Unknown' },
-    { q: 'The strongest version of you is built rep by rep.', a: 'Unknown' },
-    { q: 'Arise. No one is coming to save you.', a: 'Unknown' },
-    { q: 'Every limitation exists only in your mind.', a: 'Unknown' },
-    { q: 'Today\'s training is tomorrow\'s power.', a: 'Unknown' },
-    { q: 'Rank up or go home.', a: 'Unknown' },
-    { q: 'The grind is the dungeon. Results are the reward.', a: 'Unknown' },
-    { q: 'You can\'t skip the grind and expect the glory.', a: 'Unknown' },
-    { q: 'The mission never ends. The grind is daily.', a: 'Unknown' },
-    { q: 'The secret of change is to focus all energy on building the new, not fighting the old.', a: 'Socrates' },
-    { q: 'It is not the mountain we conquer, but ourselves.', a: 'Edmund Hillary' },
-    { q: 'In the middle of every difficulty lies opportunity.', a: 'Albert Einstein' },
-    { q: 'Life is 10% what happens to you and 90% how you respond.', a: 'Unknown' },
-    { q: 'We suffer more in imagination than in reality.', a: 'Seneca' },
-    { q: 'He who is not courageous enough to take risks will accomplish nothing.', a: 'Muhammad Ali' },
-    { q: 'It does not matter how slowly you go as long as you do not stop.', a: 'Confucius' },
-    { q: 'The cave you fear to enter holds the treasure you seek.', a: 'Joseph Campbell' },
-    { q: 'You don\'t rise to the level of your goals. You fall to the level of your systems.', a: 'James Clear' },
-    { q: 'Identity drives behavior. Become the person who works out.', a: 'Unknown' },
-    { q: 'The quality of your life is the quality of your habits.', a: 'Unknown' },
-    { q: 'Comparison is the thief of joy.', a: 'Theodore Roosevelt' },
-    { q: 'First say to yourself what you would be, then do what you have to do.', a: 'Epictetus' },
-    { q: 'Pressure makes diamonds.', a: 'George S. Patton' },
-    { q: 'Suffer the pain of discipline or suffer the pain of regret.', a: 'Unknown' },
-    { q: 'The person who says it cannot be done should not interrupt the person doing it.', a: 'Chinese Proverb' },
-    { q: 'An obstacle is often a stepping stone.', a: 'Unknown' },
-    { q: 'Your habits define your future.', a: 'Unknown' },
-    { q: 'Atomic habits, massive results.', a: 'James Clear' },
-    { q: 'We become what we think about.', a: 'Earl Nightingale' },
-    { q: 'Be the energy you want to attract.', a: 'Unknown' },
-    { q: 'The first step to getting somewhere is deciding not to stay where you are.', a: 'Unknown' },
-    { q: 'Nothing worth having comes easy.', a: 'Theodore Roosevelt' },
-    { q: 'Believe in yourself and all that you are.', a: 'Christian D. Larson' },
-    { q: 'There is no substitute for hard work.', a: 'Thomas Edison' },
-    { q: 'You don\'t need motivation. You need discipline.', a: 'Unknown' },
-    { q: 'All progress takes place outside the comfort zone.', a: 'Unknown' },
-    { q: 'What you do every day matters more than what you do once in a while.', a: 'Gretchen Rubin' },
-    { q: 'The expert in anything was once a beginner.', a: 'Helen Hayes' },
-    { q: 'Be stubborn about your goals and flexible about your methods.', a: 'Unknown' },
-    { q: 'You were made to do hard things. Believe in yourself.', a: 'Unknown' },
-    { q: 'Big results require big ambitions.', a: 'Heraclitus' },
-    { q: 'The best time to plant a tree was 20 years ago. The second best time is now.', a: 'Chinese Proverb' },
-    { q: 'Run your own race.', a: 'Unknown' },
-    { q: 'One day you will look back and be glad you didn\'t quit.', a: 'Unknown' },
-    { q: 'When it gets hard, that\'s when you find out who you really are.', a: 'Unknown' },
-    { q: 'Your potential is limitless.', a: 'Unknown' },
-    { q: 'Success demands sacrifice.', a: 'Unknown' },
-    { q: 'Fuel the hunger inside you.', a: 'Unknown' },
-    { q: 'Strive for progress, not perfection.', a: 'Unknown' },
-    { q: 'Your sweat is your signature.', a: 'Unknown' },
-    { q: 'Fitness is not about being better than someone else. It\'s about being better than you used to be.', a: 'Unknown' },
-    { q: 'The will to win means nothing without the will to prepare.', a: 'Unknown' },
-    { q: 'If you want to change your body, change your mind first.', a: 'Unknown' },
-    { q: 'Every day is a chance to be better.', a: 'Unknown' },
-    { q: 'Work until your idols become your rivals.', a: 'Unknown' },
-    { q: 'The pain of discipline weighs ounces. The pain of regret weighs tons.', a: 'Jim Rohn' },
-    { q: 'Your body can stand almost anything. It\'s your mind you have to convince.', a: 'Unknown' },
-    { q: 'Be patient. Good things take time.', a: 'Unknown' },
-    { q: 'You are one decision away from a totally different life.', a: 'Unknown' },
-    { q: 'Train hard or go home.', a: 'Unknown' },
-    { q: 'Don\'t let the fear of the time it will take to accomplish something stop you.', a: 'Earl Nightingale' },
-    { q: 'The only person you should try to be better than is the person you were yesterday.', a: 'Unknown' },
-    { q: 'Muscles are torn in the gym, fed in the kitchen, built in bed.', a: 'Unknown' },
-    { q: 'Your body is your most priceless possession. Take care of it.', a: 'Jack LaLanne' },
-    { q: 'Success comes to those who are too busy to be looking for it.', a: 'Unknown' },
-    { q: 'If you don\'t make time for exercise, you\'ll probably have to make time for illness.', a: 'Robin Sharma' },
-    { q: 'Strength doesn\'t come from physical capacity. It comes from an indomitable will.', a: 'Mahatma Gandhi' },
-    { q: 'You can feel sore tomorrow or you can feel sorry tomorrow. Your choice.', a: 'Unknown' },
-    { q: 'The secret is to work less as individuals and more as a team.', a: 'Unknown' },
-    { q: 'Champions train. Losers complain.', a: 'Unknown' },
-    { q: 'Push past the point where others stop.', a: 'Unknown' },
-    { q: 'Your limitation is only your imagination.', a: 'Unknown' },
-    { q: 'Sweat now. Shine later.', a: 'Unknown' },
-    { q: 'Be the version of yourself that future you will be proud of.', a: 'Unknown' },
-    { q: 'One small step can change your entire trajectory.', a: 'Unknown' },
-    { q: 'Eat. Sleep. Train. Repeat.', a: 'Unknown' },
-    { q: 'The gym is my church.', a: 'Unknown' },
-    { q: 'You have to want it as much as you want to breathe.', a: 'Unknown' },
-    { q: 'Hard work always beats talent when talent doesn\'t work hard.', a: 'Unknown' },
-    { q: 'The more you sweat in training, the less you bleed in battle.', a: 'Unknown' },
-    { q: 'Stay the course. The finish line is closer than you think.', a: 'Unknown' },
-    { q: 'You\'re not tired. You\'re just not mentally strong enough yet.', a: 'Unknown' },
-    { q: 'Mind over matter. If you don\'t mind, it doesn\'t matter.', a: 'Unknown' },
-    { q: 'Winning isn\'t everything, but wanting to win is.', a: 'Vince Lombardi' },
-    { q: 'How bad do you want it?', a: 'Unknown' },
-    { q: 'The tragedy is not that you failed, but that you almost succeeded.', a: 'Unknown' },
-    { q: 'Every great achievement was once considered impossible.', a: 'Unknown' },
-    { q: 'Work until you no longer have to introduce yourself.', a: 'Unknown' },
-    { q: 'Strive not to be a success, but rather to be of value.', a: 'Albert Einstein' },
-    { q: 'If you\'re not willing to work for it, don\'t wish for it.', a: 'Unknown' },
-    { q: 'Never let a stumble in the road be the end of the journey.', a: 'Unknown' },
-    { q: 'Energy and persistence conquer all things.', a: 'Benjamin Franklin' },
-    { q: 'You\'re always one workout away from a better mood.', a: 'Unknown' },
-    { q: 'Don\'t be afraid to start over. It\'s a chance to build something better.', a: 'Unknown' },
-    { q: 'Be driven. Be focused. Be awesome.', a: 'Unknown' },
-    { q: 'Make the rest of your life the best of your life.', a: 'Unknown' },
-    { q: 'No matter how slow you go, you\'re still lapping everyone on the couch.', a: 'Unknown' },
-    { q: 'You are your only limit.', a: 'Unknown' },
-    { q: 'If you can dream it, you can achieve it.', a: 'Zig Ziglar' },
-    { q: 'Success is no accident. It is hard work, perseverance, learning, studying, sacrifice.', a: 'Pele' },
-    { q: 'Believe in the power of yet.', a: 'Carol Dweck' },
-    { q: 'You\'ve got what it takes, but it will take everything you\'ve got.', a: 'Unknown' },
-    { q: 'Invest in yourself. It pays the best interest.', a: 'Benjamin Franklin' },
-    { q: 'Your future depends on what you do today.', a: 'Mahatma Gandhi' },
-    { q: 'Failure is not the opposite of success. It\'s part of it.', a: 'Arianna Huffington' },
-    { q: 'Life begins at the end of your comfort zone.', a: 'Neale Donald Walsch' },
-    { q: 'It\'s not whether you get knocked down. It\'s whether you get up.', a: 'Vince Lombardi' },
-    { q: 'Today\'s preparation determines tomorrow\'s achievement.', a: 'Unknown' },
-    { q: 'Do the work. The results will follow.', a: 'Unknown' },
-    { q: 'Just because it\'s hard doesn\'t mean it\'s not worth it.', a: 'Unknown' },
-    { q: 'Earn what you want. Nothing is given.', a: 'Unknown' },
-    { q: 'Be hungry. Stay humble.', a: 'Unknown' },
-    { q: 'Outwork everyone.', a: 'Unknown' },
-    { q: 'The only time success comes before work is in the dictionary.', a: 'Unknown' },
-    { q: 'Work harder than you think you did yesterday.', a: 'Unknown' },
-    { q: 'Stop dreaming. Start doing.', a: 'Unknown' },
-    { q: 'Excuses don\'t burn calories.', a: 'Unknown' },
-    { q: 'You become what you believe.', a: 'Oprah Winfrey' },
-    { q: 'Don\'t give up on yourself.', a: 'Unknown' },
-    { q: 'Remember why you started on the days you want to quit.', a: 'Unknown' },
-    { q: 'Embrace the grind.', a: 'Unknown' },
-    { q: 'Results speak louder than excuses.', a: 'Unknown' },
-    { q: 'Your story isn\'t over yet.', a: 'Unknown' },
-    { q: 'Get after it.', a: 'Unknown' },
-    { q: 'Be the reason someone believes in themselves.', a: 'Unknown' },
-    { q: 'The real workout starts when you want to stop.', a: 'Unknown' },
-    { q: 'You never regret a workout.', a: 'Unknown' },
-    { q: 'Every rep builds the life you want.', a: 'Unknown' },
-    { q: 'No excuses. Only results.', a: 'Unknown' },
-    { q: 'This is your sign to go to the gym.', a: 'Unknown' },
-    { q: 'Hustle harder.', a: 'Unknown' },
-    { q: 'Nothing great was ever achieved without enthusiasm.', a: 'Ralph Waldo Emerson' },
-    { q: 'If it was easy, everyone would do it.', a: 'Unknown' },
-    { q: 'Pain is weakness leaving the body.', a: 'Unknown' },
-    { q: 'Turn your can\'ts into cans and your dreams into plans.', a: 'Unknown' },
-    { q: 'Be so focused that nothing can distract you.', a: 'Unknown' },
-    { q: 'Your greatest opponent is the voice in your head.', a: 'Unknown' },
-    { q: 'The fire inside you burns brighter than the fire around you.', a: 'Unknown' },
-    { q: 'One more day. One more rep. One more step.', a: 'Unknown' },
-    { q: 'If you\'re breathing, you can do one more.', a: 'Unknown' },
-    { q: 'The will to win is nothing without the will to prepare to win.', a: 'Unknown' },
-    { q: 'If you want to change your body, change your mind first.', a: 'Unknown' },
-    { q: 'Work until your idols become your rivals.', a: 'Unknown' },
-    { q: 'The pain of discipline weighs ounces. The pain of regret weighs tons.', a: 'Jim Rohn' },
-    { q: 'Be patient. Good things take time.', a: 'Unknown' },
-    { q: 'You are one decision away from a totally different life.', a: 'Unknown' },
-    { q: 'Your body can stand almost anything. It\'s your mind you have to convince.', a: 'Unknown' },
-    { q: 'Muscles are torn in the gym, fed in the kitchen, built in bed.', a: 'Unknown' },
-    { q: 'You can feel sore tomorrow or feel sorry tomorrow. Your choice.', a: 'Unknown' },
-    { q: 'If you don\'t make time for exercise, you\'ll have to make time for illness.', a: 'Robin Sharma' },
-    { q: 'The more you sweat in training, the less you bleed in battle.', a: 'Unknown' },
-    { q: 'Stay the course. The finish line is closer than you think.', a: 'Unknown' },
-    { q: 'Winning isn\'t everything, but wanting to win is.', a: 'Vince Lombardi' },
-    { q: 'How bad do you want it?', a: 'Unknown' },
-    { q: 'Every great achievement was once considered impossible.', a: 'Unknown' },
-    { q: 'Energy and persistence conquer all things.', a: 'Benjamin Franklin' },
-    { q: 'No matter how slow you go, you\'re still lapping everyone on the couch.', a: 'Unknown' },
-    { q: 'Success is no accident. It is hard work, perseverance, and sacrifice.', a: 'Pele' },
-    { q: 'Your future depends on what you do today.', a: 'Mahatma Gandhi' },
-    { q: 'Failure is not the opposite of success. It\'s part of success.', a: 'Arianna Huffington' },
-    { q: 'Life begins at the end of your comfort zone.', a: 'Neale Donald Walsch' },
-    { q: 'It\'s not whether you get knocked down. It\'s whether you get up.', a: 'Vince Lombardi' },
-    { q: 'The only time success comes before work is in the dictionary.', a: 'Unknown' },
-    { q: 'Excuses don\'t burn calories.', a: 'Unknown' },
-];
+
+function ActivityLog({ workoutHistory, cardioHistory, onClose, accentColor, onShare, onUpdateNote }) {
+    const C = useC();
+    const [expanded, setExpanded] = useState(null);
+    const [editingNote, setEditingNote] = useState(null);
+    const [noteText, setNoteText] = useState("");
+    const accent = accentColor || "#FF6B35";
+
+    // Build sessions: group by date, merge same-day workout+cardio into one session
+    // Each session: { date, workout: obj|null, cardioList: [], totalXP, workoutIdx }
+    const sessions = [];
+    const byDate = {};
+
+    (workoutHistory || []).forEach((s, i) => {
+        const d = s.date || "Unknown";
+        if (!byDate[d]) byDate[d] = { date: d, workout: null, workoutIdx: null, cardioList: [] };
+        // keep first workout per day (most recent already at index 0)
+        if (!byDate[d].workout) { byDate[d].workout = s; byDate[d].workoutIdx = i; }
+    });
+    (cardioHistory || []).forEach((c) => {
+        const d = c.date || "Unknown";
+        if (!byDate[d]) byDate[d] = { date: d, workout: null, workoutIdx: null, cardioList: [] };
+        byDate[d].cardioList.push(c);
+    });
+
+    const sortedDates = Object.keys(byDate).sort((a, b) => new Date(b) - new Date(a));
+
+    // Summary stats (unchanged arrays)
+    const totalWorkouts = (workoutHistory || []).length;
+    const totalCardio = (cardioHistory || []).length;
+    const totalSets = (workoutHistory || []).reduce((a, s) => a + (s.setsCompleted || 0), 0);
+    const totalMiles = (cardioHistory || []).reduce((a, c) => a + (parseFloat(c.distance) || 0), 0);
+    const totalXPAll = [...(workoutHistory || []), ...(cardioHistory || [])].reduce((a, s) => a + (s.xpEarned || s.xp || 0), 0);
+
+    return React.createElement("div", { style: { position: "fixed", inset: 0, background: C.surface, zIndex: 200, display: "flex", flexDirection: "column" } },
+        // Header
+        React.createElement("div", { style: { padding: "52px 24px 16px", borderBottom: "1px solid " + C.border, flexShrink: 0 } },
+            React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "flex-start" } },
+                React.createElement("div", null,
+                    React.createElement("div", { style: { fontSize: 10, color: C.muted, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 4 } }, "History"),
+                    React.createElement("div", { style: { fontSize: 26, fontWeight: 800, letterSpacing: "-0.02em", color: C.text } }, "Activity Log")),
+                React.createElement("button", { onClick: onClose, style: { width: 36, height: 36, borderRadius: 10, background: C.btnBg, border: "1px solid " + C.btnBorder, color: C.muted, fontSize: 18, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" } }, "\u2715")),
+            React.createElement("div", { style: { display: "flex", gap: 8, marginTop: 16 } },
+                [
+                    { label: "Workouts", value: totalWorkouts },
+                    { label: "Cardio", value: totalCardio },
+                    { label: "Sets", value: totalSets },
+                    { label: "Miles", value: totalMiles.toFixed(1) },
+                    { label: "XP", value: totalXPAll },
+                ].map(s => React.createElement("div", { key: s.label, style: { flex: 1, background: C.card, borderRadius: 12, padding: "10px 4px", border: "1px solid " + C.cardBorder, textAlign: "center" } },
+                    React.createElement("div", { style: { fontSize: 14, fontWeight: 800, color: accent } }, s.value),
+                    React.createElement("div", { style: { fontSize: 8, color: C.muted, textTransform: "uppercase", letterSpacing: "0.06em", marginTop: 2 } }, s.label))))),
+
+        // Sessions list
+        React.createElement("div", { style: { flex: 1, overflowY: "auto", padding: "12px 24px 40px" } },
+            sortedDates.length === 0
+                ? React.createElement("div", { style: { textAlign: "center", padding: "40px 0", color: C.muted, fontSize: 13 } }, "No activity logged yet")
+                : React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 12 } },
+                    sortedDates.map(date => {
+                        const sess = byDate[date];
+                        const w = sess.workout;
+                        const cardioList = sess.cardioList;
+                        const isOpen = expanded === date;
+
+                        // Colors
+                        const plan = w ? WORKOUT_PLANS[w.workout] : null;
+                        const wColor = (plan && plan.color) || "#FF6B35";
+                        const firstCardio = cardioList[0];
+                        const firstCT = firstCardio ? CARDIO_TYPES.find(t => t.id === firstCardio.type) : null;
+                        const cColor = (firstCT && firstCT.color) || "#52E3A0";
+                        const primaryColor = w ? wColor : cColor;
+
+                        // Combined XP
+                        const wXP = w ? (w.xpEarned || 0) : 0;
+                        const cXP = cardioList.reduce((a, c) => a + (c.xp || 0), 0);
+                        const totalXP = wXP + cXP;
+
+                        // Subtitle line
+                        const wSub = w ? (w.setsCompleted + " sets \u00B7 " + w.duration + "min") : null;
+                        const cSub = cardioList.map(c => {
+                            const ct = CARDIO_TYPES.find(t => t.id === c.type);
+                            return (c.distance ? c.distance + "mi " : "") + (ct ? ct.label : c.type);
+                        }).join(", ");
+
+                        // Primary title
+                        const title = w ? w.workout : (firstCT ? firstCT.label + " \u00B7 " + (firstCardio.location === "outside" ? "Outdoor" : "Indoor") : "Cardio");
+
+                        // Icon
+                        const icon = w
+                            ? ((IC[PLAN_ICON[w.workout]] && IC[PLAN_ICON[w.workout]](wColor, 20)) || IC.Active(wColor, 20))
+                            : ((firstCT && firstCT.icon && firstCT.icon(cColor, 20)) || IC.Cardio(cColor, 20));
+
+                        return React.createElement("div", { key: date },
+                            React.createElement("div", { style: { fontSize: 10, color: C.muted, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 6, paddingLeft: 2 } }, date),
+                            React.createElement("div", { style: { background: C.card, borderRadius: 14, border: "1px solid " + (isOpen ? primaryColor + "55" : C.cardBorder), overflow: "hidden", transition: "border-color 0.15s" } },
+
+                                // Row header — always visible
+                                React.createElement("div", { onClick: () => setExpanded(isOpen ? null : date), style: { padding: "13px 16px", display: "flex", alignItems: "center", gap: 12, cursor: "pointer" } },
+                                    React.createElement("div", { style: { width: 36, height: 36, borderRadius: 10, background: primaryColor + "22", border: "1px solid " + primaryColor + "44", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 } }, icon),
+                                    React.createElement("div", { style: { flex: 1, minWidth: 0 } },
+                                        React.createElement("div", { style: { fontSize: 13, fontWeight: 700, color: C.text } }, title),
+                                        React.createElement("div", { style: { fontSize: 11, color: C.muted, marginTop: 2, display: "flex", gap: 6, flexWrap: "wrap", alignItems: "center" } },
+                                            wSub && React.createElement("span", null, wSub),
+                                            wSub && cSub && React.createElement("span", { style: { color: C.border } }, "\u00B7"),
+                                            // cardio pills
+                                            cardioList.length > 0 && React.createElement("span", { style: { color: cColor } },
+                                                cardioList.map((c, ci) => {
+                                                    var ct2 = CARDIO_TYPES.find(function(t) { return t.id === c.type; });
+                                                    return (ci > 0 ? ", " : "") + (c.distance ? c.distance + "mi " : "") + (ct2 ? ct2.label : c.type);
+                                                }).join("")))),
+                                    React.createElement("div", { style: { textAlign: "right", flexShrink: 0 } },
+                                        React.createElement("div", { style: { fontSize: 12, fontWeight: 700, color: accent } }, "+" + totalXP + " XP"),
+                                        React.createElement("div", { style: { fontSize: 10, color: C.muted, marginTop: 1 } }, w ? (w.time || "") : (firstCardio && firstCardio.time ? firstCardio.time : ""))),
+                                    React.createElement("div", { style: { fontSize: 11, color: C.muted, transform: isOpen ? "rotate(180deg)" : "none", transition: "transform 0.2s", marginLeft: 4 } }, "\u25BE")),
+
+                                // Expanded detail
+                                isOpen && React.createElement("div", { style: { background: C.deep, borderTop: "1px solid " + C.cardBorder, padding: "12px 16px" } },
+
+                                    // Workout exercises section
+                                    w && React.createElement("div", { style: { marginBottom: cardioList.length > 0 ? 14 : 0 } },
+                                        React.createElement("div", { style: { fontSize: 9, color: C.muted, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 8 } }, "Exercises Logged"),
+                                        Object.keys(w.exercises || {}).length === 0
+                                            ? React.createElement("div", { style: { fontSize: 12, color: C.muted } }, "No set data recorded")
+                                            : React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 6 } },
+                                                Object.entries(w.exercises).map(function(kv) {
+                                                    var ename = kv[0], sets = kv[1];
+                                                    return React.createElement("div", { key: ename, style: { display: "flex", justifyContent: "space-between", alignItems: "center" } },
+                                                        React.createElement("div", { style: { fontSize: 12, color: C.text } }, ename),
+                                                        React.createElement("div", { style: { display: "flex", gap: 5, flexWrap: "wrap", justifyContent: "flex-end" } },
+                                                            (sets || []).map((set, j) => React.createElement("div", { key: j, style: { fontSize: 10, padding: "2px 7px", borderRadius: 8, background: wColor + "22", color: wColor } },
+                                                                (set.weight > 0 ? set.weight + "lb" : "") +
+                                                                (set.weight > 0 && set.reps > 0 ? " \u00D7 " : "") +
+                                                                (set.reps > 0 ? "" + set.reps : "")))));
+                                                }))),
+
+                                    // Cardio entries section
+                                    cardioList.length > 0 && React.createElement("div", null,
+                                        w && React.createElement("div", { style: { height: 1, background: C.border, marginBottom: 12 } }),
+                                        React.createElement("div", { style: { fontSize: 9, color: C.muted, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 8 } }, "Cardio"),
+                                        cardioList.map((c, ci) => {
+                                            var ct3 = CARDIO_TYPES.find(function(t) { return t.id === c.type; });
+                                            var cc = (ct3 && ct3.color) || "#52E3A0";
+                                            return React.createElement("div", { key: ci, style: { display: "flex", alignItems: "center", gap: 10, marginBottom: ci < cardioList.length - 1 ? 8 : 0 } },
+                                                React.createElement("div", { style: { width: 28, height: 28, borderRadius: 8, background: cc + "22", border: "1px solid " + cc + "44", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 } },
+                                                    (ct3 && ct3.icon && ct3.icon(cc, 14)) || IC.Cardio(cc, 14)),
+                                                React.createElement("div", { style: { flex: 1 } },
+                                                    React.createElement("div", { style: { fontSize: 12, color: C.text, fontWeight: 600, textTransform: "capitalize" } }, c.type + " \u00B7 " + (c.location === "outside" ? "Outdoor" : "Indoor")),
+                                                    React.createElement("div", { style: { fontSize: 11, color: C.muted, marginTop: 2, display: "flex", gap: 8, flexWrap: "wrap" } },
+                                                        c.distance && React.createElement("span", null, c.distance + " mi"),
+                                                        c.duration && React.createElement("span", null, c.duration + " min"),
+                                                        c.pace && React.createElement("span", { style: { color: cc } }, c.pace + " " + (c.type === "run" ? "min/mi" : "mph")),
+                                                        c.incline && React.createElement("span", null, c.incline + "% incline"))),
+                                                React.createElement("div", { style: { fontSize: 11, fontWeight: 700, color: cc } }, "+" + (c.xp || 0) + " XP"));
+                                        })),
+
+                                    // Note section (workout notes only)
+                                    w && onUpdateNote && React.createElement("div", { style: { marginTop: 12 } },
+                                        w.note && editingNote !== date
+                                            ? React.createElement("div", { style: { padding: "9px 12px", background: wColor + "12", borderRadius: 10, border: "1px solid " + wColor + "22" } },
+                                                React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 } },
+                                                    React.createElement("div", { style: { fontSize: 10, color: wColor, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em" } }, "Note"),
+                                                    React.createElement("button", { onClick: () => { setEditingNote(date); setNoteText(w.note || ""); }, style: { background: "none", border: "none", color: C.muted, fontSize: 10, cursor: "pointer", textDecoration: "underline" } }, "Edit")),
+                                                React.createElement("div", { style: { fontSize: 12, color: C.text, lineHeight: 1.6 } }, w.note))
+                                            : React.createElement("div", null,
+                                                React.createElement("div", { style: { fontSize: 10, color: C.muted, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 6 } }, w.note ? "Edit Note" : "Add Note"),
+                                                React.createElement("div", { onClick: () => { setEditingNote(date); setNoteText(w.note || ""); }, style: { width: "100%", padding: "9px 12px", borderRadius: 10, background: C.input, border: "1.5px solid " + C.inputBorder, color: (editingNote === date ? noteText : w.note) ? C.text : C.muted, fontSize: 12, lineHeight: 1.5, minHeight: 38, cursor: "text" } },
+                                                    (editingNote === date ? noteText : w.note) || "Add a note..."),
+                                                editingNote === date && React.createElement("div", { style: { position: "fixed", top: 0, left: 0, right: 0, bottom: 0, zIndex: 600, background: "rgba(0,0,0,0.5)", display: "flex", flexDirection: "column", justifyContent: "flex-end" }, onClick: e => { if (e.target === e.currentTarget) setEditingNote(null); } },
+                                                    React.createElement("div", { style: { background: C.surface, borderRadius: "20px 20px 0 0", padding: "20px 20px calc(20px + env(safe-area-inset-bottom))", maxHeight: "70vh", display: "flex", flexDirection: "column" } },
+                                                        React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 } },
+                                                            React.createElement("div", { style: { fontSize: 13, fontWeight: 700, color: C.text } }, w.note ? "Edit Note" : "Add Note"),
+                                                            React.createElement("button", { onClick: () => { onUpdateNote(sess.workoutIdx, noteText.trim()); setEditingNote(null); }, style: { background: accent, border: "none", color: "#fff", fontSize: 13, fontWeight: 700, cursor: "pointer", padding: "6px 16px", borderRadius: 8 } }, "Save")),
+                                                        React.createElement("textarea", { autoFocus: true, value: noteText, onChange: e => setNoteText(e.target.value), placeholder: "Add a note...", style: { flex: 1, width: "100%", padding: "12px", borderRadius: 10, background: C.input, border: "1.5px solid " + C.inputBorder, color: C.text, fontSize: 14, outline: "none", fontFamily: "inherit", resize: "none", lineHeight: 1.6, minHeight: 160 } }),
+                                                        React.createElement("button", { onClick: () => setEditingNote(null), style: { marginTop: 10, padding: "10px", borderRadius: 10, background: C.btnBg, border: "1px solid " + C.btnBorder, color: C.muted, fontSize: 13, cursor: "pointer", width: "100%" } }, "Cancel"))))),
+
+                                    // Share button — always show if there's a workout, or standalone cardio
+                                    onShare && React.createElement("button", { onClick: () => onShare({ workout: w, cardioList: cardioList, totalXP: totalXP, date: date }), style: { marginTop: 12, width: "100%", padding: "9px", borderRadius: 10, background: primaryColor + "22", border: "1px solid " + primaryColor + "44", color: primaryColor, fontSize: 12, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 6 } },
+                                        React.createElement("svg", { width: "13", height: "13", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round" },
+                                            React.createElement("path", { d: "M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" }),
+                                            React.createElement("circle", { cx: "12", cy: "13", r: "4" })),
+                                        "Share Stats"))));
+                    
+                    }))));
+}
+
+const DAILY_QUOTES = []; // loaded from quotes.json
 // ── QUOTE SPLASH ──────────────────────────────────────────────────────────────
 // Shows a daily motivational quote on app open for ~3 seconds
 function QuoteSplash({ onDone }) {
@@ -3357,7 +3147,13 @@ function QuoteSplash({ onDone }) {
         const diff = now - start;
         return Math.floor(diff / (1000 * 60 * 60 * 24)) % 365;
     };
-    const quote = DAILY_QUOTES[dayOfYear()];
+    const [quote, setQuote] = useState({ q: "Rise and grind.", a: "Unknown" });
+    useEffect(() => {
+        fetch('quotes.json')
+            .then(r => r.json())
+            .then(qs => { if (qs && qs.length) setQuote(qs[dayOfYear() % qs.length]); })
+            .catch(() => {});
+    }, []);
     useEffect(() => {
         // Start fade-out after 3.2s, dismiss after 3.7s
         const fadeTimer = setTimeout(() => setFadeOut(true), 3200);
@@ -3450,17 +3246,19 @@ const [camReady, setCamReady] = useState(false);
 const [camError, setCamError] = useState(false);
 const [camDenied, setCamDenied] = useState(false);
 const [flashAnim, setFlashAnim] = useState(false);
-const [position, setPosition] = useState(“center”);
-const [size, setSize] = useState(“medium”);
+const [position, setPosition] = useState("center");
+const [size, setSize] = useState("medium");
 const [showSettings, setShowSettings] = useState(false);
 const [uiVisible, setUiVisible] = useState(true);
-const [facing, setFacing] = useState(“environment”);
-const { workout, duration, xpEarned, rankInfo } = summary;
-const plan = WORKOUT_PLANS[workout];
-const color = (plan === null || plan === void 0 ? void 0 : plan.color) || “#FF6B35”;
+const [facing, setFacing] = useState("environment");
+const { workout, duration, xpEarned, rankInfo, cardioOnDay, isCardioOnly } = summary;
+const plan = workout ? WORKOUT_PLANS[workout] : null;
+const firstCardio = cardioOnDay && cardioOnDay[0];
+const firstCT = firstCardio ? CARDIO_TYPES.find(function(t) { return t.id === firstCardio.type; }) : null;
+const color = (plan && plan.color) || (firstCT && firstCT.color) || "#FF6B35";
 const rank = rankInfo === null || rankInfo === void 0 ? void 0 : rankInfo.current;
-const mins = Math.floor(duration);
-const formatDur = mins >= 60 ? `${Math.floor(mins / 60)}h ${mins % 60}m` : `${mins}m`;
+const mins = duration ? Math.floor(duration) : 0;
+const formatDur = mins > 0 ? (mins >= 60 ? Math.floor(mins/60) + "h " + (mins%60) + "m" : mins + "m") : null;
 const startCamera = async (facingMode) => {
 var _a;
 (_a = streamRef.current) === null || _a === void 0 ? void 0 : _a.getTracks().forEach(t => t.stop());
@@ -3476,8 +3274,8 @@ streamRef.current = stream;
 const vid = videoRef.current;
 if (vid) {
 vid.srcObject = stream;
-vid.setAttribute(“playsinline”, “”);
-vid.setAttribute(“muted”, “”);
+vid.setAttribute("playsinline", "");
+vid.setAttribute("muted", "");
 try {
 await vid.play();
 }
@@ -3488,7 +3286,7 @@ setCamReady(true);
 }
 }
 catch (e) {
-if (e.name === “NotAllowedError” || e.name === “PermissionDeniedError”) {
+if (e.name === "NotAllowedError" || e.name === "PermissionDeniedError") {
 setCamDenied(true);
 }
 setCamError(true);
@@ -3499,7 +3297,7 @@ startCamera(facing);
 return () => { var _a; (_a = streamRef.current) === null || _a === void 0 ? void 0 : _a.getTracks().forEach(t => t.stop()); };
 }, []);
 const flipCamera = () => {
-const newFacing = facing === “environment” ? “user” : “environment”;
+const newFacing = facing === "environment" ? "user" : "environment";
 setFacing(newFacing);
 startCamera(newFacing);
 };
@@ -3525,13 +3323,13 @@ const cw = needsRotation ? vh : vw;
 const ch = needsRotation ? vw : vh;
 canvas.width = cw;
 canvas.height = ch;
-const ctx = canvas.getContext(“2d”);
+const ctx = canvas.getContext("2d");
 // Draw video — rotate 90° CCW if needed
 if (needsRotation) {
 ctx.save();
 ctx.translate(0, cw); // cw = original vh
 ctx.rotate(-Math.PI / 2);
-if (facing === “user”) {
+if (facing === "user") {
 ctx.translate(vh, 0);
 ctx.scale(-1, 1);
 }
@@ -3539,12 +3337,12 @@ ctx.drawImage(vid, 0, 0, vw, vh);
 ctx.restore();
 }
 else {
-if (facing === “user”) {
+if (facing === "user") {
 ctx.translate(cw, 0);
 ctx.scale(-1, 1);
 }
 ctx.drawImage(vid, 0, 0, cw, ch);
-if (facing === “user”) {
+if (facing === "user") {
 ctx.setTransform(1, 0, 0, 1, 0, 0);
 }
 }
@@ -3553,11 +3351,11 @@ const sx = cw / window.innerWidth;
 const sy = ch / window.innerHeight;
 const px = (n) => n * sx;
 const py = (n) => n * sy;
-ctx.textBaseline = “top”;
+ctx.textBaseline = "top";
 // Vignette
 const vig = ctx.createRadialGradient(cw / 2, ch / 2, ch * 0.18, cw / 2, ch / 2, ch * 0.72);
-vig.addColorStop(0, “rgba(0,0,0,0)”);
-vig.addColorStop(1, “rgba(0,0,0,0.45)”);
+vig.addColorStop(0, "rgba(0,0,0,0)");
+vig.addColorStop(1, "rgba(0,0,0,0.45)");
 ctx.fillStyle = vig;
 ctx.fillRect(0, 0, cw, ch);
 // Stats position
@@ -3569,28 +3367,37 @@ br: { x: cw - px(20), y: ch - py(220) },
 center: { x: cw / 2, y: ch / 2 - py(60) },
 };
 const spos = posMap[position] || posMap.center;
-const isRight = [“tr”, “br”].includes(position);
-const isCenter = position === “center”;
+const isRight = ["tr", "br"].includes(position);
+const isCenter = position === "center";
 const dateSz = px(9 * sc);
 const nameSz = px(28 * sc);
 const valSz = px(22 * sc);
 const labelSz = px(8 * sc);
 // Date
-ctx.textAlign = isCenter ? “center” : isRight ? “right” : “left”;
+ctx.textAlign = isCenter ? "center" : isRight ? "right" : "left";
 ctx.font = `600 ${dateSz}px 'Helvetica Neue',Arial,sans-serif`;
-ctx.fillStyle = “rgba(255,255,255,0.65)”;
-ctx.shadowColor = “rgba(0,0,0,0.8)”;
+ctx.fillStyle = "rgba(255,255,255,0.65)";
+ctx.shadowColor = "rgba(0,0,0,0.8)";
 ctx.shadowBlur = px(6);
-ctx.fillText(new Date().toLocaleDateString([], { weekday: “long”, month: “short”, day: “numeric” }).toUpperCase(), spos.x, spos.y);
+ctx.fillText(new Date().toLocaleDateString([], { weekday: "long", month: "short", day: "numeric" }).toUpperCase(), spos.x, spos.y);
 // Workout name
 ctx.font = `900 ${nameSz}px 'Helvetica Neue',Arial,sans-serif`;
-ctx.fillStyle = “#fff”;
+ctx.fillStyle = "#fff";
 ctx.shadowBlur = px(14);
-ctx.fillText((workout || “”).replace(“Bodyweight “, “BW “), spos.x, spos.y + dateSz + py(5));
+const displayTitle = isCardioOnly
+    ? (firstCT ? firstCT.label : "Cardio")
+    : (workout || "").replace("Bodyweight ", "BW ");
+ctx.fillText(displayTitle, spos.x, spos.y + dateSz + py(5));
 // Stats row — measure widths first, then draw side by side
 const statsY = spos.y + dateSz + py(5) + nameSz + py(12);
 ctx.shadowBlur = px(8);
-const statsData = [{ label: “DURATION”, value: formatDur }, { label: “XP EARNED”, value: `+${xpEarned}` }];
+const cardioLine = cardioOnDay && cardioOnDay.length > 0
+    ? cardioOnDay.map(function(c) { var ct = CARDIO_TYPES.find(function(t) { return t.id === c.type; }); return (c.distance ? c.distance + "mi " : (c.duration ? c.duration + "min " : "")) + (ct ? ct.label : c.type); }).join(", ")
+    : null;
+const statsData = [];
+if (formatDur) statsData.push({ label: "DURATION", value: formatDur });
+if (cardioLine) statsData.push({ label: "CARDIO", value: cardioLine.substring(0, 14) });
+statsData.push({ label: "XP EARNED", value: "+" + xpEarned });
 ctx.font = `900 ${valSz}px 'Helvetica Neue',Arial,sans-serif`;
 const w0 = ctx.measureText(statsData[0].value).width;
 const w1 = ctx.measureText(statsData[1].value).width;
@@ -3600,77 +3407,77 @@ const startX = isCenter ? cw / 2 - totalW / 2 : isRight ? spos.x - totalW : spos
 for (let i = 0; i < statsData.length; i++) {
 const s = statsData[i];
 const x = i === 0 ? startX : startX + w0 + gap;
-ctx.textAlign = “left”;
+ctx.textAlign = "left";
 ctx.font = `900 ${valSz}px 'Helvetica Neue',Arial,sans-serif`;
-ctx.fillStyle = “#fff”;
+ctx.fillStyle = "#fff";
 ctx.fillText(s.value, x, statsY);
 ctx.font = `600 ${labelSz}px 'Helvetica Neue',Arial,sans-serif`;
-ctx.fillStyle = “rgba(255,255,255,0.6)”;
+ctx.fillStyle = "rgba(255,255,255,0.6)";
 ctx.fillText(s.label, x, statsY + valSz + py(3));
 }
 // Rank badge
 const bx = px(20), by = py(56), bw = px(40), bh = py(40);
 ctx.shadowBlur = 0;
-ctx.fillStyle = “rgba(0,0,0,0.55)”;
+ctx.fillStyle = "rgba(0,0,0,0.55)";
 roundRect(ctx, bx, by, bw, bh, px(10));
-ctx.strokeStyle = ((rank === null || rank === void 0 ? void 0 : rank.color) || “#888”) + “99”;
+ctx.strokeStyle = ((rank === null || rank === void 0 ? void 0 : rank.color) || "#888") + "99";
 ctx.lineWidth = px(1.5);
 roundRect(ctx, bx, by, bw, bh, px(10), false);
-ctx.textAlign = “center”;
+ctx.textAlign = "center";
 ctx.font = `700 ${px(7)}px 'Helvetica Neue',Arial,sans-serif`;
-ctx.fillStyle = (rank === null || rank === void 0 ? void 0 : rank.color) || “#888”;
-ctx.fillText(“LVL”, bx + bw / 2, by + py(7));
+ctx.fillStyle = (rank === null || rank === void 0 ? void 0 : rank.color) || "#888";
+ctx.fillText("LVL", bx + bw / 2, by + py(7));
 ctx.font = `900 ${px(16)}px 'Helvetica Neue',Arial,sans-serif`;
-ctx.fillText(String((rank === null || rank === void 0 ? void 0 : rank.level) || “”), bx + bw / 2, by + py(17));
+ctx.fillText(String((rank === null || rank === void 0 ? void 0 : rank.level) || ""), bx + bw / 2, by + py(17));
 // XP bar
 const barY = by + bh + py(4);
-ctx.fillStyle = “rgba(255,255,255,0.15)”;
+ctx.fillStyle = "rgba(255,255,255,0.15)";
 ctx.fillRect(bx, barY, bw, py(3));
 const prog = Math.min(1, (rankInfo === null || rankInfo === void 0 ? void 0 : rankInfo.progress) || 0);
 const grad = ctx.createLinearGradient(bx, 0, bx + bw, 0);
-grad.addColorStop(0, (rank === null || rank === void 0 ? void 0 : rank.color) || “#888”);
-grad.addColorStop(1, “#A855F7”);
+grad.addColorStop(0, (rank === null || rank === void 0 ? void 0 : rank.color) || "#888");
+grad.addColorStop(1, "#A855F7");
 ctx.fillStyle = grad;
 ctx.fillRect(bx, barY, bw * prog, py(3));
 // Rank text
-ctx.textAlign = “left”;
-ctx.shadowColor = “rgba(0,0,0,0.9)”;
+ctx.textAlign = "left";
+ctx.shadowColor = "rgba(0,0,0,0.9)";
 ctx.shadowBlur = px(6);
 ctx.font = `700 ${px(12)}px 'Helvetica Neue',Arial,sans-serif`;
-ctx.fillStyle = “#fff”;
-ctx.fillText((rank === null || rank === void 0 ? void 0 : rank.title) || “”, bx + bw + px(10), by + py(8));
+ctx.fillStyle = "#fff";
+ctx.fillText((rank === null || rank === void 0 ? void 0 : rank.title) || "", bx + bw + px(10), by + py(8));
 ctx.font = `400 ${px(9)}px 'Helvetica Neue',Arial,sans-serif`;
-ctx.fillStyle = “rgba(255,255,255,0.45)”;
-ctx.fillText(“Rank “ + ((rank === null || rank === void 0 ? void 0 : rank.rank) || “”), bx + bw + px(10), by + py(22));
+ctx.fillStyle = "rgba(255,255,255,0.45)";
+ctx.fillText("Rank " + ((rank === null || rank === void 0 ? void 0 : rank.rank) || ""), bx + bw + px(10), by + py(22));
 // Branding
 ctx.shadowBlur = px(8);
 ctx.font = `900 ${px(14)}px 'Helvetica Neue',Arial,sans-serif`;
-ctx.fillStyle = “#fff”;
-ctx.textAlign = “left”;
-ctx.fillText(“Level Up”, px(20), ch - py(100));
+ctx.fillStyle = "#fff";
+ctx.textAlign = "left";
+ctx.fillText("Level Up", px(20), ch - py(100));
 ctx.font = `400 ${px(9)}px 'Helvetica Neue',Arial,sans-serif`;
-ctx.fillStyle = “rgba(255,255,255,0.4)”;
+ctx.fillStyle = "rgba(255,255,255,0.4)";
 ctx.fillText(`WORKOUT TRACKER · ${(profile === null || profile === void 0 ? void 0 : profile.name) || ""}`, px(20), ch - py(86));
 ctx.shadowBlur = 0;
 canvas.toBlob(async (blob) => {
 var _a;
 if (!blob)
 return;
-const file = new File([blob], “levelup-workout.jpg”, { type: “image/jpeg” });
-if (navigator.share && ((_a = navigator.canShare) === null || _a === void 0 ? void 0 : *a.call(navigator, { files: [file] }))) {
+const file = new File([blob], "levelup-workout.jpg", { type: "image/jpeg" });
+if (navigator.share && ((_a = navigator.canShare) === null || _a === void 0 ? void 0 : _a.call(navigator, { files: [file] }))) {
 try {
-await navigator.share({ files: [file], title: “Level Up Workout” });
+await navigator.share({ files: [file], title: "Level Up Workout" });
 }
 catch (e) { }
 }
 else {
-const a = document.createElement(“a”);
+const a = document.createElement("a");
 a.href = URL.createObjectURL(blob);
-a.download = “levelup-workout.jpg”;
+a.download = "levelup-workout.jpg";
 a.click();
 }
 startCamera(facing);
-}, “image/jpeg”, 0.92);
+}, "image/jpeg", 0.92);
 };
 // Canvas roundRect helper for older Safari
 function roundRect(ctx, x, y, w, h, r, fill = true) {
@@ -3694,256 +3501,256 @@ ctx.stroke();
 const sc = { small: 0.65, medium: 1.0, large: 1.45 }[size];
 // Position styles — safe margins to avoid rank badge (top-left) and branding (bottom-left)
 const posStyle = {
-tl: { top: 110, left: 20, right: “auto”, bottom: “auto”, transform: “none” },
-tr: { top: 110, right: 20, left: “auto”, bottom: “auto”, transform: “none” },
-bl: { bottom: 160, left: 20, right: “auto”, top: “auto”, transform: “none” },
-br: { bottom: 160, right: 20, left: “auto”, top: “auto”, transform: “none” },
-center: { top: “50%”, left: “50%”, right: “auto”, bottom: “auto”, transform: “translate(-50%,-50%)” },
+tl: { top: 110, left: 20, right: "auto", bottom: "auto", transform: "none" },
+tr: { top: 110, right: 20, left: "auto", bottom: "auto", transform: "none" },
+bl: { bottom: 160, left: 20, right: "auto", top: "auto", transform: "none" },
+br: { bottom: 160, right: 20, left: "auto", top: "auto", transform: "none" },
+center: { top: "50%", left: "50%", right: "auto", bottom: "auto", transform: "translate(-50%,-50%)" },
 }[position];
-const textAlign = [“tl”, “bl”].includes(position) ? “left” : [“tr”, “br”].includes(position) ? “right” : “center”;
-const flexJust = textAlign === “center” ? “center” : textAlign === “right” ? “flex-end” : “flex-start”;
-return (React.createElement(“div”, { onClick: toggleUI, style: { position: “fixed”, inset: 0, zIndex: 600, background: “#000”, fontFamily: “‘DM Sans’,sans-serif”, cursor: “pointer” } },
-React.createElement(“video”, { ref: videoRef, playsInline: true, muted: true, autoPlay: true, style: { position: “fixed”, top: 0, left: 0, width: “100vw”, height: “100vh”, objectFit: “cover”, zIndex: 0, opacity: camReady ? 1 : 0, transition: “opacity 0.3s”, transform: facing === “user” ? “scaleX(-1)” : “none” } }),
-camError && React.createElement(“div”, { style: { position: “absolute”, inset: 0, background: “linear-gradient(135deg, #0A0A14 0%, #0d0d20 100%)”, zIndex: 1 } }),
-!camReady && !camError && React.createElement(“div”, { style: { position: “absolute”, inset: 0, background: “#000”, display: “flex”, alignItems: “center”, justifyContent: “center”, zIndex: 1 } },
-React.createElement(“div”, { style: { fontSize: 11, color: “#444”, letterSpacing: “0.12em” } }, “LOADING CAMERA\u2026”)),
-camError && (React.createElement(“div”, { style: { position: “absolute”, inset: 0, display: “flex”, flexDirection: “column”, alignItems: “center”, justifyContent: “center”, gap: 14, zIndex: 4, padding: “0 40px”, textAlign: “center” } }, camDenied ? (React.createElement(React.Fragment, null,
-React.createElement(“div”, { style: { fontSize: 13, color: “rgba(255,255,255,0.5)”, lineHeight: 1.6 } },
-“Camera access denied.”,
-React.createElement(“br”, null),
-“Go to “,
-React.createElement(“strong”, { style: { color: “#fff” } }, “Settings \u2192 Safari \u2192 Camera”),
-“ and allow access, then tap retry.”),
-React.createElement(“button”, { onClick: () => { setCamError(false); setCamDenied(false); startCamera(facing); }, style: { padding: “10px 24px”, borderRadius: 10, background: “rgba(255,255,255,0.15)”, border: “1px solid rgba(255,255,255,0.25)”, color: “#fff”, fontSize: 13, fontWeight: 600, cursor: “pointer” } }, “Retry Camera”))) : (React.createElement(“button”, { onClick: () => { setCamError(false); startCamera(facing); }, style: { padding: “10px 24px”, borderRadius: 10, background: “rgba(255,255,255,0.15)”, border: “1px solid rgba(255,255,255,0.25)”, color: “#fff”, fontSize: 13, fontWeight: 600, cursor: “pointer” } }, “Tap to Enable Camera”)))),
-flashAnim && React.createElement(“div”, { style: { position: “absolute”, inset: 0, background: “white”, opacity: 0.55, zIndex: 20, pointerEvents: “none” } }),
-React.createElement(“div”, { style: { position: “absolute”, inset: 0, background: “radial-gradient(ellipse at center, transparent 35%, rgba(0,0,0,0.45) 100%)”, pointerEvents: “none” } }),
-React.createElement(“div”, { style: Object.assign(Object.assign({ position: “absolute” }, posStyle), { zIndex: 5, maxWidth: 280 }) },
-React.createElement(“div”, { style: { fontSize: 9 * sc, color: “rgba(255,255,255,0.6)”, letterSpacing: “0.14em”, textTransform: “uppercase”, marginBottom: 5 * sc, textShadow: “0 1px 6px rgba(0,0,0,0.8)” } }, new Date().toLocaleDateString([], { weekday: “long”, month: “short”, day: “numeric” })),
-React.createElement(“div”, { style: { fontSize: 28 * sc, fontWeight: 900, color: “#fff”, letterSpacing: “-0.02em”, lineHeight: 1, marginBottom: 12 * sc, textShadow: “0 2px 12px rgba(0,0,0,0.9)” } }, workout === null || workout === void 0 ? void 0 : workout.replace(“Bodyweight “, “BW “)),
-React.createElement(“div”, { style: { display: “flex”, justifyContent: flexJust, gap: 20 * sc } }, [{ label: “Duration”, value: formatDur }, { label: “XP Earned”, value: `+${xpEarned}` }].map(s => (React.createElement(“div”, { key: s.label },
-React.createElement(“div”, { style: { fontSize: 22 * sc, fontWeight: 900, color: “#fff”, lineHeight: 1, textShadow: “0 2px 8px rgba(0,0,0,0.9)” } }, s.value),
-React.createElement(“div”, { style: { fontSize: 8 * sc, color: “rgba(255,255,255,0.6)”, letterSpacing: “0.1em”, textTransform: “uppercase”, marginTop: 3 * sc, textShadow: “0 1px 4px rgba(0,0,0,0.8)” } }, s.label)))))),
-React.createElement(“div”, { style: { position: “absolute”, top: 56, left: 20, display: “flex”, alignItems: “center”, gap: 10, zIndex: 6 } },
-React.createElement(“div”, { style: { display: “flex”, flexDirection: “column”, alignItems: “center”, gap: 4 } },
-React.createElement(“div”, { style: { width: 40, height: 40, borderRadius: 10, background: “rgba(0,0,0,0.55)”, border: `1.5px solid ${rank === null || rank === void 0 ? void 0 : rank.color}99`, backdropFilter: “blur(8px)”, display: “flex”, flexDirection: “column”, alignItems: “center”, justifyContent: “center” } },
-React.createElement(“div”, { style: { fontSize: 7, color: rank === null || rank === void 0 ? void 0 : rank.color, fontWeight: 700, letterSpacing: “0.06em” } }, “LVL”),
-React.createElement(“div”, { style: { fontSize: 16, fontWeight: 900, color: rank === null || rank === void 0 ? void 0 : rank.color, lineHeight: 1 } }, rank === null || rank === void 0 ? void 0 : rank.level)),
-React.createElement(“div”, { style: { width: 40, height: 3, background: “rgba(255,255,255,0.15)”, borderRadius: 2, overflow: “hidden” } },
-React.createElement(“div”, { style: { height: 3, borderRadius: 2, width: `${Math.min(100, ((rankInfo === null || rankInfo === void 0 ? void 0 : rankInfo.progress) || 0) * 100)}%`, background: `linear-gradient(90deg, ${rank === null || rank === void 0 ? void 0 : rank.color}, #A855F7)`, transition: “width 0.5s” } }))),
-React.createElement(“div”, null,
-React.createElement(“div”, { style: { fontSize: 12, fontWeight: 700, color: “#fff”, textShadow: “0 1px 6px rgba(0,0,0,0.9)” } }, rank === null || rank === void 0 ? void 0 : rank.title),
-React.createElement(“div”, { style: { fontSize: 9, color: “rgba(255,255,255,0.45)” } },
-“Rank “, rank === null || rank === void 0 ? void 0 :
+const textAlign = ["tl", "bl"].includes(position) ? "left" : ["tr", "br"].includes(position) ? "right" : "center";
+const flexJust = textAlign === "center" ? "center" : textAlign === "right" ? "flex-end" : "flex-start";
+return (React.createElement("div", { onClick: toggleUI, style: { position: "fixed", inset: 0, zIndex: 600, background: "#000", fontFamily: "‘DM Sans’,sans-serif", cursor: "pointer" } },
+React.createElement("video", { ref: videoRef, playsInline: true, muted: true, autoPlay: true, style: { position: "fixed", top: 0, left: 0, width: "100vw", height: "100vh", objectFit: "cover", zIndex: 0, opacity: camReady ? 1 : 0, transition: "opacity 0.3s", transform: facing === "user" ? "scaleX(-1)" : "none" } }),
+camError && React.createElement("div", { style: { position: "absolute", inset: 0, background: "linear-gradient(135deg, #0A0A14 0%, #0d0d20 100%)", zIndex: 1 } }),
+!camReady && !camError && React.createElement("div", { style: { position: "absolute", inset: 0, background: "#000", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1 } },
+React.createElement("div", { style: { fontSize: 11, color: "#444", letterSpacing: "0.12em" } }, "LOADING CAMERA\u2026")),
+camError && (React.createElement("div", { style: { position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 14, zIndex: 4, padding: "0 40px", textAlign: "center" } }, camDenied ? (React.createElement(React.Fragment, null,
+React.createElement("div", { style: { fontSize: 13, color: "rgba(255,255,255,0.5)", lineHeight: 1.6 } },
+"Camera access denied.",
+React.createElement("br", null),
+"Go to ",
+React.createElement("strong", { style: { color: "#fff" } }, "Settings \u2192 Safari \u2192 Camera"),
+" and allow access, then tap retry."),
+React.createElement("button", { onClick: () => { setCamError(false); setCamDenied(false); startCamera(facing); }, style: { padding: "10px 24px", borderRadius: 10, background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.25)", color: "#fff", fontSize: 13, fontWeight: 600, cursor: "pointer" } }, "Retry Camera"))) : (React.createElement("button", { onClick: () => { setCamError(false); startCamera(facing); }, style: { padding: "10px 24px", borderRadius: 10, background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.25)", color: "#fff", fontSize: 13, fontWeight: 600, cursor: "pointer" } }, "Tap to Enable Camera")))),
+flashAnim && React.createElement("div", { style: { position: "absolute", inset: 0, background: "white", opacity: 0.55, zIndex: 20, pointerEvents: "none" } }),
+React.createElement("div", { style: { position: "absolute", inset: 0, background: "radial-gradient(ellipse at center, transparent 35%, rgba(0,0,0,0.45) 100%)", pointerEvents: "none" } }),
+React.createElement("div", { style: Object.assign(Object.assign({ position: "absolute" }, posStyle), { zIndex: 5, maxWidth: 280 }) },
+React.createElement("div", { style: { fontSize: 9 * sc, color: "rgba(255,255,255,0.6)", letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 5 * sc, textShadow: "0 1px 6px rgba(0,0,0,0.8)" } }, new Date().toLocaleDateString([], { weekday: "long", month: "short", day: "numeric" })),
+React.createElement("div", { style: { fontSize: 28 * sc, fontWeight: 900, color: "#fff", letterSpacing: "-0.02em", lineHeight: 1, marginBottom: 12 * sc, textShadow: "0 2px 12px rgba(0,0,0,0.9)" } }, workout === null || workout === void 0 ? void 0 : workout.replace("Bodyweight ", "BW ")),
+React.createElement("div", { style: { display: "flex", justifyContent: flexJust, gap: 20 * sc } }, [{ label: "Duration", value: formatDur }, { label: "XP Earned", value: `+${xpEarned}` }].map(s => (React.createElement("div", { key: s.label },
+React.createElement("div", { style: { fontSize: 22 * sc, fontWeight: 900, color: "#fff", lineHeight: 1, textShadow: "0 2px 8px rgba(0,0,0,0.9)" } }, s.value),
+React.createElement("div", { style: { fontSize: 8 * sc, color: "rgba(255,255,255,0.6)", letterSpacing: "0.1em", textTransform: "uppercase", marginTop: 3 * sc, textShadow: "0 1px 4px rgba(0,0,0,0.8)" } }, s.label)))))),
+React.createElement("div", { style: { position: "absolute", top: 56, left: 20, display: "flex", alignItems: "center", gap: 10, zIndex: 6 } },
+React.createElement("div", { style: { display: "flex", flexDirection: "column", alignItems: "center", gap: 4 } },
+React.createElement("div", { style: { width: 40, height: 40, borderRadius: 10, background: "rgba(0,0,0,0.55)", border: `1.5px solid ${rank === null || rank === void 0 ? void 0 : rank.color}99`, backdropFilter: "blur(8px)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" } },
+React.createElement("div", { style: { fontSize: 7, color: rank === null || rank === void 0 ? void 0 : rank.color, fontWeight: 700, letterSpacing: "0.06em" } }, "LVL"),
+React.createElement("div", { style: { fontSize: 16, fontWeight: 900, color: rank === null || rank === void 0 ? void 0 : rank.color, lineHeight: 1 } }, rank === null || rank === void 0 ? void 0 : rank.level)),
+React.createElement("div", { style: { width: 40, height: 3, background: "rgba(255,255,255,0.15)", borderRadius: 2, overflow: "hidden" } },
+React.createElement("div", { style: { height: 3, borderRadius: 2, width: `${Math.min(100, ((rankInfo === null || rankInfo === void 0 ? void 0 : rankInfo.progress) || 0) * 100)}%`, background: `linear-gradient(90deg, ${rank === null || rank === void 0 ? void 0 : rank.color}, #A855F7)`, transition: "width 0.5s" } }))),
+React.createElement("div", null,
+React.createElement("div", { style: { fontSize: 12, fontWeight: 700, color: "#fff", textShadow: "0 1px 6px rgba(0,0,0,0.9)" } }, rank === null || rank === void 0 ? void 0 : rank.title),
+React.createElement("div", { style: { fontSize: 9, color: "rgba(255,255,255,0.45)" } },
+"Rank ", rank === null || rank === void 0 ? void 0 :
 rank.rank))),
-React.createElement(“div”, { style: { position: “absolute”, bottom: 100, left: 20, zIndex: 6 } },
-React.createElement(LevelUpLogo, { accent: “#ffffff”, size: 0.6, showTagline: false }),
-React.createElement(“div”, { style: { fontSize: 9, color: “rgba(255,255,255,0.4)”, letterSpacing: “0.1em”, marginTop: 4 } },
-“WORKOUT TRACKER \u00B7 “, profile === null || profile === void 0 ? void 0 :
+React.createElement("div", { style: { position: "absolute", bottom: 100, left: 20, zIndex: 6 } },
+React.createElement(LevelUpLogo, { accent: "#ffffff", size: 0.6, showTagline: false }),
+React.createElement("div", { style: { fontSize: 9, color: "rgba(255,255,255,0.4)", letterSpacing: "0.1em", marginTop: 4 } },
+"WORKOUT TRACKER \u00B7 ", profile === null || profile === void 0 ? void 0 :
 profile.name)),
-uiVisible && (React.createElement(“div”, { style: { position: “absolute”, top: 52, right: 16, display: “flex”, gap: 8, zIndex: 10 } },
-React.createElement(“button”, { onClick: e => { e.stopPropagation(); flipCamera(); }, style: { width: 36, height: 36, borderRadius: 10, background: “rgba(0,0,0,0.5)”, border: “1px solid rgba(255,255,255,0.15)”, color: “rgba(255,255,255,0.85)”, cursor: “pointer”, display: “flex”, alignItems: “center”, justifyContent: “center”, backdropFilter: “blur(8px)” } },
-React.createElement(“svg”, { width: “16”, height: “16”, viewBox: “0 0 24 24”, fill: “none”, stroke: “currentColor”, strokeWidth: “2”, strokeLinecap: “round”, strokeLinejoin: “round” },
-React.createElement(“path”, { d: “M20 7h-3a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z” }),
-React.createElement(“path”, { d: “M8 12a4 4 0 1 1 4.5 3.97” }),
-React.createElement(“polyline”, { points: “8 10 8 12 10 12” }))),
-React.createElement(“button”, { style: { width: 36, height: 36, borderRadius: 10, background: showSettings ? “rgba(255,255,255,0.25)” : “rgba(0,0,0,0.5)”, border: `1px solid ${showSettings ? "rgba(255,255,255,0.4)" : "rgba(255,255,255,0.15)"}`, color: “rgba(255,255,255,0.85)”, cursor: “pointer”, display: “flex”, alignItems: “center”, justifyContent: “center”, backdropFilter: “blur(8px)” }, onClick: e => { e.stopPropagation(); setShowSettings(v => !v); } },
-React.createElement(“svg”, { width: “16”, height: “16”, viewBox: “0 0 24 24”, fill: “none”, stroke: “currentColor”, strokeWidth: “2”, strokeLinecap: “round”, strokeLinejoin: “round” },
-React.createElement(“circle”, { cx: “12”, cy: “12”, r: “3” }),
-React.createElement(“path”, { d: “M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z” }))),
-React.createElement(“button”, { onClick: onClose, style: { width: 36, height: 36, borderRadius: 10, background: “rgba(0,0,0,0.5)”, border: “1px solid rgba(255,255,255,0.15)”, color: “rgba(255,255,255,0.7)”, fontSize: 16, cursor: “pointer”, display: “flex”, alignItems: “center”, justifyContent: “center”, backdropFilter: “blur(8px)” } }, “\u2715”))),
-uiVisible && showSettings && (React.createElement(“div”, { onClick: e => e.stopPropagation(), style: { position: “absolute”, top: 100, right: 16, zIndex: 10, background: “rgba(0,0,0,0.75)”, backdropFilter: “blur(16px)”, borderRadius: 14, padding: “14px 16px”, border: “1px solid rgba(255,255,255,0.15)”, minWidth: 180 } },
-React.createElement(“div”, { style: { fontSize: 9, color: “rgba(255,255,255,0.4)”, textTransform: “uppercase”, letterSpacing: “0.1em”, marginBottom: 8 } }, “Position”),
-React.createElement(“div”, { style: { display: “grid”, gridTemplateColumns: “repeat(3,1fr)”, gap: 5, marginBottom: 14, width: 72 } }, [[“tl”, “”, “tr”], [””, “center”, “”], [“bl”, “”, “br”]].flat().map((pos, i) => (pos === “” ? React.createElement(“div”, { key: i }) : (React.createElement(“div”, { key: pos, onClick: () => setPosition(pos), style: { width: 20, height: 20, borderRadius: 5, cursor: “pointer”,
-background: position === pos ? “#fff” : “rgba(255,255,255,0.18)”,
+uiVisible && (React.createElement("div", { style: { position: "absolute", top: 52, right: 16, display: "flex", gap: 8, zIndex: 10 } },
+React.createElement("button", { onClick: e => { e.stopPropagation(); flipCamera(); }, style: { width: 36, height: 36, borderRadius: 10, background: "rgba(0,0,0,0.5)", border: "1px solid rgba(255,255,255,0.15)", color: "rgba(255,255,255,0.85)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", backdropFilter: "blur(8px)" } },
+React.createElement("svg", { width: "16", height: "16", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round" },
+React.createElement("path", { d: "M20 7h-3a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" }),
+React.createElement("path", { d: "M8 12a4 4 0 1 1 4.5 3.97" }),
+React.createElement("polyline", { points: "8 10 8 12 10 12" }))),
+React.createElement("button", { style: { width: 36, height: 36, borderRadius: 10, background: showSettings ? "rgba(255,255,255,0.25)" : "rgba(0,0,0,0.5)", border: `1px solid ${showSettings ? "rgba(255,255,255,0.4)" : "rgba(255,255,255,0.15)"}`, color: "rgba(255,255,255,0.85)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", backdropFilter: "blur(8px)" }, onClick: e => { e.stopPropagation(); setShowSettings(v => !v); } },
+React.createElement("svg", { width: "16", height: "16", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round" },
+React.createElement("circle", { cx: "12", cy: "12", r: "3" }),
+React.createElement("path", { d: "M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" }))),
+React.createElement("button", { onClick: onClose, style: { width: 36, height: 36, borderRadius: 10, background: "rgba(0,0,0,0.5)", border: "1px solid rgba(255,255,255,0.15)", color: "rgba(255,255,255,0.7)", fontSize: 16, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", backdropFilter: "blur(8px)" } }, "\u2715"))),
+uiVisible && showSettings && (React.createElement("div", { onClick: e => e.stopPropagation(), style: { position: "absolute", top: 100, right: 16, zIndex: 10, background: "rgba(0,0,0,0.75)", backdropFilter: "blur(16px)", borderRadius: 14, padding: "14px 16px", border: "1px solid rgba(255,255,255,0.15)", minWidth: 180 } },
+React.createElement("div", { style: { fontSize: 9, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 8 } }, "Position"),
+React.createElement("div", { style: { display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 5, marginBottom: 14, width: 72 } }, [["tl", "", "tr"], ["", "center", ""], ["bl", "", "br"]].flat().map((pos, i) => (pos === "" ? React.createElement("div", { key: i }) : (React.createElement("div", { key: pos, onClick: () => setPosition(pos), style: { width: 20, height: 20, borderRadius: 5, cursor: "pointer",
+background: position === pos ? "#fff" : "rgba(255,255,255,0.18)",
 border: `1px solid ${position === pos ? "#fff" : "rgba(255,255,255,0.15)"}`,
-transition: “all 0.1s” } }))))),
-React.createElement(“div”, { style: { fontSize: 9, color: “rgba(255,255,255,0.4)”, textTransform: “uppercase”, letterSpacing: “0.1em”, marginBottom: 8 } }, “Size”),
-React.createElement(“div”, { style: { display: “flex”, gap: 6 } }, [[“S”, “small”], [“M”, “medium”], [“L”, “large”]].map(([label, val]) => (React.createElement(“button”, { key: val, onClick: () => setSize(val), style: { width: 32, height: 32, borderRadius: 7, cursor: “pointer”, fontSize: 11, fontWeight: 700,
-background: size === val ? “#fff” : “rgba(255,255,255,0.15)”,
-color: size === val ? “#000” : “rgba(255,255,255,0.6)”,
+transition: "all 0.1s" } }))))),
+React.createElement("div", { style: { fontSize: 9, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 8 } }, "Size"),
+React.createElement("div", { style: { display: "flex", gap: 6 } }, [["S", "small"], ["M", "medium"], ["L", "large"]].map(([label, val]) => (React.createElement("button", { key: val, onClick: () => setSize(val), style: { width: 32, height: 32, borderRadius: 7, cursor: "pointer", fontSize: 11, fontWeight: 700,
+background: size === val ? "#fff" : "rgba(255,255,255,0.15)",
+color: size === val ? "#000" : "rgba(255,255,255,0.6)",
 border: `1px solid ${size === val ? "#fff" : "rgba(255,255,255,0.15)"}`,
-transition: “all 0.1s” } }, label)))))),
-uiVisible && (React.createElement(“div”, { onClick: e => e.stopPropagation(), style: { position: “absolute”, bottom: “calc(32px + env(safe-area-inset-bottom))”, left: 0, right: 0, zIndex: 10, display: “flex”, flexDirection: “column”, alignItems: “center”, gap: 10 } },
-React.createElement(“button”, { onClick: capturePhoto, style: { width: 72, height: 72, borderRadius: “50%”, background: “#fff”, border: “4px solid rgba(255,255,255,0.4)”, cursor: “pointer”, boxShadow: “0 4px 20px rgba(0,0,0,0.4)”, display: “flex”, alignItems: “center”, justifyContent: “center” } },
-React.createElement(“div”, { style: { width: 56, height: 56, borderRadius: “50%”, background: “#fff”, border: “2px solid #ccc” } })),
-React.createElement(“div”, { style: { fontSize: 10, color: “rgba(255,255,255,0.4)”, letterSpacing: “0.08em” } }, “Tap to capture \u00B7 tap screen to hide UI”),
-camError && !camDenied && React.createElement(“div”, { style: { fontSize: 10, color: “rgba(255,255,255,0.25)” } }, “Tap the camera icon to retry”),
-camError && camDenied && React.createElement(“div”, { style: { fontSize: 10, color: “rgba(255,255,255,0.25)” } }, “Allow camera in Settings \u2192 Safari \u2192 Camera”))),
-React.createElement(“canvas”, { ref: canvasRef, style: { display: “none” } })));
+transition: "all 0.1s" } }, label)))))),
+uiVisible && (React.createElement("div", { onClick: e => e.stopPropagation(), style: { position: "absolute", bottom: "calc(32px + env(safe-area-inset-bottom))", left: 0, right: 0, zIndex: 10, display: "flex", flexDirection: "column", alignItems: "center", gap: 10 } },
+React.createElement("button", { onClick: capturePhoto, style: { width: 72, height: 72, borderRadius: "50%", background: "#fff", border: "4px solid rgba(255,255,255,0.4)", cursor: "pointer", boxShadow: "0 4px 20px rgba(0,0,0,0.4)", display: "flex", alignItems: "center", justifyContent: "center" } },
+React.createElement("div", { style: { width: 56, height: 56, borderRadius: "50%", background: "#fff", border: "2px solid #ccc" } })),
+React.createElement("div", { style: { fontSize: 10, color: "rgba(255,255,255,0.4)", letterSpacing: "0.08em" } }, "Tap to capture \u00B7 tap screen to hide UI"),
+camError && !camDenied && React.createElement("div", { style: { fontSize: 10, color: "rgba(255,255,255,0.25)" } }, "Tap the camera icon to retry"),
+camError && camDenied && React.createElement("div", { style: { fontSize: 10, color: "rgba(255,255,255,0.25)" } }, "Allow camera in Settings \u2192 Safari \u2192 Camera"))),
+React.createElement("canvas", { ref: canvasRef, style: { display: "none" } })));
 }
 // ── PLAN EDITOR ───────────────────────────────────────────────────────────────
 function PlanEditor({ planName, exercises, onSave, onClose }) {
 const C = useC();
 const plan = WORKOUT_PLANS[planName];
-const color = (plan === null || plan === void 0 ? void 0 : plan.color) || “#FF6B35”;
-const [exList, setExList] = useState([…exercises]);
+const color = (plan === null || plan === void 0 ? void 0 : plan.color) || "#FF6B35";
+const [exList, setExList] = useState([...exercises]);
 const [swappingIdx, setSwappingIdx] = useState(null); // index being swapped
-const [search, setSearch] = useState(””);
+const [search, setSearch] = useState("");
 const filteredLib = LIBRARY.filter(ex => !exList.some(e => e.name === ex.name) &&
-(search === “” || ex.name.toLowerCase().includes(search.toLowerCase()) || ex.group.toLowerCase().includes(search.toLowerCase())));
-const removeEx = (idx) => setExList(prev => prev.filter((*, i) => i !== idx));
+(search === "" || ex.name.toLowerCase().includes(search.toLowerCase()) || ex.group.toLowerCase().includes(search.toLowerCase())));
+const removeEx = (idx) => setExList(prev => prev.filter((_item, i) => i !== idx));
 const swapEx = (idx, newEx) => {
 setExList(prev => prev.map((e, i) => i === idx
 ? { name: newEx.name, sets: newEx.sets, reps: newEx.reps, muscle: newEx.group }
 : e));
 setSwappingIdx(null);
-setSearch(””);
+setSearch("");
 };
 const addEx = (ex) => {
-setExList(prev => […prev, { name: ex.name, sets: ex.sets, reps: ex.reps, muscle: ex.group }]);
-setSearch(””);
+setExList(prev => [...prev, { name: ex.name, sets: ex.sets, reps: ex.reps, muscle: ex.group }]);
+setSearch("");
 };
-return (React.createElement(“div”, { style: { position: “fixed”, inset: 0, background: C.surface, zIndex: 300, display: “flex”, flexDirection: “column”, maxWidth: 420, margin: “0 auto” } },
-React.createElement(“div”, { style: { padding: “52px 24px 16px”, borderBottom: `1px solid ${C.border}`, flexShrink: 0 } },
-React.createElement(“div”, { style: { display: “flex”, justifyContent: “space-between”, alignItems: “flex-start” } },
-React.createElement(“div”, null,
-React.createElement(“div”, { style: { fontSize: 10, color: C.muted, letterSpacing: “0.12em”, textTransform: “uppercase”, marginBottom: 4 } }, “Edit Plan”),
-React.createElement(“div”, { style: { fontSize: 24, fontWeight: 800, color: color } }, planName)),
-React.createElement(“div”, { style: { display: “flex”, gap: 8 } },
-React.createElement(“button”, { onClick: () => { onSave(exList); onClose(); }, style: { padding: “8px 16px”, borderRadius: 10, background: color, border: “none”, color: “#000”, fontSize: 13, fontWeight: 700, cursor: “pointer” } }, “Save”),
-React.createElement(“button”, { onClick: onClose, style: { width: 36, height: 36, borderRadius: 10, background: C.btnBg, border: `1px solid ${C.btnBorder}`, color: C.muted, fontSize: 18, cursor: “pointer”, display: “flex”, alignItems: “center”, justifyContent: “center” } }, “\u2715”)))),
-React.createElement(“div”, { style: { flex: 1, overflowY: “auto”, padding: “12px 24px 24px” } },
-React.createElement(“div”, { style: { fontSize: 10, color: C.muted, textTransform: “uppercase”, letterSpacing: “0.1em”, marginBottom: 10 } },
-“Exercises (”,
+return (React.createElement("div", { style: { position: "fixed", inset: 0, background: C.surface, zIndex: 300, display: "flex", flexDirection: "column", maxWidth: 420, margin: "0 auto" } },
+React.createElement("div", { style: { padding: "52px 24px 16px", borderBottom: `1px solid ${C.border}`, flexShrink: 0 } },
+React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "flex-start" } },
+React.createElement("div", null,
+React.createElement("div", { style: { fontSize: 10, color: C.muted, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 4 } }, "Edit Plan"),
+React.createElement("div", { style: { fontSize: 24, fontWeight: 800, color: color } }, planName)),
+React.createElement("div", { style: { display: "flex", gap: 8 } },
+React.createElement("button", { onClick: () => { onSave(exList); onClose(); }, style: { padding: "8px 16px", borderRadius: 10, background: color, border: "none", color: "#000", fontSize: 13, fontWeight: 700, cursor: "pointer" } }, "Save"),
+React.createElement("button", { onClick: onClose, style: { width: 36, height: 36, borderRadius: 10, background: C.btnBg, border: `1px solid ${C.btnBorder}`, color: C.muted, fontSize: 18, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" } }, "\u2715")))),
+React.createElement("div", { style: { flex: 1, overflowY: "auto", padding: "12px 24px 24px" } },
+React.createElement("div", { style: { fontSize: 10, color: C.muted, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 10 } },
+"Exercises (",
 exList.length,
-“)”),
-React.createElement(“div”, { style: { display: “flex”, flexDirection: “column”, gap: 7, marginBottom: 20 } }, exList.map((ex, idx) => (React.createElement(“div”, { key: idx },
-React.createElement(“div”, { style: { background: C.card, borderRadius: 12, padding: “11px 14px”, border: `1px solid ${swappingIdx === idx ? color + "66" : C.cardBorder}`, display: “flex”, alignItems: “center”, gap: 10 } },
-React.createElement(“div”, { style: { flex: 1 } },
-React.createElement(“div”, { style: { fontSize: 13, fontWeight: 600, color: C.text } }, ex.name),
-React.createElement(“div”, { style: { fontSize: 11, color: C.muted, marginTop: 2 } },
+")"),
+React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 7, marginBottom: 20 } }, exList.map((ex, idx) => (React.createElement("div", { key: idx },
+React.createElement("div", { style: { background: C.card, borderRadius: 12, padding: "11px 14px", border: `1px solid ${swappingIdx === idx ? color + "66" : C.cardBorder}`, display: "flex", alignItems: "center", gap: 10 } },
+React.createElement("div", { style: { flex: 1 } },
+React.createElement("div", { style: { fontSize: 13, fontWeight: 600, color: C.text } }, ex.name),
+React.createElement("div", { style: { fontSize: 11, color: C.muted, marginTop: 2 } },
 ex.muscle,
-“ \u00B7 “,
+" \u00B7 ",
 ex.sets,
-“ sets \u00D7 “,
+" sets \u00D7 ",
 ex.reps)),
-React.createElement(“button”, { onClick: () => { setSwappingIdx(swappingIdx === idx ? null : idx); setSearch(””); }, style: { padding: “5px 10px”, borderRadius: 8, background: swappingIdx === idx ? color + “22” : C.btnBg, border: `1px solid ${swappingIdx === idx ? color : C.btnBorder}`, color: swappingIdx === idx ? color : C.muted, fontSize: 11, cursor: “pointer”, fontWeight: 600 } }, “\u21C4 Swap”),
-React.createElement(“button”, { onClick: () => removeEx(idx), style: { width: 28, height: 28, borderRadius: 8, background: “#F8717112”, border: “1px solid #F8717133”, color: “#F87171”, fontSize: 14, cursor: “pointer”, display: “flex”, alignItems: “center”, justifyContent: “center”, flexShrink: 0 } }, “\u2715”)),
-swappingIdx === idx && (React.createElement(“div”, { style: { background: C.deep, borderRadius: 12, padding: “10px 12px”, border: `1px solid ${color}33`, marginTop: 4 } },
-React.createElement(“input”, { value: search, onChange: e => setSearch(e.target.value), placeholder: “Search exercises…”, style: { width: “100%”, padding: “8px 12px”, borderRadius: 8, background: C.input, border: `1px solid ${C.inputBorder}`, color: C.text, fontSize: 13, outline: “none”, fontFamily: “inherit”, marginBottom: 8 } }),
-React.createElement(“div”, { style: { display: “flex”, flexDirection: “column”, gap: 5, maxHeight: 180, overflowY: “auto” } },
-filteredLib.slice(0, 12).map(ex => (React.createElement(“div”, { key: ex.name, onClick: () => swapEx(idx, ex), style: { padding: “8px 10px”, borderRadius: 8, background: C.card, border: `1px solid ${C.cardBorder}`, cursor: “pointer”, display: “flex”, justifyContent: “space-between”, alignItems: “center” } },
-React.createElement(“div”, null,
-React.createElement(“div”, { style: { fontSize: 12, fontWeight: 600, color: C.text } }, ex.name),
-React.createElement(“div”, { style: { fontSize: 10, color: C.muted } },
+React.createElement("button", { onClick: () => { setSwappingIdx(swappingIdx === idx ? null : idx); setSearch(""); }, style: { padding: "5px 10px", borderRadius: 8, background: swappingIdx === idx ? color + "22" : C.btnBg, border: `1px solid ${swappingIdx === idx ? color : C.btnBorder}`, color: swappingIdx === idx ? color : C.muted, fontSize: 11, cursor: "pointer", fontWeight: 600 } }, "\u21C4 Swap"),
+React.createElement("button", { onClick: () => removeEx(idx), style: { width: 28, height: 28, borderRadius: 8, background: "#F8717112", border: "1px solid #F8717133", color: "#F87171", fontSize: 14, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 } }, "\u2715")),
+swappingIdx === idx && (React.createElement("div", { style: { background: C.deep, borderRadius: 12, padding: "10px 12px", border: `1px solid ${color}33`, marginTop: 4 } },
+React.createElement("input", { value: search, onChange: e => setSearch(e.target.value), placeholder: "Search exercises...", style: { width: "100%", padding: "8px 12px", borderRadius: 8, background: C.input, border: `1px solid ${C.inputBorder}`, color: C.text, fontSize: 13, outline: "none", fontFamily: "inherit", marginBottom: 8 } }),
+React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 5, maxHeight: 180, overflowY: "auto" } },
+filteredLib.slice(0, 12).map(ex => (React.createElement("div", { key: ex.name, onClick: () => swapEx(idx, ex), style: { padding: "8px 10px", borderRadius: 8, background: C.card, border: `1px solid ${C.cardBorder}`, cursor: "pointer", display: "flex", justifyContent: "space-between", alignItems: "center" } },
+React.createElement("div", null,
+React.createElement("div", { style: { fontSize: 12, fontWeight: 600, color: C.text } }, ex.name),
+React.createElement("div", { style: { fontSize: 10, color: C.muted } },
 ex.group,
-“ \u00B7 “,
+" \u00B7 ",
 ex.sets,
-“\u00D7”,
+"\u00D7",
 ex.reps)),
-React.createElement(“div”, { style: { fontSize: 11, color: color, fontWeight: 700 } }, “\u21C4”)))),
-filteredLib.length === 0 && React.createElement(“div”, { style: { fontSize: 12, color: C.muted, textAlign: “center”, padding: “8px 0” } }, “No matches”)))))))),
-React.createElement(“div”, { style: { fontSize: 10, color: C.muted, textTransform: “uppercase”, letterSpacing: “0.1em”, marginBottom: 10 } }, “Add Exercise”),
-React.createElement(“input”, { value: search, onChange: e => setSearch(e.target.value), placeholder: “Search to add…”, style: { width: “100%”, padding: “10px 14px”, borderRadius: 10, background: C.input, border: `1px solid ${C.inputBorder}`, color: C.text, fontSize: 13, outline: “none”, fontFamily: “inherit”, marginBottom: 8 } }),
-search.length > 0 && (React.createElement(“div”, { style: { display: “flex”, flexDirection: “column”, gap: 5 } }, LIBRARY.filter(ex => !exList.some(e => e.name === ex.name) && (ex.name.toLowerCase().includes(search.toLowerCase()) || ex.group.toLowerCase().includes(search.toLowerCase()))).slice(0, 8).map(ex => (React.createElement(“div”, { key: ex.name, onClick: () => addEx(ex), style: { padding: “9px 12px”, borderRadius: 10, background: C.card, border: `1px solid ${C.cardBorder}`, cursor: “pointer”, display: “flex”, justifyContent: “space-between”, alignItems: “center” } },
-React.createElement(“div”, null,
-React.createElement(“div”, { style: { fontSize: 13, fontWeight: 600, color: C.text } }, ex.name),
-React.createElement(“div”, { style: { fontSize: 11, color: C.muted } },
+React.createElement("div", { style: { fontSize: 11, color: color, fontWeight: 700 } }, "\u21C4")))),
+filteredLib.length === 0 && React.createElement("div", { style: { fontSize: 12, color: C.muted, textAlign: "center", padding: "8px 0" } }, "No matches")))))))),
+React.createElement("div", { style: { fontSize: 10, color: C.muted, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 10 } }, "Add Exercise"),
+React.createElement("input", { value: search, onChange: e => setSearch(e.target.value), placeholder: "Search to add...", style: { width: "100%", padding: "10px 14px", borderRadius: 10, background: C.input, border: `1px solid ${C.inputBorder}`, color: C.text, fontSize: 13, outline: "none", fontFamily: "inherit", marginBottom: 8 } }),
+search.length > 0 && (React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 5 } }, LIBRARY.filter(ex => !exList.some(e => e.name === ex.name) && (ex.name.toLowerCase().includes(search.toLowerCase()) || ex.group.toLowerCase().includes(search.toLowerCase()))).slice(0, 8).map(ex => (React.createElement("div", { key: ex.name, onClick: () => addEx(ex), style: { padding: "9px 12px", borderRadius: 10, background: C.card, border: `1px solid ${C.cardBorder}`, cursor: "pointer", display: "flex", justifyContent: "space-between", alignItems: "center" } },
+React.createElement("div", null,
+React.createElement("div", { style: { fontSize: 13, fontWeight: 600, color: C.text } }, ex.name),
+React.createElement("div", { style: { fontSize: 11, color: C.muted } },
 ex.group,
-“ \u00B7 “,
+" \u00B7 ",
 ex.sets,
-“\u00D7”,
+"\u00D7",
 ex.reps)),
-React.createElement(“div”, { style: { fontSize: 16, color: color, fontWeight: 700 } }, “+”)))))),
-React.createElement(“button”, { onClick: () => setExList([…WORKOUT_PLANS[planName].exercises]), style: { marginTop: 20, width: “100%”, padding: “11px”, borderRadius: 10, background: “transparent”, border: `1px solid ${C.btnBorder}`, color: C.muted, fontSize: 12, cursor: “pointer” } }, “\u21BA Reset to default”))));
+React.createElement("div", { style: { fontSize: 16, color: color, fontWeight: 700 } }, "+")))))),
+React.createElement("button", { onClick: () => setExList([...WORKOUT_PLANS[planName].exercises]), style: { marginTop: 20, width: "100%", padding: "11px", borderRadius: 10, background: "transparent", border: `1px solid ${C.btnBorder}`, color: C.muted, fontSize: 12, cursor: "pointer" } }, "\u21BA Reset to default"))));
 }
 function WelcomeScreen({ onComplete }) {
 var _a;
-const [name, setName] = useState(””);
+const [name, setName] = useState("");
 const [days, setDays] = useState(3);
-const [goal, setGoal] = useState(“Build Muscle”);
-const [themeId, setThemeId] = useState(“solo”);
+const [goal, setGoal] = useState("Build Muscle");
+const [themeId, setThemeId] = useState("solo");
 const [step, setStep] = useState(1); // 1=name, 2=setup, 3=theme
-const [error, setError] = useState(””);
-const goals = [“Build Muscle”, “Lose Weight”, “Get Stronger”, “Stay Active”, “All of the Above”];
-const ANIME_THEMES = [“solo”, “pokemon”, “naruto”, “onepiece”, “dragonball”, “aot”];
-const OTHER_THEMES = [“greek”, “rpg”, “space”, “military”, “sports”];
+const [error, setError] = useState("");
+const goals = ["Build Muscle", "Lose Weight", "Get Stronger", "Stay Active", "All of the Above"];
+const ANIME_THEMES = ["solo", "pokemon", "naruto", "onepiece", "dragonball", "aot"];
+const OTHER_THEMES = ["greek", "rpg", "space", "military", "sports"];
 const submitName = () => { if (!name.trim()) {
-setError(“Enter your name to continue”);
+setError("Enter your name to continue");
 return;
-} setError(””); setStep(2); };
+} setError(""); setStep(2); };
 const submitSetup = () => setStep(3);
 const submitTheme = () => onComplete({ name: name.trim(), goal, days, themeId });
-const accentColor = ((_a = APP_THEMES[themeId]) === null || _a === void 0 ? void 0 : _a.accent) || “#FF6B35”;
-return (React.createElement(“div”, { style: { minHeight: “100vh”, background: “#0A0A0A”, overflowY: “auto”, fontFamily: “‘DM Sans’,‘Helvetica Neue’,sans-serif”, maxWidth: 420, margin: “0 auto” } },
-React.createElement(“div”, { style: { padding: “60px 28px 120px” } },
-React.createElement(“div”, { style: { display: “flex”, justifyContent: “space-between”, alignItems: “flex-start”, marginBottom: 48 } },
-React.createElement(“div”, null,
-React.createElement(LevelUpLogo, { accent: “#FF6B35”, size: 1.2, showTagline: true })),
-step === 1 && (React.createElement(“button”, { onClick: submitName, style: { padding: “10px 20px”, borderRadius: 12, background: “#FF6B35”, border: “none”, color: “#000”, fontSize: 14, fontWeight: 800, cursor: “pointer”, marginTop: 4 } }, “Continue \u2192”)),
-step === 2 && (React.createElement(“button”, { onClick: submitSetup, style: { padding: “10px 20px”, borderRadius: 12, background: “#FF6B35”, border: “none”, color: “#000”, fontSize: 14, fontWeight: 800, cursor: “pointer”, marginTop: 4 } }, “Next \u2192”)),
-step === 3 && (React.createElement(“button”, { onClick: submitTheme, style: { padding: “10px 20px”, borderRadius: 12, background: accentColor, border: “none”, color: “#fff”, fontSize: 14, fontWeight: 800, cursor: “pointer”, marginTop: 4 } }, “Let’s Go \u2192”))),
-React.createElement(“div”, { style: { display: “flex”, gap: 6, marginBottom: 36 } }, [1, 2, 3].map(s => (React.createElement(“div”, { key: s, style: { height: 3, flex: 1, borderRadius: 2, background: s <= step ? “#FF6B35” : “#222”, transition: “background 0.3s” } })))),
+const accentColor = ((_a = APP_THEMES[themeId]) === null || _a === void 0 ? void 0 : _a.accent) || "#FF6B35";
+return (React.createElement("div", { style: { minHeight: "100vh", background: "#0A0A0A", overflowY: "auto", fontFamily: "‘DM Sans’,‘Helvetica Neue’,sans-serif", maxWidth: 420, margin: "0 auto" } },
+React.createElement("div", { style: { padding: "60px 28px 120px" } },
+React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 48 } },
+React.createElement("div", null,
+React.createElement(LevelUpLogo, { accent: "#FF6B35", size: 1.2, showTagline: true })),
+step === 1 && (React.createElement("button", { onClick: submitName, style: { padding: "10px 20px", borderRadius: 12, background: "#FF6B35", border: "none", color: "#000", fontSize: 14, fontWeight: 800, cursor: "pointer", marginTop: 4 } }, "Continue \u2192")),
+step === 2 && (React.createElement("button", { onClick: submitSetup, style: { padding: "10px 20px", borderRadius: 12, background: "#FF6B35", border: "none", color: "#000", fontSize: 14, fontWeight: 800, cursor: "pointer", marginTop: 4 } }, "Next \u2192")),
+step === 3 && (React.createElement("button", { onClick: submitTheme, style: { padding: "10px 20px", borderRadius: 12, background: accentColor, border: "none", color: "#fff", fontSize: 14, fontWeight: 800, cursor: "pointer", marginTop: 4 } }, "Let’s Go \u2192"))),
+React.createElement("div", { style: { display: "flex", gap: 6, marginBottom: 36 } }, [1, 2, 3].map(s => (React.createElement("div", { key: s, style: { height: 3, flex: 1, borderRadius: 2, background: s <= step ? "#FF6B35" : "#222", transition: "background 0.3s" } })))),
 step === 1 && (React.createElement(React.Fragment, null,
-React.createElement(“div”, { style: { fontSize: 28, fontWeight: 800, color: “#F0EDE8”, letterSpacing: “-0.02em”, marginBottom: 8, lineHeight: 1.2 } }, “Welcome.”),
-React.createElement(“div”, { style: { fontSize: 14, color: “#555”, marginBottom: 40, lineHeight: 1.6 } }, “What should we call you?”),
-React.createElement(“input”, { value: name, onChange: e => { setName(e.target.value); setError(””); }, onKeyDown: e => e.key === “Enter” && submitName(), placeholder: “Your name”, autoFocus: true, style: { width: “100%”, padding: “16px 18px”, borderRadius: 14, background: “#141414”, border: `1.5px solid ${error ? "#F87171" : "#222"}`, color: “#F0EDE8”, fontSize: 18, outline: “none”, fontFamily: “inherit”, marginBottom: 8 } }),
-error && React.createElement(“div”, { style: { fontSize: 12, color: “#F87171”, marginBottom: 12 } }, error))),
+React.createElement("div", { style: { fontSize: 28, fontWeight: 800, color: "#F0EDE8", letterSpacing: "-0.02em", marginBottom: 8, lineHeight: 1.2 } }, "Welcome."),
+React.createElement("div", { style: { fontSize: 14, color: "#555", marginBottom: 40, lineHeight: 1.6 } }, "What should we call you?"),
+React.createElement("input", { value: name, onChange: e => { setName(e.target.value); setError(""); }, onKeyDown: e => e.key === "Enter" && submitName(), placeholder: "Your name", autoFocus: true, style: { width: "100%", padding: "16px 18px", borderRadius: 14, background: "#141414", border: `1.5px solid ${error ? "#F87171" : "#222"}`, color: "#F0EDE8", fontSize: 18, outline: "none", fontFamily: "inherit", marginBottom: 8 } }),
+error && React.createElement("div", { style: { fontSize: 12, color: "#F87171", marginBottom: 12 } }, error))),
 step === 2 && (React.createElement(React.Fragment, null,
-React.createElement(“div”, { style: { fontSize: 28, fontWeight: 800, color: “#F0EDE8”, letterSpacing: “-0.02em”, marginBottom: 8, lineHeight: 1.2 } },
-“Let’s set you up,”,
-React.createElement(“br”, null),
-React.createElement(“span”, { style: { color: “#FF6B35” } }, name),
-“.”),
-React.createElement(“div”, { style: { fontSize: 14, color: “#555”, marginBottom: 32, lineHeight: 1.6 } }, “A few quick settings \u2014 you can change these anytime.”),
-React.createElement(“div”, { style: { fontSize: 10, color: “#555”, textTransform: “uppercase”, letterSpacing: “0.1em”, marginBottom: 10 } }, “Your Goal”),
-React.createElement(“div”, { style: { display: “flex”, flexDirection: “column”, gap: 8, marginBottom: 28 } }, goals.map(g => (React.createElement(“button”, { key: g, onClick: () => setGoal(g), style: { padding: “12px 16px”, borderRadius: 12, cursor: “pointer”, textAlign: “left”, fontSize: 14, fontWeight: 600,
-background: goal === g ? “#FF6B3522” : “#141414”,
+React.createElement("div", { style: { fontSize: 28, fontWeight: 800, color: "#F0EDE8", letterSpacing: "-0.02em", marginBottom: 8, lineHeight: 1.2 } },
+"Let’s set you up,",
+React.createElement("br", null),
+React.createElement("span", { style: { color: "#FF6B35" } }, name),
+"."),
+React.createElement("div", { style: { fontSize: 14, color: "#555", marginBottom: 32, lineHeight: 1.6 } }, "A few quick settings \u2014 you can change these anytime."),
+React.createElement("div", { style: { fontSize: 10, color: "#555", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 10 } }, "Your Goal"),
+React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 8, marginBottom: 28 } }, goals.map(g => (React.createElement("button", { key: g, onClick: () => setGoal(g), style: { padding: "12px 16px", borderRadius: 12, cursor: "pointer", textAlign: "left", fontSize: 14, fontWeight: 600,
+background: goal === g ? "#FF6B3522" : "#141414",
 border: `1.5px solid ${goal === g ? "#FF6B35" : "#222"}`,
-color: goal === g ? “#FF6B35” : “#666”, transition: “all 0.15s” } }, g)))),
-React.createElement(“div”, { style: { fontSize: 10, color: “#555”, textTransform: “uppercase”, letterSpacing: “0.1em”, marginBottom: 10 } }, “Days Per Week”),
-React.createElement(“div”, { style: { display: “flex”, gap: 8 } }, [2, 3, 4, 5, 6].map(d => (React.createElement(“button”, { key: d, onClick: () => setDays(d), style: { flex: 1, padding: “12px 0”, borderRadius: 12, cursor: “pointer”, fontSize: 15, fontWeight: 700,
-background: days === d ? “#FF6B3522” : “#141414”,
+color: goal === g ? "#FF6B35" : "#666", transition: "all 0.15s" } }, g)))),
+React.createElement("div", { style: { fontSize: 10, color: "#555", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 10 } }, "Days Per Week"),
+React.createElement("div", { style: { display: "flex", gap: 8 } }, [2, 3, 4, 5, 6].map(d => (React.createElement("button", { key: d, onClick: () => setDays(d), style: { flex: 1, padding: "12px 0", borderRadius: 12, cursor: "pointer", fontSize: 15, fontWeight: 700,
+background: days === d ? "#FF6B3522" : "#141414",
 border: `1.5px solid ${days === d ? "#FF6B35" : "#222"}`,
-color: days === d ? “#FF6B35” : “#555”, transition: “all 0.15s” } }, d)))))),
+color: days === d ? "#FF6B35" : "#555", transition: "all 0.15s" } }, d)))))),
 step === 3 && (React.createElement(React.Fragment, null,
-React.createElement(“div”, { style: { fontSize: 28, fontWeight: 800, color: “#F0EDE8”, letterSpacing: “-0.02em”, marginBottom: 8, lineHeight: 1.2 } },
-“Choose your”,
-React.createElement(“br”, null),
-React.createElement(“span”, { style: { color: accentColor } }, “universe”),
-“.”),
-React.createElement(“div”, { style: { fontSize: 14, color: “#555”, marginBottom: 28, lineHeight: 1.6 } }, “This sets your rank names and colors. Change it anytime in Profile.”),
-React.createElement(“div”, { style: { fontSize: 10, color: “#444”, letterSpacing: “0.1em”, textTransform: “uppercase”, marginBottom: 10 } }, “Anime”),
-React.createElement(“div”, { style: { display: “flex”, flexDirection: “column”, gap: 8, marginBottom: 24 } }, ANIME_THEMES.map(id => {
+React.createElement("div", { style: { fontSize: 28, fontWeight: 800, color: "#F0EDE8", letterSpacing: "-0.02em", marginBottom: 8, lineHeight: 1.2 } },
+"Choose your",
+React.createElement("br", null),
+React.createElement("span", { style: { color: accentColor } }, "universe"),
+"."),
+React.createElement("div", { style: { fontSize: 14, color: "#555", marginBottom: 28, lineHeight: 1.6 } }, "This sets your rank names and colors. Change it anytime in Profile."),
+React.createElement("div", { style: { fontSize: 10, color: "#444", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 10 } }, "Anime"),
+React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 8, marginBottom: 24 } }, ANIME_THEMES.map(id => {
 const theme = APP_THEMES[id];
 const isSelected = themeId === id;
 const topRank = theme.ranks[theme.ranks.length - 1];
-return (React.createElement(“button”, { key: id, onClick: () => setThemeId(id), style: { width: “100%”, padding: “12px 14px”, borderRadius: 14, cursor: “pointer”, textAlign: “left”,
-background: isSelected ? theme.accent + “22” : “#141414”,
+return (React.createElement("button", { key: id, onClick: () => setThemeId(id), style: { width: "100%", padding: "12px 14px", borderRadius: 14, cursor: "pointer", textAlign: "left",
+background: isSelected ? theme.accent + "22" : "#141414",
 border: `1.5px solid ${isSelected ? theme.accent : "#222"}`,
-transition: “all 0.15s”, display: “flex”, alignItems: “center”, gap: 12 } },
-React.createElement(“div”, { style: { width: 4, height: 36, borderRadius: 4, background: theme.accent, flexShrink: 0 } }),
-React.createElement(“div”, { style: { flex: 1 } },
-React.createElement(“div”, { style: { display: “flex”, alignItems: “center”, gap: 8, marginBottom: 3 } },
-React.createElement(“span”, { style: { fontSize: 13, fontWeight: 700, color: isSelected ? theme.accent : “#DDD” } }, theme.name),
-React.createElement(“span”, { style: { fontSize: 9, padding: “2px 7px”, borderRadius: 6, background: theme.accent + “22”, color: theme.accent, border: `1px solid ${theme.accent}33`, fontWeight: 600 } }, theme.tag)),
-React.createElement(“div”, { style: { fontSize: 10, color: “#555” } },
+transition: "all 0.15s", display: "flex", alignItems: "center", gap: 12 } },
+React.createElement("div", { style: { width: 4, height: 36, borderRadius: 4, background: theme.accent, flexShrink: 0 } }),
+React.createElement("div", { style: { flex: 1 } },
+React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 8, marginBottom: 3 } },
+React.createElement("span", { style: { fontSize: 13, fontWeight: 700, color: isSelected ? theme.accent : "#DDD" } }, theme.name),
+React.createElement("span", { style: { fontSize: 9, padding: "2px 7px", borderRadius: 6, background: theme.accent + "22", color: theme.accent, border: `1px solid ${theme.accent}33`, fontWeight: 600 } }, theme.tag)),
+React.createElement("div", { style: { fontSize: 10, color: "#555" } },
 theme.ranks[0].title,
-“ \u2192 “,
+" \u2192 ",
 topRank.title)),
-isSelected && React.createElement(“div”, { style: { width: 8, height: 8, borderRadius: “50%”, background: theme.accent, flexShrink: 0 } })));
+isSelected && React.createElement("div", { style: { width: 8, height: 8, borderRadius: "50%", background: theme.accent, flexShrink: 0 } })));
 })),
-React.createElement(“div”, { style: { fontSize: 10, color: “#444”, letterSpacing: “0.1em”, textTransform: “uppercase”, marginBottom: 10 } }, “Other”),
-React.createElement(“div”, { style: { display: “flex”, flexDirection: “column”, gap: 8 } }, OTHER_THEMES.map(id => {
+React.createElement("div", { style: { fontSize: 10, color: "#444", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 10 } }, "Other"),
+React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 8 } }, OTHER_THEMES.map(id => {
 const theme = APP_THEMES[id];
 const isSelected = themeId === id;
-const allRanks = […(theme.ranks || []), …(theme.prestige || [])];
+const allRanks = [...(theme.ranks || []), ...(theme.prestige || [])];
 const topRank = allRanks[allRanks.length - 1];
-return (React.createElement(“button”, { key: id, onClick: () => setThemeId(id), style: { width: “100%”, padding: “12px 14px”, borderRadius: 14, cursor: “pointer”, textAlign: “left”,
-background: isSelected ? theme.accent + “22” : “#141414”,
+return (React.createElement("button", { key: id, onClick: () => setThemeId(id), style: { width: "100%", padding: "12px 14px", borderRadius: 14, cursor: "pointer", textAlign: "left",
+background: isSelected ? theme.accent + "22" : "#141414",
 border: `1.5px solid ${isSelected ? theme.accent : "#222"}`,
-transition: “all 0.15s”, display: “flex”, alignItems: “center”, gap: 12 } },
-React.createElement(“div”, { style: { width: 4, height: 36, borderRadius: 4, background: theme.accent, flexShrink: 0 } }),
-React.createElement(“div”, { style: { flex: 1 } },
-React.createElement(“div”, { style: { display: “flex”, alignItems: “center”, gap: 8, marginBottom: 3 } },
-React.createElement(“span”, { style: { fontSize: 13, fontWeight: 700, color: isSelected ? theme.accent : “#DDD” } }, theme.name),
-React.createElement(“span”, { style: { fontSize: 9, padding: “2px 7px”, borderRadius: 6, background: theme.accent + “22”, color: theme.accent, border: `1px solid ${theme.accent}33`, fontWeight: 600 } }, theme.tag)),
-React.createElement(“div”, { style: { fontSize: 10, color: “#555” } },
+transition: "all 0.15s", display: "flex", alignItems: "center", gap: 12 } },
+React.createElement("div", { style: { width: 4, height: 36, borderRadius: 4, background: theme.accent, flexShrink: 0 } }),
+React.createElement("div", { style: { flex: 1 } },
+React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 8, marginBottom: 3 } },
+React.createElement("span", { style: { fontSize: 13, fontWeight: 700, color: isSelected ? theme.accent : "#DDD" } }, theme.name),
+React.createElement("span", { style: { fontSize: 9, padding: "2px 7px", borderRadius: 6, background: theme.accent + "22", color: theme.accent, border: `1px solid ${theme.accent}33`, fontWeight: 600 } }, theme.tag)),
+React.createElement("div", { style: { fontSize: 10, color: "#555" } },
 theme.ranks[0].title,
-“ \u2192 “,
+" \u2192 ",
 topRank.title,
-theme.prestige ? “ · Prestige” : “”)),
-isSelected && React.createElement(“div”, { style: { width: 8, height: 8, borderRadius: “50%”, background: theme.accent, flexShrink: 0 } })));
+theme.prestige ? " · Prestige" : "")),
+isSelected && React.createElement("div", { style: { width: 8, height: 8, borderRadius: "50%", background: theme.accent, flexShrink: 0 } })));
 })))))));
 }
 function WorkoutApp() {
@@ -3953,10 +3760,10 @@ const [showSplash, setShowSplash] = useState(false); // starts false, set true a
 const [showWelcome, setShowWelcome] = useState(false);
 // ── PERSISTENT STATE ──────────────────────────────────────────────────────
 const [daysPerWeek, setDaysPerWeek] = useState(3);
-const [themeId, setThemeId] = useState(“solo”);
-const [intensity, setIntensity] = useState(“Moderate”);
+const [themeId, setThemeId] = useState("solo");
+const [intensity, setIntensity] = useState("Moderate");
 const [totalXP, setTotalXP] = useState(0);
-const [profile, setProfile] = useState({ name: “Jesse”, weight: “”, height: “”, age: “”, chest: “”, waist: “”, arms: “”, shoulders: “” });
+const [profile, setProfile] = useState({ name: "Jesse", weight: "", height: "", age: "", chest: "", waist: "", arms: "", shoulders: "" });
 const [checkIns, setCheckIns] = useState([]);
 const [xpEvents, setXpEvents] = useState([]);
 const [cardioHistory, setCardioHistory] = useState([]);
@@ -3968,7 +3775,7 @@ const [currentWeekKey, setCurrentWeekKey] = useState(() => getISOWeek(new Date()
 useEffect(() => {
 (async () => {
 try {
-const keys = [“daysPerWeek”, “themeId”, “intensity”, “totalXP”, “profile”, “checkIns”, “xpEvents”, “cardioHistory”, “exercisePRs”, “workoutHistory”, “customSchedule”, “currentWeekKey”];
+const keys = ["daysPerWeek", "themeId", "intensity", "totalXP", "profile", "checkIns", "xpEvents", "cardioHistory", "exercisePRs", "workoutHistory", "customSchedule", "currentWeekKey"];
 const setters = { daysPerWeek: setDaysPerWeek, themeId: setThemeId, intensity: setIntensity, totalXP: setTotalXP, profile: setProfile, checkIns: setCheckIns, xpEvents: setXpEvents, cardioHistory: setCardioHistory, exercisePRs: setExercisePRs, workoutHistory: setWorkoutHistory, customSchedule: setCustomSchedule, currentWeekKey: setCurrentWeekKey };
 let hasProfile = false;
 for (const key of keys) {
@@ -3976,7 +3783,7 @@ try {
 const res = localStorage.getItem(`jbr:${key}`);
 if (res) {
 setters[key](JSON.parse(res));
-if (key === “profile”)
+if (key === "profile")
 hasProfile = true;
 }
 }
@@ -3992,11 +3799,11 @@ setShowSplash(true);
 }
 }
 catch (e) { }
-try{var _ws=localStorage.getItem(‘jbr:ws’);if(_ws){var _d=JSON.parse(_ws);
+try{var _ws=localStorage.getItem('jbr:ws');if(_ws){var _d=JSON.parse(_ws);
 if(_d&&_d.w){setSelectedWorkout(_d.w);setCompletedSets(_d.c||{});
-setSetLogs(_d.l||{});setWorkoutPhase(_d.p||‘stretch’);
-setWorkoutEquipment(_d.e||‘gym’);setWorkoutTimer(_d.t||0);
-setWorkoutActive(true);setActiveTab(‘workout’);}}}catch(_r){}
+setSetLogs(_d.l||{});setWorkoutPhase(_d.p||'stretch');
+setWorkoutEquipment(_d.e||'gym');setWorkoutTimer(_d.t||0);
+setWorkoutActive(true);setActiveTab('workout');}}}catch(_r){}
 setStorageReady(true);
 })();
 }, []);
@@ -4008,61 +3815,60 @@ localStorage.setItem(`jbr:${key}`, JSON.stringify(value));
 catch (e) { }
 };
 useEffect(() => { if (storageReady)
-save(“daysPerWeek”, daysPerWeek); }, [daysPerWeek, storageReady]);
+save("daysPerWeek", daysPerWeek); }, [daysPerWeek, storageReady]);
 useEffect(() => { if (storageReady)
-save(“themeId”, themeId); }, [themeId, storageReady]);
+save("themeId", themeId); }, [themeId, storageReady]);
 useEffect(() => { if (storageReady)
-save(“intensity”, intensity); }, [intensity, storageReady]);
+save("intensity", intensity); }, [intensity, storageReady]);
 useEffect(() => { if (storageReady)
-save(“totalXP”, totalXP); }, [totalXP, storageReady]);
+save("totalXP", totalXP); }, [totalXP, storageReady]);
 useEffect(() => { if (storageReady)
-save(“profile”, profile); }, [profile, storageReady]);
+save("profile", profile); }, [profile, storageReady]);
 useEffect(() => { if (storageReady)
-save(“checkIns”, checkIns); }, [checkIns, storageReady]);
+save("checkIns", checkIns); }, [checkIns, storageReady]);
 useEffect(() => { if (storageReady)
-save(“xpEvents”, xpEvents); }, [xpEvents, storageReady]);
+save("xpEvents", xpEvents); }, [xpEvents, storageReady]);
 useEffect(() => { if (storageReady)
-save(“cardioHistory”, cardioHistory); }, [cardioHistory, storageReady]);
+save("cardioHistory", cardioHistory); }, [cardioHistory, storageReady]);
 useEffect(() => { if (storageReady)
-save(“exercisePRs”, exercisePRs); }, [exercisePRs, storageReady]);
+save("exercisePRs", exercisePRs); }, [exercisePRs, storageReady]);
 useEffect(() => { if (storageReady)
-save(“workoutHistory”, workoutHistory); }, [workoutHistory, storageReady]);
+save("workoutHistory", workoutHistory); }, [workoutHistory, storageReady]);
 useEffect(() => { if (storageReady)
-save(“customSchedule”, customSchedule); }, [customSchedule, storageReady]);
+save("customSchedule", customSchedule); }, [customSchedule, storageReady]);
 useEffect(() => { if (storageReady)
-save(“currentWeekKey”, currentWeekKey); }, [currentWeekKey, storageReady]);
+save("currentWeekKey", currentWeekKey); }, [currentWeekKey, storageReady]);
 const TH = APP_THEMES[themeId] || APP_THEMES.solo;
 const C = getC(TH);
 _C = C; // update module-level context for child components
 // Settings
 const [showSettings, setShowSettings] = useState(false);
 // Workout session (not persisted — resets each session)
-const [activeTab, setActiveTab] = useState(“home”);
+const [activeTab, setActiveTab] = useState("home");
 const [selectedWorkout, setSelectedWorkout] = useState(null);
 const [completedSets, setCompletedSets] = useState({});
 const [setLogs, setSetLogs] = useState({});
-const [workoutPhase, setWorkoutPhase] = useState(“stretch”);
+const [workoutPhase, setWorkoutPhase] = useState("stretch");
 const [workoutActive, setWorkoutActive] = useState(false);
 const [workoutTimer, setWorkoutTimer] = useState(0);
-const [workoutEquipment, setWorkoutEquipment] = useState(“gym”);
+const [workoutEquipment, setWorkoutEquipment] = useState("gym");
 const [cardioMode, setCardioMode] = useState(false);
-const [manualNote, setManualNote] = useState(””);
-const [noteSearch, setNoteSearch] = useState(””);
+const [manualNote, setManualNote] = useState("");
+const [noteSearch, setNoteSearch] = useState("");
 const [showNoteSuggestions, setShowNoteSuggestions] = useState(false);
 const [noteExpanded, setNoteExpanded] = useState(false);
 // Library
-const [libMode, setLibMode] = useState(“exercises”);
+const [libMode, setLibMode] = useState("exercises");
 const [ptArea, setPtArea] = useState(null);
-const [ptSection, setPtSection] = useState(“stretches”);
-const [libFilter, setLibFilter] = useState(“All”);
-const [libEquipment, setLibEquipment] = useState(“Any”);
-const [libSearch, setLibSearch] = useState(””);
+const [ptSection, setPtSection] = useState("stretches");
+const [libFilter, setLibFilter] = useState("All");
+const [libEquipment, setLibEquipment] = useState("Any");
+const [libSearch, setLibSearch] = useState("");
 const [checked, setChecked] = useState({});
 const [showFilters, setShowFilters] = useState(false);
 const [customExercises, setCustomExercises] = useState([]);
 const [setCountOverrides, setSetCountOverrides] = useState({});
 
-```
 const [activeGuidedWorkout, setActiveGuidedWorkout] = useState(null);
 // Coach
 const [messages, setMessages] = useState([{ role: "assistant", content: "Hey — I'm your AI coach. Ask me anything about workouts, form, intensity, or how to structure your week." }]);
@@ -4071,8 +3877,7 @@ const [loading, setLoading] = useState(false);
 // UI-only (not persisted)
 const [showXPToast, setShowXPToast] = useState(null);
 const [weeklyCheckinDone, setWeeklyCheckinDone] = useState(false);
-const [showCardioLog, setShowCardioLog] = useState(false);
-const [showWorkoutLog, setShowWorkoutLog] = useState(false);
+const [showActivityLog, setShowActivityLog] = useState(false);
 const [editingPlan, setEditingPlan] = useState(null);
 const [showShareScreen, setShowShareScreen] = useState(false);
 const [showSharePrompt, setShowSharePrompt] = useState(false);
@@ -4414,21 +4219,24 @@ return (React.createElement("div", { style: { height: "100vh", background: TH.bg
             setWorkoutHistory(prev => [session, ...prev]);
             setActiveGuidedWorkout(null);
         } })),
-    showWorkoutLog && (React.createElement(WorkoutLog, { workoutHistory: workoutHistory, onClose: () => setShowWorkoutLog(false), accentColor: TH.accent, onUpdateNote: (idx, note) => {
+    showActivityLog && React.createElement(ActivityLog, { workoutHistory: workoutHistory, cardioHistory: cardioHistory, onClose: () => setShowActivityLog(false), accentColor: TH.accent, onUpdateNote: (idx, note) => {
             setWorkoutHistory(prev => prev.map((s, i) => i === idx ? Object.assign(Object.assign({}, s), { note }) : s));
-        }, onShare: (session) => {
+        }, onShare: (sess) => {
+            const w = sess.workout;
+            const cardioList = sess.cardioList || [];
             setLastWorkoutSummary({
-                workout: session.workout,
-                duration: session.duration,
-                setsCompleted: session.setsCompleted,
-                xpEarned: session.xpEarned,
-                intensity: session.intensity,
+                workout: w ? w.workout : null,
+                duration: w ? w.duration : null,
+                setsCompleted: w ? w.setsCompleted : null,
+                xpEarned: sess.totalXP,
+                intensity: w ? w.intensity : null,
                 rankInfo: getRankInfo(totalXP, themeId),
+                cardioOnDay: cardioList,
+                isCardioOnly: !w && cardioList.length > 0,
             });
-            setShowWorkoutLog(false);
+            setShowActivityLog(false);
             setShowShareScreen(true);
-        } })),
-    showCardioLog && (React.createElement(CardioLog, { cardioHistory: cardioHistory, onClose: () => setShowCardioLog(false), accentColor: TH.accent })),
+        } }),
     activeTab === "home" && (React.createElement("div", { style: { flex: 1, overflowY: "auto", position: "relative", zIndex: 1, paddingBottom: 80 } },
         React.createElement("div", { style: { padding: "52px 24px 16px" } },
             React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "flex-start" } },
@@ -4618,7 +4426,7 @@ return (React.createElement("div", { style: { height: "100vh", background: TH.bg
         React.createElement("div", { style: { fontSize: 26, fontWeight: 700, marginBottom: 18 } }, "What's the plan?"),
         React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 } },
             React.createElement("div", { style: { fontSize: 10, color: C.muted, letterSpacing: "0.1em", textTransform: "uppercase" } }, "Cardio"),
-            cardioHistory.length > 0 && (React.createElement("button", { onClick: () => setShowCardioLog(true), style: { fontSize: 10, padding: "4px 10px", borderRadius: 8, background: C.card, border: `1px solid ${C.inputBorder}`, color: C.muted, cursor: "pointer" } },
+            cardioHistory.length > 0 && (React.createElement("button", { onClick: () => setShowActivityLog(true), style: { fontSize: 10, padding: "4px 10px", borderRadius: 8, background: C.card, border: `1px solid ${C.inputBorder}`, color: C.muted, cursor: "pointer" } },
                 "Log (",
                 cardioHistory.length,
                 ")"))),
@@ -4896,7 +4704,7 @@ return (React.createElement("div", { style: { height: "100vh", background: TH.bg
                 showXPToast.xp,
                 " XP"),
             React.createElement("div", { style: { fontSize: 11, color: C.muted, marginTop: 2 } }, showXPToast.label)))),
-    activeTab === "profile" && (React.createElement(HunterProfile, { rankInfo: rankInfo, totalXP: totalXP, profile: profile, setProfile: setProfile, checkIns: checkIns, setCheckIns: setCheckIns, weeklyCheckinDone: weeklyCheckinDone, xpEvents: xpEvents, awardXP: awardXP, intensity: intensity, cardioHistory: cardioHistory, exercisePRs: exercisePRs, workoutHistory: workoutHistory, setShowCardioLog: setShowCardioLog, setShowWorkoutLog: setShowWorkoutLog, onResetStats: () => {
+    activeTab === "profile" && (React.createElement(HunterProfile, { rankInfo: rankInfo, totalXP: totalXP, profile: profile, setProfile: setProfile, checkIns: checkIns, setCheckIns: setCheckIns, weeklyCheckinDone: weeklyCheckinDone, xpEvents: xpEvents, awardXP: awardXP, intensity: intensity, cardioHistory: cardioHistory, exercisePRs: exercisePRs, workoutHistory: workoutHistory, setShowActivityLog: setShowActivityLog, onResetStats: () => {
             setTotalXP(0);
             setProfile({ name: profile.name, goal: profile.goal, weight: "", height: "", age: "", chest: "", waist: "", arms: "", shoulders: "" });
             setCheckIns([]);
@@ -4922,15 +4730,14 @@ return (React.createElement("div", { style: { height: "100vh", background: TH.bg
     
     input::placeholder{color:var(--muted, #3a3a3a)}
   `)));
-```
 
 }
-if (typeof React !== “undefined” && typeof ReactDOM !== “undefined”) {
+if (typeof React !== "undefined" && typeof ReactDOM !== "undefined") {
 try {
-ReactDOM.createRoot(document.getElementById(“root”)).render(React.createElement(WorkoutApp));
+ReactDOM.createRoot(document.getElementById("root")).render(React.createElement(WorkoutApp));
 }
 catch (e) {
-document.getElementById(“fallback”).style.display = “flex”;
+document.getElementById("fallback").style.display = "flex";
 }
 }
 </script>
