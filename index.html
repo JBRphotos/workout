@@ -1,4 +1,4 @@
-<!DOCTYPE html><!-- v20260411-013 -->
+<!DOCTYPE html><!-- v20260411-014 -->
 
 <html lang="en">
 <head>
@@ -726,9 +726,9 @@ const INTENSITY_CONFIG = {
 const SCHEDULES = {
     2: ["Push", "Rest", "Rest", "Pull", "Rest", "Rest", "Rest"],
     3: ["Push", "Rest", "Pull", "Rest", "Legs", "Rest", "Rest"],
-    4: ["Push", "Pull", "Rest", "Legs", "Push", "Rest", "Rest"],
-    5: ["Push", "Pull", "Legs", "Rest", "Push", "Pull", "Rest"],
-    6: ["Push", "Pull", "Legs", "Push", "Pull", "Legs", "Rest"],
+    4: ["Push", "Rest", "Pull", "Legs", "Rest", "Full Body", "Rest"],
+    5: ["Push", "Pull", "Legs", "Rest", "Full Body", "Push", "Rest"],
+    6: ["Push", "Pull", "Legs", "Full Body", "Push", "Pull", "Rest"],
 };
 const GROUP_COLORS = {
     Chest: "#FF6B35", Back: "#4ECDC4", Shoulders: "#F7DC6F",
@@ -4127,8 +4127,10 @@ const getPlanExercises = (planName) => {
     const accessories = plan.accessoryOptions
         ? plan.accessoryOptions[isoWeek % plan.accessoryOptions.length]
         : [];
-    const core = plan.coreOptions
-        ? [plan.coreOptions[isoWeek % plan.coreOptions.length]]
+    const corePool = plan.coreOptions || [];
+    const core = corePool.length > 0
+        ? [corePool[isoWeek % corePool.length],
+           corePool.length > 1 ? corePool[(isoWeek + 1) % corePool.length] : null].filter(Boolean)
         : [];
     return [...base, ...accessories, ...core];
 };
