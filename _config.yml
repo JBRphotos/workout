@@ -1,0 +1,4 @@
+# Disable Jekyll processing to prevent smart quote transformation of JS
+markdown: kramdown
+kramdown:
+  smart_quotes: ["apos", "apos", "quot", "quot"]
