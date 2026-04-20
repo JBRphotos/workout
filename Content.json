@@ -1,0 +1,3556 @@
+{
+  "PT_AREAS": [
+    {
+      "id": "shoulder",
+      "label": "Shoulder / Rotator Cuff",
+      "color": "#F7DC6F",
+      "overview": "The rotator cuff is four muscles that stabilize your shoulder joint. Pain usually comes from impingement, weakness in the small stabilizers, or poor scapular control. The goal is to decompress the joint, strengthen the external rotators, and rebuild scapular stability.",
+      "avoidNote": "Avoid heavy overhead pressing, upright rows, and behind-the-neck movements until pain-free.",
+      "stretches": [
+        {
+          "name": "Cross-Body Shoulder Stretch",
+          "dur": 30,
+          "muscles": [
+            "Rear Delt",
+            "Shoulder"
+          ],
+          "cue": "Pull one arm across chest with opposite hand. Keep shoulder blades level. Feel the rear delt and posterior capsule stretch."
+        },
+        {
+          "name": "Sleeper Stretch",
+          "dur": 35,
+          "muscles": [
+            "Shoulder",
+            "Rear Delt"
+          ],
+          "cue": "Lie on your side on a mat. Bend elbow 90 deg, use opposite hand to gently push forearm toward the floor. This stretches the posterior capsule -- a common tightness with shoulder pain."
+        },
+        {
+          "name": "Doorway Pec Stretch",
+          "dur": 30,
+          "muscles": [
+            "Chest",
+            "Front Delts"
+          ],
+          "cue": "Forearms on a doorframe at 90 deg. Lean forward until you feel a deep chest stretch. Tight pecs pull the shoulder forward and contribute to impingement."
+        },
+        {
+          "name": "Overhead Towel Stretch",
+          "dur": 25,
+          "muscles": [
+            "Shoulder",
+            "Tricep"
+          ],
+          "cue": "Hold a towel behind your back -- one hand above, one below. Gently pull the lower hand down to stretch the upper shoulder's internal rotation."
+        },
+        {
+          "name": "Child's Pose with Rotation",
+          "dur": 35,
+          "muscles": [
+            "Lat",
+            "Rear Delt",
+            "Shoulder"
+          ],
+          "cue": "In child's pose, thread one arm underneath your body. This decompresses the shoulder and stretches the posterior capsule simultaneously."
+        }
+      ],
+      "exercises": [
+        {
+          "name": "Band External Rotation",
+          "sets": 3,
+          "reps": "15-20",
+          "cue": "Anchor a band at elbow height. Elbow bent 90 deg, tucked to side. Rotate forearm outward against resistance. This directly targets the infraspinatus and teres minor -- the most commonly weak rotator cuff muscles.",
+          "equipment": "Band/Cable"
+        },
+        {
+          "name": "Side-Lying External Rotation",
+          "sets": 3,
+          "reps": "12-15",
+          "cue": "Lie on your side, elbow bent 90 deg. Hold a light dumbbell and rotate forearm toward ceiling. Pause at top. Critical for rotator cuff health.",
+          "equipment": "Dumbbell"
+        },
+        {
+          "name": "Face Pulls",
+          "sets": 3,
+          "reps": "15-20",
+          "cue": "Cable at face height, pull rope to forehead with elbows flared high. Hits rear delts and external rotators. One of the best shoulder health exercises -- do these every session.",
+          "equipment": "Cable"
+        },
+        {
+          "name": "Band Pull-Aparts",
+          "sets": 3,
+          "reps": "20-25",
+          "cue": "Hold a band at chest height with straight arms. Pull it apart until arms are wide, squeezing shoulder blades together. Builds rear delt and scapular retractor strength.",
+          "equipment": "Band"
+        },
+        {
+          "name": "Scapular Push-Ups",
+          "sets": 3,
+          "reps": "15",
+          "cue": "In a push-up position, without bending elbows, let your shoulder blades come together (sag), then push them apart (protract). Trains serratus anterior -- key for shoulder blade control.",
+          "equipment": "Bodyweight"
+        },
+        {
+          "name": "Wall Slide",
+          "sets": 3,
+          "reps": "12",
+          "cue": "Stand with back against wall, arms in a 'goalpost' position. Slowly slide arms up the wall keeping contact throughout. Trains lower trap and scapular upward rotation.",
+          "equipment": "Bodyweight"
+        },
+        {
+          "name": "Prone Y-T-W",
+          "sets": 3,
+          "reps": "10 each",
+          "cue": "Lie face down. Raise arms into Y shape (overhead), then T (out to sides), then W (elbows bent, squeeze). Light weight or bodyweight only. Comprehensive posterior shoulder and scapular strengthener.",
+          "equipment": "Dumbbell/Bodyweight"
+        }
+      ]
+    },
+    {
+      "id": "lower-back",
+      "label": "Lower Back",
+      "color": "#F06292",
+      "overview": "Lower back pain in lifters usually stems from tight hip flexors, weak glutes, poor core stability, or overloading before technique is solid. The fix is rarely rest -- it's targeted strengthening of the posterior chain and core while restoring hip mobility.",
+      "avoidNote": "Avoid heavy loaded spinal flexion (sit-ups, good mornings) and any movement that reproduces sharp pain. Modify deadlifts to Romanian or trap bar variation.",
+      "stretches": [
+        {
+          "name": "Knee-to-Chest Stretch",
+          "dur": 35,
+          "muscles": [
+            "Lower Back",
+            "Lumbar"
+          ],
+          "cue": "Lie on your back. Pull both knees to your chest and hug them. Gently rock side to side to massage the lower back. Hold the position and breathe deeply."
+        },
+        {
+          "name": "Piriformis Figure-4",
+          "dur": 40,
+          "muscles": [
+            "Glute",
+            "Hip"
+          ],
+          "cue": "Lie on back, cross one ankle over opposite knee. Pull the uncrossed leg toward your chest. Tight piriformis can refer pain to the lower back."
+        },
+        {
+          "name": "Hip Flexor Lunge Stretch",
+          "dur": 35,
+          "muscles": [
+            "Hip Flexor",
+            "Quad"
+          ],
+          "cue": "Low lunge, back knee on floor. Push hips forward. Tight hip flexors pull the pelvis into anterior tilt, compressing the lumbar spine."
+        },
+        {
+          "name": "Cat-Cow Mobility",
+          "dur": 40,
+          "muscles": [
+            "Lower Back",
+            "Core",
+            "Erector"
+          ],
+          "cue": "On all fours, move between arching and rounding your back. Slow and controlled. Restores segmental movement in the lumbar spine and reduces stiffness."
+        },
+        {
+          "name": "Child's Pose",
+          "dur": 45,
+          "muscles": [
+            "Lower Back",
+            "Lat"
+          ],
+          "cue": "Sit back on heels, arms extended forward. Let your lower back relax completely. One of the most effective lower back decompression stretches."
+        }
+      ],
+      "exercises": [
+        {
+          "name": "Dead Bug",
+          "sets": 3,
+          "reps": "8-10 each side",
+          "cue": "Lie on back, arms up, knees bent 90 deg. Slowly lower opposite arm and leg toward floor without letting lower back arch. Press lower back into floor throughout. Foundational core stability exercise.",
+          "equipment": "Bodyweight"
+        },
+        {
+          "name": "Bird Dog",
+          "sets": 3,
+          "reps": "10 each side",
+          "cue": "On all fours, extend opposite arm and leg. Keep hips level -- don't rotate. Hold 2 seconds. Trains multifidus and core stabilizers that directly support the lumbar spine.",
+          "equipment": "Bodyweight"
+        },
+        {
+          "name": "Glute Bridge",
+          "sets": 3,
+          "reps": "15-20",
+          "cue": "Lie on back, feet flat. Drive hips up, squeeze glutes hard at top. Weak glutes force the lower back to compensate on every hip extension movement.",
+          "equipment": "Bodyweight"
+        },
+        {
+          "name": "McGill Curl-Up",
+          "sets": 3,
+          "reps": "10",
+          "cue": "Lie on back, one knee bent. Place hands under lower back to maintain its natural curve. Raise only head and shoulders -- NOT a sit-up. Spinal flexion with neutral lumbar spine.",
+          "equipment": "Bodyweight"
+        },
+        {
+          "name": "Side Plank",
+          "sets": 3,
+          "reps": "30 sec each",
+          "cue": "Elbow under shoulder, body in straight line. Don't let hips sag. Targets quadratus lumborum -- a key lateral stabilizer of the spine that's often overlooked.",
+          "equipment": "Bodyweight"
+        },
+        {
+          "name": "Romanian Deadlift (light)",
+          "sets": 3,
+          "reps": "12-15",
+          "cue": "Hinge from hips with soft knees, bar close to legs. This pattern strengthens the posterior chain without the spinal loading of a conventional deadlift. Start very light and focus on the hinge.",
+          "equipment": "Barbell/Dumbbell"
+        }
+      ]
+    },
+    {
+      "id": "knees",
+      "label": "Knees",
+      "color": "#64B5F6",
+      "overview": "Knee pain in athletes typically comes from quad weakness, poor VMO (inner quad) activation, tight IT band, or patellar tracking issues. Strengthening the quads, hamstrings, and glutes while improving mobility usually resolves most common knee complaints.",
+      "avoidNote": "Avoid deep knee flexion under heavy load until pain-free. Skip leg extensions if you have patellar tendon pain. Never train through sharp or clicking knee pain.",
+      "stretches": [
+        {
+          "name": "Standing Quad Stretch",
+          "dur": 30,
+          "muscles": [
+            "Quad",
+            "Hip Flexor"
+          ],
+          "cue": "Stand on one leg, pull heel to glute. Keep knees together and torso upright. Tight quads increase patellar compression."
+        },
+        {
+          "name": "Kneeling Hip Flexor Stretch",
+          "dur": 35,
+          "muscles": [
+            "Hip Flexor",
+            "Quad"
+          ],
+          "cue": "Low lunge position. Push hips forward until you feel the front of the rear hip stretching. Hip flexor tightness changes pelvic position and loads the knee differently."
+        },
+        {
+          "name": "IT Band Foam Roll",
+          "dur": 45,
+          "muscles": [
+            "Quad",
+            "Inner Thigh"
+          ],
+          "cue": "Lie on side, foam roller under outer thigh. Slowly roll from hip to just above the knee. Pause on tender spots. Tight IT band is a leading cause of lateral knee pain."
+        },
+        {
+          "name": "Calf Stretch",
+          "dur": 30,
+          "muscles": [
+            "Calf",
+            "Soleus"
+          ],
+          "cue": "Place toes on wall or step, heel on floor. Lean in. Tight calves affect ankle dorsiflexion, which causes the knee to compensate during squatting movements."
+        },
+        {
+          "name": "Seated Hamstring Stretch",
+          "dur": 35,
+          "muscles": [
+            "Hamstring"
+          ],
+          "cue": "Legs straight, hinge from hips reaching toward feet. Keep back flat. Hamstring tightness increases tension on the back of the knee."
+        }
+      ],
+      "exercises": [
+        {
+          "name": "Terminal Knee Extension",
+          "sets": 3,
+          "reps": "15-20",
+          "cue": "Anchor a band behind you, loop around knee. Stand with slight knee bend. Straighten the knee against the band resistance. Directly targets VMO -- the teardrop-shaped inner quad that's often weak in people with knee pain.",
+          "equipment": "Band"
+        },
+        {
+          "name": "Step-Up",
+          "sets": 3,
+          "reps": "12-15 each",
+          "cue": "Step onto a box or step, drive through the heel of the front foot. Control on the way down. Low-impact quad and glute strengthener that loads the knee in a safe range.",
+          "equipment": "Bodyweight"
+        },
+        {
+          "name": "Wall Sit",
+          "sets": 3,
+          "reps": "30-45 sec",
+          "cue": "Back against wall, thighs parallel to floor. Hold. Isometric quad exercise -- particularly effective for patellar tendon pain as isometrics reduce tendon pain signals.",
+          "equipment": "Bodyweight"
+        },
+        {
+          "name": "Nordic Hamstring Curl",
+          "sets": 3,
+          "reps": "6-8",
+          "cue": "Kneel with feet anchored. Lower your body toward the floor by slowly letting your knees straighten. Use hands to catch yourself. One of the most effective hamstring injury-prevention exercises.",
+          "equipment": "Bodyweight"
+        },
+        {
+          "name": "Single-Leg Glute Bridge",
+          "sets": 3,
+          "reps": "12 each",
+          "cue": "Glute bridge but one leg extended. Hip drives up, squeeze glutes. Glute weakness causes inward knee collapse -- this addresses it directly.",
+          "equipment": "Bodyweight"
+        },
+        {
+          "name": "Lateral Band Walk",
+          "sets": 3,
+          "reps": "15 each dir",
+          "cue": "Band around ankles, slight squat position. Step sideways maintaining band tension. Strengthens hip abductors which control knee tracking.",
+          "equipment": "Band"
+        }
+      ]
+    },
+    {
+      "id": "hips",
+      "label": "Hips / Hip Flexors",
+      "color": "#A78BFA",
+      "overview": "Hip flexor tightness is almost universal in anyone who sits regularly. It causes anterior pelvic tilt, lower back pain, and reduced glute activation. Hip mobility work improves squat depth, reduces lower back stress, and directly improves athletic performance.",
+      "avoidNote": "Avoid forcing range of motion in the hip. Progress gradually. Sharp groin or deep hip pain should be assessed by a professional.",
+      "stretches": [
+        {
+          "name": "Kneeling Hip Flexor Lunge",
+          "dur": 40,
+          "muscles": [
+            "Hip Flexor",
+            "Quad"
+          ],
+          "cue": "Low lunge, back knee on floor. Push hips forward and hold. Tuck your pelvis slightly (posterior tilt) for a deeper stretch. This is the most important hip flexor stretch."
+        },
+        {
+          "name": "Pigeon Pose",
+          "dur": 45,
+          "muscles": [
+            "Glute",
+            "Hip Flexor"
+          ],
+          "cue": "From a plank, bring one knee toward the same-side wrist. Sink hips toward floor. Stretches both hip flexors and external rotators (glutes/piriformis) simultaneously."
+        },
+        {
+          "name": "90/90 Hip Stretch",
+          "dur": 40,
+          "muscles": [
+            "Hip",
+            "Glute",
+            "Inner Thigh"
+          ],
+          "cue": "Sit with both hips at 90 deg -- one leg in front, one to the side. Lean gently over the front leg. Targets the hip capsule and external rotators comprehensively."
+        },
+        {
+          "name": "Supine Figure-4",
+          "dur": 35,
+          "muscles": [
+            "Glute",
+            "Hip"
+          ],
+          "cue": "Lie on back, cross one ankle over the opposite knee. Pull the lower leg toward your chest. Targets piriformis and deep hip external rotators."
+        },
+        {
+          "name": "Adductor Squat Stretch",
+          "dur": 35,
+          "muscles": [
+            "Inner Thigh",
+            "Groin",
+            "Adduct"
+          ],
+          "cue": "Wide squat stance, elbows on inner knees. Push knees out gently. Stretches the adductors (inner thigh) which are often neglected but restrict hip mobility significantly."
+        }
+      ],
+      "exercises": [
+        {
+          "name": "Hip 90/90 Active Rotations",
+          "sets": 3,
+          "reps": "8-10 each",
+          "cue": "In 90/90 position, actively rotate between internal and external rotation of the front hip. This builds active control through the hip range of motion -- not just passive flexibility.",
+          "equipment": "Bodyweight"
+        },
+        {
+          "name": "Hip Thrust",
+          "sets": 3,
+          "reps": "12-15",
+          "cue": "Upper back on bench, bar or band over hips. Drive hips to full extension, squeeze glutes hard. This directly counteracts hip flexor dominance by strengthening the hip extensors.",
+          "equipment": "Barbell/Bodyweight"
+        },
+        {
+          "name": "KB Goblet Squat with Pause",
+          "sets": 3,
+          "reps": "10-12",
+          "cue": "Hold kettlebell at chest. Squat deep and pause 3 seconds at the bottom. Elbows push knees out. This builds active hip flexion strength and mobility simultaneously.",
+          "equipment": "Kettlebell/Dumbbell"
+        },
+        {
+          "name": "Cossack Squat",
+          "sets": 3,
+          "reps": "8 each side",
+          "cue": "Wide stance. Shift weight to one side, bending that knee while keeping the other leg straight. Lower as deep as comfortable. Exceptional hip and adductor mobility builder.",
+          "equipment": "Bodyweight"
+        },
+        {
+          "name": "Fire Hydrant",
+          "sets": 3,
+          "reps": "15 each",
+          "cue": "On all fours, raise one knee out to the side like a dog at a fire hydrant. Keep hips level. Targets hip abductors and external rotators -- often weak from prolonged sitting.",
+          "equipment": "Bodyweight"
+        },
+        {
+          "name": "Single-Leg RDL",
+          "sets": 3,
+          "reps": "10 each",
+          "cue": "Balance on one leg, hinge at hip pushing the other leg back. Keep back flat. Trains hip hinge mechanics, glute strength, and balance simultaneously.",
+          "equipment": "Dumbbell/Bodyweight"
+        }
+      ]
+    },
+    {
+      "id": "neck",
+      "label": "Neck / Upper Traps",
+      "color": "#4ECDC4",
+      "overview": "Neck and upper trap tension is almost always postural -- forward head position, rounded shoulders, and weakness in the deep neck flexors and lower traps. Phone and desk use are the primary culprits. The fix is a combination of releasing the tight muscles and strengthening the opposing weak ones.",
+      "avoidNote": "Avoid heavy shrugs and any overhead work that causes neck pain. Never crack your own neck forcefully.",
+      "stretches": [
+        {
+          "name": "Neck Side Tilt",
+          "dur": 25,
+          "muscles": [
+            "Trap",
+            "Neck"
+          ],
+          "cue": "Tilt head toward one shoulder, ear to shoulder. Let gravity do the work -- don't pull. Hold and breathe. Feel the stretch along the opposite side of the neck."
+        },
+        {
+          "name": "Neck Rotation Stretch",
+          "dur": 25,
+          "muscles": [
+            "Neck",
+            "Trap"
+          ],
+          "cue": "Turn head to look over one shoulder as far as comfortable. Hold. Then turn the other way. Don't force the end range."
+        },
+        {
+          "name": "Levator Scapulae Stretch",
+          "dur": 30,
+          "muscles": [
+            "Trap",
+            "Neck",
+            "Shoulder"
+          ],
+          "cue": "Tilt head forward and to one side at about 45 deg. Gentle pressure with your hand. Targets the levator scapulae -- the muscle that runs from neck to shoulder blade and is chronically tight in desk workers."
+        },
+        {
+          "name": "Upper Trap Stretch",
+          "dur": 30,
+          "muscles": [
+            "Trap"
+          ],
+          "cue": "Tilt head to one side. Reach the opposite arm down toward the floor to increase the stretch. Feel the upper trap release."
+        },
+        {
+          "name": "Pec Minor Stretch",
+          "dur": 35,
+          "muscles": [
+            "Chest",
+            "Front Delt"
+          ],
+          "cue": "Place hand high on a wall or doorframe. Rotate body away. Tight pec minor causes shoulder protraction which increases neck strain. Fixing this is as important as stretching the neck itself."
+        }
+      ],
+      "exercises": [
+        {
+          "name": "Chin Tucks",
+          "sets": 3,
+          "reps": "15",
+          "cue": "Sitting tall, draw your chin straight back (making a double chin). Hold 2 seconds. This retrains the deep cervical flexors which are inhibited by forward head posture. Do these throughout the day.",
+          "equipment": "Bodyweight"
+        },
+        {
+          "name": "Band Pull-Aparts",
+          "sets": 3,
+          "reps": "20",
+          "cue": "Hold band at chest height, arms straight. Pull apart until arms are wide. Builds lower trap and rhomboid strength which pulls shoulders back and relieves neck tension.",
+          "equipment": "Band"
+        },
+        {
+          "name": "Prone Cobra",
+          "sets": 3,
+          "reps": "10",
+          "cue": "Lie face down, arms at sides. Squeeze shoulder blades, lift chest and arms slightly off floor. Rotate palms up. Hold 3 seconds. Directly counteracts the rounded posture that causes neck pain.",
+          "equipment": "Bodyweight"
+        },
+        {
+          "name": "Wall Angels",
+          "sets": 3,
+          "reps": "12",
+          "cue": "Stand with back flat against wall. Arms in goalpost position against wall. Slide arms up and down keeping everything in contact with the wall. Trains thoracic mobility and lower trap activation.",
+          "equipment": "Bodyweight"
+        },
+        {
+          "name": "Face Pulls",
+          "sets": 3,
+          "reps": "20",
+          "cue": "Cable at face height, pull rope to forehead with elbows high. Strengthens rear delts and external rotators which directly improve posture and reduce forward head position.",
+          "equipment": "Cable"
+        }
+      ]
+    },
+    {
+      "id": "wrists",
+      "label": "Wrists / Forearms",
+      "color": "#52E3A0",
+      "overview": "Wrist pain in lifters often comes from tight forearm flexors, poor wrist extension mobility, or grip imbalances. This is especially common with heavy pressing or pulling movements. Consistent mobility and antagonist strengthening resolves most cases.",
+      "avoidNote": "Avoid wrist-loaded exercises during flare-ups. Use wrist wraps as a short-term aid -- not a crutch.",
+      "stretches": [
+        {
+          "name": "Wrist Extension Stretch",
+          "dur": 25,
+          "muscles": [
+            "Forearm",
+            "Wrist"
+          ],
+          "cue": "Extend one arm, use opposite hand to pull fingers back toward you. Hold. This stretches the forearm flexors which are chronically tight from gripping."
+        },
+        {
+          "name": "Wrist Flexion Stretch",
+          "dur": 25,
+          "muscles": [
+            "Forearm",
+            "Wrist"
+          ],
+          "cue": "Extend arm, push fingers down with opposite hand. Stretches the forearm extensors -- often tight from typing and computer use."
+        },
+        {
+          "name": "Prayer Stretch",
+          "dur": 30,
+          "muscles": [
+            "Forearm",
+            "Wrist"
+          ],
+          "cue": "Place palms together in prayer position in front of your chest. Slowly lower hands toward waist keeping palms together. Stretches the wrist flexors through full range."
+        },
+        {
+          "name": "Wrist Circles",
+          "dur": 20,
+          "muscles": [
+            "Forearm",
+            "Wrist"
+          ],
+          "cue": "Extend arms forward. Make large slow circles -- 10 each direction. Lubricates the wrist joint and improves range of motion in all planes."
+        }
+      ],
+      "exercises": [
+        {
+          "name": "Wrist Roller",
+          "sets": 3,
+          "reps": "3 rolls up/down",
+          "cue": "Hold a wrist roller at shoulder height, arms extended. Roll the weight up, then slowly down. One of the best forearm strengtheners for wrist stability.",
+          "equipment": "Wrist Roller"
+        },
+        {
+          "name": "Reverse Curl",
+          "sets": 3,
+          "reps": "12-15",
+          "cue": "Hold barbell or dumbbells with an overhand grip. Curl up. This strengthens the forearm extensors which balance the typically overworked flexors.",
+          "equipment": "Barbell/Dumbbell"
+        },
+        {
+          "name": "Plate Pinch",
+          "sets": 3,
+          "reps": "30 sec holds",
+          "cue": "Pinch two weight plates together between thumb and fingers. Hold. Builds grip strength and wrist stability from a different angle than standard holds.",
+          "equipment": "Plates"
+        },
+        {
+          "name": "Rice Bucket",
+          "sets": 1,
+          "reps": "5 min",
+          "cue": "Dig hands into a bucket of rice, open and close fingers, rotate wrists. An old PT staple -- exceptional for wrist and finger tendon health.",
+          "equipment": "Rice Bucket"
+        }
+      ]
+    }
+  ],
+  "ALL_STRETCHES": [
+    {
+      "name": "Chest Doorway Stretch",
+      "dur": 30,
+      "muscles": [
+        "Chest",
+        "Front Delts"
+      ],
+      "cue": "Place forearms on a doorframe, lean forward until you feel a deep chest stretch. Keep shoulders down.",
+      "days": [
+        "Push",
+        "Full Body",
+        "Bodyweight Push",
+        "Bodyweight Full Body"
+      ]
+    },
+    {
+      "name": "Cross-Body Shoulder",
+      "dur": 30,
+      "muscles": [
+        "Rear Delts",
+        "Shoulders"
+      ],
+      "cue": "Pull one arm across your chest with the opposite hand. Keep shoulder blades level.",
+      "days": [
+        "Push",
+        "Full Body",
+        "Bodyweight Push",
+        "Bodyweight Full Body"
+      ]
+    },
+    {
+      "name": "Tricep Overhead Stretch",
+      "dur": 30,
+      "muscles": [
+        "Triceps"
+      ],
+      "cue": "Raise one arm, bend at elbow behind your head. Use opposite hand to gently push elbow back.",
+      "days": [
+        "Push",
+        "Full Body",
+        "Bodyweight Push",
+        "Bodyweight Full Body"
+      ]
+    },
+    {
+      "name": "Neck Side Tilt",
+      "dur": 20,
+      "muscles": [
+        "Traps",
+        "Neck"
+      ],
+      "cue": "Tilt your head toward one shoulder, let gravity do the work. Don't force it.",
+      "days": [
+        "Push",
+        "Pull",
+        "Full Body",
+        "Bodyweight Push",
+        "Bodyweight Pull",
+        "Bodyweight Full Body"
+      ]
+    },
+    {
+      "name": "Wall Pec Stretch",
+      "dur": 30,
+      "muscles": [
+        "Chest"
+      ],
+      "cue": "Place one hand on a wall at shoulder height, rotate your body away until you feel the stretch across your chest.",
+      "days": [
+        "Push",
+        "Full Body",
+        "Bodyweight Push",
+        "Bodyweight Full Body"
+      ]
+    },
+    {
+      "name": "Lat Hang",
+      "dur": 30,
+      "muscles": [
+        "Lats",
+        "Back"
+      ],
+      "cue": "Hang from a bar with both hands. Let your body weight stretch your lats. Slight hollow body position.",
+      "days": [
+        "Pull",
+        "Full Body",
+        "Bodyweight Pull",
+        "Bodyweight Full Body"
+      ]
+    },
+    {
+      "name": "Child's Pose",
+      "dur": 40,
+      "muscles": [
+        "Lats",
+        "Back",
+        "Shoulders"
+      ],
+      "cue": "Sit back on your heels, arms extended forward. Walk hands out as far as comfortable. Breathe deeply.",
+      "days": [
+        "Pull",
+        "Full Body",
+        "Bodyweight Pull",
+        "Bodyweight Full Body"
+      ]
+    },
+    {
+      "name": "Doorway Bicep Stretch",
+      "dur": 25,
+      "muscles": [
+        "Biceps"
+      ],
+      "cue": "Place palm flat on wall behind you at shoulder height, arm straight. Rotate body away slowly.",
+      "days": [
+        "Pull",
+        "Full Body",
+        "Bodyweight Pull",
+        "Bodyweight Full Body"
+      ]
+    },
+    {
+      "name": "Cat-Cow",
+      "dur": 40,
+      "muscles": [
+        "Back",
+        "Core"
+      ],
+      "cue": "On all fours -- arch your back up (cat), then dip it down and lift chest (cow). Move with your breath.",
+      "days": [
+        "Pull",
+        "Bodyweight Pull",
+        "Legs",
+        "Bodyweight Legs"
+      ]
+    },
+    {
+      "name": "Thread the Needle",
+      "dur": 30,
+      "muscles": [
+        "Mid Back",
+        "Rear Delts"
+      ],
+      "cue": "On all fours, slide one arm under your body along the floor. Rest on your shoulder and breathe.",
+      "days": [
+        "Pull",
+        "Full Body",
+        "Bodyweight Pull",
+        "Bodyweight Full Body"
+      ]
+    },
+    {
+      "name": "Hip Flexor Lunge",
+      "dur": 35,
+      "muscles": [
+        "Hip Flexors",
+        "Quads"
+      ],
+      "cue": "Drop into a low lunge, back knee on floor. Push hips forward and hold. Keep torso tall.",
+      "days": [
+        "Legs",
+        "Full Body",
+        "Bodyweight Legs",
+        "Bodyweight Full Body"
+      ]
+    },
+    {
+      "name": "Standing Quad Stretch",
+      "dur": 25,
+      "muscles": [
+        "Quads"
+      ],
+      "cue": "Stand on one leg, pull heel to glute. Keep knees together. Use a wall if needed for balance.",
+      "days": [
+        "Legs",
+        "Full Body",
+        "Bodyweight Legs",
+        "Bodyweight Full Body"
+      ]
+    },
+    {
+      "name": "Seated Hamstring Stretch",
+      "dur": 35,
+      "muscles": [
+        "Hamstrings"
+      ],
+      "cue": "Sit on floor with legs straight. Hinge from hips, reach toward feet. Keep back flat -- don't round.",
+      "days": [
+        "Legs",
+        "Full Body",
+        "Bodyweight Legs",
+        "Bodyweight Full Body"
+      ]
+    },
+    {
+      "name": "Pigeon Pose",
+      "dur": 45,
+      "muscles": [
+        "Glutes",
+        "Hip Flexors"
+      ],
+      "cue": "From a plank, bring one knee forward toward your wrist. Lower hips toward floor. Breathe and relax.",
+      "days": [
+        "Legs",
+        "Full Body",
+        "Bodyweight Legs",
+        "Bodyweight Full Body"
+      ]
+    },
+    {
+      "name": "Calf Wall Stretch",
+      "dur": 30,
+      "muscles": [
+        "Calves"
+      ],
+      "cue": "Place toes on a wall, heel on floor. Lean into the wall keeping leg straight. Feel the calf stretch.",
+      "days": [
+        "Legs",
+        "Full Body",
+        "Bodyweight Legs",
+        "Bodyweight Full Body"
+      ]
+    },
+    {
+      "name": "Lying Glute Stretch",
+      "dur": 35,
+      "muscles": [
+        "Glutes"
+      ],
+      "cue": "Lie on your back. Cross one ankle over the opposite knee. Pull the uncrossed leg toward your chest.",
+      "days": [
+        "Legs",
+        "Full Body",
+        "Bodyweight Legs",
+        "Bodyweight Full Body"
+      ]
+    },
+    {
+      "name": "Adductor Squat Stretch",
+      "dur": 30,
+      "muscles": [
+        "Inner Thighs",
+        "Groin"
+      ],
+      "cue": "Wide stance squat position, elbows on inner knees. Gently push knees out and hold.",
+      "days": [
+        "Legs",
+        "Full Body",
+        "Bodyweight Legs",
+        "Bodyweight Full Body"
+      ]
+    },
+    {
+      "name": "Thoracic Rotation",
+      "dur": 30,
+      "muscles": [
+        "Back",
+        "Core"
+      ],
+      "cue": "Sit cross-legged, place one hand behind head. Rotate your elbow up toward the ceiling. Keep hips square.",
+      "days": [
+        "Push",
+        "Pull",
+        "Legs",
+        "Full Body",
+        "Bodyweight Push",
+        "Bodyweight Pull",
+        "Bodyweight Legs",
+        "Bodyweight Full Body"
+      ]
+    },
+    {
+      "name": "Wrist Circles",
+      "dur": 20,
+      "muscles": [
+        "Forearms",
+        "Wrists"
+      ],
+      "cue": "Extend arms forward. Make large slow circles with both wrists -- 5 each direction.",
+      "days": [
+        "Push",
+        "Pull",
+        "Full Body",
+        "Bodyweight Push",
+        "Bodyweight Pull",
+        "Bodyweight Full Body"
+      ]
+    },
+    {
+      "name": "World's Greatest Stretch",
+      "dur": 45,
+      "muscles": [
+        "Full Body"
+      ],
+      "cue": "From a lunge, place same-side hand on floor, rotate opposite arm to ceiling. Hold, then switch legs.",
+      "days": [
+        "Push",
+        "Pull",
+        "Legs",
+        "Full Body",
+        "Bodyweight Push",
+        "Bodyweight Pull",
+        "Bodyweight Legs",
+        "Bodyweight Full Body"
+      ]
+    }
+  ],
+  "FORM_GUIDES": {
+    "Bench Press": {
+      "cues": [
+        "Retract shoulder blades and squeeze them together",
+        "Feet flat on floor, slight arch in lower back",
+        "Bar path: touch lower chest, press back at slight angle",
+        "Grip slightly wider than shoulder-width"
+      ],
+      "muscles": [
+        "Chest",
+        "Front Delts",
+        "Triceps"
+      ],
+      "tip": "Think 'push the bar away from you' not 'push yourself into the bench'"
+    },
+    "Incline Dumbbell Press": {
+      "cues": [
+        "Set bench to 30-45 deg",
+        "Dumbbells at chest level, elbows at ~75 deg angle",
+        "Press up and slightly inward at the top",
+        "Control the descent -- 2 second lower"
+      ],
+      "muscles": [
+        "Upper Chest",
+        "Front Delts"
+      ],
+      "tip": "Lower incline (30 deg) hits more chest; higher (45 deg) shifts to shoulders"
+    },
+    "Overhead Press": {
+      "cues": [
+        "Stand or sit, bar starts at upper chest",
+        "Brace core tight before each rep",
+        "Press straight up, slightly back at lockout",
+        "Don't flare elbows too wide -- keep ~45 deg"
+      ],
+      "muscles": [
+        "Shoulders",
+        "Triceps",
+        "Upper Traps"
+      ],
+      "tip": "Squeeze glutes to protect lower back on heavy sets"
+    },
+    "Lateral Raises": {
+      "cues": [
+        "Slight bend in elbows throughout",
+        "Raise to shoulder height -- no higher",
+        "Lead with your elbows, not your wrists",
+        "Slow and controlled, no momentum"
+      ],
+      "muscles": [
+        "Side Delts"
+      ],
+      "tip": "Tilt dumbbells slightly so pinky is higher than thumb at top"
+    },
+    "Tricep Pushdowns": {
+      "cues": [
+        "Elbows pinned to your sides -- don't let them flare",
+        "Full extension at bottom, squeeze hard",
+        "Control the cable on the way back up",
+        "Lean slightly forward at the hips"
+      ],
+      "muscles": [
+        "Triceps"
+      ],
+      "tip": "If elbows drift back, reduce the weight"
+    },
+    "Overhead Tricep Ext": {
+      "cues": [
+        "Keep upper arms vertical -- elbows pointed at ceiling",
+        "Lower dumbbell/bar behind head slowly",
+        "Only forearms move -- upper arms are locked",
+        "Full stretch at bottom, full extension at top"
+      ],
+      "muscles": [
+        "Triceps (long head)"
+      ],
+      "tip": "Best exercise for the long head -- the biggest part of your tricep"
+    },
+    "Deadlift": {
+      "cues": [
+        "Bar over mid-foot, hip-width stance",
+        "Hinge at hips first, then bend knees to grip",
+        "Chest up, back flat -- 'proud chest'",
+        "Drive floor away, keep bar dragging up your shins"
+      ],
+      "muscles": [
+        "Hamstrings",
+        "Glutes",
+        "Back",
+        "Traps"
+      ],
+      "tip": "Take a big breath into your belly and brace before every single rep"
+    },
+    "Barbell Row": {
+      "cues": [
+        "Hinge 45 deg forward, bar hangs below chest",
+        "Pull to lower chest/upper belly -- not shoulders",
+        "Squeeze shoulder blades together at top",
+        "Lower controlled -- don't drop the weight"
+      ],
+      "muscles": [
+        "Lats",
+        "Mid Back",
+        "Biceps"
+      ],
+      "tip": "Think 'elbow to back pocket' to activate lats better"
+    },
+    "Pull-Ups": {
+      "cues": [
+        "Start from dead hang -- full arm extension",
+        "Depress and retract shoulder blades first",
+        "Pull elbows toward your hips, not just down",
+        "Chin clears bar -- full rep"
+      ],
+      "muscles": [
+        "Lats",
+        "Biceps",
+        "Rear Delts"
+      ],
+      "tip": "Crossing your ankles and squeezing keeps your body stable"
+    },
+    "Face Pulls": {
+      "cues": [
+        "Set cable at face height or slightly above",
+        "Pull rope to your forehead -- hands to ears",
+        "Elbows stay flared high throughout",
+        "Pause and squeeze at the end of each rep"
+      ],
+      "muscles": [
+        "Rear Delts",
+        "External Rotators"
+      ],
+      "tip": "One of the most important exercises for shoulder health -- don't skip it"
+    },
+    "Hammer Curls": {
+      "cues": [
+        "Neutral grip (palms facing each other)",
+        "Keep elbows pinned to your sides",
+        "Curl up, full range of motion",
+        "Control the negative -- 2 seconds down"
+      ],
+      "muscles": [
+        "Biceps",
+        "Brachialis",
+        "Forearms"
+      ],
+      "tip": "Hits the brachialis which pushes the bicep up, making arms look thicker"
+    },
+    "Incline Dumbbell Curl": {
+      "cues": [
+        "Set bench to 45-60 deg, sit back fully",
+        "Arms hang straight down at start",
+        "Curl up slowly -- stretch is the point here",
+        "Don't swing or shorten the range"
+      ],
+      "muscles": [
+        "Biceps (long head)"
+      ],
+      "tip": "The stretch at the bottom is what makes this one special -- use lighter weight"
+    },
+    "Squat": {
+      "cues": [
+        "Bar on traps (high bar) or rear delts (low bar)",
+        "Stance slightly wider than hips, toes 15-30 deg out",
+        "Break at hips and knees simultaneously",
+        "Drive knees out over toes on the way up"
+      ],
+      "muscles": [
+        "Quads",
+        "Glutes",
+        "Hamstrings"
+      ],
+      "tip": "Depth goal: hip crease below parallel. Use depth you can maintain with good form"
+    },
+    "Romanian Deadlift": {
+      "cues": [
+        "Slight bend in knees -- keep it consistent",
+        "Hinge at hips, push them straight back",
+        "Bar stays close to legs the entire way down",
+        "Feel a deep hamstring stretch, then drive hips forward"
+      ],
+      "muscles": [
+        "Hamstrings",
+        "Glutes"
+      ],
+      "tip": "This is a stretch exercise -- go slow on the way down"
+    },
+    "Leg Press": {
+      "cues": [
+        "Feet shoulder-width, mid-to-high on platform",
+        "Lower until knees are at ~90 deg or less",
+        "Don't lock out knees at the top -- keep tension",
+        "Press through your heels"
+      ],
+      "muscles": [
+        "Quads",
+        "Glutes"
+      ],
+      "tip": "Higher foot placement = more glutes. Lower = more quads"
+    },
+    "Walking Lunges": {
+      "cues": [
+        "Step forward, lower back knee toward floor",
+        "Front shin stays vertical -- knee over ankle",
+        "Push off front heel to step through",
+        "Keep torso upright throughout"
+      ],
+      "muscles": [
+        "Quads",
+        "Glutes",
+        "Hamstrings"
+      ],
+      "tip": "Take long enough strides to get knee close to the floor"
+    },
+    "Leg Curl": {
+      "cues": [
+        "Lying: pad just above heels",
+        "Curl heels to glutes -- full range",
+        "Squeeze hamstrings at top for 1 second",
+        "Lower slowly -- 3 second negative"
+      ],
+      "muscles": [
+        "Hamstrings"
+      ],
+      "tip": "Plantar-flex your feet (toes pointed) to get a slightly better contraction"
+    },
+    "Calf Raises": {
+      "cues": [
+        "Full stretch at bottom -- heel below platform level",
+        "Rise all the way up on the ball of your foot",
+        "Pause 1 second at the top",
+        "Slow negatives -- 3-4 seconds down"
+      ],
+      "muscles": [
+        "Gastrocnemius",
+        "Soleus"
+      ],
+      "tip": "Calves need high volume and full range -- don't bounce at the bottom"
+    },
+    "Cable Fly": {
+      "cues": [
+        "Set cables at chest height or above",
+        "Slight bend in elbows -- lock it in throughout",
+        "Bring hands together in a hugging arc, not a press",
+        "Squeeze hard at the centre, slow return"
+      ],
+      "muscles": [
+        "Chest",
+        "Front Delts"
+      ],
+      "tip": "Focus on the stretch at the end of each rep -- that's where growth happens"
+    },
+    "Dips": {
+      "cues": [
+        "Lean slightly forward to hit chest more",
+        "Lower until shoulders are below elbows",
+        "Elbows flare slightly outward",
+        "Drive back up without fully locking out"
+      ],
+      "muscles": [
+        "Chest",
+        "Triceps",
+        "Front Delts"
+      ],
+      "tip": "Upright torso = more tricep. Forward lean = more chest"
+    },
+    "Chest Supported Row": {
+      "cues": [
+        "Chest flat against pad -- eliminate all momentum",
+        "Pull elbows straight back, squeeze at the top",
+        "Full stretch at the bottom each rep",
+        "Don't shrug your traps -- keep them down"
+      ],
+      "muscles": [
+        "Mid Back",
+        "Lats",
+        "Rear Delts"
+      ],
+      "tip": "Best row variation if your lower back fatigues easily on other rows"
+    },
+    "Lat Pulldown": {
+      "cues": [
+        "Wide overhand grip, lean back slightly",
+        "Pull bar to upper chest -- not behind neck",
+        "Drive elbows down and back",
+        "Full stretch at top -- let lats lengthen"
+      ],
+      "muscles": [
+        "Lats",
+        "Biceps"
+      ],
+      "tip": "Think 'elbows to back pockets' to feel lats instead of biceps"
+    },
+    "Seated Cable Row": {
+      "cues": [
+        "Sit tall, slight knee bend, chest up",
+        "Pull handle to lower chest/upper belly",
+        "Squeeze shoulder blades together at the end",
+        "Return with control -- don't let the stack yank you"
+      ],
+      "muscles": [
+        "Mid Back",
+        "Lats",
+        "Biceps"
+      ],
+      "tip": "Pause 1 second at full contraction to maximize muscle activation"
+    },
+    "Preacher Curl": {
+      "cues": [
+        "Upper arm flat on pad throughout",
+        "Full extension at the bottom -- don't cheat the range",
+        "Curl to full contraction, pause at top",
+        "Slow on the way down -- 3 seconds"
+      ],
+      "muscles": [
+        "Biceps"
+      ],
+      "tip": "Eliminates cheating completely -- great for building the bicep peak"
+    },
+    "Concentration Curl": {
+      "cues": [
+        "Sit on a bench, elbow braced on inner thigh",
+        "Curl slowly, supinate wrist at the top",
+        "Pause and squeeze at peak contraction",
+        "Lower all the way down each rep"
+      ],
+      "muscles": [
+        "Biceps"
+      ],
+      "tip": "Keep the rep slow -- speed kills the stimulus here"
+    },
+    "Skull Crushers": {
+      "cues": [
+        "Lie flat, bar directly above face",
+        "Only forearms move -- upper arms stay vertical",
+        "Lower bar toward forehead or just behind head",
+        "Press back up in a slight arc"
+      ],
+      "muscles": [
+        "Triceps"
+      ],
+      "tip": "Slightly angling upper arms back from vertical hits the long head better"
+    },
+    "Close-Grip Bench": {
+      "cues": [
+        "Grip shoulder-width -- not too narrow",
+        "Elbows stay close to your sides throughout",
+        "Lower to lower chest, press straight up",
+        "Don't flare elbows on the way down"
+      ],
+      "muscles": [
+        "Triceps",
+        "Chest"
+      ],
+      "tip": "Great compound tricep builder -- goes heavy better than isolation work"
+    },
+    "Arnold Press": {
+      "cues": [
+        "Start with palms facing you at chin level",
+        "Rotate palms outward as you press up",
+        "Full overhead lockout at top",
+        "Reverse rotation on the way back down"
+      ],
+      "muscles": [
+        "Shoulders",
+        "Front Delts",
+        "Triceps"
+      ],
+      "tip": "The rotation recruits more of the front and side delt than a standard press"
+    },
+    "Rear Delt Fly": {
+      "cues": [
+        "Hinge forward 45 deg, slight bend in elbows",
+        "Raise arms out to the sides -- think T shape",
+        "Lead with your elbows, not your hands",
+        "Squeeze rear delts at the top"
+      ],
+      "muscles": [
+        "Rear Delts",
+        "Mid Back"
+      ],
+      "tip": "Most people go too heavy here -- use a weight you can actually feel"
+    },
+    "Shrugs": {
+      "cues": [
+        "Hold dumbbells or barbell at your sides",
+        "Shrug straight up -- no rolling",
+        "Hold at the top for 1-2 seconds",
+        "Lower slowly all the way down"
+      ],
+      "muscles": [
+        "Traps"
+      ],
+      "tip": "Rolling your shoulders does nothing -- just go straight up and squeeze"
+    },
+    "Leg Extension": {
+      "cues": [
+        "Adjust pad to just above ankles",
+        "Extend fully and hold 1 second at the top",
+        "Lower with control -- don't drop",
+        "Toes slightly inward can increase inner quad activation"
+      ],
+      "muscles": [
+        "Quads"
+      ],
+      "tip": "Great finisher after squats -- pump the quads with 15-20 reps"
+    },
+    "Hip Thrust": {
+      "cues": [
+        "Upper back on bench, bar over hip crease",
+        "Feet hip-width, toes slightly out",
+        "Drive hips straight up -- squeeze glutes hard at top",
+        "Chin tucked, don't hyperextend lower back"
+      ],
+      "muscles": [
+        "Glutes",
+        "Hamstrings"
+      ],
+      "tip": "The best exercise for glute development -- don't skip it on leg day"
+    },
+    "Cable Crunch": {
+      "cues": [
+        "Kneel facing cable, rope at top pulley",
+        "Hold rope at temples, don't pull with arms",
+        "Crunch down -- think elbow to knee",
+        "Hold contraction 1 second, control return"
+      ],
+      "muscles": [
+        "Abs"
+      ],
+      "tip": "Keep hips still -- all the movement should come from your spine flexing"
+    },
+    "Plank": {
+      "cues": [
+        "Elbows under shoulders, body in straight line",
+        "Squeeze abs, glutes, and quads simultaneously",
+        "Don't let hips rise or sag",
+        "Breathe steadily -- don't hold your breath"
+      ],
+      "muscles": [
+        "Abs",
+        "Core"
+      ],
+      "tip": "30 seconds with perfect tension beats 2 minutes of sagging"
+    },
+    "Push-Ups": {
+      "cues": [
+        "Hands slightly wider than shoulders",
+        "Body in straight line head to heels",
+        "Lower chest to floor -- full range",
+        "Push explosively up, control down"
+      ],
+      "muscles": [
+        "Chest",
+        "Triceps",
+        "Front Delts"
+      ],
+      "tip": "Elevate feet to increase difficulty; hands elevated to reduce it"
+    },
+    "Pike Push-Ups": {
+      "cues": [
+        "Form inverted V with hips high",
+        "Lower head toward floor between hands",
+        "Push back up to start",
+        "Closer feet = harder"
+      ],
+      "muscles": [
+        "Shoulders",
+        "Triceps"
+      ],
+      "tip": "The more vertical your torso, the more shoulder activation"
+    },
+    "Diamond Push-Ups": {
+      "cues": [
+        "Hands form a diamond shape under chest",
+        "Elbows track back close to ribs",
+        "Full range -- chest to hands",
+        "Keep core braced throughout"
+      ],
+      "muscles": [
+        "Triceps",
+        "Chest"
+      ],
+      "tip": "One of the hardest bodyweight tricep exercises -- go slow"
+    },
+    "Bodyweight Squat": {
+      "cues": [
+        "Feet shoulder-width, toes slightly out",
+        "Arms forward for balance, chest up",
+        "Sit back and down -- depth to parallel or below",
+        "Drive through heels to stand"
+      ],
+      "muscles": [
+        "Quads",
+        "Glutes",
+        "Hamstrings"
+      ],
+      "tip": "Pause 2 seconds at the bottom for extra difficulty"
+    },
+    "Jump Squat": {
+      "cues": [
+        "Squat to parallel, then explode upward",
+        "Soft landing -- absorb through hips and knees",
+        "Go straight back into the squat",
+        "Arms swing for momentum"
+      ],
+      "muscles": [
+        "Quads",
+        "Glutes",
+        "Calves"
+      ],
+      "tip": "Land quietly -- that's the sign of good control"
+    },
+    "Bulgarian Split Squat": {
+      "cues": [
+        "Rear foot elevated on bench",
+        "Front foot far enough forward that knee stays behind toe",
+        "Lower back knee toward floor",
+        "Drive through front heel to stand"
+      ],
+      "muscles": [
+        "Quads",
+        "Glutes",
+        "Hamstrings"
+      ],
+      "tip": "One of the best bodyweight leg exercises -- as hard as any barbell work"
+    },
+    "Glute Bridge": {
+      "cues": [
+        "Lie on back, feet flat, knees bent",
+        "Drive hips straight up -- squeeze glutes at top",
+        "Hold 1-2 seconds at the top",
+        "Lower slowly -- don't let hips touch the floor between reps"
+      ],
+      "muscles": [
+        "Glutes",
+        "Hamstrings"
+      ],
+      "tip": "Single-leg version is a great progression"
+    },
+    "Inverted Row": {
+      "cues": [
+        "Set bar low, lie under it, heels on floor",
+        "Body in straight line -- don't let hips sag",
+        "Pull chest to bar squeezing shoulder blades",
+        "Lower with control -- full arm extension"
+      ],
+      "muscles": [
+        "Back",
+        "Biceps",
+        "Rear Delts"
+      ],
+      "tip": "Raising feet increases difficulty; bending knees makes it easier"
+    },
+    "Chin-Ups": {
+      "cues": [
+        "Supinated (palms toward you) grip",
+        "Start from dead hang",
+        "Pull until chin clears bar",
+        "Control the negative -- 3 seconds down"
+      ],
+      "muscles": [
+        "Biceps",
+        "Lats"
+      ],
+      "tip": "Supinated grip means more bicep -- great for arm development too"
+    },
+    "Burpee": {
+      "cues": [
+        "From standing: squat down, kick feet back to plank",
+        "Perform a push-up (optional)",
+        "Jump feet back to squat, then jump up",
+        "Clap overhead at the top"
+      ],
+      "muscles": [
+        "Full Body",
+        "Core"
+      ],
+      "tip": "Scale by removing the jump or push-up when fatigued"
+    },
+    "Mountain Climbers": {
+      "cues": [
+        "Start in push-up position, core braced",
+        "Drive one knee toward chest, then switch",
+        "Keep hips level -- don't bounce them up",
+        "The faster you go the more cardio; slower = more core"
+      ],
+      "muscles": [
+        "Core",
+        "Abs",
+        "Shoulders"
+      ],
+      "tip": "Great as a finisher -- 30 seconds at the end of any session"
+    },
+    "Hollow Body Hold": {
+      "cues": [
+        "Lie on back, arms overhead",
+        "Press lower back into floor",
+        "Lift shoulders and legs off floor slightly",
+        "Hold -- breathe steadily, don't let lower back arch"
+      ],
+      "muscles": [
+        "Abs",
+        "Core"
+      ],
+      "tip": "This is the foundation of calisthenics core work"
+    },
+    "KB Swing": {
+      "cues": [
+        "Hinge at hips -- not a squat",
+        "Snap hips forward explosively to drive the bell",
+        "Bell floats to chest height -- arm-powered swing is wrong",
+        "Hinge back again as the bell descends"
+      ],
+      "muscles": [
+        "Glutes",
+        "Hamstrings",
+        "Back"
+      ],
+      "tip": "The power comes from your hips, not your arms or lower back"
+    },
+    "KB Goblet Squat": {
+      "cues": [
+        "Hold KB at chest, elbows pointing down",
+        "Squat deep -- elbows track inside knees",
+        "Stay tall through the chest",
+        "Drive heels through the floor to stand"
+      ],
+      "muscles": [
+        "Quads",
+        "Glutes",
+        "Core"
+      ],
+      "tip": "Great for learning squat mechanics -- the counterbalance helps depth"
+    },
+    "KB Clean and Press": {
+      "cues": [
+        "Clean KB to rack position (resting on forearm)",
+        "Press straight overhead from rack",
+        "Lower with control back to rack, then swing down",
+        "Keep wrist straight throughout"
+      ],
+      "muscles": [
+        "Shoulders",
+        "Triceps",
+        "Back",
+        "Core"
+      ],
+      "tip": "One of the best full-body kettlebell movements"
+    },
+    "KB Romanian Deadlift": {
+      "cues": [
+        "Hold KB in both hands or one hand",
+        "Hinge from hips pushing them back",
+        "Keep back flat and KB close to legs",
+        "Drive hips forward to stand"
+      ],
+      "muscles": [
+        "Hamstrings",
+        "Glutes",
+        "Back"
+      ],
+      "tip": "Single-leg version is a serious balance and strength challenge"
+    },
+    "Decline Barbell Press": {
+      "cues": [
+        "Set bench 15-30 deg decline, feet hooked under pad",
+        "Grip slightly wider than shoulder-width",
+        "Lower bar to lower chest with control",
+        "Press straight up -- don't arch excessively"
+      ],
+      "muscles": [
+        "Lower Chest",
+        "Triceps",
+        "Front Delts"
+      ],
+      "tip": "Best movement for lower chest thickness -- often skipped but very effective"
+    },
+    "Dumbbell Floor Press": {
+      "cues": [
+        "Lie flat, dumbbells at chest, elbows on floor",
+        "Pause when triceps touch floor -- removes leg drive completely",
+        "Press up and in slightly at the top",
+        "Elbows at about 45-60 deg from torso"
+      ],
+      "muscles": [
+        "Chest",
+        "Triceps",
+        "Front Delts"
+      ],
+      "tip": "The floor stop eliminates momentum -- forces pure pressing strength"
+    },
+    "Pec Deck / Machine Fly": {
+      "cues": [
+        "Adjust seat so handles are at chest height",
+        "Slight bend in elbows, locked throughout",
+        "Bring arms together in a hug -- not a press",
+        "Squeeze hard at the centre, slow controlled return"
+      ],
+      "muscles": [
+        "Chest",
+        "Front Delts"
+      ],
+      "tip": "Focus on the stretched position at the start -- that's where the pec works hardest"
+    },
+    "Front Raises": {
+      "cues": [
+        "Stand tall, dumbbells at thighs",
+        "Raise both arms to eye level -- no higher",
+        "Keep a very slight elbow bend throughout",
+        "Lower slowly -- 2-3 seconds down"
+      ],
+      "muscles": [
+        "Front Delts",
+        "Upper Chest"
+      ],
+      "tip": "Avoid swinging -- if you need momentum the weight is too heavy"
+    },
+    "Cable Lateral Raise": {
+      "cues": [
+        "Cable at hip height, stand side-on",
+        "Cross body and pull cable out and up to shoulder height",
+        "Pinky leads at the top -- thumb points down",
+        "Pause 1 second at the top"
+      ],
+      "muscles": [
+        "Side Delts"
+      ],
+      "tip": "Constant cable tension beats dumbbells for lateral raise stimulus"
+    },
+    "Reverse Pec Deck": {
+      "cues": [
+        "Face the machine pad, chest against it",
+        "Grasp handles with arms parallel to floor",
+        "Pull elbows back and out -- squeeze rear delts",
+        "Don't use momentum -- this is a slow, deliberate movement"
+      ],
+      "muscles": [
+        "Rear Delts",
+        "Rhomboids",
+        "Mid Back"
+      ],
+      "tip": "One of the few machine exercises with no real free-weight equivalent"
+    },
+    "Tricep Kickbacks": {
+      "cues": [
+        "Hinge forward 45 deg, upper arm parallel to floor",
+        "Only the forearm moves -- like a pendulum",
+        "Fully extend at the top and pause 1 second",
+        "Keep upper arm locked -- don't let it drop"
+      ],
+      "muscles": [
+        "Triceps"
+      ],
+      "tip": "Best for the lateral head -- go lighter and feel the contraction"
+    },
+    "Single-Arm DB Row": {
+      "cues": [
+        "Knee and hand braced on bench, back flat",
+        "Pull elbow past torso -- think 'elbow to hip pocket'",
+        "Pause at top, feel the shoulder blade retract",
+        "Full stretch at the bottom every rep"
+      ],
+      "muscles": [
+        "Lats",
+        "Mid Back",
+        "Rear Delts",
+        "Biceps"
+      ],
+      "tip": "Don't rotate the torso to get the weight up -- that's your lower back working, not your lat"
+    },
+    "Straight-Arm Pulldown": {
+      "cues": [
+        "Stand at cable station, slight forward lean",
+        "Slight elbow bend, locked throughout",
+        "Drive bar to hips using lats -- arms stay rigid",
+        "Slow return, feel the lat stretch overhead"
+      ],
+      "muscles": [
+        "Lats",
+        "Serratus"
+      ],
+      "tip": "One of the best lat isolation exercises -- really feel the muscle working"
+    },
+    "Rack Pull": {
+      "cues": [
+        "Set pins at knee height or just below",
+        "Setup identical to deadlift -- bar over mid-foot",
+        "Drive hips forward, squeeze traps hard at lockout",
+        "This is a partial range -- go heavier than your deadlift"
+      ],
+      "muscles": [
+        "Upper Back",
+        "Traps",
+        "Glutes",
+        "Spinal Erectors"
+      ],
+      "tip": "Great for overloading the lockout and building trap thickness"
+    },
+    "Meadows Row": {
+      "cues": [
+        "Barbell in landmine -- stand perpendicular at far end",
+        "Hinge forward, grip the end of the bar with one hand",
+        "Pull elbow high and out -- flares more than a DB row",
+        "Brace your other hand on your knee for support"
+      ],
+      "muscles": [
+        "Lats",
+        "Mid Back",
+        "Rear Delts"
+      ],
+      "tip": "The angle creates a unique lat stretch that regular rows can't match"
+    },
+    "Cable Curl": {
+      "cues": [
+        "Low pulley, face the cable stack",
+        "Elbows pinned at your sides throughout",
+        "Curl to full contraction -- supinate at the top",
+        "Lower slowly -- constant tension the whole way"
+      ],
+      "muscles": [
+        "Biceps"
+      ],
+      "tip": "Cables keep tension at the bottom -- dumbbells lose it there. Great combination"
+    },
+    "Reverse Curl": {
+      "cues": [
+        "Overhand (pronated) grip on barbell or cable",
+        "Keep elbows pinned, curl to chest",
+        "Full extension at the bottom each rep",
+        "Control the negative -- forearms work hard here"
+      ],
+      "muscles": [
+        "Brachialis",
+        "Brachioradialis",
+        "Forearms"
+      ],
+      "tip": "The brachialis sits under the bicep -- training it pushes the bicep peak higher"
+    },
+    "Hack Squat": {
+      "cues": [
+        "Feet shoulder-width on platform, low placement",
+        "Keep lower back against pad throughout",
+        "Full depth -- knee over toes",
+        "Press through heels -- don't let knees cave"
+      ],
+      "muscles": [
+        "Quads",
+        "Glutes"
+      ],
+      "tip": "Lower foot placement = more quad. Use it as a quad finisher after regular squats"
+    },
+    "Nordic Hamstring Curl": {
+      "cues": [
+        "Kneel with feet anchored under something stable",
+        "Lower body slowly -- 4-5 second descent",
+        "Use hands to catch yourself at the bottom",
+        "Pull back up or use hip extension to return"
+      ],
+      "muscles": [
+        "Hamstrings",
+        "Glutes"
+      ],
+      "tip": "One of the most effective hamstring strength exercises -- also the most humbling"
+    },
+    "Sumo Deadlift": {
+      "cues": [
+        "Wide stance, toes pointed out 30-45 deg",
+        "Grip inside your legs, arms vertical",
+        "Push knees out hard as you pull",
+        "Bar stays close to body -- hip drive at the top"
+      ],
+      "muscles": [
+        "Inner Thighs",
+        "Glutes",
+        "Hamstrings",
+        "Back"
+      ],
+      "tip": "Hips are closer to the bar than conventional -- reduces lower back stress"
+    },
+    "Sissy Squat": {
+      "cues": [
+        "Hold support for balance",
+        "Lean body back as knees travel forward over toes",
+        "Lower until knees nearly touch floor",
+        "Full terminal knee extension at the top"
+      ],
+      "muscles": [
+        "Quads",
+        "Patellar Tendon"
+      ],
+      "tip": "Pure quad isolation -- the knee-forward position is intentional, not bad form"
+    },
+    "Seated Calf Raise": {
+      "cues": [
+        "Pad rests just above knees, slight knee bend",
+        "Full stretch at the bottom -- heel below platform",
+        "Rise all the way up, pause 1 second at top",
+        "Bent knee targets the soleus more than standing raises"
+      ],
+      "muscles": [
+        "Soleus",
+        "Gastrocnemius"
+      ],
+      "tip": "Most people neglect the soleus -- it's the deeper calf muscle that gives thickness"
+    },
+    "Adductor Machine": {
+      "cues": [
+        "Full range -- let the pads open wide at the start",
+        "Squeeze legs together through full range",
+        "Slow and controlled -- don't slam the pads together",
+        "Hold 1 second at the top contraction"
+      ],
+      "muscles": [
+        "Adductors",
+        "Inner Thighs"
+      ],
+      "tip": "Weak adductors cause knee cave in squats -- worth training directly"
+    },
+    "Glute Kickback Machine": {
+      "cues": [
+        "Pad behind ankle or knee depending on machine",
+        "Drive leg back to full hip extension",
+        "Squeeze glute hard at the top -- don't hyperextend lower back",
+        "Slow return to start"
+      ],
+      "muscles": [
+        "Glutes",
+        "Hamstrings"
+      ],
+      "tip": "Hip extension is the primary glute function -- isolate it here"
+    },
+    "Step-Ups": {
+      "cues": [
+        "Step onto box, drive through heel of the leading foot",
+        "Keep torso upright -- don't lean forward excessively",
+        "Control the step down -- don't drop",
+        "Add dumbbells when bodyweight is easy"
+      ],
+      "muscles": [
+        "Quads",
+        "Glutes",
+        "Hamstrings"
+      ],
+      "tip": "Great single-leg strength builder that's easier on the knees than lunges"
+    },
+    "Trap Bar Deadlift": {
+      "cues": [
+        "Stand centred in the trap bar",
+        "More knee bend than conventional deadlift",
+        "Load is balanced over your feet -- more natural position",
+        "Powerful hip drive, squeeze glutes at lockout"
+      ],
+      "muscles": [
+        "Quads",
+        "Glutes",
+        "Hamstrings",
+        "Back",
+        "Traps"
+      ],
+      "tip": "The neutral grip and balanced load make this the most beginner-friendly deadlift variant"
+    },
+    "Archer Push-Ups": {
+      "cues": [
+        "Wide hand placement, both arms extended",
+        "Shift weight to one side -- that arm bends, other stays straight",
+        "Lower chest to the bending side",
+        "Alternate sides each rep"
+      ],
+      "muscles": [
+        "Chest",
+        "Triceps",
+        "Front Delts"
+      ],
+      "tip": "The hardest bodyweight push-up progression before one-arm push-ups"
+    },
+    "Decline Push-Ups": {
+      "cues": [
+        "Feet elevated on bench or chair",
+        "Body in a straight line from feet to head",
+        "Lower chest toward floor -- full range",
+        "The incline shifts load to the upper chest and shoulders"
+      ],
+      "muscles": [
+        "Upper Chest",
+        "Front Delts",
+        "Triceps"
+      ],
+      "tip": "The higher the elevation, the more shoulder-press-like it becomes"
+    },
+    "Wide Push-Ups": {
+      "cues": [
+        "Hands wider than shoulder-width",
+        "Elbows flare more than standard -- that's intentional",
+        "Lower until chest touches floor",
+        "Focus on feeling the chest stretch at the bottom"
+      ],
+      "muscles": [
+        "Chest",
+        "Front Delts"
+      ],
+      "tip": "Width shifts load from triceps to the chest -- great variation for chest development"
+    },
+    "Pseudo Planche Push-Ups": {
+      "cues": [
+        "Hands at hip level, fingers pointing back",
+        "Lean body forward significantly before bending elbows",
+        "Keep body rigid as a plank",
+        "The forward lean is what creates the difficulty"
+      ],
+      "muscles": [
+        "Chest",
+        "Front Delts",
+        "Core"
+      ],
+      "tip": "One of the best strength builders for both chest and shoulder stability"
+    },
+    "Typewriter Push-Ups": {
+      "cues": [
+        "Lower to one side of your body",
+        "Slide chest across the bottom position to the other side",
+        "Push up from the opposite side",
+        "Keep hips and core level throughout the slide"
+      ],
+      "muscles": [
+        "Chest",
+        "Triceps",
+        "Core"
+      ],
+      "tip": "The lateral slide creates a unique stretch and contraction -- very effective"
+    },
+    "Handstand Hold": {
+      "cues": [
+        "Kick up against a wall for support",
+        "Arms locked out, press through the shoulders",
+        "Try to get ears between arms -- not head forward",
+        "Work toward 30-second holds before progressing off wall"
+      ],
+      "muscles": [
+        "Shoulders",
+        "Triceps",
+        "Serratus"
+      ],
+      "tip": "Builds overhead pressing strength that transfers directly to overhead press and dips"
+    },
+    "Tricep Dips (Chair)": {
+      "cues": [
+        "Hands on chair behind you, legs extended",
+        "Lower until elbows reach 90 deg",
+        "Elbows track straight back -- not flaring outward",
+        "Press up without locking out completely"
+      ],
+      "muscles": [
+        "Triceps",
+        "Front Delts"
+      ],
+      "tip": "Keeping legs straight makes this significantly harder than knees-bent version"
+    },
+    "Isometric Push-Up Hold": {
+      "cues": [
+        "Lower to bottom push-up position",
+        "Hold with chest just off the floor -- 3-5 seconds",
+        "Maintain full tension through the whole body",
+        "Breathe steadily -- don't hold your breath"
+      ],
+      "muscles": [
+        "Chest",
+        "Triceps",
+        "Core"
+      ],
+      "tip": "Isometrics build tendon strength and stability that traditional reps can't -- great for injury prevention"
+    },
+    "Plyometric Push-Ups": {
+      "cues": [
+        "Start in push-up position",
+        "Push explosively -- hands leave the floor",
+        "Land softly, absorb with bent elbows",
+        "Focus on the power of the push, not the height"
+      ],
+      "muscles": [
+        "Chest",
+        "Triceps",
+        "Fast-Twitch Muscle"
+      ],
+      "tip": "Develops explosive pressing power -- great for sport performance"
+    },
+    "Shoulder Taps": {
+      "cues": [
+        "Push-up position, feet hip-width apart",
+        "Tap opposite shoulder with one hand while balancing",
+        "Keep hips square -- resist the urge to rotate",
+        "The wider your feet the easier the balance"
+      ],
+      "muscles": [
+        "Core",
+        "Shoulders",
+        "Anti-Rotation"
+      ],
+      "tip": "The goal is zero hip rotation -- all movement should stay above the waist"
+    },
+    "Staggered Push-Ups": {
+      "cues": [
+        "One hand forward of shoulder, one hand back",
+        "This shifts more load to the forward arm",
+        "Lower chest to the floor -- full range",
+        "Switch hand positions between sets to balance both sides"
+      ],
+      "muscles": [
+        "Chest",
+        "Triceps",
+        "Unilateral Strength"
+      ],
+      "tip": "Exposes left/right strength imbalances that bilateral push-ups hide"
+    },
+    "T Push-Ups": {
+      "cues": [
+        "Perform a push-up, then at the top rotate to side plank",
+        "Raise top arm to ceiling -- full T position",
+        "Hold 1 second, return and repeat other side",
+        "Keep hips level throughout the rotation"
+      ],
+      "muscles": [
+        "Chest",
+        "Core",
+        "Obliques",
+        "Shoulders"
+      ],
+      "tip": "Combines pressing strength with rotational stability -- efficient full-upper-body movement"
+    },
+    "Wide-Grip Pull-Ups": {
+      "cues": [
+        "Grip wider than shoulder-width -- overhand",
+        "Pull elbows down and back -- not just down",
+        "Chin clears the bar, full dead hang at bottom",
+        "Wider grip shortens the lat's range but increases width stimulus"
+      ],
+      "muscles": [
+        "Lats",
+        "Biceps",
+        "Rear Delts"
+      ],
+      "tip": "Emphasises lat width -- combine with close-grip for complete lat development"
+    },
+    "Neutral-Grip Pull-Ups": {
+      "cues": [
+        "Parallel grip -- palms facing each other",
+        "Often easiest on the shoulder of all pull-up grips",
+        "Full dead hang, pull to chin or chest",
+        "The neutral grip often allows a better lat connection than overhand"
+      ],
+      "muscles": [
+        "Lats",
+        "Biceps",
+        "Brachialis"
+      ],
+      "tip": "Best pull-up variation if shoulder pain prevents overhand or underhand grips"
+    },
+    "L-Sit Pull-Ups": {
+      "cues": [
+        "Hang from bar and raise legs to parallel with floor",
+        "Hold the L position throughout the pull",
+        "Pull chin to bar while keeping legs up",
+        "Start with just the L-sit hold before combining"
+      ],
+      "muscles": [
+        "Lats",
+        "Biceps",
+        "Abs",
+        "Hip Flexors"
+      ],
+      "tip": "One movement that trains pulling strength and core simultaneously -- extremely efficient"
+    },
+    "Scapular Pull-Ups": {
+      "cues": [
+        "Dead hang from bar -- fully relaxed",
+        "Without bending elbows: depress and retract shoulder blades",
+        "You'll rise slightly -- hold 2 seconds",
+        "Lower back to full hang -- this is one rep"
+      ],
+      "muscles": [
+        "Serratus",
+        "Lower Traps",
+        "Rotator Cuff"
+      ],
+      "tip": "The foundation of healthy shoulder mechanics -- do these before every pull-up session"
+    },
+    "Australian Pull-Up": {
+      "cues": [
+        "Set bar at waist height, hang underneath",
+        "Body in straight line from feet to shoulders",
+        "Pull chest to bar -- same motion as a row",
+        "Lower with control -- full arm extension each rep"
+      ],
+      "muscles": [
+        "Back",
+        "Biceps",
+        "Rear Delts"
+      ],
+      "tip": "Perfect stepping stone between rows and full pull-ups -- scale by raising bar height"
+    },
+    "Towel Curls": {
+      "cues": [
+        "Loop a towel around a fixed pole or door handle",
+        "Hold both ends with a neutral grip",
+        "Curl toward your shoulders -- full range",
+        "The grip challenge is part of the exercise"
+      ],
+      "muscles": [
+        "Biceps",
+        "Forearms",
+        "Grip"
+      ],
+      "tip": "Builds forearm and grip strength alongside bicep stimulus -- functional carryover"
+    },
+    "Band Bicep Curl": {
+      "cues": [
+        "Stand on the band, shoulder-width",
+        "Curl to full contraction -- constant tension throughout",
+        "Full extension at the bottom -- don't short the range",
+        "Slower reps than with dumbbells for maximum stimulus"
+      ],
+      "muscles": [
+        "Biceps"
+      ],
+      "tip": "Bands keep tension through the full range unlike free weights -- use them as a supplement"
+    },
+    "Superman Hold": {
+      "cues": [
+        "Lie face down, arms extended overhead",
+        "Simultaneously lift arms and legs off the floor",
+        "Hold the peak position 2-3 seconds per rep",
+        "Breathe out on the lift"
+      ],
+      "muscles": [
+        "Spinal Erectors",
+        "Glutes",
+        "Rear Delts"
+      ],
+      "tip": "One of the few exercises that directly trains the spinal extensors without load -- great prehab"
+    },
+    "Back Extension": {
+      "cues": [
+        "Hinge at the hips over the pad",
+        "Lower torso toward the floor -- full stretch",
+        "Drive hips forward and up to full extension",
+        "Squeeze glutes at the top -- not lower back"
+      ],
+      "muscles": [
+        "Glutes",
+        "Hamstrings",
+        "Spinal Erectors"
+      ],
+      "tip": "Focus on glute contraction at the top rather than hyperextending the spine"
+    },
+    "Commando Pull-Ups": {
+      "cues": [
+        "Parallel grip on the bar",
+        "Pull up to one side -- chin goes over one hand",
+        "Lower, then pull up to the opposite side",
+        "Alternate sides each rep -- creates rotational demand"
+      ],
+      "muscles": [
+        "Lats",
+        "Biceps",
+        "Obliques"
+      ],
+      "tip": "The alternating direction trains rotational stability that standard pull-ups miss"
+    },
+    "Typewriter Pull-Up": {
+      "cues": [
+        "Pull chin up to one hand",
+        "Shift body laterally so chin moves to the other hand",
+        "Slow and controlled across the top",
+        "This is extremely advanced -- build regular pull-up volume first"
+      ],
+      "muscles": [
+        "Lats",
+        "Biceps"
+      ],
+      "tip": "Only attempt once you can do 15+ clean pull-ups -- it's a true strength test"
+    },
+    "Single-Leg Glute Bridge": {
+      "cues": [
+        "Lie on back, one leg extended straight",
+        "Drive working heel into floor, push hips up",
+        "Squeeze glute hard at the top -- hold 1-2 seconds",
+        "Keep hips level -- don't let opposite hip sag"
+      ],
+      "muscles": [
+        "Glutes",
+        "Hamstrings",
+        "Core"
+      ],
+      "tip": "Fixes glute imbalances that cause knee pain and lower back issues"
+    },
+    "Lateral Lunge": {
+      "cues": [
+        "Step wide to one side -- stay upright",
+        "Sit into the stepping leg -- other leg stays straight",
+        "Drive through the heel to push back to start",
+        "Keep toes pointed forward on the straight leg"
+      ],
+      "muscles": [
+        "Quads",
+        "Adductors",
+        "Glutes"
+      ],
+      "tip": "The lateral direction trains hip abductors and adductors that forward lunges miss"
+    },
+    "Reverse Lunge": {
+      "cues": [
+        "Step back onto your toes -- not the heel",
+        "Lower the back knee toward the floor",
+        "Front shin stays vertical -- knee over ankle",
+        "Push off the front heel to return"
+      ],
+      "muscles": [
+        "Quads",
+        "Glutes",
+        "Hamstrings"
+      ],
+      "tip": "Easier on the knees than forward lunges -- good starting point if knees are sensitive"
+    },
+    "Cossack Squat": {
+      "cues": [
+        "Very wide stance, toes pointed out at 45 deg",
+        "Shift weight to one side, bending that knee deeply",
+        "Other leg stays straight, foot flat or heel raised",
+        "Go as deep as your mobility allows"
+      ],
+      "muscles": [
+        "Adductors",
+        "Hips",
+        "Quads",
+        "Ankles"
+      ],
+      "tip": "One of the best combined strength and mobility exercises -- builds hip range of motion"
+    },
+    "Wall Sit": {
+      "cues": [
+        "Back flat against wall, thighs parallel to floor",
+        "Knees directly over ankles -- not forward",
+        "Hold the position -- breathe steadily",
+        "Add weight across thighs to progress"
+      ],
+      "muscles": [
+        "Quads",
+        "Glutes"
+      ],
+      "tip": "Isometric quads -- particularly effective for patellar tendon health and rehab"
+    },
+    "Single-Leg RDL": {
+      "cues": [
+        "Balance on one leg with a slight knee bend",
+        "Hinge from the hip -- free leg floats straight back",
+        "Keep hips square -- don't open to the side",
+        "Touch the floor or reach toward it with opposite hand"
+      ],
+      "muscles": [
+        "Hamstrings",
+        "Glutes",
+        "Core",
+        "Balance"
+      ],
+      "tip": "The single-leg demand reveals hip stability weaknesses that deadlifts hide"
+    },
+    "Donkey Calf Raise": {
+      "cues": [
+        "Hinge forward 90 deg at the hips -- hands on bench",
+        "Rise up on toes through full range",
+        "Full stretch at the bottom -- heel below toe level",
+        "The hip-hinged position increases the range vs standing raises"
+      ],
+      "muscles": [
+        "Gastrocnemius",
+        "Soleus"
+      ],
+      "tip": "Greater range of motion than standing calf raises -- more effective at same load"
+    },
+    "Squat Pulse": {
+      "cues": [
+        "Hold a parallel squat position",
+        "Small pulses -- only a few inches of range",
+        "Keep tension constant -- don't lock out or drop too deep",
+        "The burn is the point -- metabolic fatigue"
+      ],
+      "muscles": [
+        "Quads",
+        "Glutes"
+      ],
+      "tip": "Great finisher after heavy squats -- empties the tank with zero additional joint stress"
+    },
+    "Fire Hydrants": {
+      "cues": [
+        "On all fours, hands under shoulders, knees under hips",
+        "Raise one knee out to the side -- like a dog at a fire hydrant",
+        "Keep hips level -- don't tilt",
+        "Hold 1 second at the top, lower with control"
+      ],
+      "muscles": [
+        "Glutes",
+        "Hip Abductors",
+        "TFL"
+      ],
+      "tip": "Directly targets the hip abductors which are often weakened by sitting"
+    },
+    "Curtsy Lunge": {
+      "cues": [
+        "Step one foot behind and across to the opposite side",
+        "Lower the back knee toward the floor",
+        "Hips stay square -- just the leg crosses",
+        "Drive off the front foot to return"
+      ],
+      "muscles": [
+        "Glutes",
+        "Abductors",
+        "Quads"
+      ],
+      "tip": "Hits the glute medius from a unique angle -- important for hip stability"
+    },
+    "Box Jumps": {
+      "cues": [
+        "Stand in front of box, feet hip-width",
+        "Quarter-squat and swing arms back, then explode",
+        "Land softly in a quarter-squat -- absorb through hips and knees",
+        "Step down -- don't jump down, risk of Achilles injury"
+      ],
+      "muscles": [
+        "Quads",
+        "Glutes",
+        "Calves",
+        "Power"
+      ],
+      "tip": "Power development -- rest fully between sets, quality over quantity"
+    },
+    "Skater Jumps": {
+      "cues": [
+        "Hop laterally from one foot to the other",
+        "Land on the outside foot and reach opposite hand toward it",
+        "Hold the single-leg landing 1 second -- balance matters",
+        "Increase the distance to increase the challenge"
+      ],
+      "muscles": [
+        "Glutes",
+        "Adductors",
+        "Lateral Power"
+      ],
+      "tip": "Trains the frontal plane -- most strength work is sagittal, this fills the gap"
+    },
+    "Dead Bug": {
+      "cues": [
+        "Lie on back, arms straight up, knees bent 90 deg",
+        "Lower opposite arm and leg toward floor simultaneously",
+        "Press lower back into floor throughout -- don't arch",
+        "Exhale as you extend -- breathe deliberately"
+      ],
+      "muscles": [
+        "Abs",
+        "Core Stabilizers",
+        "Anti-Rotation"
+      ],
+      "tip": "The lower back pressing into floor is the whole point -- if it arches, reduce your range"
+    },
+    "Bird Dog": {
+      "cues": [
+        "On all fours, hands under shoulders, knees under hips",
+        "Extend opposite arm and leg simultaneously",
+        "Keep hips completely level -- no rotation",
+        "Hold 2 seconds at full extension"
+      ],
+      "muscles": [
+        "Multifidus",
+        "Glutes",
+        "Core"
+      ],
+      "tip": "Trains the small stabilizing muscles of the spine that heavy lifts don't reach"
+    },
+    "Side Plank": {
+      "cues": [
+        "Elbow under shoulder, body in a straight line",
+        "Stack feet or stagger them for stability",
+        "Don't let the hip sag toward the floor",
+        "Breathe steadily -- squeeze glutes and obliques"
+      ],
+      "muscles": [
+        "Obliques",
+        "Quadratus Lumborum",
+        "Glutes"
+      ],
+      "tip": "The QL is the main target -- it's a key stabilizer that's often undertrained"
+    },
+    "Ab Wheel Rollout": {
+      "cues": [
+        "Kneel on a pad, wheel under shoulders",
+        "Roll forward slowly -- lower back stays flat",
+        "Go only as far as you can without your back arching",
+        "Pull back with your abs -- not by pushing with your arms"
+      ],
+      "muscles": [
+        "Abs",
+        "Core",
+        "Lats",
+        "Shoulders"
+      ],
+      "tip": "One of the hardest ab exercises -- the long lever arm makes it brutally effective"
+    },
+    "Hanging Leg Raise": {
+      "cues": [
+        "Dead hang from bar -- no swinging",
+        "Raise legs until thighs are parallel (or higher)",
+        "Lower with control -- don't just drop",
+        "Tuck version is easier; straight leg is harder"
+      ],
+      "muscles": [
+        "Abs",
+        "Hip Flexors",
+        "Grip"
+      ],
+      "tip": "If you swing, your hip flexors are taking over -- slow down and use a dead hang start"
+    },
+    "V-Ups": {
+      "cues": [
+        "Lie flat, arms and legs extended",
+        "Simultaneously lift legs and upper body -- meet in the middle",
+        "Keep legs straight -- bend at the hip not the knee",
+        "Lower both slowly to complete one rep"
+      ],
+      "muscles": [
+        "Abs",
+        "Hip Flexors"
+      ],
+      "tip": "A progression from crunches -- if your lower back lifts off when you lower, reduce range"
+    },
+    "Russian Twists": {
+      "cues": [
+        "Sit with knees bent, lean back to 45 deg",
+        "Rotate the torso from side to side",
+        "Feet can be on floor or raised for more difficulty",
+        "Touch hands or a plate to the floor on each side"
+      ],
+      "muscles": [
+        "Obliques",
+        "Abs",
+        "Core"
+      ],
+      "tip": "Add a pause on each side to increase the challenge -- the rotation should come from the torso, not just the arms"
+    },
+    "Bicycle Crunch": {
+      "cues": [
+        "Lie on back, hands behind head, knees bent",
+        "Bring opposite elbow to opposite knee",
+        "Extend the other leg straight and low",
+        "Rotate from the torso -- not just the elbow"
+      ],
+      "muscles": [
+        "Obliques",
+        "Abs"
+      ],
+      "tip": "Slow the movement down -- speed kills the stimulus and lets momentum take over"
+    },
+    "Crunch": {
+      "cues": [
+        "Lie on back, knees bent, feet flat",
+        "Hands behind head or crossed on chest",
+        "Lift shoulder blades off the floor -- not your full back",
+        "Lower with control -- don't just drop"
+      ],
+      "muscles": [
+        "Abs"
+      ],
+      "tip": "Think about shortening the distance between your ribcage and hips, not sitting up"
+    },
+    "High Knees": {
+      "cues": [
+        "Run in place, driving knees to hip height",
+        "Pump arms in opposition to legs",
+        "Stay on the balls of your feet",
+        "Keep your core braced throughout"
+      ],
+      "muscles": [
+        "Hip Flexors",
+        "Quads",
+        "Core",
+        "Cardio"
+      ],
+      "tip": "The faster the pace, the higher the heart rate -- great as a warm-up or work interval"
+    },
+    "Jumping Jack": {
+      "cues": [
+        "Start with feet together, arms at sides",
+        "Jump feet out and raise arms overhead simultaneously",
+        "Jump back to starting position",
+        "Keep a soft bend in the knees on landing"
+      ],
+      "muscles": [
+        "Full Body",
+        "Cardio"
+      ],
+      "tip": "Classic warm-up movement -- focus on landing softly to protect your knees"
+    },
+    "Jumping Lunge": {
+      "cues": [
+        "Start in a split stance lunge position",
+        "Jump and switch legs in the air",
+        "Land in lunge with opposite leg forward",
+        "Absorb landing through the heel and midfoot"
+      ],
+      "muscles": [
+        "Quads",
+        "Glutes",
+        "Hamstrings",
+        "Cardio"
+      ],
+      "tip": "Keep your torso upright and land as quietly as possible to protect the knees"
+    },
+    "Lunge": {
+      "cues": [
+        "Step forward, lower back knee toward the floor",
+        "Front shin stays vertical -- knee over ankle",
+        "Push off the front heel to return",
+        "Keep your torso tall and upright throughout"
+      ],
+      "muscles": [
+        "Quads",
+        "Glutes",
+        "Hamstrings"
+      ],
+      "tip": "Think about dropping down, not stepping forward -- it keeps the knee safer"
+    },
+    "Leg Raise": {
+      "cues": [
+        "Lie flat, hands under your lower back for support",
+        "Raise legs to 90 deg keeping them straight",
+        "Lower slowly -- stop just before they touch the floor",
+        "Press lower back into the floor throughout"
+      ],
+      "muscles": [
+        "Abs",
+        "Hip Flexors"
+      ],
+      "tip": "The slower the lower, the harder the ab work -- don't rush the descent"
+    },
+    "Plank Tap": {
+      "cues": [
+        "Start in high plank position",
+        "Tap opposite shoulder with one hand, then switch",
+        "Keep hips completely still -- no rotation",
+        "Squeeze your core and glutes to stabilize"
+      ],
+      "muscles": [
+        "Core",
+        "Shoulders",
+        "Anti-Rotation"
+      ],
+      "tip": "The challenge is resisting rotation -- if your hips are swaying, widen your feet"
+    },
+    "Plank to Downdog": {
+      "cues": [
+        "Start in high plank, core braced",
+        "Push hips up and back into downward dog",
+        "Hold briefly at the top, then return to plank",
+        "Keep arms straight throughout"
+      ],
+      "muscles": [
+        "Core",
+        "Shoulders",
+        "Hamstrings",
+        "Lats"
+      ],
+      "tip": "The transition is the point -- it challenges shoulder stability and core control simultaneously"
+    },
+    "Shoulder Tap": {
+      "cues": [
+        "High plank position, hands under shoulders",
+        "Tap one shoulder with the opposite hand",
+        "Return and repeat on the other side",
+        "Keep hips completely square to the floor"
+      ],
+      "muscles": [
+        "Core",
+        "Shoulders",
+        "Obliques"
+      ],
+      "tip": "Wider foot stance makes it easier -- narrow it as you get stronger"
+    },
+    "Sumo Squat": {
+      "cues": [
+        "Feet wider than shoulder width, toes turned out 45 deg",
+        "Sit straight down -- keep chest up",
+        "Knees track over toes throughout",
+        "Drive up through the heels"
+      ],
+      "muscles": [
+        "Glutes",
+        "Inner Thighs",
+        "Quads"
+      ],
+      "tip": "The wide stance shifts more emphasis to the inner thighs and glutes vs a regular squat"
+    },
+    "Tuck Jump": {
+      "cues": [
+        "Start standing, slight bend in knees",
+        "Jump and pull knees toward chest",
+        "Land softly on the balls of your feet",
+        "Immediately absorb and repeat"
+      ],
+      "muscles": [
+        "Quads",
+        "Glutes",
+        "Calves",
+        "Cardio"
+      ],
+      "tip": "Land as quietly as possible -- loud landings mean you're not absorbing the impact properly"
+    },
+    "Box Jump": {
+      "cues": [
+        "Stand facing the box, feet hip-width",
+        "Bend knees, swing arms back, then jump",
+        "Land with both feet on top, knees soft",
+        "Step down -- don't jump down to protect the knees"
+      ],
+      "muscles": [
+        "Quads",
+        "Glutes",
+        "Calves",
+        "Power"
+      ],
+      "tip": "Focus on sticking the landing -- power is useless without control"
+    },
+    "Broad Jump": {
+      "cues": [
+        "Start with feet hip-width, slight knee bend",
+        "Swing arms back then drive forward",
+        "Land with both feet simultaneously, knees soft",
+        "Measure from takeoff line to heel landing"
+      ],
+      "muscles": [
+        "Glutes",
+        "Quads",
+        "Hamstrings",
+        "Power"
+      ],
+      "tip": "Think about driving your hips forward, not just jumping up -- horizontal power is the goal"
+    },
+    "Lateral Shuffle": {
+      "cues": [
+        "Athletic stance, knees slightly bent",
+        "Push off the outside foot to shuffle sideways",
+        "Stay low throughout -- don't bounce up",
+        "Touch the ground at each end to mark the distance"
+      ],
+      "muscles": [
+        "Glutes",
+        "Quads",
+        "Adductors",
+        "Cardio"
+      ],
+      "tip": "The lower you stay, the more glute and quad activation -- resist the urge to stand up"
+    },
+    "Sprint in Place": {
+      "cues": [
+        "Drive knees up as high and fast as possible",
+        "Pump arms aggressively in opposition",
+        "Stay on the balls of your feet -- heels don't touch",
+        "Maintain a slight forward lean"
+      ],
+      "muscles": [
+        "Hip Flexors",
+        "Quads",
+        "Calves",
+        "Cardio"
+      ],
+      "tip": "Maximum effort is the whole point -- short bursts at 100% are more effective than long moderate ones"
+    },
+    "Jump Rope": {
+      "cues": [
+        "Keep elbows close to your sides",
+        "Rotate the rope with your wrists -- not your shoulders",
+        "Jump just high enough to clear the rope",
+        "Land softly on the balls of your feet"
+      ],
+      "muscles": [
+        "Calves",
+        "Cardio",
+        "Coordination"
+      ],
+      "tip": "Consistent rhythm beats high jumps -- focus on timing over height"
+    },
+    "Power Clean": {
+      "cues": [
+        "Bar starts over mid-foot, hip-width stance",
+        "First pull: push floor away, bar stays close to legs",
+        "Second pull: extend hips explosively, shrug and pull",
+        "Catch in quarter squat, elbows forward"
+      ],
+      "muscles": [
+        "Full Body",
+        "Power",
+        "Traps",
+        "Glutes"
+      ],
+      "tip": "The power comes from the hip extension -- the arms just guide the bar up"
+    },
+    "Dumbbell Thruster": {
+      "cues": [
+        "Hold dumbbells at shoulder height",
+        "Squat down keeping chest up and knees out",
+        "Drive up explosively and press overhead in one motion",
+        "Lock out arms at the top before descending"
+      ],
+      "muscles": [
+        "Quads",
+        "Glutes",
+        "Shoulders",
+        "Triceps"
+      ],
+      "tip": "The squat drives the press -- use leg power to initiate the press, don't do them as two separate movements"
+    },
+    "Renegade Row": {
+      "cues": [
+        "High plank with dumbbells as handles",
+        "Row one dumbbell to your hip, keeping hips level",
+        "Return and repeat on the other side",
+        "Brace hard to prevent rotation"
+      ],
+      "muscles": [
+        "Back",
+        "Biceps",
+        "Core",
+        "Anti-Rotation"
+      ],
+      "tip": "Start with lighter weight than you think -- stabilizing with one hand is much harder than it looks"
+    },
+    "Explosive Row": {
+      "cues": [
+        "Hinge at hips, dumbbells hanging down",
+        "Drive elbows back powerfully and explosively",
+        "Allow dumbbells to travel slightly higher than normal",
+        "Control the return -- only the pull is explosive"
+      ],
+      "muscles": [
+        "Back",
+        "Biceps",
+        "Rear Delts"
+      ],
+      "tip": "Think about trying to touch your elbows behind your back -- creates full retraction"
+    },
+    "DB Curl to Press": {
+      "cues": [
+        "Start with dumbbells at sides, palms forward",
+        "Curl to shoulders, then rotate and press overhead",
+        "Lower from overhead back to shoulders, then curl down",
+        "Control every phase -- 4 movements in one"
+      ],
+      "muscles": [
+        "Biceps",
+        "Shoulders",
+        "Triceps"
+      ],
+      "tip": "The rotation at the top engages more shoulder muscle than a neutral press"
+    },
+    "KB Snatch": {
+      "cues": [
+        "Start with KB between legs, hinge position",
+        "Drive hips forward explosively",
+        "Guide the bell overhead in a smooth arc -- not a swing",
+        "Lock arm at the top with wrist straight"
+      ],
+      "muscles": [
+        "Glutes",
+        "Traps",
+        "Shoulders",
+        "Full Body"
+      ],
+      "tip": "The bell should float up, not be muscled up -- hip power does the work"
+    },
+    "KB Turkish Get-Up": {
+      "cues": [
+        "Lie flat, KB pressed overhead, eye on the bell",
+        "Rise to elbow, then to hand, then to kneeling",
+        "Stand up fully, then reverse every step to lie back down",
+        "Keep the KB locked overhead throughout every transition"
+      ],
+      "muscles": [
+        "Full Body",
+        "Core",
+        "Shoulder Stability"
+      ],
+      "tip": "Go slow -- this is a technique exercise, not a conditioning one. Speed comes after mastery"
+    }
+  },
+  "LIBRARY": [
+    {
+      "name": "Bench Press",
+      "group": "Chest",
+      "sets": 4,
+      "reps": "6-8",
+      "equipment": "Barbell"
+    },
+    {
+      "name": "Incline Dumbbell Press",
+      "group": "Chest",
+      "sets": 3,
+      "reps": "8-10",
+      "equipment": "Dumbbell"
+    },
+    {
+      "name": "Cable Fly",
+      "group": "Chest",
+      "sets": 3,
+      "reps": "12-15",
+      "equipment": "Cable"
+    },
+    {
+      "name": "Decline Barbell Press",
+      "group": "Chest",
+      "sets": 3,
+      "reps": "8-10",
+      "equipment": "Barbell"
+    },
+    {
+      "name": "Dumbbell Floor Press",
+      "group": "Chest",
+      "sets": 3,
+      "reps": "10-12",
+      "equipment": "Dumbbell"
+    },
+    {
+      "name": "Pec Deck / Machine Fly",
+      "group": "Chest",
+      "sets": 3,
+      "reps": "12-15",
+      "equipment": "Machine"
+    },
+    {
+      "name": "Dips",
+      "group": "Chest",
+      "sets": 3,
+      "reps": "8-12",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Close-Grip Bench",
+      "group": "Chest",
+      "sets": 3,
+      "reps": "8-10",
+      "equipment": "Barbell"
+    },
+    {
+      "name": "Push-Ups",
+      "group": "Chest",
+      "sets": 4,
+      "reps": "12-15",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Archer Push-Ups",
+      "group": "Chest",
+      "sets": 3,
+      "reps": "6-8 ea",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Decline Push-Ups",
+      "group": "Chest",
+      "sets": 3,
+      "reps": "12-15",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Wide Push-Ups",
+      "group": "Chest",
+      "sets": 3,
+      "reps": "12-15",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Pseudo Planche Push-Ups",
+      "group": "Chest",
+      "sets": 3,
+      "reps": "8-10",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Typewriter Push-Ups",
+      "group": "Chest",
+      "sets": 3,
+      "reps": "8 ea",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Plyometric Push-Ups",
+      "group": "Chest",
+      "sets": 3,
+      "reps": "8-10",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Staggered Push-Ups",
+      "group": "Chest",
+      "sets": 3,
+      "reps": "10 ea",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "T Push-Ups",
+      "group": "Chest",
+      "sets": 3,
+      "reps": "8 ea",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Deadlift",
+      "group": "Back",
+      "sets": 4,
+      "reps": "4-6",
+      "equipment": "Barbell"
+    },
+    {
+      "name": "Barbell Row",
+      "group": "Back",
+      "sets": 4,
+      "reps": "6-8",
+      "equipment": "Barbell"
+    },
+    {
+      "name": "Pull-Ups",
+      "group": "Back",
+      "sets": 3,
+      "reps": "6-10",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Lat Pulldown",
+      "group": "Back",
+      "sets": 3,
+      "reps": "10-12",
+      "equipment": "Cable"
+    },
+    {
+      "name": "Seated Cable Row",
+      "group": "Back",
+      "sets": 3,
+      "reps": "10-12",
+      "equipment": "Cable"
+    },
+    {
+      "name": "Chest Supported Row",
+      "group": "Back",
+      "sets": 3,
+      "reps": "10-12",
+      "equipment": "Dumbbell"
+    },
+    {
+      "name": "Single-Arm DB Row",
+      "group": "Back",
+      "sets": 3,
+      "reps": "10-12",
+      "equipment": "Dumbbell"
+    },
+    {
+      "name": "Face Pulls",
+      "group": "Back",
+      "sets": 3,
+      "reps": "12-15",
+      "equipment": "Cable"
+    },
+    {
+      "name": "Straight-Arm Pulldown",
+      "group": "Back",
+      "sets": 3,
+      "reps": "12-15",
+      "equipment": "Cable"
+    },
+    {
+      "name": "Rack Pull",
+      "group": "Back",
+      "sets": 3,
+      "reps": "5-6",
+      "equipment": "Barbell"
+    },
+    {
+      "name": "Meadows Row",
+      "group": "Back",
+      "sets": 3,
+      "reps": "10-12",
+      "equipment": "Barbell"
+    },
+    {
+      "name": "Inverted Row",
+      "group": "Back",
+      "sets": 3,
+      "reps": "10-12",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Wide-Grip Pull-Ups",
+      "group": "Back",
+      "sets": 3,
+      "reps": "5-8",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Neutral-Grip Pull-Ups",
+      "group": "Back",
+      "sets": 3,
+      "reps": "8-10",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Scapular Pull-Ups",
+      "group": "Back",
+      "sets": 3,
+      "reps": "10-12",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Australian Pull-Up",
+      "group": "Back",
+      "sets": 3,
+      "reps": "12-15",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "KB Swing",
+      "group": "Back",
+      "sets": 4,
+      "reps": "15-20",
+      "equipment": "Kettlebell"
+    },
+    {
+      "name": "KB Romanian Deadlift",
+      "group": "Back",
+      "sets": 3,
+      "reps": "10-12",
+      "equipment": "Kettlebell"
+    },
+    {
+      "name": "Superman Hold",
+      "group": "Back",
+      "sets": 3,
+      "reps": "10x3s",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Back Extension",
+      "group": "Back",
+      "sets": 3,
+      "reps": "12-15",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Overhead Press",
+      "group": "Shoulders",
+      "sets": 4,
+      "reps": "6-8",
+      "equipment": "Barbell"
+    },
+    {
+      "name": "Arnold Press",
+      "group": "Shoulders",
+      "sets": 3,
+      "reps": "10-12",
+      "equipment": "Dumbbell"
+    },
+    {
+      "name": "Lateral Raises",
+      "group": "Shoulders",
+      "sets": 3,
+      "reps": "12-15",
+      "equipment": "Dumbbell"
+    },
+    {
+      "name": "Front Raises",
+      "group": "Shoulders",
+      "sets": 3,
+      "reps": "12-15",
+      "equipment": "Dumbbell"
+    },
+    {
+      "name": "Cable Lateral Raise",
+      "group": "Shoulders",
+      "sets": 3,
+      "reps": "12-15",
+      "equipment": "Cable"
+    },
+    {
+      "name": "Rear Delt Fly",
+      "group": "Shoulders",
+      "sets": 3,
+      "reps": "12-15",
+      "equipment": "Dumbbell"
+    },
+    {
+      "name": "Reverse Pec Deck",
+      "group": "Shoulders",
+      "sets": 3,
+      "reps": "12-15",
+      "equipment": "Machine"
+    },
+    {
+      "name": "Shrugs",
+      "group": "Shoulders",
+      "sets": 3,
+      "reps": "12-15",
+      "equipment": "Dumbbell"
+    },
+    {
+      "name": "Pike Push-Ups",
+      "group": "Shoulders",
+      "sets": 3,
+      "reps": "10-12",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Handstand Hold",
+      "group": "Shoulders",
+      "sets": 3,
+      "reps": "20-30s",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "KB Clean and Press",
+      "group": "Shoulders",
+      "sets": 3,
+      "reps": "8-10",
+      "equipment": "Kettlebell"
+    },
+    {
+      "name": "Hammer Curls",
+      "group": "Biceps",
+      "sets": 3,
+      "reps": "10-12",
+      "equipment": "Dumbbell"
+    },
+    {
+      "name": "Incline Dumbbell Curl",
+      "group": "Biceps",
+      "sets": 3,
+      "reps": "10-12",
+      "equipment": "Dumbbell"
+    },
+    {
+      "name": "Preacher Curl",
+      "group": "Biceps",
+      "sets": 3,
+      "reps": "10-12",
+      "equipment": "Machine"
+    },
+    {
+      "name": "Concentration Curl",
+      "group": "Biceps",
+      "sets": 3,
+      "reps": "12-15",
+      "equipment": "Dumbbell"
+    },
+    {
+      "name": "Cable Curl",
+      "group": "Biceps",
+      "sets": 3,
+      "reps": "12-15",
+      "equipment": "Cable"
+    },
+    {
+      "name": "Reverse Curl",
+      "group": "Biceps",
+      "sets": 3,
+      "reps": "10-12",
+      "equipment": "Barbell"
+    },
+    {
+      "name": "Chin-Ups",
+      "group": "Biceps",
+      "sets": 3,
+      "reps": "8-10",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Towel Curls",
+      "group": "Biceps",
+      "sets": 3,
+      "reps": "12-15",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Band Bicep Curl",
+      "group": "Biceps",
+      "sets": 3,
+      "reps": "12-15",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Tricep Pushdowns",
+      "group": "Triceps",
+      "sets": 3,
+      "reps": "10-12",
+      "equipment": "Cable"
+    },
+    {
+      "name": "Overhead Tricep Ext",
+      "group": "Triceps",
+      "sets": 3,
+      "reps": "10-12",
+      "equipment": "Dumbbell"
+    },
+    {
+      "name": "Skull Crushers",
+      "group": "Triceps",
+      "sets": 3,
+      "reps": "8-10",
+      "equipment": "Barbell"
+    },
+    {
+      "name": "Close-Grip Bench",
+      "group": "Triceps",
+      "sets": 3,
+      "reps": "8-10",
+      "equipment": "Barbell"
+    },
+    {
+      "name": "Tricep Kickbacks",
+      "group": "Triceps",
+      "sets": 3,
+      "reps": "12-15",
+      "equipment": "Dumbbell"
+    },
+    {
+      "name": "Diamond Push-Ups",
+      "group": "Triceps",
+      "sets": 3,
+      "reps": "10-15",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Tricep Dips (Chair)",
+      "group": "Triceps",
+      "sets": 3,
+      "reps": "12-15",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Isometric Push-Up Hold",
+      "group": "Triceps",
+      "sets": 3,
+      "reps": "3x5s",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Squat",
+      "group": "Legs",
+      "sets": 4,
+      "reps": "6-8",
+      "equipment": "Barbell"
+    },
+    {
+      "name": "Romanian Deadlift",
+      "group": "Legs",
+      "sets": 3,
+      "reps": "8-10",
+      "equipment": "Barbell"
+    },
+    {
+      "name": "Leg Press",
+      "group": "Legs",
+      "sets": 3,
+      "reps": "10-12",
+      "equipment": "Machine"
+    },
+    {
+      "name": "Walking Lunges",
+      "group": "Legs",
+      "sets": 3,
+      "reps": "10 ea",
+      "equipment": "Dumbbell"
+    },
+    {
+      "name": "Leg Curl",
+      "group": "Legs",
+      "sets": 3,
+      "reps": "10-12",
+      "equipment": "Machine"
+    },
+    {
+      "name": "Leg Extension",
+      "group": "Legs",
+      "sets": 3,
+      "reps": "12-15",
+      "equipment": "Machine"
+    },
+    {
+      "name": "Hack Squat",
+      "group": "Legs",
+      "sets": 3,
+      "reps": "8-10",
+      "equipment": "Machine"
+    },
+    {
+      "name": "Hip Thrust",
+      "group": "Legs",
+      "sets": 3,
+      "reps": "10-12",
+      "equipment": "Barbell"
+    },
+    {
+      "name": "Nordic Hamstring Curl",
+      "group": "Legs",
+      "sets": 3,
+      "reps": "6-8",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Sumo Deadlift",
+      "group": "Legs",
+      "sets": 3,
+      "reps": "5-7",
+      "equipment": "Barbell"
+    },
+    {
+      "name": "Bulgarian Split Squat",
+      "group": "Legs",
+      "sets": 3,
+      "reps": "8-10 ea",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Sissy Squat",
+      "group": "Legs",
+      "sets": 3,
+      "reps": "10-15",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Calf Raises",
+      "group": "Legs",
+      "sets": 4,
+      "reps": "15-20",
+      "equipment": "Machine"
+    },
+    {
+      "name": "Seated Calf Raise",
+      "group": "Legs",
+      "sets": 4,
+      "reps": "15-20",
+      "equipment": "Machine"
+    },
+    {
+      "name": "Adductor Machine",
+      "group": "Legs",
+      "sets": 3,
+      "reps": "12-15",
+      "equipment": "Machine"
+    },
+    {
+      "name": "Glute Kickback Machine",
+      "group": "Legs",
+      "sets": 3,
+      "reps": "12-15",
+      "equipment": "Machine"
+    },
+    {
+      "name": "Step-Ups",
+      "group": "Legs",
+      "sets": 3,
+      "reps": "10 ea",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Trap Bar Deadlift",
+      "group": "Legs",
+      "sets": 3,
+      "reps": "5-7",
+      "equipment": "Barbell"
+    },
+    {
+      "name": "Bodyweight Squat",
+      "group": "Legs",
+      "sets": 4,
+      "reps": "15-20",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "KB Goblet Squat",
+      "group": "Legs",
+      "sets": 3,
+      "reps": "12-15",
+      "equipment": "Kettlebell"
+    },
+    {
+      "name": "Glute Bridge",
+      "group": "Legs",
+      "sets": 4,
+      "reps": "15-20",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Single-Leg Glute Bridge",
+      "group": "Legs",
+      "sets": 3,
+      "reps": "12 ea",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Lateral Lunge",
+      "group": "Legs",
+      "sets": 3,
+      "reps": "10 ea",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Reverse Lunge",
+      "group": "Legs",
+      "sets": 3,
+      "reps": "10 ea",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Cossack Squat",
+      "group": "Legs",
+      "sets": 3,
+      "reps": "8 ea",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Wall Sit",
+      "group": "Legs",
+      "sets": 3,
+      "reps": "45 sec",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Single-Leg RDL",
+      "group": "Legs",
+      "sets": 3,
+      "reps": "10 ea",
+      "equipment": "Dumbbell"
+    },
+    {
+      "name": "Donkey Calf Raise",
+      "group": "Legs",
+      "sets": 4,
+      "reps": "15-20",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Fire Hydrants",
+      "group": "Legs",
+      "sets": 3,
+      "reps": "15 ea",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Curtsy Lunge",
+      "group": "Legs",
+      "sets": 3,
+      "reps": "10 ea",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Box Jumps",
+      "group": "Legs",
+      "sets": 3,
+      "reps": "8-10",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Skater Jumps",
+      "group": "Legs",
+      "sets": 3,
+      "reps": "12 ea",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Jump Squat",
+      "group": "Legs",
+      "sets": 3,
+      "reps": "12-15",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Cable Crunch",
+      "group": "Core",
+      "sets": 3,
+      "reps": "15-20",
+      "equipment": "Cable"
+    },
+    {
+      "name": "Plank",
+      "group": "Core",
+      "sets": 3,
+      "reps": "45 sec",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Hollow Body Hold",
+      "group": "Core",
+      "sets": 3,
+      "reps": "30 sec",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Mountain Climbers",
+      "group": "Core",
+      "sets": 3,
+      "reps": "30 sec",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Burpee",
+      "group": "Core",
+      "sets": 3,
+      "reps": "10-15",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "L-Sit Pull-Ups",
+      "group": "Core",
+      "sets": 3,
+      "reps": "5-7",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Dead Bug",
+      "group": "Core",
+      "sets": 3,
+      "reps": "8-10 ea",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Bird Dog",
+      "group": "Core",
+      "sets": 3,
+      "reps": "10 ea",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Side Plank",
+      "group": "Core",
+      "sets": 3,
+      "reps": "30 sec",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Ab Wheel Rollout",
+      "group": "Core",
+      "sets": 3,
+      "reps": "8-12",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Hanging Leg Raise",
+      "group": "Core",
+      "sets": 3,
+      "reps": "10-15",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "V-Ups",
+      "group": "Core",
+      "sets": 3,
+      "reps": "12-15",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Russian Twists",
+      "group": "Core",
+      "sets": 3,
+      "reps": "20 ea",
+      "equipment": "Bodyweight"
+    },
+    {
+      "name": "Shoulder Taps",
+      "group": "Core",
+      "sets": 3,
+      "reps": "16 ea",
+      "equipment": "Bodyweight"
+    }
+  ]
+}

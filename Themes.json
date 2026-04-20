@@ -1,0 +1,1640 @@
+{
+  "solo": {
+    "id": "solo",
+    "profileLabel": "Hunter Profile",
+    "name": "Solo Leveling",
+    "tag": "Hunter System",
+    "bg": "#F0F0FF",
+    "surface": "#FFFFFF",
+    "border": "#DDDDF5",
+    "card": "#F8F8FF",
+    "cardBorder": "#E0E0F5",
+    "accent": "#5B4FE8",
+    "accent2": "#A855F7",
+    "text": "#111111",
+    "muted": "#888899",
+    "sub": "#CCCCEE",
+    "push": "#5B4FE8",
+    "pull": "#52C4A0",
+    "legs": "#A855F7",
+    "green": "#2E7D32",
+    "yellow": "#E65100",
+    "red": "#C62828",
+    "onAccent": "#FFFFFF",
+    "ranks": [
+      {
+        "level": 1,
+        "rank": "E",
+        "title": "Novice Hunter",
+        "color": "#888899"
+      },
+      {
+        "level": 2,
+        "rank": "E",
+        "title": "Weakest Hunter",
+        "color": "#888899"
+      },
+      {
+        "level": 3,
+        "rank": "E",
+        "title": "Awakened",
+        "color": "#888899"
+      },
+      {
+        "level": 4,
+        "rank": "D",
+        "title": "Gate Raider",
+        "color": "#2E7D32"
+      },
+      {
+        "level": 5,
+        "rank": "D",
+        "title": "Dungeon Crawler",
+        "color": "#2E7D32"
+      },
+      {
+        "level": 6,
+        "rank": "D",
+        "title": "Seasoned Fighter",
+        "color": "#2E7D32"
+      },
+      {
+        "level": 7,
+        "rank": "C",
+        "title": "Shadow Apprentice",
+        "color": "#1565C0"
+      },
+      {
+        "level": 8,
+        "rank": "C",
+        "title": "Dungeon Breaker",
+        "color": "#1565C0"
+      },
+      {
+        "level": 9,
+        "rank": "C",
+        "title": "C-Rank Hunter",
+        "color": "#1565C0"
+      },
+      {
+        "level": 10,
+        "rank": "B",
+        "title": "Elite Soldier",
+        "color": "#6A1B9A"
+      },
+      {
+        "level": 11,
+        "rank": "B",
+        "title": "Monarch's Eye",
+        "color": "#6A1B9A"
+      },
+      {
+        "level": 12,
+        "rank": "B",
+        "title": "B-Rank Hunter",
+        "color": "#6A1B9A"
+      },
+      {
+        "level": 13,
+        "rank": "A",
+        "title": "Shadow Commander",
+        "color": "#E65100"
+      },
+      {
+        "level": 14,
+        "rank": "A",
+        "title": "Ruler of Shadows",
+        "color": "#E65100"
+      },
+      {
+        "level": 15,
+        "rank": "A",
+        "title": "A-Rank Hunter",
+        "color": "#E65100"
+      },
+      {
+        "level": 16,
+        "rank": "S",
+        "title": "National Level",
+        "color": "#C62828"
+      },
+      {
+        "level": 17,
+        "rank": "S",
+        "title": "S-Rank Hunter",
+        "color": "#C62828"
+      },
+      {
+        "level": 18,
+        "rank": "S",
+        "title": "Shadow Monarch",
+        "color": "#C62828"
+      },
+      {
+        "level": 19,
+        "rank": "SS",
+        "title": "Arise",
+        "color": "#5B4FE8"
+      },
+      {
+        "level": 20,
+        "rank": "SS",
+        "title": "The Player",
+        "color": "#5B4FE8"
+      }
+    ],
+    "badgeLabel": "LVL"
+  },
+  "pokemon": {
+    "id": "pokemon",
+    "profileLabel": "Trainer Profile",
+    "name": "Pokemon",
+    "tag": "Trainer Journey",
+    "bg": "#F8F8F8",
+    "surface": "#FFFFFF",
+    "border": "#E0E0E0",
+    "card": "#F8F8F8",
+    "cardBorder": "#E8E8E8",
+    "accent": "#E3000B",
+    "accent2": "#222222",
+    "text": "#111111",
+    "muted": "#888888",
+    "sub": "#CCCCCC",
+    "push": "#E3000B",
+    "pull": "#1565C0",
+    "legs": "#2E7D32",
+    "green": "#2E7D32",
+    "yellow": "#E65100",
+    "red": "#E3000B",
+    "onAccent": "#FFFFFF",
+    "ranks": [
+      {
+        "level": 1,
+        "rank": "W",
+        "title": "Youngster",
+        "color": "#888888"
+      },
+      {
+        "level": 2,
+        "rank": "W",
+        "title": "Bug Catcher",
+        "color": "#888888"
+      },
+      {
+        "level": 3,
+        "rank": "W",
+        "title": "Cool Trainer",
+        "color": "#888888"
+      },
+      {
+        "level": 4,
+        "rank": "TR",
+        "title": "Trainer",
+        "color": "#2E7D32"
+      },
+      {
+        "level": 5,
+        "rank": "TR",
+        "title": "Ace Trainer",
+        "color": "#2E7D32"
+      },
+      {
+        "level": 6,
+        "rank": "TR",
+        "title": "Super Nerd",
+        "color": "#2E7D32"
+      },
+      {
+        "level": 7,
+        "rank": "GL",
+        "title": "Gym Leader",
+        "color": "#1565C0"
+      },
+      {
+        "level": 8,
+        "rank": "GL",
+        "title": "Badge Collector",
+        "color": "#1565C0"
+      },
+      {
+        "level": 9,
+        "rank": "GL",
+        "title": "Gym Champion",
+        "color": "#1565C0"
+      },
+      {
+        "level": 10,
+        "rank": "E4",
+        "title": "Elite Four",
+        "color": "#6A1B9A"
+      },
+      {
+        "level": 11,
+        "rank": "E4",
+        "title": "Elite Challenger",
+        "color": "#6A1B9A"
+      },
+      {
+        "level": 12,
+        "rank": "E4",
+        "title": "Elite Master",
+        "color": "#6A1B9A"
+      },
+      {
+        "level": 13,
+        "rank": "C",
+        "title": "Champion",
+        "color": "#E65100"
+      },
+      {
+        "level": 14,
+        "rank": "C",
+        "title": "Hall of Fame",
+        "color": "#E65100"
+      },
+      {
+        "level": 15,
+        "rank": "C",
+        "title": "Undefeated",
+        "color": "#E65100"
+      },
+      {
+        "level": 16,
+        "rank": "M",
+        "title": "Master",
+        "color": "#E3000B"
+      },
+      {
+        "level": 17,
+        "rank": "M",
+        "title": "Grand Master",
+        "color": "#E3000B"
+      },
+      {
+        "level": 18,
+        "rank": "M",
+        "title": "World Champion",
+        "color": "#E3000B"
+      },
+      {
+        "level": 19,
+        "rank": "LG",
+        "title": "Mythic",
+        "color": "#B71C1C"
+      },
+      {
+        "level": 20,
+        "rank": "LG",
+        "title": "Legend",
+        "color": "#B71C1C"
+      }
+    ],
+    "badgeLabel": "LV"
+  },
+  "naruto": {
+    "id": "naruto",
+    "profileLabel": "Shinobi Profile",
+    "name": "Naruto",
+    "tag": "Ninja Way",
+    "bg": "#FFF8F0",
+    "surface": "#FFFFFF",
+    "border": "#F0E0CC",
+    "card": "#FFF8F0",
+    "cardBorder": "#F0E0CC",
+    "accent": "#E85C00",
+    "accent2": "#2C5282",
+    "text": "#111111",
+    "muted": "#886644",
+    "sub": "#F0D0A0",
+    "push": "#E85C00",
+    "pull": "#2C5282",
+    "legs": "#2E7D32",
+    "green": "#2E7D32",
+    "yellow": "#E85C00",
+    "red": "#B71C1C",
+    "onAccent": "#FFFFFF",
+    "ranks": [
+      {
+        "level": 1,
+        "rank": "AC",
+        "title": "Academy Student",
+        "color": "#888888"
+      },
+      {
+        "level": 2,
+        "rank": "AC",
+        "title": "Leaf Recruit",
+        "color": "#888888"
+      },
+      {
+        "level": 3,
+        "rank": "AC",
+        "title": "Graduation",
+        "color": "#888888"
+      },
+      {
+        "level": 4,
+        "rank": "GN",
+        "title": "Genin",
+        "color": "#2E7D32"
+      },
+      {
+        "level": 5,
+        "rank": "GN",
+        "title": "Team Placed",
+        "color": "#2E7D32"
+      },
+      {
+        "level": 6,
+        "rank": "GN",
+        "title": "D-Rank Missions",
+        "color": "#2E7D32"
+      },
+      {
+        "level": 7,
+        "rank": "CN",
+        "title": "Chunin",
+        "color": "#1565C0"
+      },
+      {
+        "level": 8,
+        "rank": "CN",
+        "title": "Shadow Clone",
+        "color": "#1565C0"
+      },
+      {
+        "level": 9,
+        "rank": "CN",
+        "title": "C-Rank Missions",
+        "color": "#1565C0"
+      },
+      {
+        "level": 10,
+        "rank": "JN",
+        "title": "Jonin",
+        "color": "#1B5E20"
+      },
+      {
+        "level": 11,
+        "rank": "JN",
+        "title": "S-Rank Missions",
+        "color": "#1B5E20"
+      },
+      {
+        "level": 12,
+        "rank": "JN",
+        "title": "Elite Jonin",
+        "color": "#1B5E20"
+      },
+      {
+        "level": 13,
+        "rank": "AN",
+        "title": "Anbu",
+        "color": "#4A148C"
+      },
+      {
+        "level": 14,
+        "rank": "AN",
+        "title": "Black Ops",
+        "color": "#4A148C"
+      },
+      {
+        "level": 15,
+        "rank": "AN",
+        "title": "Anbu Captain",
+        "color": "#4A148C"
+      },
+      {
+        "level": 16,
+        "rank": "KG",
+        "title": "Kage",
+        "color": "#B71C1C"
+      },
+      {
+        "level": 17,
+        "rank": "KG",
+        "title": "Five Kage",
+        "color": "#B71C1C"
+      },
+      {
+        "level": 18,
+        "rank": "KG",
+        "title": "Will of Fire",
+        "color": "#B71C1C"
+      },
+      {
+        "level": 19,
+        "rank": "HK",
+        "title": "Hokage",
+        "color": "#E85C00"
+      },
+      {
+        "level": 20,
+        "rank": "HK",
+        "title": "God of Shinobi",
+        "color": "#E85C00"
+      }
+    ],
+    "badgeLabel": "LVL"
+  },
+  "onepiece": {
+    "id": "onepiece",
+    "profileLabel": "Pirate Profile",
+    "name": "One Piece",
+    "tag": "Pirate Crew",
+    "bg": "#F0F6FF",
+    "surface": "#FFFFFF",
+    "border": "#D0E0F0",
+    "card": "#F0F6FF",
+    "cardBorder": "#D0E8FF",
+    "accent": "#C0392B",
+    "accent2": "#D4A017",
+    "text": "#111111",
+    "muted": "#556677",
+    "sub": "#A0C0D0",
+    "push": "#C0392B",
+    "pull": "#1565C0",
+    "legs": "#2E7D32",
+    "green": "#2E7D32",
+    "yellow": "#D4A017",
+    "red": "#C0392B",
+    "onAccent": "#FFFFFF",
+    "ranks": [
+      {
+        "level": 1,
+        "rank": "CB",
+        "title": "Cabin Boy",
+        "color": "#888888"
+      },
+      {
+        "level": 2,
+        "rank": "CB",
+        "title": "East Blue Rookie",
+        "color": "#888888"
+      },
+      {
+        "level": 3,
+        "rank": "CB",
+        "title": "Bounty Earned",
+        "color": "#888888"
+      },
+      {
+        "level": 4,
+        "rank": "RP",
+        "title": "Rookie Pirate",
+        "color": "#2E7D32"
+      },
+      {
+        "level": 5,
+        "rank": "RP",
+        "title": "Grand Line Entry",
+        "color": "#2E7D32"
+      },
+      {
+        "level": 6,
+        "rank": "RP",
+        "title": "Pirate Crew Named",
+        "color": "#2E7D32"
+      },
+      {
+        "level": 7,
+        "rank": "SN",
+        "title": "Supernova",
+        "color": "#1565C0"
+      },
+      {
+        "level": 8,
+        "rank": "SN",
+        "title": "Worst Generation",
+        "color": "#1565C0"
+      },
+      {
+        "level": 9,
+        "rank": "SN",
+        "title": "New World Entry",
+        "color": "#1565C0"
+      },
+      {
+        "level": 10,
+        "rank": "WL",
+        "title": "Warlord",
+        "color": "#6A1B9A"
+      },
+      {
+        "level": 11,
+        "rank": "WL",
+        "title": "Sea Tyrant",
+        "color": "#6A1B9A"
+      },
+      {
+        "level": 12,
+        "rank": "WL",
+        "title": "Devil Fruit User",
+        "color": "#6A1B9A"
+      },
+      {
+        "level": 13,
+        "rank": "YK",
+        "title": "Yonko Commander",
+        "color": "#D4A017"
+      },
+      {
+        "level": 14,
+        "rank": "YK",
+        "title": "Yonko",
+        "color": "#D4A017"
+      },
+      {
+        "level": 15,
+        "rank": "YK",
+        "title": "Conqueror's Haki",
+        "color": "#D4A017"
+      },
+      {
+        "level": 16,
+        "rank": "PK",
+        "title": "Pirate King",
+        "color": "#C0392B"
+      },
+      {
+        "level": 17,
+        "rank": "PK",
+        "title": "King of Pirates",
+        "color": "#C0392B"
+      },
+      {
+        "level": 18,
+        "rank": "PK",
+        "title": "Will of D.",
+        "color": "#C0392B"
+      },
+      {
+        "level": 19,
+        "rank": "LG",
+        "title": "Legend of Sea",
+        "color": "#7B1818"
+      },
+      {
+        "level": 20,
+        "rank": "LG",
+        "title": "Joy Boy",
+        "color": "#7B1818"
+      }
+    ],
+    "badgeLabel": "LVL"
+  },
+  "dragonball": {
+    "id": "dragonball",
+    "profileLabel": "Warrior Profile",
+    "name": "Dragon Ball",
+    "tag": "Power Level",
+    "bg": "#FFFAF0",
+    "surface": "#FFFFFF",
+    "border": "#F0E8D0",
+    "card": "#FFFAF0",
+    "cardBorder": "#F0E8CC",
+    "accent": "#E65100",
+    "accent2": "#F9A825",
+    "text": "#111111",
+    "muted": "#886633",
+    "sub": "#F0D090",
+    "push": "#E65100",
+    "pull": "#1565C0",
+    "legs": "#2E7D32",
+    "green": "#2E7D32",
+    "yellow": "#F9A825",
+    "red": "#C62828",
+    "onAccent": "#FFFFFF",
+    "ranks": [
+      {
+        "level": 1,
+        "rank": "E",
+        "title": "Earthling",
+        "color": "#888888"
+      },
+      {
+        "level": 2,
+        "rank": "E",
+        "title": "Trained Fighter",
+        "color": "#888888"
+      },
+      {
+        "level": 3,
+        "rank": "E",
+        "title": "Tournament Vet",
+        "color": "#888888"
+      },
+      {
+        "level": 4,
+        "rank": "ZF",
+        "title": "Z-Fighter",
+        "color": "#2E7D32"
+      },
+      {
+        "level": 5,
+        "rank": "ZF",
+        "title": "Kai Student",
+        "color": "#2E7D32"
+      },
+      {
+        "level": 6,
+        "rank": "ZF",
+        "title": "Elite Warrior",
+        "color": "#2E7D32"
+      },
+      {
+        "level": 7,
+        "rank": "SS1",
+        "title": "Super Saiyan",
+        "color": "#F9A825"
+      },
+      {
+        "level": 8,
+        "rank": "SS1",
+        "title": "Ascended SS",
+        "color": "#F9A825"
+      },
+      {
+        "level": 9,
+        "rank": "SS1",
+        "title": "Full Power SS",
+        "color": "#F9A825"
+      },
+      {
+        "level": 10,
+        "rank": "SS2",
+        "title": "Super Saiyan 2",
+        "color": "#1565C0"
+      },
+      {
+        "level": 11,
+        "rank": "SS2",
+        "title": "Legendary Power",
+        "color": "#1565C0"
+      },
+      {
+        "level": 12,
+        "rank": "SS3",
+        "title": "Super Saiyan 3",
+        "color": "#6A1B9A"
+      },
+      {
+        "level": 13,
+        "rank": "SS3",
+        "title": "Mystic Form",
+        "color": "#6A1B9A"
+      },
+      {
+        "level": 14,
+        "rank": "G",
+        "title": "Super Saiyan God",
+        "color": "#C62828"
+      },
+      {
+        "level": 15,
+        "rank": "G",
+        "title": "SS Blue",
+        "color": "#C62828"
+      },
+      {
+        "level": 16,
+        "rank": "G",
+        "title": "SS Blue Evolved",
+        "color": "#C62828"
+      },
+      {
+        "level": 17,
+        "rank": "UI",
+        "title": "Ultra Instinct",
+        "color": "#546E7A"
+      },
+      {
+        "level": 18,
+        "rank": "UI",
+        "title": "Mastered UI",
+        "color": "#546E7A"
+      },
+      {
+        "level": 19,
+        "rank": "UI",
+        "title": "True Ultra",
+        "color": "#546E7A"
+      },
+      {
+        "level": 20,
+        "rank": "UI",
+        "title": "Beyond Limit",
+        "color": "#546E7A"
+      }
+    ],
+    "badgeLabel": "PL"
+  },
+  "aot": {
+    "id": "aot",
+    "profileLabel": "Scout Profile",
+    "name": "Attack on Titan",
+    "tag": "Survey Corps",
+    "bg": "#F4F1EC",
+    "surface": "#FFFFFF",
+    "border": "#DDD8CC",
+    "card": "#F4F1EC",
+    "cardBorder": "#DDD8CC",
+    "accent": "#5C6B3A",
+    "accent2": "#8B7355",
+    "text": "#111111",
+    "muted": "#6B6B5A",
+    "sub": "#C8C0A8",
+    "push": "#8B7355",
+    "pull": "#5C6B3A",
+    "legs": "#37474F",
+    "green": "#5C6B3A",
+    "yellow": "#8B7355",
+    "red": "#C62828",
+    "onAccent": "#FFFFFF",
+    "ranks": [
+      {
+        "level": 1,
+        "rank": "CD",
+        "title": "Cadet",
+        "color": "#888888"
+      },
+      {
+        "level": 2,
+        "rank": "CD",
+        "title": "Wall Recruit",
+        "color": "#888888"
+      },
+      {
+        "level": 3,
+        "rank": "CD",
+        "title": "104th Graduate",
+        "color": "#888888"
+      },
+      {
+        "level": 4,
+        "rank": "SC",
+        "title": "Scout",
+        "color": "#5C6B3A"
+      },
+      {
+        "level": 5,
+        "rank": "SC",
+        "title": "Survey Corps",
+        "color": "#5C6B3A"
+      },
+      {
+        "level": 6,
+        "rank": "SC",
+        "title": "Vertical Maneuver",
+        "color": "#5C6B3A"
+      },
+      {
+        "level": 7,
+        "rank": "SE",
+        "title": "Corps Elite",
+        "color": "#8B7355"
+      },
+      {
+        "level": 8,
+        "rank": "SE",
+        "title": "Titan Slayer",
+        "color": "#8B7355"
+      },
+      {
+        "level": 9,
+        "rank": "SE",
+        "title": "Wall Guardian",
+        "color": "#8B7355"
+      },
+      {
+        "level": 10,
+        "rank": "AK",
+        "title": "Ackerman",
+        "color": "#1565C0"
+      },
+      {
+        "level": 11,
+        "rank": "AK",
+        "title": "Path Awakened",
+        "color": "#1565C0"
+      },
+      {
+        "level": 12,
+        "rank": "AK",
+        "title": "Combat Prodigy",
+        "color": "#1565C0"
+      },
+      {
+        "level": 13,
+        "rank": "TS",
+        "title": "Titan Shifter",
+        "color": "#6A1B9A"
+      },
+      {
+        "level": 14,
+        "rank": "TS",
+        "title": "Attack Titan",
+        "color": "#6A1B9A"
+      },
+      {
+        "level": 15,
+        "rank": "TS",
+        "title": "War Hammer",
+        "color": "#6A1B9A"
+      },
+      {
+        "level": 16,
+        "rank": "FT",
+        "title": "Founding Titan",
+        "color": "#C62828"
+      },
+      {
+        "level": 17,
+        "rank": "FT",
+        "title": "Paths Master",
+        "color": "#C62828"
+      },
+      {
+        "level": 18,
+        "rank": "FT",
+        "title": "Memory Keeper",
+        "color": "#C62828"
+      },
+      {
+        "level": 19,
+        "rank": "RB",
+        "title": "The Rumbling",
+        "color": "#37474F"
+      },
+      {
+        "level": 20,
+        "rank": "RB",
+        "title": "Last Eldian",
+        "color": "#37474F"
+      }
+    ],
+    "badgeLabel": "LVL"
+  },
+  "greek": {
+    "id": "greek",
+    "profileLabel": "Hero Profile",
+    "name": "Greek Mythology",
+    "tag": "Path of the Gods",
+    "bg": "#FAFAF5",
+    "surface": "#FFFFFF",
+    "border": "#E8E8D8",
+    "card": "#FAFAF5",
+    "cardBorder": "#E8E8D8",
+    "accent": "#B8860B",
+    "accent2": "#1A3A5C",
+    "text": "#111111",
+    "muted": "#7A7A6A",
+    "sub": "#D8D8C0",
+    "push": "#B8860B",
+    "pull": "#1A3A5C",
+    "legs": "#6A1B9A",
+    "green": "#2E7D32",
+    "yellow": "#B8860B",
+    "red": "#C62828",
+    "onAccent": "#FFFFFF",
+    "ranks": [
+      {
+        "level": 1,
+        "rank": "MT",
+        "title": "Mortal",
+        "color": "#888888"
+      },
+      {
+        "level": 2,
+        "rank": "MT",
+        "title": "Common Folk",
+        "color": "#888888"
+      },
+      {
+        "level": 3,
+        "rank": "MT",
+        "title": "Blessed Mortal",
+        "color": "#888888"
+      },
+      {
+        "level": 4,
+        "rank": "HR",
+        "title": "Hero",
+        "color": "#2E7D32"
+      },
+      {
+        "level": 5,
+        "rank": "HR",
+        "title": "Warrior of Troy",
+        "color": "#2E7D32"
+      },
+      {
+        "level": 6,
+        "rank": "HR",
+        "title": "Legendary Hero",
+        "color": "#2E7D32"
+      },
+      {
+        "level": 7,
+        "rank": "DG",
+        "title": "Demigod",
+        "color": "#1565C0"
+      },
+      {
+        "level": 8,
+        "rank": "DG",
+        "title": "Favored of Zeus",
+        "color": "#1565C0"
+      },
+      {
+        "level": 9,
+        "rank": "DG",
+        "title": "Blessed Demigod",
+        "color": "#1565C0"
+      },
+      {
+        "level": 10,
+        "rank": "CH",
+        "title": "Champion",
+        "color": "#6A1B9A"
+      },
+      {
+        "level": 11,
+        "rank": "CH",
+        "title": "Oracle",
+        "color": "#6A1B9A"
+      },
+      {
+        "level": 12,
+        "rank": "CH",
+        "title": "Fated One",
+        "color": "#6A1B9A"
+      },
+      {
+        "level": 13,
+        "rank": "TT",
+        "title": "Titan",
+        "color": "#E65100"
+      },
+      {
+        "level": 14,
+        "rank": "TT",
+        "title": "Titan Lord",
+        "color": "#E65100"
+      },
+      {
+        "level": 15,
+        "rank": "TT",
+        "title": "Cronus Guard",
+        "color": "#E65100"
+      },
+      {
+        "level": 16,
+        "rank": "OL",
+        "title": "Olympian",
+        "color": "#B8860B"
+      },
+      {
+        "level": 17,
+        "rank": "OL",
+        "title": "God of Olympus",
+        "color": "#B8860B"
+      },
+      {
+        "level": 18,
+        "rank": "OL",
+        "title": "Zeus Favored",
+        "color": "#B8860B"
+      },
+      {
+        "level": 19,
+        "rank": "OL",
+        "title": "Primordial",
+        "color": "#C62828"
+      },
+      {
+        "level": 20,
+        "rank": "OL",
+        "title": "Chaos Incarnate",
+        "color": "#C62828"
+      }
+    ],
+    "badgeLabel": "LVL"
+  },
+  "rpg": {
+    "id": "rpg",
+    "profileLabel": "Adventurer Profile",
+    "name": "RPG / Fantasy",
+    "tag": "The Ancient Order",
+    "bg": "#FAF7F0",
+    "surface": "#FFFFFF",
+    "border": "#E8E0D0",
+    "card": "#FAF7F0",
+    "cardBorder": "#E8E0D0",
+    "accent": "#8B1A1A",
+    "accent2": "#6B4C11",
+    "text": "#111111",
+    "muted": "#7A6A55",
+    "sub": "#D0C8A8",
+    "push": "#8B1A1A",
+    "pull": "#1565C0",
+    "legs": "#2E7D32",
+    "green": "#2E7D32",
+    "yellow": "#6B4C11",
+    "red": "#8B1A1A",
+    "onAccent": "#FFFFFF",
+    "ranks": [
+      {
+        "level": 1,
+        "rank": "PG",
+        "title": "Peasant",
+        "color": "#888888"
+      },
+      {
+        "level": 2,
+        "rank": "PG",
+        "title": "Farmhand",
+        "color": "#888888"
+      },
+      {
+        "level": 3,
+        "rank": "PG",
+        "title": "Village Defender",
+        "color": "#888888"
+      },
+      {
+        "level": 4,
+        "rank": "SQ",
+        "title": "Squire",
+        "color": "#2E7D32"
+      },
+      {
+        "level": 5,
+        "rank": "SQ",
+        "title": "Shield Bearer",
+        "color": "#2E7D32"
+      },
+      {
+        "level": 6,
+        "rank": "SQ",
+        "title": "Sworn Squire",
+        "color": "#2E7D32"
+      },
+      {
+        "level": 7,
+        "rank": "KN",
+        "title": "Knight",
+        "color": "#1565C0"
+      },
+      {
+        "level": 8,
+        "rank": "KN",
+        "title": "Crusader",
+        "color": "#1565C0"
+      },
+      {
+        "level": 9,
+        "rank": "KN",
+        "title": "Silver Knight",
+        "color": "#1565C0"
+      },
+      {
+        "level": 10,
+        "rank": "PL",
+        "title": "Paladin",
+        "color": "#6B4C11"
+      },
+      {
+        "level": 11,
+        "rank": "PL",
+        "title": "Holy Warrior",
+        "color": "#6B4C11"
+      },
+      {
+        "level": 12,
+        "rank": "PL",
+        "title": "Dragon Slayer",
+        "color": "#6B4C11"
+      },
+      {
+        "level": 13,
+        "rank": "AM",
+        "title": "Archmage",
+        "color": "#6A1B9A"
+      },
+      {
+        "level": 14,
+        "rank": "AM",
+        "title": "Spellweaver",
+        "color": "#6A1B9A"
+      },
+      {
+        "level": 15,
+        "rank": "AM",
+        "title": "Grand Sorcerer",
+        "color": "#6A1B9A"
+      },
+      {
+        "level": 16,
+        "rank": "WL",
+        "title": "Warlord",
+        "color": "#C62828"
+      },
+      {
+        "level": 17,
+        "rank": "WL",
+        "title": "Siege Master",
+        "color": "#C62828"
+      },
+      {
+        "level": 18,
+        "rank": "WL",
+        "title": "Dark General",
+        "color": "#C62828"
+      },
+      {
+        "level": 19,
+        "rank": "LB",
+        "title": "Legendborn",
+        "color": "#8B1A1A"
+      },
+      {
+        "level": 20,
+        "rank": "LB",
+        "title": "The Undying",
+        "color": "#8B1A1A"
+      }
+    ],
+    "badgeLabel": "LVL"
+  },
+  "space": {
+    "id": "space",
+    "profileLabel": "Commander Profile",
+    "name": "Space / Sci-Fi",
+    "tag": "Galactic Command",
+    "bg": "#F0F4FF",
+    "surface": "#FFFFFF",
+    "border": "#D0DCFF",
+    "card": "#F0F4FF",
+    "cardBorder": "#D0DCFF",
+    "accent": "#1A3A8F",
+    "accent2": "#00ACC1",
+    "text": "#111111",
+    "muted": "#556688",
+    "sub": "#A0B8E0",
+    "push": "#1A3A8F",
+    "pull": "#00ACC1",
+    "legs": "#2E7D32",
+    "green": "#2E7D32",
+    "yellow": "#E65100",
+    "red": "#C62828",
+    "onAccent": "#FFFFFF",
+    "ranks": [
+      {
+        "level": 1,
+        "rank": "CD",
+        "title": "Cadet",
+        "color": "#888888"
+      },
+      {
+        "level": 2,
+        "rank": "CD",
+        "title": "Recruit",
+        "color": "#888888"
+      },
+      {
+        "level": 3,
+        "rank": "CD",
+        "title": "Flight Trainee",
+        "color": "#888888"
+      },
+      {
+        "level": 4,
+        "rank": "EN",
+        "title": "Ensign",
+        "color": "#2E7D32"
+      },
+      {
+        "level": 5,
+        "rank": "EN",
+        "title": "Junior Officer",
+        "color": "#2E7D32"
+      },
+      {
+        "level": 6,
+        "rank": "EN",
+        "title": "Bridge Crew",
+        "color": "#2E7D32"
+      },
+      {
+        "level": 7,
+        "rank": "LT",
+        "title": "Lieutenant",
+        "color": "#1565C0"
+      },
+      {
+        "level": 8,
+        "rank": "LT",
+        "title": "Lt. Commander",
+        "color": "#1565C0"
+      },
+      {
+        "level": 9,
+        "rank": "LT",
+        "title": "Tactical Officer",
+        "color": "#1565C0"
+      },
+      {
+        "level": 10,
+        "rank": "CM",
+        "title": "Commander",
+        "color": "#00838F"
+      },
+      {
+        "level": 11,
+        "rank": "CM",
+        "title": "Strike Leader",
+        "color": "#00838F"
+      },
+      {
+        "level": 12,
+        "rank": "CM",
+        "title": "Vanguard",
+        "color": "#00838F"
+      },
+      {
+        "level": 13,
+        "rank": "CP",
+        "title": "Captain",
+        "color": "#6A1B9A"
+      },
+      {
+        "level": 14,
+        "rank": "CP",
+        "title": "Fleet Captain",
+        "color": "#6A1B9A"
+      },
+      {
+        "level": 15,
+        "rank": "CP",
+        "title": "Starship Command",
+        "color": "#6A1B9A"
+      },
+      {
+        "level": 16,
+        "rank": "AD",
+        "title": "Admiral",
+        "color": "#C62828"
+      },
+      {
+        "level": 17,
+        "rank": "AD",
+        "title": "Fleet Admiral",
+        "color": "#C62828"
+      },
+      {
+        "level": 18,
+        "rank": "AD",
+        "title": "Supreme Command",
+        "color": "#C62828"
+      },
+      {
+        "level": 19,
+        "rank": "GL",
+        "title": "Galactic",
+        "color": "#1A3A8F"
+      },
+      {
+        "level": 20,
+        "rank": "GL",
+        "title": "Galactic Sovereign",
+        "color": "#1A3A8F"
+      }
+    ],
+    "badgeLabel": "LVL"
+  },
+  "military": {
+    "id": "military",
+    "profileLabel": "Operator Profile",
+    "name": "Special Ops",
+    "tag": "Call of Duty",
+    "bg": "#F2F4F0",
+    "surface": "#FFFFFF",
+    "border": "#D8DCD0",
+    "card": "#F2F4F0",
+    "cardBorder": "#D8DCD0",
+    "accent": "#2C3E1A",
+    "accent2": "#8B8B6B",
+    "text": "#111111",
+    "muted": "#6B7055",
+    "sub": "#C0C8A8",
+    "push": "#2C3E1A",
+    "pull": "#1565C0",
+    "legs": "#5C7A3E",
+    "green": "#5C7A3E",
+    "yellow": "#8B8B6B",
+    "red": "#C62828",
+    "onAccent": "#FFFFFF",
+    "ranks": [
+      {
+        "level": 1,
+        "rank": "RC",
+        "title": "Recruit",
+        "color": "#888888"
+      },
+      {
+        "level": 2,
+        "rank": "PV",
+        "title": "Private",
+        "color": "#5C7A3E"
+      },
+      {
+        "level": 3,
+        "rank": "PV2",
+        "title": "Private II",
+        "color": "#5C7A3E"
+      },
+      {
+        "level": 4,
+        "rank": "PFC",
+        "title": "Private 1st Class",
+        "color": "#4A6741"
+      },
+      {
+        "level": 5,
+        "rank": "SPC",
+        "title": "Specialist",
+        "color": "#4A6741"
+      },
+      {
+        "level": 6,
+        "rank": "CP",
+        "title": "Corporal",
+        "color": "#4A6741"
+      },
+      {
+        "level": 7,
+        "rank": "SG",
+        "title": "Sergeant",
+        "color": "#1565C0"
+      },
+      {
+        "level": 8,
+        "rank": "SSG",
+        "title": "Staff Sergeant",
+        "color": "#1565C0"
+      },
+      {
+        "level": 9,
+        "rank": "SFC",
+        "title": "Sgt. First Class",
+        "color": "#1565C0"
+      },
+      {
+        "level": 10,
+        "rank": "MSG",
+        "title": "Master Sergeant",
+        "color": "#6A1B9A"
+      },
+      {
+        "level": 11,
+        "rank": "1SG",
+        "title": "First Sergeant",
+        "color": "#6A1B9A"
+      },
+      {
+        "level": 12,
+        "rank": "SGM",
+        "title": "Sgt. Major",
+        "color": "#6A1B9A"
+      },
+      {
+        "level": 13,
+        "rank": "WO",
+        "title": "Warrant Officer",
+        "color": "#8B8B6B"
+      },
+      {
+        "level": 14,
+        "rank": "LT",
+        "title": "Lieutenant",
+        "color": "#8B8B6B"
+      },
+      {
+        "level": 15,
+        "rank": "CPT",
+        "title": "Captain",
+        "color": "#8B8B6B"
+      },
+      {
+        "level": 16,
+        "rank": "MAJ",
+        "title": "Major",
+        "color": "#C62828"
+      },
+      {
+        "level": 17,
+        "rank": "LTC",
+        "title": "Lt. Colonel",
+        "color": "#C62828"
+      },
+      {
+        "level": 18,
+        "rank": "COL",
+        "title": "Colonel",
+        "color": "#C62828"
+      },
+      {
+        "level": 19,
+        "rank": "GN",
+        "title": "General",
+        "color": "#2C3E1A"
+      },
+      {
+        "level": 20,
+        "rank": "GN4",
+        "title": "General of Army",
+        "color": "#2C3E1A"
+      }
+    ],
+    "prestige": [
+      {
+        "level": 21,
+        "rank": "P1",
+        "title": "Prestige I",
+        "color": "#8B8B6B"
+      },
+      {
+        "level": 22,
+        "rank": "P2",
+        "title": "Prestige II",
+        "color": "#CD853F"
+      },
+      {
+        "level": 23,
+        "rank": "P3",
+        "title": "Prestige III",
+        "color": "#B8860B"
+      },
+      {
+        "level": 24,
+        "rank": "P4",
+        "title": "Prestige IV",
+        "color": "#888888"
+      },
+      {
+        "level": 25,
+        "rank": "PM",
+        "title": "Prestige Master",
+        "color": "#DAA520"
+      }
+    ],
+    "badgeLabel": "LVL"
+  },
+  "sports": {
+    "id": "sports",
+    "profileLabel": "Athlete Profile",
+    "name": "The Grind",
+    "tag": "Athlete Journey",
+    "bg": "#F8FAFF",
+    "surface": "#FFFFFF",
+    "border": "#D8E4F8",
+    "card": "#F8FAFF",
+    "cardBorder": "#D8E4F8",
+    "accent": "#003087",
+    "accent2": "#C4CED4",
+    "text": "#111111",
+    "muted": "#556688",
+    "sub": "#A8C0E0",
+    "push": "#003087",
+    "pull": "#1565C0",
+    "legs": "#2E7D32",
+    "green": "#2E7D32",
+    "yellow": "#E65100",
+    "red": "#C62828",
+    "onAccent": "#FFFFFF",
+    "ranks": [
+      {
+        "level": 1,
+        "rank": "RK",
+        "title": "Rookie",
+        "color": "#888888"
+      },
+      {
+        "level": 2,
+        "rank": "RK",
+        "title": "Walk-On",
+        "color": "#888888"
+      },
+      {
+        "level": 3,
+        "rank": "RK",
+        "title": "Practice Squad",
+        "color": "#888888"
+      },
+      {
+        "level": 4,
+        "rank": "PR",
+        "title": "Prospect",
+        "color": "#2E7D32"
+      },
+      {
+        "level": 5,
+        "rank": "PR",
+        "title": "Minor League",
+        "color": "#2E7D32"
+      },
+      {
+        "level": 6,
+        "rank": "PR",
+        "title": "Top Prospect",
+        "color": "#2E7D32"
+      },
+      {
+        "level": 7,
+        "rank": "ST",
+        "title": "Starter",
+        "color": "#1565C0"
+      },
+      {
+        "level": 8,
+        "rank": "ST",
+        "title": "Rotation Player",
+        "color": "#1565C0"
+      },
+      {
+        "level": 9,
+        "rank": "ST",
+        "title": "Impact Player",
+        "color": "#1565C0"
+      },
+      {
+        "level": 10,
+        "rank": "VT",
+        "title": "Veteran",
+        "color": "#6A1B9A"
+      },
+      {
+        "level": 11,
+        "rank": "VT",
+        "title": "Team Leader",
+        "color": "#6A1B9A"
+      },
+      {
+        "level": 12,
+        "rank": "VT",
+        "title": "Franchise Player",
+        "color": "#6A1B9A"
+      },
+      {
+        "level": 13,
+        "rank": "AS",
+        "title": "All-Star",
+        "color": "#E65100"
+      },
+      {
+        "level": 14,
+        "rank": "AS",
+        "title": "All-Pro",
+        "color": "#E65100"
+      },
+      {
+        "level": 15,
+        "rank": "AS",
+        "title": "Perennial All-Star",
+        "color": "#E65100"
+      },
+      {
+        "level": 16,
+        "rank": "MV",
+        "title": "MVP",
+        "color": "#C62828"
+      },
+      {
+        "level": 17,
+        "rank": "MV",
+        "title": "Back-to-Back MVP",
+        "color": "#C62828"
+      },
+      {
+        "level": 18,
+        "rank": "MV",
+        "title": "Dynasty Builder",
+        "color": "#C62828"
+      },
+      {
+        "level": 19,
+        "rank": "HF",
+        "title": "Hall of Fame",
+        "color": "#003087"
+      },
+      {
+        "level": 20,
+        "rank": "HF",
+        "title": "Greatest of All Time",
+        "color": "#003087"
+      }
+    ],
+    "badgeLabel": "LVL"
+  }
+}
