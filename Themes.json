@@ -143,39 +143,7 @@
         "color": "#5B4FE8"
       }
     ],
-    "badgeLabel": "LVL",
-    "prestige": [
-      {
-        "level": 1,
-        "title": "Shadow Sovereign",
-        "color": "#FFD700",
-        "badge": "P1"
-      },
-      {
-        "level": 2,
-        "title": "Void Hunter",
-        "color": "#E8B84B",
-        "badge": "P2"
-      },
-      {
-        "level": 3,
-        "title": "Monarch's Shadow",
-        "color": "#FF9500",
-        "badge": "P3"
-      },
-      {
-        "level": 4,
-        "title": "Absolute Being",
-        "color": "#FF6B35",
-        "badge": "P4"
-      },
-      {
-        "level": 5,
-        "title": "Ruler of All",
-        "color": "#FF3366",
-        "badge": "P5"
-      }
-    ]
+    "badgeLabel": "LVL"
   },
   "pokemon": {
     "id": "pokemon",
@@ -321,39 +289,7 @@
         "color": "#B71C1C"
       }
     ],
-    "badgeLabel": "LV",
-    "prestige": [
-      {
-        "level": 1,
-        "title": "Elite Trainer",
-        "color": "#FFD700",
-        "badge": "P1"
-      },
-      {
-        "level": 2,
-        "title": "Champion",
-        "color": "#E8B84B",
-        "badge": "P2"
-      },
-      {
-        "level": 3,
-        "title": "Battle Master",
-        "color": "#FF9500",
-        "badge": "P3"
-      },
-      {
-        "level": 4,
-        "title": "Grand Champion",
-        "color": "#FF6B35",
-        "badge": "P4"
-      },
-      {
-        "level": 5,
-        "title": "Mythic Trainer",
-        "color": "#FF3366",
-        "badge": "P5"
-      }
-    ]
+    "badgeLabel": "LV"
   },
   "naruto": {
     "id": "naruto",
@@ -499,39 +435,7 @@
         "color": "#E85C00"
       }
     ],
-    "badgeLabel": "LVL",
-    "prestige": [
-      {
-        "level": 1,
-        "title": "True Shinobi",
-        "color": "#FFD700",
-        "badge": "P1"
-      },
-      {
-        "level": 2,
-        "title": "Sage Master",
-        "color": "#E8B84B",
-        "badge": "P2"
-      },
-      {
-        "level": 3,
-        "title": "Warrior of Peace",
-        "color": "#FF9500",
-        "badge": "P3"
-      },
-      {
-        "level": 4,
-        "title": "Sealed Legend",
-        "color": "#FF6B35",
-        "badge": "P4"
-      },
-      {
-        "level": 5,
-        "title": "Beyond Kage",
-        "color": "#FF3366",
-        "badge": "P5"
-      }
-    ]
+    "badgeLabel": "LVL"
   },
   "onepiece": {
     "id": "onepiece",
@@ -677,39 +581,7 @@
         "color": "#7B1818"
       }
     ],
-    "badgeLabel": "LVL",
-    "prestige": [
-      {
-        "level": 1,
-        "title": "True King",
-        "color": "#FFD700",
-        "badge": "P1"
-      },
-      {
-        "level": 2,
-        "title": "Will of D",
-        "color": "#E8B84B",
-        "badge": "P2"
-      },
-      {
-        "level": 3,
-        "title": "Ancient Weapon",
-        "color": "#FF9500",
-        "badge": "P3"
-      },
-      {
-        "level": 4,
-        "title": "Sea's Legend",
-        "color": "#FF6B35",
-        "badge": "P4"
-      },
-      {
-        "level": 5,
-        "title": "One True King",
-        "color": "#FF3366",
-        "badge": "P5"
-      }
-    ]
+    "badgeLabel": "LVL"
   },
   "dragonball": {
     "id": "dragonball",
@@ -855,39 +727,7 @@
         "color": "#546E7A"
       }
     ],
-    "badgeLabel": "PL",
-    "prestige": [
-      {
-        "level": 1,
-        "title": "Divine Warrior",
-        "color": "#FFD700",
-        "badge": "P1"
-      },
-      {
-        "level": 2,
-        "title": "Ultra Instinct",
-        "color": "#E8B84B",
-        "badge": "P2"
-      },
-      {
-        "level": 3,
-        "title": "Destroyer's Equal",
-        "color": "#FF9500",
-        "badge": "P3"
-      },
-      {
-        "level": 4,
-        "title": "Eternal Champion",
-        "color": "#FF6B35",
-        "badge": "P4"
-      },
-      {
-        "level": 5,
-        "title": "Zeno's Guard",
-        "color": "#FF3366",
-        "badge": "P5"
-      }
-    ]
+    "badgeLabel": "PL"
   },
   "aot": {
     "id": "aot",
@@ -1033,39 +873,7 @@
         "color": "#37474F"
       }
     ],
-    "badgeLabel": "LVL",
-    "prestige": [
-      {
-        "level": 1,
-        "title": "Wall's Guardian",
-        "color": "#FFD700",
-        "badge": "P1"
-      },
-      {
-        "level": 2,
-        "title": "Paths Traveler",
-        "color": "#E8B84B",
-        "badge": "P2"
-      },
-      {
-        "level": 3,
-        "title": "Coordinate Master",
-        "color": "#FF9500",
-        "badge": "P3"
-      },
-      {
-        "level": 4,
-        "title": "Beyond Paradis",
-        "color": "#FF6B35",
-        "badge": "P4"
-      },
-      {
-        "level": 5,
-        "title": "Freedom's End",
-        "color": "#FF3366",
-        "badge": "P5"
-      }
-    ]
+    "badgeLabel": "LVL"
   },
   "greek": {
     "id": "greek",
@@ -1211,39 +1019,7 @@
         "color": "#C62828"
       }
     ],
-    "badgeLabel": "LVL",
-    "prestige": [
-      {
-        "level": 1,
-        "title": "Titan Slayer",
-        "color": "#FFD700",
-        "badge": "P1"
-      },
-      {
-        "level": 2,
-        "title": "Olympus Equal",
-        "color": "#E8B84B",
-        "badge": "P2"
-      },
-      {
-        "level": 3,
-        "title": "Primordial",
-        "color": "#FF9500",
-        "badge": "P3"
-      },
-      {
-        "level": 4,
-        "title": "Before the Gods",
-        "color": "#FF6B35",
-        "badge": "P4"
-      },
-      {
-        "level": 5,
-        "title": "The Absolute",
-        "color": "#FF3366",
-        "badge": "P5"
-      }
-    ]
+    "badgeLabel": "LVL"
   },
   "rpg": {
     "id": "rpg",
@@ -1389,39 +1165,7 @@
         "color": "#8B1A1A"
       }
     ],
-    "badgeLabel": "LVL",
-    "prestige": [
-      {
-        "level": 1,
-        "title": "Ascended",
-        "color": "#FFD700",
-        "badge": "P1"
-      },
-      {
-        "level": 2,
-        "title": "World Ender",
-        "color": "#E8B84B",
-        "badge": "P2"
-      },
-      {
-        "level": 3,
-        "title": "The Ancient",
-        "color": "#FF9500",
-        "badge": "P3"
-      },
-      {
-        "level": 4,
-        "title": "Beyond Death",
-        "color": "#FF6B35",
-        "badge": "P4"
-      },
-      {
-        "level": 5,
-        "title": "True Immortal",
-        "color": "#FF3366",
-        "badge": "P5"
-      }
-    ]
+    "badgeLabel": "LVL"
   },
   "space": {
     "id": "space",
@@ -1567,39 +1311,7 @@
         "color": "#1A3A8F"
       }
     ],
-    "badgeLabel": "LVL",
-    "prestige": [
-      {
-        "level": 1,
-        "title": "Cosmic Sovereign",
-        "color": "#FFD700",
-        "badge": "P1"
-      },
-      {
-        "level": 2,
-        "title": "Void Walker",
-        "color": "#E8B84B",
-        "badge": "P2"
-      },
-      {
-        "level": 3,
-        "title": "Universal Law",
-        "color": "#FF9500",
-        "badge": "P3"
-      },
-      {
-        "level": 4,
-        "title": "Beyond Stars",
-        "color": "#FF6B35",
-        "badge": "P4"
-      },
-      {
-        "level": 5,
-        "title": "The Infinite",
-        "color": "#FF3366",
-        "badge": "P5"
-      }
-    ]
+    "badgeLabel": "LVL"
   },
   "military": {
     "id": "military",
@@ -1747,34 +1459,34 @@
     ],
     "prestige": [
       {
-        "level": 1,
-        "title": "Supreme Commander",
-        "color": "#FFD700",
-        "badge": "P1"
+        "level": 21,
+        "rank": "P1",
+        "title": "Prestige I",
+        "color": "#8B8B6B"
       },
       {
-        "level": 2,
-        "title": "War Legend",
-        "color": "#E8B84B",
-        "badge": "P2"
+        "level": 22,
+        "rank": "P2",
+        "title": "Prestige II",
+        "color": "#CD853F"
       },
       {
-        "level": 3,
-        "title": "Eternal Strategist",
-        "color": "#FF9500",
-        "badge": "P3"
+        "level": 23,
+        "rank": "P3",
+        "title": "Prestige III",
+        "color": "#B8860B"
       },
       {
-        "level": 4,
-        "title": "Final Authority",
-        "color": "#FF6B35",
-        "badge": "P4"
+        "level": 24,
+        "rank": "P4",
+        "title": "Prestige IV",
+        "color": "#888888"
       },
       {
-        "level": 5,
-        "title": "Commander of All",
-        "color": "#FF3366",
-        "badge": "P5"
+        "level": 25,
+        "rank": "PM",
+        "title": "Prestige Master",
+        "color": "#DAA520"
       }
     ],
     "badgeLabel": "LVL"
@@ -1923,38 +1635,6 @@
         "color": "#003087"
       }
     ],
-    "badgeLabel": "LVL",
-    "prestige": [
-      {
-        "level": 1,
-        "title": "Living Legend",
-        "color": "#FFD700",
-        "badge": "P1"
-      },
-      {
-        "level": 2,
-        "title": "Beyond Records",
-        "color": "#E8B84B",
-        "badge": "P2"
-      },
-      {
-        "level": 3,
-        "title": "Eternal Champion",
-        "color": "#FF9500",
-        "badge": "P3"
-      },
-      {
-        "level": 4,
-        "title": "Sport Incarnate",
-        "color": "#FF6B35",
-        "badge": "P4"
-      },
-      {
-        "level": 5,
-        "title": "The Absolute GOAT",
-        "color": "#FF3366",
-        "badge": "P5"
-      }
-    ]
+    "badgeLabel": "LVL"
   }
 }
