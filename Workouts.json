@@ -1,6 +1,6 @@
 {
   "meta": {
-    "version": "5.0",
+    "version": "4.0",
     "rotation": "6-week blocks per variant",
     "periodization": "A=Hypertrophy, B=Volume, C=Strength, D=Power, E=Powerbuilding, F=Metabolic",
     "goalMapping": {
@@ -41,8 +41,7 @@
       "Jeff Nippard PPL System",
       "Dr. Mike Israetel / Renaissance Periodization",
       "Built With Science / Dr. Eric Trexler"
-    ],
-    "updated": "2026-05 - Fixed cross-variant overlap, stimulus-based periodization"
+    ]
   },
   "plans": {
     "Push": {
@@ -64,42 +63,42 @@
               "sets": 4,
               "reps": "6-8",
               "muscle": "Chest",
-              "note": "Primary horizontal compound \u2014 do first when freshest"
+              "note": "Primary horizontal compound â do first when freshest"
             },
             {
               "name": "Incline Dumbbell Press",
               "sets": 3,
               "reps": "8-10",
               "muscle": "Chest",
-              "note": "Upper chest + anterior delt \u2014 incline hits fibres flat misses"
+              "note": "Upper chest + anterior delt â incline hits fibres flat misses"
             },
             {
               "name": "Overhead Press",
               "sets": 4,
               "reps": "8-10",
               "muscle": "Shoulders",
-              "note": "Primary vertical compound \u2014 front delt + upper chest overlap"
+              "note": "Primary vertical compound â front delt + upper chest overlap"
             },
             {
               "name": "Lateral Raises",
               "sets": 3,
               "reps": "12-15",
               "muscle": "Shoulders",
-              "note": "Lateral delt isolation \u2014 the only way to widen shoulders"
+              "note": "Lateral delt isolation â the only way to widen shoulders"
             },
             {
               "name": "Overhead Tricep Ext",
               "sets": 3,
               "reps": "10-12",
               "muscle": "Triceps",
-              "note": "Long head stretched position \u2014 40% more growth than pushdowns (2023)"
+              "note": "Long head stretched position â 40% more growth than pushdowns (2023)"
             },
             {
               "name": "Tricep Pushdowns",
               "sets": 3,
               "reps": "12-15",
               "muscle": "Triceps",
-              "note": "Lateral head isolation \u2014 cable keeps tension at peak"
+              "note": "Lateral head isolation â cable keeps tension at peak"
             }
           ]
         },
@@ -113,21 +112,21 @@
               "sets": 4,
               "reps": "10-12",
               "muscle": "Chest",
-              "note": "Upper chest emphasis \u2014 fresh angle from flat bench"
+              "note": "Upper chest emphasis â fresh angle from flat bench"
             },
             {
               "name": "Cable Fly",
               "sets": 4,
               "reps": "12-15",
               "muscle": "Chest",
-              "note": "Constant tension through full ROM \u2014 peak contraction flat bench misses"
+              "note": "Constant tension through full ROM â peak contraction flat bench misses"
             },
             {
               "name": "Arnold Press",
               "sets": 4,
               "reps": "10-12",
               "muscle": "Shoulders",
-              "note": "Rotation recruits all 3 delt heads \u2014 more complete than standard press"
+              "note": "Rotation recruits all 3 delt heads â more complete than standard press"
             },
             {
               "name": "Cable Lateral Raise",
@@ -141,28 +140,28 @@
               "sets": 4,
               "reps": "12-15",
               "muscle": "Triceps",
-              "note": "Long head anchor \u2014 higher reps this block for volume"
+              "note": "Long head anchor â higher reps this block for volume"
             },
             {
               "name": "Dips",
               "sets": 3,
               "reps": "10-15",
               "muscle": "Triceps",
-              "note": "Bodyweight compound \u2014 tricep + lower chest, high metabolic cost"
+              "note": "Bodyweight compound â tricep + lower chest, high metabolic cost"
             }
           ]
         },
         {
           "label": "C",
           "focus": "Strength Block",
-          "repScheme": "4-6 reps, 80-85% 1RM \u2014 resensitizes muscles for next hypertrophy block",
+          "repScheme": "4-6 reps, 80-85% 1RM â resensitizes muscles for next hypertrophy block",
           "exercises": [
             {
               "name": "Bench Press",
               "sets": 5,
               "reps": "4-5",
               "muscle": "Chest",
-              "note": "Primary strength movement \u2014 80-85% 1RM, 3-4 min rest"
+              "note": "Primary strength movement â 80-85% 1RM, 3-4 min rest"
             },
             {
               "name": "Overhead Press",
@@ -176,14 +175,14 @@
               "sets": 4,
               "reps": "5-6",
               "muscle": "Triceps",
-              "note": "Compound tricep + chest \u2014 heaviest tricep work"
+              "note": "Compound tricep + chest â heaviest tricep work"
             },
             {
               "name": "Decline Barbell Press",
               "sets": 3,
               "reps": "6-8",
               "muscle": "Chest",
-              "note": "Lower pec + more load than incline \u2014 completes chest coverage"
+              "note": "Lower pec + more load than incline â completes chest coverage"
             },
             {
               "name": "Skull Crushers",
@@ -197,7 +196,7 @@
               "sets": 3,
               "reps": "12-15",
               "muscle": "Shoulders",
-              "note": "Isolation only \u2014 keeps shoulder health during heavy pressing block"
+              "note": "Isolation only â keeps shoulder health during heavy pressing block"
             }
           ]
         },
@@ -207,127 +206,137 @@
           "repScheme": "Mixed 6-10 reps, explosive and novel movements",
           "exercises": [
             {
-              "name": "Push Press",
+              "name": "KB Clean and Press",
               "sets": 4,
-              "reps": "5-7",
+              "reps": "8-10",
               "muscle": "Shoulders",
-              "note": "Leg drive to initiate, press to lockout"
-            },
-            {
-              "name": "Incline Barbell Press",
-              "sets": 4,
-              "reps": "6-8",
-              "muscle": "Chest"
+              "note": "Athletic compound â hip drive to overhead, novel motor pattern"
             },
             {
               "name": "Dumbbell Floor Press",
-              "sets": 3,
+              "sets": 4,
               "reps": "10-12",
-              "muscle": "Chest"
+              "muscle": "Chest",
+              "note": "Eliminates shoulder stretch at bottom â novel stimulus vs bench"
             },
             {
-              "name": "Machine Shoulder Press",
+              "name": "Pec Deck / Machine Fly",
               "sets": 3,
               "reps": "12-15",
-              "muscle": "Shoulders"
+              "muscle": "Chest",
+              "note": "Constant tension machine isolation â safe to go heavy"
             },
             {
-              "name": "Tricep Pushdown",
+              "name": "Shrugs",
               "sets": 3,
               "reps": "12-15",
-              "muscle": "Triceps"
+              "muscle": "Shoulders",
+              "note": "Upper trap â posture + shoulder health support"
             },
             {
               "name": "Overhead Tricep Ext",
+              "sets": 4,
+              "reps": "10-12",
+              "muscle": "Triceps",
+              "note": "Long head anchor â heavier than B block"
+            },
+            {
+              "name": "Tricep Kickbacks",
               "sets": 3,
               "reps": "12-15",
-              "muscle": "Triceps"
+              "muscle": "Triceps",
+              "note": "Peak contraction at full extension â novel angle"
             }
           ]
         },
         {
           "label": "E",
           "focus": "Powerbuilding",
-          "repScheme": "Heavy compounds + volume accessories",
+          "repScheme": "5-8 reps on compounds, 8-12 on accessories â strength + size together",
           "exercises": [
             {
-              "name": "Barbell Bench Press",
-              "sets": 5,
-              "reps": "3-5",
+              "name": "Bench Press",
+              "sets": 4,
+              "reps": "5-7",
               "muscle": "Chest",
-              "note": "Work up to heavy top set, then 2 back-off sets"
+              "note": "Heavier than hypertrophy block â builds both size and strength"
             },
             {
-              "name": "Seated DB Shoulder Press",
+              "name": "Overhead Press",
               "sets": 4,
-              "reps": "6-8",
-              "muscle": "Shoulders"
+              "reps": "5-7",
+              "muscle": "Shoulders",
+              "note": "Strength compound with hypertrophy volume"
             },
             {
-              "name": "Cable Fly",
+              "name": "Incline Dumbbell Press",
               "sets": 3,
-              "reps": "12-15",
-              "muscle": "Chest"
+              "reps": "8-10",
+              "muscle": "Chest",
+              "note": "Accessory volume after heavy main lift"
             },
             {
-              "name": "Lateral Raises",
-              "sets": 4,
-              "reps": "15-20",
-              "muscle": "Shoulders"
-            },
-            {
-              "name": "Weighted Dips",
-              "sets": 4,
-              "reps": "6-8",
-              "muscle": "Triceps"
-            },
-            {
-              "name": "Tricep Pushdown",
+              "name": "Cable Lateral Raise",
               "sets": 3,
-              "reps": "15-20",
-              "muscle": "Triceps"
+              "reps": "10-12",
+              "muscle": "Shoulders",
+              "note": "Isolation volume â maintains delt size during strength focus"
+            },
+            {
+              "name": "Close-Grip Bench",
+              "sets": 3,
+              "reps": "6-8",
+              "muscle": "Triceps",
+              "note": "Compound tricep strength â pairs well with bench day"
+            },
+            {
+              "name": "Overhead Tricep Ext",
+              "sets": 3,
+              "reps": "10-12",
+              "muscle": "Triceps",
+              "note": "Long head volume after compound strength work"
             }
           ]
         },
         {
           "label": "F",
           "focus": "Metabolic",
-          "repScheme": "12-20 reps, shorter rest, circuit-style \u2014 max calorie burn + conditioning",
+          "repScheme": "12-20 reps, shorter rest, circuit-style â max calorie burn + conditioning",
           "exercises": [
             {
-              "name": "Push-Ups",
+              "name": "Dumbbell Bench Press",
               "sets": 4,
               "reps": "15-20",
               "muscle": "Chest",
-              "note": "High rep bodyweight \u2014 keeps heart rate elevated"
+              "note": "Light dumbbells, fast tempo â keeps heart rate elevated"
             },
             {
-              "name": "Dumbbell Floor Press",
+              "name": "Cable Fly",
               "sets": 3,
               "reps": "15-20",
               "muscle": "Chest",
-              "note": "Light dumbbell, fast tempo \u2014 metabolic chest work"
+              "note": "Constant tension circuit pace â metabolic chest work"
             },
             {
-              "name": "Lateral Raises",
+              "name": "Arnold Press",
               "sets": 4,
               "reps": "15-20",
               "muscle": "Shoulders",
-              "note": "Light weight high rep \u2014 shoulder endurance + burn"
+              "note": "Light dumbbells, full rotation â shoulder endurance + burn"
             },
             {
-              "name": "Pike Push-Ups",
+              "name": "Cable Lateral Raise",
               "sets": 3,
-              "reps": "12-15",
+              "reps": "15-20",
               "muscle": "Shoulders",
-              "note": "Bodyweight vertical push \u2014 no rest needed between"
+              "note": "Constant cable tension â no rest needed between"
             },
             {
-              "name": "Diamond Push-Ups",
+              "name": "Tricep Pushdowns",
               "sets": 3,
               "reps": "15-20",
               "muscle": "Triceps",
-              "note": "Bodyweight tricep \u2014 pairs as superset with pike push-ups"
+              "note": "Cable, fast pace â pairs as superset with lateral raise"
             },
             {
               "name": "Dips",
@@ -358,42 +367,42 @@
               "sets": 3,
               "reps": "5-6",
               "muscle": "Back",
-              "note": "King of posterior chain \u2014 erectors, glutes, traps, lats"
+              "note": "King of posterior chain â erectors, glutes, traps, lats"
             },
             {
               "name": "Barbell Row",
               "sets": 4,
               "reps": "6-8",
               "muscle": "Back",
-              "note": "Horizontal thickness compound \u2014 mid back mass"
+              "note": "Horizontal thickness compound â mid back mass"
             },
             {
               "name": "Pull-Ups",
               "sets": 3,
               "reps": "6-10",
               "muscle": "Back",
-              "note": "Vertical pull \u2014 lat width, long head bicep"
+              "note": "Vertical pull â lat width, long head bicep"
             },
             {
               "name": "Face Pulls",
               "sets": 3,
               "reps": "12-15",
               "muscle": "Back",
-              "note": "Rear delt + rotator cuff \u2014 essential shoulder health"
+              "note": "Rear delt + rotator cuff â essential shoulder health"
             },
             {
               "name": "Hammer Curls",
               "sets": 3,
               "reps": "10-12",
               "muscle": "Biceps",
-              "note": "Brachialis + brachioradialis \u2014 arm thickness"
+              "note": "Brachialis + brachioradialis â arm thickness"
             },
             {
               "name": "Incline Dumbbell Curl",
               "sets": 3,
               "reps": "10-12",
               "muscle": "Biceps",
-              "note": "Long head stretch at bottom \u2014 greater ROM than standing"
+              "note": "Long head stretch at bottom â greater ROM than standing"
             }
           ]
         },
@@ -407,42 +416,42 @@
               "sets": 4,
               "reps": "10-12",
               "muscle": "Back",
-              "note": "Vertical pull \u2014 easier to feel lat vs pull-up for volume"
+              "note": "Vertical pull â easier to feel lat vs pull-up for volume"
             },
             {
               "name": "Seated Cable Row",
               "sets": 4,
               "reps": "10-12",
               "muscle": "Back",
-              "note": "Horizontal thickness \u2014 cable keeps tension throughout"
+              "note": "Horizontal thickness â cable keeps tension throughout"
             },
             {
               "name": "Straight-Arm Pulldown",
               "sets": 3,
               "reps": "12-15",
               "muscle": "Back",
-              "note": "Pure lat isolation \u2014 elbows locked, no bicep involvement"
+              "note": "Pure lat isolation â elbows locked, no bicep involvement"
             },
             {
               "name": "Single-Arm DB Row",
               "sets": 3,
               "reps": "10-12",
               "muscle": "Back",
-              "note": "Unilateral \u2014 fixes imbalances, greater ROM than barbell"
+              "note": "Unilateral â fixes imbalances, greater ROM than barbell"
             },
             {
               "name": "Cable Curl",
               "sets": 4,
               "reps": "12-15",
               "muscle": "Biceps",
-              "note": "Constant tension through full ROM \u2014 better than dumbbell for volume"
+              "note": "Constant tension through full ROM â better than dumbbell for volume"
             },
             {
               "name": "Concentration Curl",
               "sets": 3,
               "reps": "12-15",
               "muscle": "Biceps",
-              "note": "Highest bicep EMG of any curl \u2014 peak contraction isolation"
+              "note": "Highest bicep EMG of any curl â peak contraction isolation"
             }
           ]
         },
@@ -456,42 +465,42 @@
               "sets": 4,
               "reps": "4-5",
               "muscle": "Back",
-              "note": "Deadlift variation above knee \u2014 overloads upper back and traps"
+              "note": "Deadlift variation above knee â overloads upper back and traps"
             },
             {
               "name": "Weighted Pull-Ups",
               "sets": 4,
               "reps": "4-6",
               "muscle": "Back",
-              "note": "Add plate or belt \u2014 heaviest vertical pull of the cycle"
+              "note": "Add plate or belt â heaviest vertical pull of the cycle"
             },
             {
               "name": "Meadows Row",
               "sets": 4,
               "reps": "6-8",
               "muscle": "Back",
-              "note": "Landmine row \u2014 unique angle hits lower lat hard"
+              "note": "Landmine row â unique angle hits lower lat hard"
             },
             {
               "name": "Chest Supported Row",
               "sets": 3,
               "reps": "6-8",
               "muscle": "Back",
-              "note": "Eliminates lower back fatigue \u2014 pure back strength"
+              "note": "Eliminates lower back fatigue â pure back strength"
             },
             {
               "name": "Reverse Curl",
               "sets": 3,
               "reps": "8-10",
               "muscle": "Biceps",
-              "note": "Brachialis + forearm strength \u2014 supports all compound pulling"
+              "note": "Brachialis + forearm strength â supports all compound pulling"
             },
             {
               "name": "Preacher Curl",
               "sets": 3,
               "reps": "8-10",
               "muscle": "Biceps",
-              "note": "Eliminates cheating \u2014 pure bicep strength at bottom"
+              "note": "Eliminates cheating â pure bicep strength at bottom"
             }
           ]
         },
@@ -501,86 +510,95 @@
           "repScheme": "Mixed rep ranges, explosive movements",
           "exercises": [
             {
-              "name": "Power Clean",
+              "name": "KB Swing",
               "sets": 4,
-              "reps": "4-6",
+              "reps": "15-20",
               "muscle": "Back",
-              "note": "Explosive full-body pull \u2014 technique focus"
+              "note": "Hip hinge power â posterior chain athleticism and conditioning"
             },
             {
-              "name": "T-Bar Row",
+              "name": "KB Romanian Deadlift",
               "sets": 4,
-              "reps": "8-10",
-              "muscle": "Back"
+              "reps": "10-12",
+              "muscle": "Back",
+              "note": "Novel grip and load path vs barbell â fresh stimulus"
             },
             {
               "name": "Neutral-Grip Pull-Ups",
-              "sets": 3,
+              "sets": 4,
               "reps": "8-10",
-              "muscle": "Lats"
+              "muscle": "Back",
+              "note": "Strongest pull-up grip â hits brachialis hard"
             },
             {
-              "name": "Straight-Arm Pulldown",
-              "sets": 3,
-              "reps": "12-15",
-              "muscle": "Lats"
-            },
-            {
-              "name": "Barbell Curl",
-              "sets": 3,
-              "reps": "8-10",
-              "muscle": "Biceps"
-            },
-            {
-              "name": "Reverse Curl",
+              "name": "Inverted Row",
               "sets": 3,
               "reps": "10-12",
-              "muscle": "Forearms"
+              "muscle": "Back",
+              "note": "Bodyweight horizontal row â novel relative to cable/BB"
+            },
+            {
+              "name": "Chin-Ups",
+              "sets": 3,
+              "reps": "8-10",
+              "muscle": "Biceps",
+              "note": "Underhand grip = more bicep contribution than pull-up"
+            },
+            {
+              "name": "Towel Curls",
+              "sets": 3,
+              "reps": "12-15",
+              "muscle": "Biceps",
+              "note": "Grip-intensive â forearm and bicep together"
             }
           ]
         },
         {
           "label": "E",
           "focus": "Powerbuilding",
-          "repScheme": "Heavy DL + machine/cable volume",
+          "repScheme": "5-8 reps compounds, 8-12 accessories",
           "exercises": [
             {
               "name": "Deadlift",
               "sets": 4,
               "reps": "4-6",
               "muscle": "Back",
-              "note": "Primary strength movement"
+              "note": "Strength focus â heavier than A block, longer rest"
             },
             {
-              "name": "Chest Supported Row",
+              "name": "Barbell Row",
               "sets": 4,
-              "reps": "8-10",
+              "reps": "6-8",
               "muscle": "Back",
-              "note": "Eliminates lower back fatigue"
+              "note": "Heavy horizontal compound â pairs with deadlift strength day"
             },
             {
               "name": "Lat Pulldown",
               "sets": 3,
-              "reps": "10-12",
-              "muscle": "Lats"
-            },
-            {
-              "name": "Seated Cable Row",
-              "sets": 3,
-              "reps": "12-15",
-              "muscle": "Back"
-            },
-            {
-              "name": "EZ Bar Curl",
-              "sets": 3,
               "reps": "8-10",
-              "muscle": "Biceps"
+              "muscle": "Back",
+              "note": "Accessory vertical pull after heavy compounds"
             },
             {
               "name": "Face Pulls",
               "sets": 3,
-              "reps": "15-20",
-              "muscle": "Rear Delts"
+              "reps": "12-15",
+              "muscle": "Back",
+              "note": "Shoulder health â never skip regardless of goal"
+            },
+            {
+              "name": "Hammer Curls",
+              "sets": 3,
+              "reps": "8-10",
+              "muscle": "Biceps",
+              "note": "Heavier than hypertrophy block â brachialis strength"
+            },
+            {
+              "name": "Cable Curl",
+              "sets": 3,
+              "reps": "10-12",
+              "muscle": "Biceps",
+              "note": "Volume accessory after heavy pulling"
             }
           ]
         },
@@ -594,42 +612,42 @@
               "sets": 4,
               "reps": "20-25",
               "muscle": "Back",
-              "note": "High rep swing \u2014 posterior chain conditioning + calorie burn"
+              "note": "High rep swing â posterior chain conditioning + calorie burn"
             },
             {
               "name": "Pull-Ups",
               "sets": 4,
               "reps": "AMRAP",
               "muscle": "Back",
-              "note": "Max reps each set \u2014 bodyweight metabolic"
+              "note": "Max reps each set â bodyweight metabolic"
             },
             {
               "name": "Australian Pull-Up",
               "sets": 3,
               "reps": "15-20",
               "muscle": "Back",
-              "note": "High rep horizontal pull \u2014 easier to sustain than pull-up"
+              "note": "High rep horizontal pull â easier to sustain than pull-up"
             },
             {
               "name": "Inverted Row",
               "sets": 3,
               "reps": "15-20",
               "muscle": "Back",
-              "note": "Bodyweight row volume \u2014 no rest needed between exercises"
+              "note": "Bodyweight row volume â no rest needed between exercises"
             },
             {
               "name": "Chin-Ups",
               "sets": 3,
               "reps": "AMRAP",
               "muscle": "Biceps",
-              "note": "Max reps \u2014 supinated grip bicep endurance"
+              "note": "Max reps â supinated grip bicep endurance"
             },
             {
               "name": "Band Bicep Curl",
               "sets": 3,
               "reps": "20-25",
               "muscle": "Biceps",
-              "note": "Light band, high rep \u2014 bicep pump and endurance finisher"
+              "note": "Light band, high rep â bicep pump and endurance finisher"
             }
           ]
         }
@@ -647,7 +665,7 @@
       "variants": [
         {
           "label": "A",
-          "focus": "Hypertrophy Foundation \u2014 Quad Emphasis",
+          "focus": "Hypertrophy Foundation â Quad Emphasis",
           "repScheme": "8-12 reps, moderate load",
           "exercises": [
             {
@@ -655,28 +673,28 @@
               "sets": 4,
               "reps": "6-8",
               "muscle": "Legs",
-              "note": "King of leg exercises \u2014 quad, glute, erector compound"
+              "note": "King of leg exercises â quad, glute, erector compound"
             },
             {
               "name": "Romanian Deadlift",
               "sets": 3,
               "reps": "8-10",
               "muscle": "Legs",
-              "note": "Hip hinge \u2014 hamstring + glute compound"
+              "note": "Hip hinge â hamstring + glute compound"
             },
             {
               "name": "Leg Press",
               "sets": 3,
               "reps": "10-12",
               "muscle": "Legs",
-              "note": "Quad compound \u2014 safely overload quads after squats"
+              "note": "Quad compound â safely overload quads after squats"
             },
             {
               "name": "Leg Curl",
               "sets": 3,
               "reps": "10-12",
               "muscle": "Legs",
-              "note": "Hamstring isolation \u2014 fills gap hip hinge misses at knee"
+              "note": "Hamstring isolation â fills gap hip hinge misses at knee"
             },
             {
               "name": "Leg Extension",
@@ -690,13 +708,13 @@
               "sets": 4,
               "reps": "15-20",
               "muscle": "Legs",
-              "note": "Gastrocnemius \u2014 standing for full stretch"
+              "note": "Gastrocnemius â standing for full stretch"
             }
           ]
         },
         {
           "label": "B",
-          "focus": "Volume Block \u2014 Posterior Chain",
+          "focus": "Volume Block â Posterior Chain",
           "repScheme": "10-15 reps, higher volume",
           "exercises": [
             {
@@ -704,7 +722,7 @@
               "sets": 4,
               "reps": "10-12",
               "muscle": "Legs",
-              "note": "Highest glute EMG exercise \u2014 glute dominant at lockout"
+              "note": "Highest glute EMG exercise â glute dominant at lockout"
             },
             {
               "name": "Sumo Deadlift",
@@ -718,21 +736,21 @@
               "sets": 3,
               "reps": "10 ea",
               "muscle": "Legs",
-              "note": "Unilateral \u2014 fixes imbalances, high metabolic cost"
+              "note": "Unilateral â fixes imbalances, high metabolic cost"
             },
             {
               "name": "Nordic Hamstring Curl",
               "sets": 3,
               "reps": "6-8",
               "muscle": "Legs",
-              "note": "Eccentric overload \u2014 highest hamstring damage for growth"
+              "note": "Eccentric overload â highest hamstring damage for growth"
             },
             {
               "name": "Seated Calf Raise",
               "sets": 4,
               "reps": "15-20",
               "muscle": "Legs",
-              "note": "Soleus emphasis \u2014 different muscle than standing calf raise"
+              "note": "Soleus emphasis â different muscle than standing calf raise"
             },
             {
               "name": "Glute Kickback Machine",
@@ -753,84 +771,84 @@
               "sets": 5,
               "reps": "3-5",
               "muscle": "Legs",
-              "note": "Heavy strength work \u2014 80-85% 1RM, 3-4 min rest"
+              "note": "Heavy strength work â 80-85% 1RM, 3-4 min rest"
             },
             {
               "name": "Trap Bar Deadlift",
               "sets": 4,
               "reps": "4-6",
               "muscle": "Legs",
-              "note": "Neutral grip, safer heavy pull \u2014 more quad than conventional"
+              "note": "Neutral grip, safer heavy pull â more quad than conventional"
             },
             {
               "name": "Bulgarian Split Squat",
               "sets": 3,
               "reps": "6-8 ea",
               "muscle": "Legs",
-              "note": "Unilateral strength \u2014 very high quad and glute load"
+              "note": "Unilateral strength â very high quad and glute load"
             },
             {
               "name": "Hack Squat",
               "sets": 3,
               "reps": "8-10",
               "muscle": "Legs",
-              "note": "Machine compound \u2014 quad emphasis, safe when fatigued"
+              "note": "Machine compound â quad emphasis, safe when fatigued"
             },
             {
               "name": "Adductor Machine",
               "sets": 3,
               "reps": "12-15",
               "muscle": "Legs",
-              "note": "Adductor isolation \u2014 supports knee health"
+              "note": "Adductor isolation â supports knee health"
             },
             {
               "name": "Calf Raises",
               "sets": 4,
               "reps": "12-15",
               "muscle": "Legs",
-              "note": "Heavier than A/B \u2014 strength reps for gastrocnemius"
+              "note": "Heavier than A/B â strength reps for gastrocnemius"
             }
           ]
         },
         {
           "label": "D",
           "focus": "Power + Athletic",
-          "repScheme": "Mixed \u2014 explosive + hypertrophy",
+          "repScheme": "Mixed â explosive + hypertrophy",
           "exercises": [
             {
               "name": "Box Jumps",
               "sets": 4,
               "reps": "6-8",
               "muscle": "Legs",
-              "note": "Plyometric \u2014 trains rate of force development"
+              "note": "Plyometric â trains rate of force development"
             },
             {
               "name": "KB Goblet Squat",
               "sets": 4,
               "reps": "12-15",
               "muscle": "Legs",
-              "note": "Front-loaded squat \u2014 more upright torso, quad dominant"
+              "note": "Front-loaded squat â more upright torso, quad dominant"
             },
             {
               "name": "Single-Leg RDL",
               "sets": 3,
               "reps": "10 ea",
               "muscle": "Legs",
-              "note": "Unilateral hip hinge \u2014 balance + hamstring stretch"
+              "note": "Unilateral hip hinge â balance + hamstring stretch"
             },
             {
               "name": "Jump Squat",
               "sets": 3,
               "reps": "10-12",
               "muscle": "Legs",
-              "note": "Power endurance \u2014 novel fast-twitch recruitment"
+              "note": "Power endurance â novel fast-twitch recruitment"
             },
             {
               "name": "Step-Ups",
               "sets": 3,
               "reps": "10 ea",
               "muscle": "Legs",
-              "note": "Functional unilateral \u2014 glute + quad pattern"
+              "note": "Functional unilateral â glute + quad pattern"
             },
             {
               "name": "Donkey Calf Raise",
@@ -844,45 +862,49 @@
         {
           "label": "E",
           "focus": "Powerbuilding",
-          "repScheme": "Heavy squat + machine volume",
+          "repScheme": "5-8 reps compounds, 10-15 accessories",
           "exercises": [
             {
               "name": "Squat",
-              "sets": 5,
+              "sets": 4,
               "reps": "4-6",
-              "muscle": "Quads"
+              "muscle": "Legs",
+              "note": "Heavier than hypertrophy block â strength + size together"
             },
             {
-              "name": "Sumo Deadlift",
+              "name": "Romanian Deadlift",
               "sets": 4,
-              "reps": "5-7",
-              "muscle": "Hamstrings",
-              "note": "Wide stance hits glutes and inner thigh differently"
+              "reps": "6-8",
+              "muscle": "Legs",
+              "note": "Heavy hip hinge â hamstring strength and mass"
             },
             {
               "name": "Leg Press",
               "sets": 3,
-              "reps": "10-12",
-              "muscle": "Quads",
-              "note": "High foot placement"
+              "reps": "8-10",
+              "muscle": "Legs",
+              "note": "Heavy accessory â quad volume after strength squats"
             },
             {
               "name": "Nordic Hamstring Curl",
               "sets": 3,
               "reps": "6-8",
-              "muscle": "Hamstrings"
+              "muscle": "Legs",
+              "note": "Eccentric strength â heaviest hamstring work"
             },
             {
-              "name": "Adductor Machine",
+              "name": "Hip Thrust",
               "sets": 3,
-              "reps": "15-20",
-              "muscle": "Adductors"
+              "reps": "8-10",
+              "muscle": "Legs",
+              "note": "Glute strength compound â heavier than volume block"
             },
             {
-              "name": "Standing Calf Raise",
+              "name": "Calf Raises",
               "sets": 4,
-              "reps": "15-20",
-              "muscle": "Calves"
+              "reps": "12-15",
+              "muscle": "Legs",
+              "note": "Strength-rep calves â heavier load than hypertrophy blocks"
             }
           ]
         },
@@ -892,40 +914,46 @@
           "repScheme": "15-20 reps, circuit-style, calorie burn focus",
           "exercises": [
             {
-              "name": "Goblet Squat",
+              "name": "Jump Squat",
               "sets": 4,
               "reps": "15-20",
-              "muscle": "Quads"
+              "muscle": "Legs",
+              "note": "Plyometric â high calorie burn, full leg activation"
             },
             {
               "name": "Walking Lunges",
               "sets": 4,
               "reps": "12 ea",
-              "muscle": "Quads"
+              "muscle": "Legs",
+              "note": "Continuous movement â keeps heart rate elevated"
             },
             {
               "name": "Glute Bridge",
               "sets": 4,
               "reps": "20-25",
-              "muscle": "Glutes"
+              "muscle": "Legs",
+              "note": "High rep posterior chain â minimal rest between sets"
             },
             {
-              "name": "Leg Extension",
+              "name": "Skater Jumps",
               "sets": 3,
-              "reps": "20-25",
-              "muscle": "Quads"
+              "reps": "15 ea",
+              "muscle": "Legs",
+              "note": "Lateral plyometric â hip abductor power and conditioning"
             },
             {
-              "name": "Leg Curl",
+              "name": "Box Jumps",
               "sets": 3,
-              "reps": "20-25",
-              "muscle": "Hamstrings"
+              "reps": "10-12",
+              "muscle": "Legs",
+              "note": "Explosive finisher â max calorie burn per rep"
             },
             {
               "name": "Donkey Calf Raise",
-              "sets": 4,
-              "reps": "25-30",
-              "muscle": "Calves"
+              "sets": 3,
+              "reps": "20-25",
+              "muscle": "Legs",
+              "note": "High rep burnout â calf endurance finisher"
             }
           ]
         }
@@ -953,7 +981,7 @@
               "sets": 4,
               "reps": "6-8",
               "muscle": "Legs",
-              "note": "Lower body compound first \u2014 most demanding movement"
+              "note": "Lower body compound first â most demanding movement"
             },
             {
               "name": "Bench Press",
@@ -967,28 +995,28 @@
               "sets": 4,
               "reps": "6-8",
               "muscle": "Back",
-              "note": "Horizontal pull \u2014 balances bench press"
+              "note": "Horizontal pull â balances bench press"
             },
             {
               "name": "Overhead Press",
               "sets": 3,
               "reps": "8-10",
               "muscle": "Shoulders",
-              "note": "Vertical push \u2014 shoulder + upper chest + tricep"
+              "note": "Vertical push â shoulder + upper chest + tricep"
             },
             {
               "name": "Hammer Curls",
               "sets": 3,
               "reps": "10-12",
               "muscle": "Biceps",
-              "note": "Brachialis \u2014 arm thickness without fatiguing back for rows"
+              "note": "Brachialis â arm thickness without fatiguing back for rows"
             },
             {
               "name": "Overhead Tricep Ext",
               "sets": 3,
               "reps": "10-12",
               "muscle": "Triceps",
-              "note": "Long head \u2014 40% more growth than pressdowns"
+              "note": "Long head â 40% more growth than pressdowns"
             }
           ]
         },
@@ -1002,28 +1030,28 @@
               "sets": 3,
               "reps": "4-6",
               "muscle": "Back",
-              "note": "Full posterior chain \u2014 requires most neural resources, do first"
+              "note": "Full posterior chain â requires most neural resources, do first"
             },
             {
               "name": "Incline Dumbbell Press",
               "sets": 4,
               "reps": "8-10",
               "muscle": "Chest",
-              "note": "Upper chest + shoulder \u2014 complements deadlift day well"
+              "note": "Upper chest + shoulder â complements deadlift day well"
             },
             {
               "name": "Pull-Ups",
               "sets": 3,
               "reps": "6-10",
               "muscle": "Back",
-              "note": "Vertical pull \u2014 lat width after deadlift"
+              "note": "Vertical pull â lat width after deadlift"
             },
             {
               "name": "Bulgarian Split Squat",
               "sets": 3,
               "reps": "8-10 ea",
               "muscle": "Legs",
-              "note": "Unilateral \u2014 high quad/glute stimulus without fatiguing spine"
+              "note": "Unilateral â high quad/glute stimulus without fatiguing spine"
             },
             {
               "name": "Cable Curl",
@@ -1037,50 +1065,56 @@
               "sets": 3,
               "reps": "8-10",
               "muscle": "Triceps",
-              "note": "Long head stretch \u2014 pairs with curl as superset option"
+              "note": "Long head stretch â pairs with curl as superset option"
             }
           ]
         },
         {
           "label": "C",
-          "focus": "Machine / Volume Block",
-          "repScheme": "12-15 reps, machine focus, constant tension",
+          "focus": "Strength Block",
+          "repScheme": "3-6 reps, 80-85% 1RM",
           "exercises": [
             {
-              "name": "Leg Press",
+              "name": "Squat",
               "sets": 4,
-              "reps": "10-12",
-              "muscle": "Quads"
+              "reps": "4-5",
+              "muscle": "Legs",
+              "note": "Primary lower body strength"
             },
             {
-              "name": "Chest Press Machine",
+              "name": "Bench Press",
               "sets": 4,
-              "reps": "10-12",
-              "muscle": "Chest"
+              "reps": "4-5",
+              "muscle": "Chest",
+              "note": "Primary upper body strength"
             },
             {
-              "name": "Seated Cable Row",
-              "sets": 4,
-              "reps": "10-12",
-              "muscle": "Back"
-            },
-            {
-              "name": "Machine Shoulder Press",
+              "name": "Trap Bar Deadlift",
               "sets": 3,
-              "reps": "12-15",
-              "muscle": "Shoulders"
+              "reps": "4-6",
+              "muscle": "Back",
+              "note": "Safer heavy pull for full body day â less low back fatigue"
             },
             {
-              "name": "Leg Curl",
+              "name": "Overhead Press",
               "sets": 3,
-              "reps": "12-15",
-              "muscle": "Hamstrings"
+              "reps": "5-6",
+              "muscle": "Shoulders",
+              "note": "Vertical push strength"
             },
             {
-              "name": "Tricep Pushdown",
+              "name": "Close-Grip Bench",
               "sets": 3,
-              "reps": "15-20",
-              "muscle": "Triceps"
+              "reps": "6-8",
+              "muscle": "Triceps",
+              "note": "Compound tricep strength â also hits chest"
+            },
+            {
+              "name": "Reverse Curl",
+              "sets": 3,
+              "reps": "8-10",
+              "muscle": "Biceps",
+              "note": "Brachialis strength â supports all compound pulling"
             }
           ]
         },
@@ -1094,35 +1128,35 @@
               "sets": 4,
               "reps": "6-8",
               "muscle": "Legs",
-              "note": "Athletic hinge \u2014 neutral grip, balanced load"
+              "note": "Athletic hinge â neutral grip, balanced load"
             },
             {
               "name": "KB Clean and Press",
               "sets": 4,
               "reps": "8-10",
               "muscle": "Shoulders",
-              "note": "Full body power \u2014 hip drive to overhead"
+              "note": "Full body power â hip drive to overhead"
             },
             {
               "name": "Neutral-Grip Pull-Ups",
               "sets": 3,
               "reps": "8-10",
               "muscle": "Back",
-              "note": "Strongest grip position \u2014 brachialis + lat"
+              "note": "Strongest grip position â brachialis + lat"
             },
             {
               "name": "Hip Thrust",
               "sets": 3,
               "reps": "10-12",
               "muscle": "Legs",
-              "note": "Glute compound \u2014 novel stimulus vs squat pattern"
+              "note": "Glute compound â novel stimulus vs squat pattern"
             },
             {
               "name": "Cable Fly",
               "sets": 3,
               "reps": "12-15",
               "muscle": "Chest",
-              "note": "Constant tension \u2014 novel vs pressing movements"
+              "note": "Constant tension â novel vs pressing movements"
             },
             {
               "name": "Overhead Tricep Ext",
@@ -1136,43 +1170,49 @@
         {
           "label": "E",
           "focus": "Powerbuilding",
-          "repScheme": "Heavy compounds, 4-7 rep range",
+          "repScheme": "5-8 compounds, 8-12 accessories",
           "exercises": [
             {
               "name": "Squat",
               "sets": 4,
               "reps": "4-6",
-              "muscle": "Quads"
+              "muscle": "Legs",
+              "note": "Heavy compound â strength + size"
             },
             {
-              "name": "Incline Barbell Press",
+              "name": "Bench Press",
               "sets": 4,
               "reps": "5-7",
-              "muscle": "Chest"
+              "muscle": "Chest",
+              "note": "Heavier than hypertrophy â powerbuilding range"
             },
             {
-              "name": "Barbell Row",
-              "sets": 4,
-              "reps": "5-7",
-              "muscle": "Back"
+              "name": "Deadlift",
+              "sets": 3,
+              "reps": "4-5",
+              "muscle": "Back",
+              "note": "Strength pull â fewer reps, more weight than A/B"
             },
             {
-              "name": "Hip Thrust",
+              "name": "Overhead Press",
+              "sets": 3,
+              "reps": "6-8",
+              "muscle": "Shoulders",
+              "note": "Strength compound with hypertrophy volume"
+            },
+            {
+              "name": "Hammer Curls",
               "sets": 3,
               "reps": "8-10",
-              "muscle": "Glutes"
+              "muscle": "Biceps",
+              "note": "Heavier brachialis work than hypertrophy block"
             },
             {
-              "name": "EZ Bar Curl",
+              "name": "Close-Grip Bench",
               "sets": 3,
-              "reps": "8-10",
-              "muscle": "Biceps"
-            },
-            {
-              "name": "Skull Crushers",
-              "sets": 3,
-              "reps": "8-10",
-              "muscle": "Triceps"
+              "reps": "6-8",
+              "muscle": "Triceps",
+              "note": "Strength tricep compound after bench"
             }
           ]
         },
@@ -1186,42 +1226,42 @@
               "sets": 4,
               "reps": "15-20",
               "muscle": "Legs",
-              "note": "Plyometric lower body \u2014 high calorie burn"
+              "note": "Plyometric lower body â high calorie burn"
             },
             {
               "name": "Push-Ups",
               "sets": 4,
               "reps": "15-20",
               "muscle": "Chest",
-              "note": "Bodyweight push \u2014 keeps heart rate up"
+              "note": "Bodyweight push â keeps heart rate up"
             },
             {
               "name": "KB Swing",
               "sets": 4,
               "reps": "20-25",
               "muscle": "Back",
-              "note": "Hip hinge power + conditioning \u2014 full posterior chain"
+              "note": "Hip hinge power + conditioning â full posterior chain"
             },
             {
               "name": "Burpee",
               "sets": 3,
               "reps": "10-15",
               "muscle": "Legs",
-              "note": "Full body conditioning \u2014 highest calorie burn per rep"
+              "note": "Full body conditioning â highest calorie burn per rep"
             },
             {
               "name": "Mountain Climbers",
               "sets": 3,
               "reps": "30 sec",
               "muscle": "Legs",
-              "note": "Dynamic core + hip flexor \u2014 metabolic finisher"
+              "note": "Dynamic core + hip flexor â metabolic finisher"
             },
             {
               "name": "Pull-Ups",
               "sets": 3,
               "reps": "AMRAP",
               "muscle": "Back",
-              "note": "Max reps \u2014 bodyweight metabolic pull"
+              "note": "Max reps â bodyweight metabolic pull"
             }
           ]
         }
@@ -1286,31 +1326,36 @@
               "name": "Decline Push-Ups",
               "sets": 4,
               "reps": "12-15",
-              "muscle": "Chest"
+              "muscle": "Chest",
+              "note": "Elevated feet = upper chest"
             },
             {
               "name": "Handstand Hold",
               "sets": 3,
               "reps": "20-30s",
-              "muscle": "Shoulders"
+              "muscle": "Shoulders",
+              "note": "Overhead strength prerequisite"
             },
             {
-              "name": "Pike Push-Ups",
+              "name": "Archer Push-Ups",
+              "sets": 3,
+              "reps": "6-8 ea",
+              "muscle": "Chest",
+              "note": "Unilateral loading â higher intensity"
+            },
+            {
+              "name": "Dips",
               "sets": 4,
-              "reps": "12-15",
-              "muscle": "Shoulders"
+              "reps": "10-15",
+              "muscle": "Triceps",
+              "note": "Parallel bars â heavier than chair"
             },
             {
-              "name": "Wide Push-Ups",
+              "name": "Pseudo Planche Push-Ups",
               "sets": 3,
-              "reps": "15-20",
-              "muscle": "Chest"
-            },
-            {
-              "name": "Hindu Push-Ups",
-              "sets": 3,
-              "reps": "10-12",
-              "muscle": "Chest"
+              "reps": "8-10",
+              "muscle": "Chest",
+              "note": "High chest demand â protracted position"
             }
           ]
         },
@@ -1322,32 +1367,36 @@
               "name": "Archer Push-Ups",
               "sets": 4,
               "reps": "5-6 ea",
-              "muscle": "Chest"
+              "muscle": "Chest",
+              "note": "Near one-arm â peak difficulty"
             },
             {
               "name": "Dips",
               "sets": 5,
               "reps": "6-8",
-              "muscle": "Triceps"
+              "muscle": "Triceps",
+              "note": "Add weight if available"
+            },
+            {
+              "name": "Handstand Hold",
+              "sets": 4,
+              "reps": "30-45s",
+              "muscle": "Shoulders",
+              "note": "Build to handstand push-up"
             },
             {
               "name": "Pseudo Planche Push-Ups",
               "sets": 3,
               "reps": "6-8",
-              "muscle": "Chest"
+              "muscle": "Chest",
+              "note": "More forward lean than A"
             },
             {
               "name": "Isometric Push-Up Hold",
               "sets": 3,
               "reps": "3x5s",
-              "muscle": "Chest"
-            },
-            {
-              "name": "Ring Push-Ups",
-              "sets": 3,
-              "reps": "8-10",
-              "muscle": "Chest",
-              "note": "Rings add instability for deep stabiliser work"
+              "muscle": "Triceps",
+              "note": "Neurological strength"
             }
           ]
         },
@@ -1360,7 +1409,7 @@
               "sets": 4,
               "reps": "8-10",
               "muscle": "Chest",
-              "note": "Explosive \u2014 rate of force development"
+              "note": "Explosive â rate of force development"
             },
             {
               "name": "T Push-Ups",
@@ -1381,7 +1430,7 @@
               "sets": 3,
               "reps": "8 ea",
               "muscle": "Chest",
-              "note": "Lateral load shift \u2014 unique stimulus"
+              "note": "Lateral load shift â unique stimulus"
             },
             {
               "name": "Diamond Push-Ups",
@@ -1397,34 +1446,39 @@
           "focus": "Powerbuilding",
           "exercises": [
             {
-              "name": "Weighted Push-Ups",
+              "name": "Archer Push-Ups",
               "sets": 4,
-              "reps": "8-10",
-              "muscle": "Chest"
+              "reps": "6-8 ea",
+              "muscle": "Chest",
+              "note": "Strength-focused unilateral"
             },
             {
-              "name": "Weighted Dips",
+              "name": "Dips",
               "sets": 4,
-              "reps": "6-8",
-              "muscle": "Triceps"
+              "reps": "8-10",
+              "muscle": "Triceps",
+              "note": "Heavy compound BW"
             },
             {
               "name": "Decline Push-Ups",
               "sets": 3,
               "reps": "10-12",
-              "muscle": "Chest"
+              "muscle": "Chest",
+              "note": "Upper chest strength"
             },
             {
-              "name": "Pike Push-Ups",
+              "name": "Handstand Hold",
               "sets": 3,
-              "reps": "10-12",
-              "muscle": "Shoulders"
+              "reps": "30s",
+              "muscle": "Shoulders",
+              "note": "Overhead strength"
             },
             {
               "name": "Diamond Push-Ups",
               "sets": 3,
-              "reps": "12-15",
-              "muscle": "Triceps"
+              "reps": "10-12",
+              "muscle": "Triceps",
+              "note": "Strength reps â controlled tempo"
             }
           ]
         },
@@ -1436,31 +1490,36 @@
               "name": "Push-Ups",
               "sets": 5,
               "reps": "20-25",
-              "muscle": "Chest"
+              "muscle": "Chest",
+              "note": "High rep â max heart rate"
             },
             {
-              "name": "Dips",
+              "name": "Plyometric Push-Ups",
+              "sets": 3,
+              "reps": "10-15",
+              "muscle": "Chest",
+              "note": "Explosive for calorie burn"
+            },
+            {
+              "name": "Pike Push-Ups",
               "sets": 4,
               "reps": "15-20",
-              "muscle": "Triceps"
+              "muscle": "Shoulders",
+              "note": "High rep shoulder conditioning"
             },
             {
               "name": "Diamond Push-Ups",
               "sets": 4,
               "reps": "15-20",
-              "muscle": "Triceps"
+              "muscle": "Triceps",
+              "note": "Bodyweight tricep endurance"
             },
             {
-              "name": "Decline Push-Ups",
+              "name": "Tricep Dips (Chair)",
               "sets": 3,
-              "reps": "15-20",
-              "muscle": "Chest"
-            },
-            {
-              "name": "Plyometric Push-Ups",
-              "sets": 3,
-              "reps": "12-15",
-              "muscle": "Chest"
+              "reps": "20-25",
+              "muscle": "Triceps",
+              "note": "High rep metabolic finisher"
             }
           ]
         }
@@ -1483,31 +1542,36 @@
               "name": "Pull-Ups",
               "sets": 4,
               "reps": "6-10",
-              "muscle": "Lats"
-            },
-            {
-              "name": "Chin-Ups",
-              "sets": 4,
-              "reps": "6-10",
-              "muscle": "Biceps"
+              "muscle": "Back",
+              "note": "Primary vertical compound"
             },
             {
               "name": "Inverted Row",
-              "sets": 3,
+              "sets": 4,
               "reps": "10-12",
-              "muscle": "Back"
+              "muscle": "Back",
+              "note": "Horizontal row equivalent"
+            },
+            {
+              "name": "Chin-Ups",
+              "sets": 3,
+              "reps": "8-10",
+              "muscle": "Biceps",
+              "note": "Supinated = more bicep"
             },
             {
               "name": "Back Extension",
               "sets": 3,
               "reps": "12-15",
-              "muscle": "Lower Back"
+              "muscle": "Back",
+              "note": "Erector isolation"
             },
             {
               "name": "Scapular Pull-Ups",
               "sets": 3,
               "reps": "10-12",
-              "muscle": "Back"
+              "muscle": "Back",
+              "note": "Lower trap + scapular control"
             }
           ]
         },
@@ -1518,32 +1582,37 @@
             {
               "name": "Wide-Grip Pull-Ups",
               "sets": 4,
-              "reps": "8-12",
-              "muscle": "Lats"
+              "reps": "5-8",
+              "muscle": "Back",
+              "note": "More lat, less bicep"
             },
             {
               "name": "Australian Pull-Up",
               "sets": 4,
-              "reps": "15-20",
-              "muscle": "Back"
+              "reps": "12-15",
+              "muscle": "Back",
+              "note": "High volume horizontal"
+            },
+            {
+              "name": "Neutral-Grip Pull-Ups",
+              "sets": 3,
+              "reps": "8-10",
+              "muscle": "Back",
+              "note": "Brachialis dominant"
             },
             {
               "name": "Superman Hold",
               "sets": 3,
               "reps": "10x3s",
-              "muscle": "Lower Back"
-            },
-            {
-              "name": "Band Bicep Curl",
-              "sets": 4,
-              "reps": "20-25",
-              "muscle": "Biceps"
+              "muscle": "Back",
+              "note": "Full posterior chain"
             },
             {
               "name": "Towel Curls",
               "sets": 3,
               "reps": "12-15",
-              "muscle": "Biceps"
+              "muscle": "Biceps",
+              "note": "Grip intensive"
             }
           ]
         },
@@ -1555,31 +1624,36 @@
               "name": "Weighted Pull-Ups",
               "sets": 5,
               "reps": "4-6",
-              "muscle": "Lats"
+              "muscle": "Back",
+              "note": "Heaviest vertical pull"
             },
             {
-              "name": "Archer Pull-Ups",
-              "sets": 3,
-              "reps": "4-5 ea",
-              "muscle": "Lats"
+              "name": "Neutral-Grip Pull-Ups",
+              "sets": 4,
+              "reps": "6-8",
+              "muscle": "Back",
+              "note": "Strongest grip for max load"
             },
             {
-              "name": "L-Sit Pull-Ups",
-              "sets": 3,
-              "reps": "5-7",
-              "muscle": "Lats"
+              "name": "Inverted Row",
+              "sets": 4,
+              "reps": "8-10",
+              "muscle": "Back",
+              "note": "Elevate feet to increase difficulty"
             },
             {
-              "name": "Commando Pull-Ups",
+              "name": "Chin-Ups",
               "sets": 3,
               "reps": "6-8",
-              "muscle": "Lats"
+              "muscle": "Biceps",
+              "note": "Heavy bicep pull"
             },
             {
               "name": "Back Extension",
               "sets": 3,
               "reps": "10-12",
-              "muscle": "Lower Back"
+              "muscle": "Back",
+              "note": "Add weight plate"
             }
           ]
         },
@@ -1588,34 +1662,39 @@
           "focus": "Power + Athletic",
           "exercises": [
             {
-              "name": "Kipping Pull-Ups",
+              "name": "Pull-Ups",
               "sets": 4,
-              "reps": "10-15",
-              "muscle": "Lats"
+              "reps": "AMRAP",
+              "muscle": "Back",
+              "note": "Max reps â power endurance"
             },
             {
-              "name": "Explosive Pull-Ups",
+              "name": "Australian Pull-Up",
               "sets": 3,
-              "reps": "6-8",
-              "muscle": "Lats"
+              "reps": "15-20",
+              "muscle": "Back",
+              "note": "High rep horizontal"
             },
             {
-              "name": "Neutral-Grip Pull-Ups",
+              "name": "L-Sit Pull-Ups",
               "sets": 3,
-              "reps": "8-10",
-              "muscle": "Lats"
-            },
-            {
-              "name": "Scapular Pull-Ups",
-              "sets": 3,
-              "reps": "12-15",
-              "muscle": "Back"
+              "reps": "5-7",
+              "muscle": "Back",
+              "note": "Core + lat compound"
             },
             {
               "name": "Band Bicep Curl",
               "sets": 3,
               "reps": "15-20",
-              "muscle": "Biceps"
+              "muscle": "Biceps",
+              "note": "Accommodating resistance"
+            },
+            {
+              "name": "Superman Hold",
+              "sets": 3,
+              "reps": "5x5s",
+              "muscle": "Back",
+              "note": "Erector endurance"
             }
           ]
         },
@@ -1627,31 +1706,36 @@
               "name": "Weighted Pull-Ups",
               "sets": 4,
               "reps": "5-7",
-              "muscle": "Lats"
+              "muscle": "Back",
+              "note": "Strength + volume hybrid"
             },
             {
               "name": "Inverted Row",
               "sets": 4,
-              "reps": "10-12",
-              "muscle": "Back"
-            },
-            {
-              "name": "Australian Pull-Up",
-              "sets": 3,
-              "reps": "12-15",
-              "muscle": "Back"
+              "reps": "8-10",
+              "muscle": "Back",
+              "note": "Heavy horizontal row"
             },
             {
               "name": "Chin-Ups",
               "sets": 3,
               "reps": "6-8",
-              "muscle": "Biceps"
+              "muscle": "Biceps",
+              "note": "Heavy bicep compound"
             },
             {
-              "name": "Superman Hold",
+              "name": "Neutral-Grip Pull-Ups",
               "sets": 3,
-              "reps": "5x5s",
-              "muscle": "Lower Back"
+              "reps": "8-10",
+              "muscle": "Back",
+              "note": "Accessory vertical pull"
+            },
+            {
+              "name": "Back Extension",
+              "sets": 3,
+              "reps": "12-15",
+              "muscle": "Back",
+              "note": "Erector volume"
             }
           ]
         },
@@ -1663,31 +1747,36 @@
               "name": "Pull-Ups",
               "sets": 5,
               "reps": "AMRAP",
-              "muscle": "Lats"
+              "muscle": "Back",
+              "note": "Max reps â metabolic"
             },
             {
               "name": "Australian Pull-Up",
               "sets": 4,
               "reps": "20-25",
-              "muscle": "Back"
+              "muscle": "Back",
+              "note": "High rep horizontal"
             },
             {
               "name": "Inverted Row",
               "sets": 3,
-              "reps": "20-25",
-              "muscle": "Back"
-            },
-            {
-              "name": "Kipping Pull-Ups",
-              "sets": 3,
               "reps": "15-20",
-              "muscle": "Lats"
+              "muscle": "Back",
+              "note": "Bodyweight row conditioning"
             },
             {
-              "name": "Towel Curls",
+              "name": "Chin-Ups",
               "sets": 3,
-              "reps": "20-25",
-              "muscle": "Biceps"
+              "reps": "AMRAP",
+              "muscle": "Biceps",
+              "note": "Max reps supinated"
+            },
+            {
+              "name": "Band Bicep Curl",
+              "sets": 3,
+              "reps": "25-30",
+              "muscle": "Biceps",
+              "note": "High rep endurance finisher"
             }
           ]
         }
@@ -1775,7 +1864,7 @@
               "sets": 3,
               "reps": "8 ea",
               "muscle": "Legs",
-              "note": "Lateral \u2014 adductor + quad"
+              "note": "Lateral â adductor + quad"
             },
             {
               "name": "Step-Ups",
@@ -1789,7 +1878,7 @@
               "sets": 3,
               "reps": "15 ea",
               "muscle": "Legs",
-              "note": "Glute med \u2014 knee health"
+              "note": "Glute med â knee health"
             },
             {
               "name": "Wall Sit",
@@ -1805,40 +1894,46 @@
           "focus": "Strength Block",
           "exercises": [
             {
-              "name": "Pistol Squat Assist",
+              "name": "Bulgarian Split Squat",
+              "sets": 5,
+              "reps": "6-8 ea",
+              "muscle": "Legs",
+              "note": "Closest to pistol squat"
+            },
+            {
+              "name": "Box Jumps",
               "sets": 4,
-              "reps": "5-7 ea",
-              "muscle": "Quads"
+              "reps": "6-8",
+              "muscle": "Legs",
+              "note": "Explosive strength â max power"
             },
             {
               "name": "Nordic Hamstring Curl",
               "sets": 4,
               "reps": "4-6",
-              "muscle": "Hamstrings"
-            },
-            {
-              "name": "Box Jumps",
-              "sets": 3,
-              "reps": "6-8",
-              "muscle": "Quads"
+              "muscle": "Legs",
+              "note": "Full eccentric control"
             },
             {
               "name": "Single-Leg RDL",
               "sets": 3,
               "reps": "8-10 ea",
-              "muscle": "Hamstrings"
+              "muscle": "Legs",
+              "note": "Balance + hamstring strength"
             },
             {
-              "name": "Wall Sit",
+              "name": "Curtsy Lunge",
               "sets": 3,
-              "reps": "60 sec",
-              "muscle": "Quads"
+              "reps": "10 ea",
+              "muscle": "Legs",
+              "note": "Glute med + max diagonal"
             },
             {
-              "name": "Single-Leg Calf Raise",
+              "name": "Donkey Calf Raise",
               "sets": 4,
-              "reps": "12-15 ea",
-              "muscle": "Calves"
+              "reps": "12-15",
+              "muscle": "Legs",
+              "note": "Strength phase calves"
             }
           ]
         },
@@ -1850,37 +1945,43 @@
               "name": "Jump Squat",
               "sets": 4,
               "reps": "10-12",
-              "muscle": "Quads"
+              "muscle": "Legs",
+              "note": "Triple extension power"
             },
             {
               "name": "Skater Jumps",
               "sets": 3,
               "reps": "12 ea",
-              "muscle": "Quads"
+              "muscle": "Legs",
+              "note": "Lateral plyometric"
             },
             {
               "name": "Box Jumps",
               "sets": 3,
               "reps": "8-10",
-              "muscle": "Quads"
+              "muscle": "Legs",
+              "note": "Max height power"
             },
             {
               "name": "Glute Bridge",
               "sets": 4,
               "reps": "20-25",
-              "muscle": "Glutes"
+              "muscle": "Legs",
+              "note": "High rep glute endurance"
             },
             {
               "name": "Lateral Lunge",
               "sets": 3,
               "reps": "10 ea",
-              "muscle": "Quads"
+              "muscle": "Legs",
+              "note": "Frontal plane â adductor"
             },
             {
-              "name": "Broad Jump",
+              "name": "Wall Sit",
               "sets": 3,
-              "reps": "8",
-              "muscle": "Quads"
+              "reps": "60 sec",
+              "muscle": "Legs",
+              "note": "Isometric burnout finisher"
             }
           ]
         },
@@ -1892,37 +1993,43 @@
               "name": "Bulgarian Split Squat",
               "sets": 4,
               "reps": "6-8 ea",
-              "muscle": "Quads"
+              "muscle": "Legs",
+              "note": "Heavy unilateral strength"
             },
             {
-              "name": "Good Morning",
-              "sets": 3,
-              "reps": "12-15",
-              "muscle": "Hamstrings"
+              "name": "Nordic Hamstring Curl",
+              "sets": 4,
+              "reps": "5-7",
+              "muscle": "Legs",
+              "note": "Eccentric strength focus"
             },
             {
               "name": "Glute Bridge",
               "sets": 4,
               "reps": "15-20",
-              "muscle": "Glutes"
+              "muscle": "Legs",
+              "note": "Glute volume after strength"
+            },
+            {
+              "name": "Box Jumps",
+              "sets": 3,
+              "reps": "6-8",
+              "muscle": "Legs",
+              "note": "Power compound"
             },
             {
               "name": "Cossack Squat",
               "sets": 3,
               "reps": "8 ea",
-              "muscle": "Adductors"
+              "muscle": "Legs",
+              "note": "Mobility + lateral strength"
             },
             {
-              "name": "Curtsy Lunge",
-              "sets": 3,
-              "reps": "10 ea",
-              "muscle": "Glutes"
-            },
-            {
-              "name": "Standing Calf Raise",
+              "name": "Donkey Calf Raise",
               "sets": 4,
-              "reps": "20-25",
-              "muscle": "Calves"
+              "reps": "15-20",
+              "muscle": "Legs",
+              "note": "Calf volume"
             }
           ]
         },
@@ -1934,37 +2041,43 @@
               "name": "Jump Squat",
               "sets": 5,
               "reps": "15-20",
-              "muscle": "Quads"
+              "muscle": "Legs",
+              "note": "High rep plyometric â max burn"
             },
             {
               "name": "Walking Lunges",
               "sets": 4,
               "reps": "12 ea",
-              "muscle": "Quads"
+              "muscle": "Legs",
+              "note": "Continuous â heart rate elevated"
             },
             {
-              "name": "Hip Thrust (BW)",
+              "name": "Glute Bridge",
               "sets": 4,
               "reps": "25-30",
-              "muscle": "Glutes"
+              "muscle": "Legs",
+              "note": "High rep posterior chain"
+            },
+            {
+              "name": "Skater Jumps",
+              "sets": 3,
+              "reps": "15 ea",
+              "muscle": "Legs",
+              "note": "Lateral power conditioning"
             },
             {
               "name": "Fire Hydrants",
               "sets": 3,
               "reps": "20 ea",
-              "muscle": "Glutes"
+              "muscle": "Legs",
+              "note": "High rep glute med"
             },
             {
-              "name": "Reverse Lunge",
+              "name": "Wall Sit",
               "sets": 3,
-              "reps": "15 ea",
-              "muscle": "Quads"
-            },
-            {
-              "name": "Donkey Calf Raise",
-              "sets": 3,
-              "reps": "25-30",
-              "muscle": "Calves"
+              "reps": "60 sec",
+              "muscle": "Legs",
+              "note": "Isometric burnout"
             }
           ]
         }
@@ -2094,7 +2207,7 @@
               "sets": 4,
               "reps": "6-8",
               "muscle": "Back",
-              "note": "Strongest grip \u2014 max load"
+              "note": "Strongest grip â max load"
             },
             {
               "name": "Box Jumps",
@@ -2131,40 +2244,46 @@
           "focus": "Power + Athletic",
           "exercises": [
             {
+              "name": "Jump Squat",
+              "sets": 4,
+              "reps": "12-15",
+              "muscle": "Legs",
+              "note": "Plyometric lower"
+            },
+            {
               "name": "Plyometric Push-Ups",
               "sets": 3,
               "reps": "8-10",
-              "muscle": "Chest"
+              "muscle": "Chest",
+              "note": "Explosive push"
             },
             {
               "name": "Australian Pull-Up",
               "sets": 3,
               "reps": "12-15",
-              "muscle": "Back"
+              "muscle": "Back",
+              "note": "Horizontal pull volume"
             },
             {
-              "name": "Box Jumps",
-              "sets": 4,
-              "reps": "10-12",
-              "muscle": "Quads"
-            },
-            {
-              "name": "Broad Jump",
+              "name": "Burpee",
               "sets": 3,
-              "reps": "8-10",
-              "muscle": "Quads"
+              "reps": "10-15",
+              "muscle": "Core",
+              "note": "Full body conditioning"
             },
             {
-              "name": "Handstand Hold",
-              "sets": 3,
-              "reps": "20-30s",
-              "muscle": "Shoulders"
-            },
-            {
-              "name": "Hollow Body Hold",
+              "name": "Mountain Climbers",
               "sets": 3,
               "reps": "30 sec",
-              "muscle": "Core"
+              "muscle": "Core",
+              "note": "Dynamic core + hip flexor"
+            },
+            {
+              "name": "Skater Jumps",
+              "sets": 3,
+              "reps": "12 ea",
+              "muscle": "Legs",
+              "note": "Lateral power"
             }
           ]
         },
@@ -2225,7 +2344,7 @@
               "sets": 4,
               "reps": "15-20",
               "muscle": "Legs",
-              "note": "Plyometric \u2014 high burn"
+              "note": "Plyometric â high burn"
             },
             {
               "name": "Push-Ups",
