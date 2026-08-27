@@ -4664,5 +4664,1655 @@
       "reps": "5-8",
       "equipment": "Bodyweight"
     }
-  ]
+  ],
+  "EXERCISE_SWAPS": {
+    "Bench Press": {
+      "equipment_note": "Horizontal pressing movements -- swap for equipment access or shoulder comfort.",
+      "alternatives": [
+        "Dumbbell Bench Press",
+        "Close-Grip Bench",
+        "Guillotine Press",
+        "Landmine Chest Press",
+        "Dumbbell Floor Press",
+        "Decline Barbell Press"
+      ]
+    },
+    "Dumbbell Bench Press": {
+      "equipment_note": "Horizontal pressing movements -- swap for equipment access or shoulder comfort.",
+      "alternatives": [
+        "Bench Press",
+        "Close-Grip Bench",
+        "Guillotine Press",
+        "Landmine Chest Press",
+        "Dumbbell Floor Press",
+        "Decline Barbell Press"
+      ]
+    },
+    "Close-Grip Bench": {
+      "equipment_note": "Horizontal pressing movements -- swap for equipment access or shoulder comfort.",
+      "alternatives": [
+        "Bench Press",
+        "Dumbbell Bench Press",
+        "Guillotine Press",
+        "Landmine Chest Press",
+        "Dumbbell Floor Press"
+      ]
+    },
+    "Guillotine Press": {
+      "equipment_note": "Horizontal pressing movements -- swap for equipment access or shoulder comfort.",
+      "alternatives": [
+        "Bench Press",
+        "Dumbbell Bench Press",
+        "Close-Grip Bench",
+        "Landmine Chest Press",
+        "Dumbbell Floor Press"
+      ]
+    },
+    "Landmine Chest Press": {
+      "equipment_note": "Horizontal pressing movements -- swap for equipment access or shoulder comfort.",
+      "alternatives": [
+        "Bench Press",
+        "Dumbbell Bench Press",
+        "Close-Grip Bench",
+        "Guillotine Press",
+        "Dumbbell Floor Press"
+      ]
+    },
+    "Dumbbell Floor Press": {
+      "equipment_note": "Horizontal pressing movements -- swap for equipment access or shoulder comfort.",
+      "alternatives": [
+        "Bench Press",
+        "Dumbbell Bench Press",
+        "Close-Grip Bench",
+        "Guillotine Press",
+        "Landmine Chest Press"
+      ]
+    },
+    "Incline Barbell Press": {
+      "equipment_note": "Upper chest pressing angle -- interchangeable based on available equipment.",
+      "alternatives": [
+        "Incline Dumbbell Press",
+        "Decline Barbell Press"
+      ]
+    },
+    "Incline Dumbbell Press": {
+      "equipment_note": "Upper chest pressing angle -- interchangeable based on available equipment.",
+      "alternatives": [
+        "Incline Barbell Press"
+      ]
+    },
+    "Cable Fly": {
+      "equipment_note": "Chest isolation movements -- swap based on machine availability.",
+      "alternatives": [
+        "Pec Deck / Machine Fly",
+        "Svend Press"
+      ]
+    },
+    "Pec Deck / Machine Fly": {
+      "equipment_note": "Chest isolation movements -- swap based on machine availability.",
+      "alternatives": [
+        "Cable Fly",
+        "Svend Press"
+      ]
+    },
+    "Svend Press": {
+      "equipment_note": "Chest isolation movements -- swap based on machine availability.",
+      "alternatives": [
+        "Cable Fly",
+        "Pec Deck / Machine Fly"
+      ]
+    },
+    "Push-Ups": {
+      "equipment_note": "Bodyweight push-up variations -- swap for difficulty level or equipment-free options.",
+      "alternatives": [
+        "Wide Push-Ups",
+        "Decline Push-Ups",
+        "Staggered Push-Ups",
+        "T Push-Ups",
+        "Deficit Push-Ups",
+        "Archer Push-Ups",
+        "Pseudo Planche Push-Ups",
+        "Plyometric Push-Ups",
+        "Typewriter Push-Ups"
+      ]
+    },
+    "Wide Push-Ups": {
+      "equipment_note": "Bodyweight push-up variations -- swap for difficulty level or equipment-free options.",
+      "alternatives": [
+        "Push-Ups",
+        "Decline Push-Ups",
+        "Staggered Push-Ups",
+        "T Push-Ups",
+        "Deficit Push-Ups",
+        "Archer Push-Ups",
+        "Pseudo Planche Push-Ups",
+        "Plyometric Push-Ups",
+        "Typewriter Push-Ups"
+      ]
+    },
+    "Decline Push-Ups": {
+      "equipment_note": "Bodyweight push-up variations -- swap for difficulty level or equipment-free options.",
+      "alternatives": [
+        "Push-Ups",
+        "Wide Push-Ups",
+        "Staggered Push-Ups",
+        "T Push-Ups",
+        "Deficit Push-Ups",
+        "Archer Push-Ups",
+        "Pseudo Planche Push-Ups",
+        "Plyometric Push-Ups",
+        "Typewriter Push-Ups"
+      ]
+    },
+    "Staggered Push-Ups": {
+      "equipment_note": "Bodyweight push-up variations -- swap for difficulty level or equipment-free options.",
+      "alternatives": [
+        "Push-Ups",
+        "Wide Push-Ups",
+        "Decline Push-Ups",
+        "T Push-Ups",
+        "Deficit Push-Ups",
+        "Archer Push-Ups",
+        "Pseudo Planche Push-Ups",
+        "Plyometric Push-Ups",
+        "Typewriter Push-Ups"
+      ]
+    },
+    "T Push-Ups": {
+      "equipment_note": "Bodyweight push-up variations -- swap for difficulty level or equipment-free options.",
+      "alternatives": [
+        "Push-Ups",
+        "Wide Push-Ups",
+        "Decline Push-Ups",
+        "Staggered Push-Ups",
+        "Deficit Push-Ups",
+        "Archer Push-Ups",
+        "Pseudo Planche Push-Ups",
+        "Plyometric Push-Ups",
+        "Typewriter Push-Ups"
+      ]
+    },
+    "Deficit Push-Ups": {
+      "equipment_note": "Bodyweight push-up variations -- swap for difficulty level or equipment-free options.",
+      "alternatives": [
+        "Push-Ups",
+        "Wide Push-Ups",
+        "Decline Push-Ups",
+        "Staggered Push-Ups",
+        "T Push-Ups",
+        "Archer Push-Ups",
+        "Pseudo Planche Push-Ups",
+        "Plyometric Push-Ups",
+        "Typewriter Push-Ups"
+      ]
+    },
+    "Archer Push-Ups": {
+      "equipment_note": "Bodyweight push-up variations -- swap for difficulty level or equipment-free options.",
+      "alternatives": [
+        "Push-Ups",
+        "Wide Push-Ups",
+        "Decline Push-Ups",
+        "Staggered Push-Ups",
+        "T Push-Ups",
+        "Deficit Push-Ups",
+        "Pseudo Planche Push-Ups",
+        "Plyometric Push-Ups",
+        "Typewriter Push-Ups"
+      ]
+    },
+    "Pseudo Planche Push-Ups": {
+      "equipment_note": "Bodyweight push-up variations -- swap for difficulty level or equipment-free options.",
+      "alternatives": [
+        "Push-Ups",
+        "Wide Push-Ups",
+        "Decline Push-Ups",
+        "Staggered Push-Ups",
+        "T Push-Ups",
+        "Deficit Push-Ups",
+        "Archer Push-Ups",
+        "Plyometric Push-Ups",
+        "Typewriter Push-Ups"
+      ]
+    },
+    "Plyometric Push-Ups": {
+      "equipment_note": "Bodyweight push-up variations -- swap for difficulty level or equipment-free options.",
+      "alternatives": [
+        "Push-Ups",
+        "Wide Push-Ups",
+        "Decline Push-Ups",
+        "Staggered Push-Ups",
+        "T Push-Ups",
+        "Deficit Push-Ups",
+        "Archer Push-Ups",
+        "Pseudo Planche Push-Ups",
+        "Typewriter Push-Ups"
+      ]
+    },
+    "Typewriter Push-Ups": {
+      "equipment_note": "Bodyweight push-up variations -- swap for difficulty level or equipment-free options.",
+      "alternatives": [
+        "Push-Ups",
+        "Wide Push-Ups",
+        "Decline Push-Ups",
+        "Staggered Push-Ups",
+        "T Push-Ups",
+        "Deficit Push-Ups",
+        "Archer Push-Ups",
+        "Pseudo Planche Push-Ups",
+        "Plyometric Push-Ups"
+      ]
+    },
+    "Dips": {
+      "equipment_note": "Bodyweight/compound chest-tricep movements.",
+      "alternatives": [
+        "Man Maker"
+      ]
+    },
+    "Man Maker": {
+      "equipment_note": "Bodyweight/compound chest-tricep movements.",
+      "alternatives": [
+        "Dips"
+      ]
+    },
+    "Lat Pulldown": {
+      "equipment_note": "Vertical pulling movements -- swap for equipment access or grip preference.",
+      "alternatives": [
+        "Pull-Ups",
+        "Wide-Grip Pull-Ups",
+        "Neutral-Grip Pull-Ups",
+        "Chin-Ups",
+        "Australian Pull-Up",
+        "Weighted Pull-Ups",
+        "L-Sit Pull-Ups",
+        "Scapular Pull-Ups"
+      ]
+    },
+    "Pull-Ups": {
+      "equipment_note": "Vertical pulling movements -- swap for equipment access or grip preference.",
+      "alternatives": [
+        "Lat Pulldown",
+        "Wide-Grip Pull-Ups",
+        "Neutral-Grip Pull-Ups",
+        "Chin-Ups",
+        "Australian Pull-Up",
+        "Weighted Pull-Ups",
+        "L-Sit Pull-Ups",
+        "Scapular Pull-Ups"
+      ]
+    },
+    "Wide-Grip Pull-Ups": {
+      "equipment_note": "Vertical pulling movements -- swap for equipment access or grip preference.",
+      "alternatives": [
+        "Lat Pulldown",
+        "Pull-Ups",
+        "Neutral-Grip Pull-Ups",
+        "Chin-Ups",
+        "Australian Pull-Up",
+        "Weighted Pull-Ups",
+        "L-Sit Pull-Ups",
+        "Scapular Pull-Ups"
+      ]
+    },
+    "Neutral-Grip Pull-Ups": {
+      "equipment_note": "Vertical pulling movements -- swap for equipment access or grip preference.",
+      "alternatives": [
+        "Lat Pulldown",
+        "Pull-Ups",
+        "Wide-Grip Pull-Ups",
+        "Chin-Ups",
+        "Australian Pull-Up",
+        "Weighted Pull-Ups",
+        "L-Sit Pull-Ups",
+        "Scapular Pull-Ups"
+      ]
+    },
+    "Chin-Ups": {
+      "equipment_note": "Vertical pulling movements -- swap for equipment access or grip preference.",
+      "alternatives": [
+        "Lat Pulldown",
+        "Pull-Ups",
+        "Wide-Grip Pull-Ups",
+        "Neutral-Grip Pull-Ups",
+        "Australian Pull-Up",
+        "Weighted Pull-Ups",
+        "L-Sit Pull-Ups",
+        "Scapular Pull-Ups"
+      ]
+    },
+    "Australian Pull-Up": {
+      "equipment_note": "Vertical pulling movements -- swap for equipment access or grip preference.",
+      "alternatives": [
+        "Lat Pulldown",
+        "Pull-Ups",
+        "Wide-Grip Pull-Ups",
+        "Neutral-Grip Pull-Ups",
+        "Chin-Ups",
+        "Weighted Pull-Ups",
+        "L-Sit Pull-Ups",
+        "Scapular Pull-Ups"
+      ]
+    },
+    "Weighted Pull-Ups": {
+      "equipment_note": "Vertical pulling movements -- swap for equipment access or grip preference.",
+      "alternatives": [
+        "Lat Pulldown",
+        "Pull-Ups",
+        "Wide-Grip Pull-Ups",
+        "Neutral-Grip Pull-Ups",
+        "Chin-Ups",
+        "Australian Pull-Up",
+        "L-Sit Pull-Ups",
+        "Scapular Pull-Ups"
+      ]
+    },
+    "L-Sit Pull-Ups": {
+      "equipment_note": "Vertical pulling movements -- swap for equipment access or grip preference.",
+      "alternatives": [
+        "Lat Pulldown",
+        "Pull-Ups",
+        "Wide-Grip Pull-Ups",
+        "Neutral-Grip Pull-Ups",
+        "Chin-Ups",
+        "Australian Pull-Up",
+        "Weighted Pull-Ups",
+        "Scapular Pull-Ups"
+      ]
+    },
+    "Scapular Pull-Ups": {
+      "equipment_note": "Vertical pulling movements -- swap for equipment access or grip preference.",
+      "alternatives": [
+        "Lat Pulldown",
+        "Pull-Ups",
+        "Wide-Grip Pull-Ups",
+        "Neutral-Grip Pull-Ups",
+        "Chin-Ups",
+        "Australian Pull-Up",
+        "Weighted Pull-Ups",
+        "L-Sit Pull-Ups"
+      ]
+    },
+    "Barbell Row": {
+      "equipment_note": "Horizontal rowing movements -- swap based on equipment or strictness preference.",
+      "alternatives": [
+        "Chest Supported Row",
+        "Single-Arm DB Row",
+        "Seated Cable Row",
+        "Machine Row",
+        "T-Bar Row",
+        "Meadows Row",
+        "Kroc Row",
+        "Seal Row",
+        "Renegade Row",
+        "Inverted Row"
+      ]
+    },
+    "Chest Supported Row": {
+      "equipment_note": "Horizontal rowing movements -- swap based on equipment or strictness preference.",
+      "alternatives": [
+        "Barbell Row",
+        "Single-Arm DB Row",
+        "Seated Cable Row",
+        "Machine Row",
+        "T-Bar Row",
+        "Meadows Row",
+        "Kroc Row",
+        "Seal Row",
+        "Renegade Row",
+        "Inverted Row"
+      ]
+    },
+    "Single-Arm DB Row": {
+      "equipment_note": "Horizontal rowing movements -- swap based on equipment or strictness preference.",
+      "alternatives": [
+        "Barbell Row",
+        "Chest Supported Row",
+        "Seated Cable Row",
+        "Machine Row",
+        "T-Bar Row",
+        "Meadows Row",
+        "Kroc Row",
+        "Seal Row",
+        "Renegade Row",
+        "Inverted Row"
+      ]
+    },
+    "Seated Cable Row": {
+      "equipment_note": "Horizontal rowing movements -- swap based on equipment or strictness preference.",
+      "alternatives": [
+        "Barbell Row",
+        "Chest Supported Row",
+        "Single-Arm DB Row",
+        "Machine Row",
+        "T-Bar Row",
+        "Meadows Row",
+        "Kroc Row",
+        "Seal Row",
+        "Renegade Row",
+        "Inverted Row"
+      ]
+    },
+    "Machine Row": {
+      "equipment_note": "Horizontal rowing movements -- swap based on equipment or strictness preference.",
+      "alternatives": [
+        "Barbell Row",
+        "Chest Supported Row",
+        "Single-Arm DB Row",
+        "Seated Cable Row",
+        "T-Bar Row",
+        "Meadows Row",
+        "Kroc Row",
+        "Seal Row",
+        "Renegade Row",
+        "Inverted Row"
+      ]
+    },
+    "T-Bar Row": {
+      "equipment_note": "Horizontal rowing movements -- swap based on equipment or strictness preference.",
+      "alternatives": [
+        "Barbell Row",
+        "Chest Supported Row",
+        "Single-Arm DB Row",
+        "Seated Cable Row",
+        "Machine Row",
+        "Meadows Row",
+        "Kroc Row",
+        "Seal Row",
+        "Renegade Row",
+        "Inverted Row"
+      ]
+    },
+    "Meadows Row": {
+      "equipment_note": "Horizontal rowing movements -- swap based on equipment or strictness preference.",
+      "alternatives": [
+        "Barbell Row",
+        "Chest Supported Row",
+        "Single-Arm DB Row",
+        "Seated Cable Row",
+        "Machine Row",
+        "T-Bar Row",
+        "Kroc Row",
+        "Seal Row",
+        "Renegade Row",
+        "Inverted Row"
+      ]
+    },
+    "Kroc Row": {
+      "equipment_note": "Horizontal rowing movements -- swap based on equipment or strictness preference.",
+      "alternatives": [
+        "Barbell Row",
+        "Chest Supported Row",
+        "Single-Arm DB Row",
+        "Seated Cable Row",
+        "Machine Row",
+        "T-Bar Row",
+        "Meadows Row",
+        "Seal Row",
+        "Renegade Row",
+        "Inverted Row"
+      ]
+    },
+    "Seal Row": {
+      "equipment_note": "Horizontal rowing movements -- swap based on equipment or strictness preference.",
+      "alternatives": [
+        "Barbell Row",
+        "Chest Supported Row",
+        "Single-Arm DB Row",
+        "Seated Cable Row",
+        "Machine Row",
+        "T-Bar Row",
+        "Meadows Row",
+        "Kroc Row",
+        "Renegade Row",
+        "Inverted Row"
+      ]
+    },
+    "Renegade Row": {
+      "equipment_note": "Horizontal rowing movements -- swap based on equipment or strictness preference.",
+      "alternatives": [
+        "Barbell Row",
+        "Chest Supported Row",
+        "Single-Arm DB Row",
+        "Seated Cable Row",
+        "Machine Row",
+        "T-Bar Row",
+        "Meadows Row",
+        "Kroc Row",
+        "Seal Row",
+        "Inverted Row"
+      ]
+    },
+    "Inverted Row": {
+      "equipment_note": "Horizontal rowing movements -- swap based on equipment or strictness preference.",
+      "alternatives": [
+        "Barbell Row",
+        "Chest Supported Row",
+        "Single-Arm DB Row",
+        "Seated Cable Row",
+        "Machine Row",
+        "T-Bar Row",
+        "Meadows Row",
+        "Kroc Row",
+        "Seal Row",
+        "Renegade Row"
+      ]
+    },
+    "Deadlift": {
+      "equipment_note": "Hip-hinge pulling movements -- swap for equipment or lower-back comfort.",
+      "alternatives": [
+        "Rack Pull",
+        "Sumo Deadlift",
+        "Trap Bar Deadlift",
+        "KB Romanian Deadlift"
+      ]
+    },
+    "Rack Pull": {
+      "equipment_note": "Hip-hinge pulling movements -- swap for equipment or lower-back comfort.",
+      "alternatives": [
+        "Deadlift",
+        "Sumo Deadlift",
+        "Trap Bar Deadlift",
+        "KB Romanian Deadlift"
+      ]
+    },
+    "Sumo Deadlift": {
+      "equipment_note": "Hip-hinge pulling movements -- swap for equipment or lower-back comfort.",
+      "alternatives": [
+        "Deadlift",
+        "Rack Pull",
+        "Trap Bar Deadlift",
+        "KB Romanian Deadlift"
+      ]
+    },
+    "Trap Bar Deadlift": {
+      "equipment_note": "Hip-hinge pulling movements -- swap for equipment or lower-back comfort.",
+      "alternatives": [
+        "Deadlift",
+        "Rack Pull",
+        "Sumo Deadlift",
+        "KB Romanian Deadlift"
+      ]
+    },
+    "KB Romanian Deadlift": {
+      "equipment_note": "Hip-hinge pulling movements -- swap for equipment or lower-back comfort.",
+      "alternatives": [
+        "Deadlift",
+        "Rack Pull",
+        "Sumo Deadlift",
+        "Trap Bar Deadlift"
+      ]
+    },
+    "Straight-Arm Pulldown": {
+      "equipment_note": "Lat isolation with a stretched-position emphasis.",
+      "alternatives": [
+        "Pull-Over"
+      ]
+    },
+    "Pull-Over": {
+      "equipment_note": "Lat isolation with a stretched-position emphasis.",
+      "alternatives": [
+        "Straight-Arm Pulldown"
+      ]
+    },
+    "Face Pulls": {
+      "equipment_note": "Upper back and rear delt health-focused pulling.",
+      "alternatives": [
+        "Cable Rear Delt Row"
+      ]
+    },
+    "Cable Rear Delt Row": {
+      "equipment_note": "Upper back and rear delt health-focused pulling.",
+      "alternatives": [
+        "Face Pulls"
+      ]
+    },
+    "Superman Hold": {
+      "equipment_note": "Lower back / posterior chain isometric and extension work.",
+      "alternatives": [
+        "Back Extension"
+      ]
+    },
+    "Back Extension": {
+      "equipment_note": "Lower back / posterior chain isometric and extension work.",
+      "alternatives": [
+        "Superman Hold"
+      ]
+    },
+    "Overhead Press": {
+      "equipment_note": "Overhead pressing movements -- swap for shoulder comfort or equipment.",
+      "alternatives": [
+        "Seated Overhead Press",
+        "Arnold Press",
+        "Landmine Press",
+        "Viking Press",
+        "Cuban Press"
+      ]
+    },
+    "Seated Overhead Press": {
+      "equipment_note": "Overhead pressing movements -- swap for shoulder comfort or equipment.",
+      "alternatives": [
+        "Overhead Press",
+        "Arnold Press",
+        "Landmine Press",
+        "Viking Press",
+        "Cuban Press"
+      ]
+    },
+    "Arnold Press": {
+      "equipment_note": "Overhead pressing movements -- swap for shoulder comfort or equipment.",
+      "alternatives": [
+        "Overhead Press",
+        "Seated Overhead Press",
+        "Landmine Press",
+        "Viking Press",
+        "Cuban Press"
+      ]
+    },
+    "Landmine Press": {
+      "equipment_note": "Overhead pressing movements -- swap for shoulder comfort or equipment.",
+      "alternatives": [
+        "Overhead Press",
+        "Seated Overhead Press",
+        "Arnold Press",
+        "Viking Press",
+        "Cuban Press"
+      ]
+    },
+    "Viking Press": {
+      "equipment_note": "Overhead pressing movements -- swap for shoulder comfort or equipment.",
+      "alternatives": [
+        "Overhead Press",
+        "Seated Overhead Press",
+        "Arnold Press",
+        "Landmine Press",
+        "Cuban Press"
+      ]
+    },
+    "Cuban Press": {
+      "equipment_note": "Overhead pressing movements -- swap for shoulder comfort or equipment.",
+      "alternatives": [
+        "Overhead Press",
+        "Seated Overhead Press",
+        "Arnold Press",
+        "Landmine Press",
+        "Viking Press"
+      ]
+    },
+    "Lateral Raises": {
+      "equipment_note": "Lateral delt isolation -- swap based on equipment for constant vs. free-weight tension.",
+      "alternatives": [
+        "Cable Lateral Raise"
+      ]
+    },
+    "Cable Lateral Raise": {
+      "equipment_note": "Lateral delt isolation -- swap based on equipment for constant vs. free-weight tension.",
+      "alternatives": [
+        "Lateral Raises"
+      ]
+    },
+    "Rear Delt Fly": {
+      "equipment_note": "Rear delt / posterior shoulder isolation and health work.",
+      "alternatives": [
+        "Reverse Pec Deck",
+        "Bent-Over Rear Delt Raise",
+        "Y-Raise",
+        "Bus Driver"
+      ]
+    },
+    "Reverse Pec Deck": {
+      "equipment_note": "Rear delt / posterior shoulder isolation and health work.",
+      "alternatives": [
+        "Rear Delt Fly",
+        "Bent-Over Rear Delt Raise",
+        "Y-Raise",
+        "Bus Driver"
+      ]
+    },
+    "Bent-Over Rear Delt Raise": {
+      "equipment_note": "Rear delt / posterior shoulder isolation and health work.",
+      "alternatives": [
+        "Rear Delt Fly",
+        "Reverse Pec Deck",
+        "Y-Raise",
+        "Bus Driver"
+      ]
+    },
+    "Y-Raise": {
+      "equipment_note": "Rear delt / posterior shoulder isolation and health work.",
+      "alternatives": [
+        "Rear Delt Fly",
+        "Reverse Pec Deck",
+        "Bent-Over Rear Delt Raise",
+        "Bus Driver"
+      ]
+    },
+    "Bus Driver": {
+      "equipment_note": "Rear delt / posterior shoulder isolation and health work.",
+      "alternatives": [
+        "Rear Delt Fly",
+        "Reverse Pec Deck",
+        "Bent-Over Rear Delt Raise",
+        "Y-Raise"
+      ]
+    },
+    "Front Raises": {
+      "equipment_note": "Anterior delt and trap-emphasis shoulder movements.",
+      "alternatives": [
+        "Upright Row"
+      ]
+    },
+    "Upright Row": {
+      "equipment_note": "Anterior delt and trap-emphasis shoulder movements.",
+      "alternatives": [
+        "Front Raises"
+      ]
+    },
+    "Handstand Hold": {
+      "equipment_note": "Bodyweight shoulder stability and pressing strength.",
+      "alternatives": [
+        "Pike Push-Ups",
+        "Turkish Get-Up"
+      ]
+    },
+    "Pike Push-Ups": {
+      "equipment_note": "Bodyweight shoulder stability and pressing strength.",
+      "alternatives": [
+        "Handstand Hold",
+        "Turkish Get-Up"
+      ]
+    },
+    "Turkish Get-Up": {
+      "equipment_note": "Bodyweight shoulder stability and pressing strength.",
+      "alternatives": [
+        "Handstand Hold",
+        "Pike Push-Ups"
+      ]
+    },
+    "Cable Curl": {
+      "equipment_note": "Bicep curl variations -- swap based on equipment or which head you're emphasizing.",
+      "alternatives": [
+        "Hammer Curls",
+        "Incline Dumbbell Curl",
+        "Preacher Curl",
+        "Reverse Curl",
+        "Concentration Curl",
+        "EZ-Bar Curl",
+        "Zottman Curl",
+        "Spider Curl",
+        "Drag Curl",
+        "Cross-Body Hammer Curl",
+        "Waiter Curl",
+        "21s",
+        "Band Bicep Curl",
+        "Towel Curls"
+      ]
+    },
+    "Hammer Curls": {
+      "equipment_note": "Bicep curl variations -- swap based on equipment or which head you're emphasizing.",
+      "alternatives": [
+        "Cable Curl",
+        "Incline Dumbbell Curl",
+        "Preacher Curl",
+        "Reverse Curl",
+        "Concentration Curl",
+        "EZ-Bar Curl",
+        "Zottman Curl",
+        "Spider Curl",
+        "Drag Curl",
+        "Cross-Body Hammer Curl",
+        "Waiter Curl",
+        "21s",
+        "Band Bicep Curl",
+        "Towel Curls"
+      ]
+    },
+    "Incline Dumbbell Curl": {
+      "equipment_note": "Bicep curl variations -- swap based on equipment or which head you're emphasizing.",
+      "alternatives": [
+        "Cable Curl",
+        "Hammer Curls",
+        "Preacher Curl",
+        "Reverse Curl",
+        "Concentration Curl",
+        "EZ-Bar Curl",
+        "Zottman Curl",
+        "Spider Curl",
+        "Drag Curl",
+        "Cross-Body Hammer Curl",
+        "Waiter Curl",
+        "21s",
+        "Band Bicep Curl",
+        "Towel Curls"
+      ]
+    },
+    "Preacher Curl": {
+      "equipment_note": "Bicep curl variations -- swap based on equipment or which head you're emphasizing.",
+      "alternatives": [
+        "Cable Curl",
+        "Hammer Curls",
+        "Incline Dumbbell Curl",
+        "Reverse Curl",
+        "Concentration Curl",
+        "EZ-Bar Curl",
+        "Zottman Curl",
+        "Spider Curl",
+        "Drag Curl",
+        "Cross-Body Hammer Curl",
+        "Waiter Curl",
+        "21s",
+        "Band Bicep Curl",
+        "Towel Curls"
+      ]
+    },
+    "Reverse Curl": {
+      "equipment_note": "Bicep curl variations -- swap based on equipment or which head you're emphasizing.",
+      "alternatives": [
+        "Cable Curl",
+        "Hammer Curls",
+        "Incline Dumbbell Curl",
+        "Preacher Curl",
+        "Concentration Curl",
+        "EZ-Bar Curl",
+        "Zottman Curl",
+        "Spider Curl",
+        "Drag Curl",
+        "Cross-Body Hammer Curl",
+        "Waiter Curl",
+        "21s",
+        "Band Bicep Curl",
+        "Towel Curls"
+      ]
+    },
+    "Concentration Curl": {
+      "equipment_note": "Bicep curl variations -- swap based on equipment or which head you're emphasizing.",
+      "alternatives": [
+        "Cable Curl",
+        "Hammer Curls",
+        "Incline Dumbbell Curl",
+        "Preacher Curl",
+        "Reverse Curl",
+        "EZ-Bar Curl",
+        "Zottman Curl",
+        "Spider Curl",
+        "Drag Curl",
+        "Cross-Body Hammer Curl",
+        "Waiter Curl",
+        "21s",
+        "Band Bicep Curl",
+        "Towel Curls"
+      ]
+    },
+    "EZ-Bar Curl": {
+      "equipment_note": "Bicep curl variations -- swap based on equipment or which head you're emphasizing.",
+      "alternatives": [
+        "Cable Curl",
+        "Hammer Curls",
+        "Incline Dumbbell Curl",
+        "Preacher Curl",
+        "Reverse Curl",
+        "Concentration Curl",
+        "Zottman Curl",
+        "Spider Curl",
+        "Drag Curl",
+        "Cross-Body Hammer Curl",
+        "Waiter Curl",
+        "21s",
+        "Band Bicep Curl",
+        "Towel Curls"
+      ]
+    },
+    "Zottman Curl": {
+      "equipment_note": "Bicep curl variations -- swap based on equipment or which head you're emphasizing.",
+      "alternatives": [
+        "Cable Curl",
+        "Hammer Curls",
+        "Incline Dumbbell Curl",
+        "Preacher Curl",
+        "Reverse Curl",
+        "Concentration Curl",
+        "EZ-Bar Curl",
+        "Spider Curl",
+        "Drag Curl",
+        "Cross-Body Hammer Curl",
+        "Waiter Curl",
+        "21s",
+        "Band Bicep Curl",
+        "Towel Curls"
+      ]
+    },
+    "Spider Curl": {
+      "equipment_note": "Bicep curl variations -- swap based on equipment or which head you're emphasizing.",
+      "alternatives": [
+        "Cable Curl",
+        "Hammer Curls",
+        "Incline Dumbbell Curl",
+        "Preacher Curl",
+        "Reverse Curl",
+        "Concentration Curl",
+        "EZ-Bar Curl",
+        "Zottman Curl",
+        "Drag Curl",
+        "Cross-Body Hammer Curl",
+        "Waiter Curl",
+        "21s",
+        "Band Bicep Curl",
+        "Towel Curls"
+      ]
+    },
+    "Drag Curl": {
+      "equipment_note": "Bicep curl variations -- swap based on equipment or which head you're emphasizing.",
+      "alternatives": [
+        "Cable Curl",
+        "Hammer Curls",
+        "Incline Dumbbell Curl",
+        "Preacher Curl",
+        "Reverse Curl",
+        "Concentration Curl",
+        "EZ-Bar Curl",
+        "Zottman Curl",
+        "Spider Curl",
+        "Cross-Body Hammer Curl",
+        "Waiter Curl",
+        "21s",
+        "Band Bicep Curl",
+        "Towel Curls"
+      ]
+    },
+    "Cross-Body Hammer Curl": {
+      "equipment_note": "Bicep curl variations -- swap based on equipment or which head you're emphasizing.",
+      "alternatives": [
+        "Cable Curl",
+        "Hammer Curls",
+        "Incline Dumbbell Curl",
+        "Preacher Curl",
+        "Reverse Curl",
+        "Concentration Curl",
+        "EZ-Bar Curl",
+        "Zottman Curl",
+        "Spider Curl",
+        "Drag Curl",
+        "Waiter Curl",
+        "21s",
+        "Band Bicep Curl",
+        "Towel Curls"
+      ]
+    },
+    "Waiter Curl": {
+      "equipment_note": "Bicep curl variations -- swap based on equipment or which head you're emphasizing.",
+      "alternatives": [
+        "Cable Curl",
+        "Hammer Curls",
+        "Incline Dumbbell Curl",
+        "Preacher Curl",
+        "Reverse Curl",
+        "Concentration Curl",
+        "EZ-Bar Curl",
+        "Zottman Curl",
+        "Spider Curl",
+        "Drag Curl",
+        "Cross-Body Hammer Curl",
+        "21s",
+        "Band Bicep Curl",
+        "Towel Curls"
+      ]
+    },
+    "21s": {
+      "equipment_note": "Bicep curl variations -- swap based on equipment or which head you're emphasizing.",
+      "alternatives": [
+        "Cable Curl",
+        "Hammer Curls",
+        "Incline Dumbbell Curl",
+        "Preacher Curl",
+        "Reverse Curl",
+        "Concentration Curl",
+        "EZ-Bar Curl",
+        "Zottman Curl",
+        "Spider Curl",
+        "Drag Curl",
+        "Cross-Body Hammer Curl",
+        "Waiter Curl",
+        "Band Bicep Curl",
+        "Towel Curls"
+      ]
+    },
+    "Band Bicep Curl": {
+      "equipment_note": "Bicep curl variations -- swap based on equipment or which head you're emphasizing.",
+      "alternatives": [
+        "Cable Curl",
+        "Hammer Curls",
+        "Incline Dumbbell Curl",
+        "Preacher Curl",
+        "Reverse Curl",
+        "Concentration Curl",
+        "EZ-Bar Curl",
+        "Zottman Curl",
+        "Spider Curl",
+        "Drag Curl",
+        "Cross-Body Hammer Curl",
+        "Waiter Curl",
+        "21s",
+        "Towel Curls"
+      ]
+    },
+    "Towel Curls": {
+      "equipment_note": "Bicep curl variations -- swap based on equipment or which head you're emphasizing.",
+      "alternatives": [
+        "Cable Curl",
+        "Hammer Curls",
+        "Incline Dumbbell Curl",
+        "Preacher Curl",
+        "Reverse Curl",
+        "Concentration Curl",
+        "EZ-Bar Curl",
+        "Zottman Curl",
+        "Spider Curl",
+        "Drag Curl",
+        "Cross-Body Hammer Curl",
+        "Waiter Curl",
+        "21s",
+        "Band Bicep Curl"
+      ]
+    },
+    "Overhead Tricep Ext": {
+      "equipment_note": "Overhead tricep extension -- targets the long head.",
+      "alternatives": [
+        "Rope Overhead Ext",
+        "Single-Arm Tricep Ext"
+      ]
+    },
+    "Rope Overhead Ext": {
+      "equipment_note": "Overhead tricep extension -- targets the long head.",
+      "alternatives": [
+        "Overhead Tricep Ext",
+        "Single-Arm Tricep Ext"
+      ]
+    },
+    "Single-Arm Tricep Ext": {
+      "equipment_note": "Overhead tricep extension -- targets the long head.",
+      "alternatives": [
+        "Overhead Tricep Ext",
+        "Rope Overhead Ext"
+      ]
+    },
+    "Tricep Pushdowns": {
+      "equipment_note": "Cable/isolation tricep pressdown movements.",
+      "alternatives": [
+        "Tricep Kickbacks"
+      ]
+    },
+    "Tricep Kickbacks": {
+      "equipment_note": "Cable/isolation tricep pressdown movements.",
+      "alternatives": [
+        "Tricep Pushdowns"
+      ]
+    },
+    "Skull Crushers": {
+      "equipment_note": "Lying tricep extension and hybrid press variations.",
+      "alternatives": [
+        "JM Press",
+        "Tate Press",
+        "California Press"
+      ]
+    },
+    "JM Press": {
+      "equipment_note": "Lying tricep extension and hybrid press variations.",
+      "alternatives": [
+        "Skull Crushers",
+        "Tate Press",
+        "California Press"
+      ]
+    },
+    "Tate Press": {
+      "equipment_note": "Lying tricep extension and hybrid press variations.",
+      "alternatives": [
+        "Skull Crushers",
+        "JM Press",
+        "California Press"
+      ]
+    },
+    "California Press": {
+      "equipment_note": "Lying tricep extension and hybrid press variations.",
+      "alternatives": [
+        "Skull Crushers",
+        "JM Press",
+        "Tate Press"
+      ]
+    },
+    "Tricep Dips (Chair)": {
+      "equipment_note": "Bodyweight tricep-focused pressing movements.",
+      "alternatives": [
+        "Bench Dips",
+        "Diamond Push-Ups",
+        "Isometric Push-Up Hold",
+        "Diamond Push-Up to Plank"
+      ]
+    },
+    "Bench Dips": {
+      "equipment_note": "Bodyweight tricep-focused pressing movements.",
+      "alternatives": [
+        "Tricep Dips (Chair)",
+        "Diamond Push-Ups",
+        "Isometric Push-Up Hold",
+        "Diamond Push-Up to Plank"
+      ]
+    },
+    "Diamond Push-Ups": {
+      "equipment_note": "Bodyweight tricep-focused pressing movements.",
+      "alternatives": [
+        "Tricep Dips (Chair)",
+        "Bench Dips",
+        "Isometric Push-Up Hold",
+        "Diamond Push-Up to Plank"
+      ]
+    },
+    "Isometric Push-Up Hold": {
+      "equipment_note": "Bodyweight tricep-focused pressing movements.",
+      "alternatives": [
+        "Tricep Dips (Chair)",
+        "Bench Dips",
+        "Diamond Push-Ups",
+        "Diamond Push-Up to Plank"
+      ]
+    },
+    "Diamond Push-Up to Plank": {
+      "equipment_note": "Bodyweight tricep-focused pressing movements.",
+      "alternatives": [
+        "Tricep Dips (Chair)",
+        "Bench Dips",
+        "Diamond Push-Ups",
+        "Isometric Push-Up Hold"
+      ]
+    },
+    "Squat": {
+      "equipment_note": "Bilateral squat pattern -- swap for equipment or knee comfort.",
+      "alternatives": [
+        "Hack Squat",
+        "Bodyweight Squat",
+        "Jump Squat",
+        "Spanish Squat"
+      ]
+    },
+    "Hack Squat": {
+      "equipment_note": "Bilateral squat pattern -- swap for equipment or knee comfort.",
+      "alternatives": [
+        "Squat",
+        "Bodyweight Squat",
+        "Jump Squat",
+        "Spanish Squat"
+      ]
+    },
+    "Bodyweight Squat": {
+      "equipment_note": "Bilateral squat pattern -- swap for equipment or knee comfort.",
+      "alternatives": [
+        "Squat",
+        "Hack Squat",
+        "Jump Squat",
+        "Spanish Squat"
+      ]
+    },
+    "Jump Squat": {
+      "equipment_note": "Bilateral squat pattern -- swap for equipment or knee comfort.",
+      "alternatives": [
+        "Squat",
+        "Hack Squat",
+        "Bodyweight Squat",
+        "Spanish Squat"
+      ]
+    },
+    "Spanish Squat": {
+      "equipment_note": "Bilateral squat pattern -- swap for equipment or knee comfort.",
+      "alternatives": [
+        "Squat",
+        "Hack Squat",
+        "Bodyweight Squat",
+        "Jump Squat"
+      ]
+    },
+    "Pistol Squat": {
+      "equipment_note": "Single-leg / unilateral squat variations -- swap by difficulty level.",
+      "alternatives": [
+        "Shrimp Squat",
+        "Bulgarian Split Squat",
+        "Cossack Squat"
+      ]
+    },
+    "Shrimp Squat": {
+      "equipment_note": "Single-leg / unilateral squat variations -- swap by difficulty level.",
+      "alternatives": [
+        "Pistol Squat",
+        "Bulgarian Split Squat",
+        "Cossack Squat"
+      ]
+    },
+    "Bulgarian Split Squat": {
+      "equipment_note": "Single-leg / unilateral squat variations -- swap by difficulty level.",
+      "alternatives": [
+        "Pistol Squat",
+        "Shrimp Squat",
+        "Cossack Squat"
+      ]
+    },
+    "Cossack Squat": {
+      "equipment_note": "Single-leg / unilateral squat variations -- swap by difficulty level.",
+      "alternatives": [
+        "Pistol Squat",
+        "Shrimp Squat",
+        "Bulgarian Split Squat"
+      ]
+    },
+    "Sissy Squat": {
+      "equipment_note": "Deep quad-stretch loading movements.",
+      "alternatives": [
+        "Sissy Squat Machine",
+        "Reverse Nordic Curl"
+      ]
+    },
+    "Sissy Squat Machine": {
+      "equipment_note": "Deep quad-stretch loading movements.",
+      "alternatives": [
+        "Sissy Squat",
+        "Reverse Nordic Curl"
+      ]
+    },
+    "Reverse Nordic Curl": {
+      "equipment_note": "Deep quad-stretch loading movements.",
+      "alternatives": [
+        "Sissy Squat",
+        "Sissy Squat Machine"
+      ]
+    },
+    "Romanian Deadlift": {
+      "equipment_note": "Hamstring-dominant hinge movements.",
+      "alternatives": [
+        "Single-Leg RDL",
+        "B-Stance RDL",
+        "Nordic Hamstring Curl"
+      ]
+    },
+    "Single-Leg RDL": {
+      "equipment_note": "Hamstring-dominant hinge movements.",
+      "alternatives": [
+        "Romanian Deadlift",
+        "B-Stance RDL",
+        "Nordic Hamstring Curl"
+      ]
+    },
+    "B-Stance RDL": {
+      "equipment_note": "Hamstring-dominant hinge movements.",
+      "alternatives": [
+        "Romanian Deadlift",
+        "Single-Leg RDL",
+        "Nordic Hamstring Curl"
+      ]
+    },
+    "Nordic Hamstring Curl": {
+      "equipment_note": "Hamstring-dominant hinge movements.",
+      "alternatives": [
+        "Romanian Deadlift",
+        "Single-Leg RDL",
+        "B-Stance RDL"
+      ]
+    },
+    "Hip Thrust": {
+      "equipment_note": "Glute-focused hip extension movements.",
+      "alternatives": [
+        "Glute Bridge",
+        "Single-Leg Glute Bridge",
+        "Frog Pumps"
+      ]
+    },
+    "Glute Bridge": {
+      "equipment_note": "Glute-focused hip extension movements.",
+      "alternatives": [
+        "Hip Thrust",
+        "Single-Leg Glute Bridge",
+        "Frog Pumps"
+      ]
+    },
+    "Single-Leg Glute Bridge": {
+      "equipment_note": "Glute-focused hip extension movements.",
+      "alternatives": [
+        "Hip Thrust",
+        "Glute Bridge",
+        "Frog Pumps"
+      ]
+    },
+    "Frog Pumps": {
+      "equipment_note": "Glute-focused hip extension movements.",
+      "alternatives": [
+        "Hip Thrust",
+        "Glute Bridge",
+        "Single-Leg Glute Bridge"
+      ]
+    },
+    "Reverse Lunge": {
+      "equipment_note": "Lunge and step-up variations -- swap by direction of movement or space available.",
+      "alternatives": [
+        "Lateral Lunge",
+        "Curtsy Lunge",
+        "Walking Lunges",
+        "Step-Ups"
+      ]
+    },
+    "Lateral Lunge": {
+      "equipment_note": "Lunge and step-up variations -- swap by direction of movement or space available.",
+      "alternatives": [
+        "Reverse Lunge",
+        "Curtsy Lunge",
+        "Walking Lunges",
+        "Step-Ups"
+      ]
+    },
+    "Curtsy Lunge": {
+      "equipment_note": "Lunge and step-up variations -- swap by direction of movement or space available.",
+      "alternatives": [
+        "Reverse Lunge",
+        "Lateral Lunge",
+        "Walking Lunges",
+        "Step-Ups"
+      ]
+    },
+    "Walking Lunges": {
+      "equipment_note": "Lunge and step-up variations -- swap by direction of movement or space available.",
+      "alternatives": [
+        "Reverse Lunge",
+        "Lateral Lunge",
+        "Curtsy Lunge",
+        "Step-Ups"
+      ]
+    },
+    "Step-Ups": {
+      "equipment_note": "Lunge and step-up variations -- swap by direction of movement or space available.",
+      "alternatives": [
+        "Reverse Lunge",
+        "Lateral Lunge",
+        "Curtsy Lunge",
+        "Walking Lunges"
+      ]
+    },
+    "Leg Press": {
+      "equipment_note": "Machine-based quad/hamstring isolation.",
+      "alternatives": [
+        "Leg Extension",
+        "Leg Curl"
+      ]
+    },
+    "Leg Extension": {
+      "equipment_note": "Machine-based quad/hamstring isolation.",
+      "alternatives": [
+        "Leg Press",
+        "Leg Curl"
+      ]
+    },
+    "Leg Curl": {
+      "equipment_note": "Machine-based quad/hamstring isolation.",
+      "alternatives": [
+        "Leg Press",
+        "Leg Extension"
+      ]
+    },
+    "Calf Raises": {
+      "equipment_note": "Calf isolation -- swap based on standing vs. seated emphasis.",
+      "alternatives": [
+        "Seated Calf Raise",
+        "Donkey Calf Raise"
+      ]
+    },
+    "Seated Calf Raise": {
+      "equipment_note": "Calf isolation -- swap based on standing vs. seated emphasis.",
+      "alternatives": [
+        "Calf Raises",
+        "Donkey Calf Raise"
+      ]
+    },
+    "Donkey Calf Raise": {
+      "equipment_note": "Calf isolation -- swap based on standing vs. seated emphasis.",
+      "alternatives": [
+        "Calf Raises",
+        "Seated Calf Raise"
+      ]
+    },
+    "Adductor Machine": {
+      "equipment_note": "Inner-thigh / adductor strength work.",
+      "alternatives": [
+        "Copenhagen Plank"
+      ]
+    },
+    "Copenhagen Plank": {
+      "equipment_note": "Inner-thigh / adductor strength work.",
+      "alternatives": [
+        "Adductor Machine"
+      ]
+    },
+    "Glute Kickback Machine": {
+      "equipment_note": "Glute isolation and hip abduction.",
+      "alternatives": [
+        "Fire Hydrants"
+      ]
+    },
+    "Fire Hydrants": {
+      "equipment_note": "Glute isolation and hip abduction.",
+      "alternatives": [
+        "Glute Kickback Machine"
+      ]
+    },
+    "Box Jumps": {
+      "equipment_note": "Explosive / plyometric lower-body power movements.",
+      "alternatives": [
+        "Skater Jumps",
+        "Devil Press"
+      ]
+    },
+    "Skater Jumps": {
+      "equipment_note": "Explosive / plyometric lower-body power movements.",
+      "alternatives": [
+        "Box Jumps",
+        "Devil Press"
+      ]
+    },
+    "Devil Press": {
+      "equipment_note": "Explosive / plyometric lower-body power movements.",
+      "alternatives": [
+        "Box Jumps",
+        "Skater Jumps"
+      ]
+    },
+    "Wall Sit": {
+      "equipment_note": "Isometric or loaded squat-hold work.",
+      "alternatives": [
+        "KB Goblet Squat"
+      ]
+    },
+    "KB Goblet Squat": {
+      "equipment_note": "Isometric or loaded squat-hold work.",
+      "alternatives": [
+        "Wall Sit"
+      ]
+    },
+    "Crunches": {
+      "equipment_note": "Basic flexion-based core movements -- good starting points for core work.",
+      "alternatives": [
+        "Sit-Ups",
+        "Bicycle Crunch",
+        "Reverse Crunch",
+        "Cable Crunch"
+      ]
+    },
+    "Sit-Ups": {
+      "equipment_note": "Basic flexion-based core movements -- good starting points for core work.",
+      "alternatives": [
+        "Crunches",
+        "Bicycle Crunch",
+        "Reverse Crunch",
+        "Cable Crunch"
+      ]
+    },
+    "Bicycle Crunch": {
+      "equipment_note": "Basic flexion-based core movements -- good starting points for core work.",
+      "alternatives": [
+        "Crunches",
+        "Sit-Ups",
+        "Reverse Crunch",
+        "Cable Crunch"
+      ]
+    },
+    "Reverse Crunch": {
+      "equipment_note": "Basic flexion-based core movements -- good starting points for core work.",
+      "alternatives": [
+        "Crunches",
+        "Sit-Ups",
+        "Bicycle Crunch",
+        "Cable Crunch"
+      ]
+    },
+    "Plank": {
+      "equipment_note": "Isometric core holds -- swap for difficulty or anti-rotation emphasis.",
+      "alternatives": [
+        "Side Plank",
+        "Copenhagen Side Plank",
+        "Hollow Body Hold"
+      ]
+    },
+    "Side Plank": {
+      "equipment_note": "Isometric core holds -- swap for difficulty or anti-rotation emphasis.",
+      "alternatives": [
+        "Plank",
+        "Copenhagen Side Plank",
+        "Hollow Body Hold"
+      ]
+    },
+    "Copenhagen Side Plank": {
+      "equipment_note": "Isometric core holds -- swap for difficulty or anti-rotation emphasis.",
+      "alternatives": [
+        "Plank",
+        "Side Plank",
+        "Hollow Body Hold"
+      ]
+    },
+    "Hollow Body Hold": {
+      "equipment_note": "Isometric core holds -- swap for difficulty or anti-rotation emphasis.",
+      "alternatives": [
+        "Plank",
+        "Side Plank",
+        "Copenhagen Side Plank"
+      ]
+    },
+    "Hanging Leg Raise": {
+      "equipment_note": "Lower-ab and hip-flexor focused core movements.",
+      "alternatives": [
+        "Leg Raises",
+        "Flutter Kicks",
+        "V-Ups",
+        "Hanging Windshield Wipers"
+      ]
+    },
+    "Leg Raises": {
+      "equipment_note": "Lower-ab and hip-flexor focused core movements.",
+      "alternatives": [
+        "Hanging Leg Raise",
+        "Flutter Kicks",
+        "V-Ups",
+        "Hanging Windshield Wipers"
+      ]
+    },
+    "Flutter Kicks": {
+      "equipment_note": "Lower-ab and hip-flexor focused core movements.",
+      "alternatives": [
+        "Hanging Leg Raise",
+        "Leg Raises",
+        "V-Ups",
+        "Hanging Windshield Wipers"
+      ]
+    },
+    "V-Ups": {
+      "equipment_note": "Lower-ab and hip-flexor focused core movements.",
+      "alternatives": [
+        "Hanging Leg Raise",
+        "Leg Raises",
+        "Flutter Kicks",
+        "Hanging Windshield Wipers"
+      ]
+    },
+    "Hanging Windshield Wipers": {
+      "equipment_note": "Lower-ab and hip-flexor focused core movements.",
+      "alternatives": [
+        "Hanging Leg Raise",
+        "Leg Raises",
+        "Flutter Kicks",
+        "V-Ups"
+      ]
+    },
+    "Ab Wheel Rollout": {
+      "equipment_note": "Advanced anti-extension core movements -- significant difficulty jump.",
+      "alternatives": [
+        "Dragon Flag"
+      ]
+    },
+    "Dragon Flag": {
+      "equipment_note": "Advanced anti-extension core movements -- significant difficulty jump.",
+      "alternatives": [
+        "Ab Wheel Rollout"
+      ]
+    },
+    "Russian Twists": {
+      "equipment_note": "Rotational and anti-rotational core work.",
+      "alternatives": [
+        "Pallof Press"
+      ]
+    },
+    "Pallof Press": {
+      "equipment_note": "Rotational and anti-rotational core work.",
+      "alternatives": [
+        "Russian Twists"
+      ]
+    },
+    "Dead Bug": {
+      "equipment_note": "Core stability and anti-rotation movements -- good for warm-ups or lighter days.",
+      "alternatives": [
+        "Bird Dog",
+        "Shoulder Taps"
+      ]
+    },
+    "Bird Dog": {
+      "equipment_note": "Core stability and anti-rotation movements -- good for warm-ups or lighter days.",
+      "alternatives": [
+        "Dead Bug",
+        "Shoulder Taps"
+      ]
+    },
+    "Shoulder Taps": {
+      "equipment_note": "Core stability and anti-rotation movements -- good for warm-ups or lighter days.",
+      "alternatives": [
+        "Dead Bug",
+        "Bird Dog"
+      ]
+    },
+    "Mountain Climbers": {
+      "equipment_note": "Dynamic, cardio-leaning core and full-body movements.",
+      "alternatives": [
+        "Burpee"
+      ]
+    },
+    "Burpee": {
+      "equipment_note": "Dynamic, cardio-leaning core and full-body movements.",
+      "alternatives": [
+        "Mountain Climbers"
+      ]
+    },
+    "Decline Barbell Press": {
+      "equipment_note": "Lower chest pressing angle -- swap for a different chest emphasis.",
+      "alternatives": [
+        "Bench Press",
+        "Incline Barbell Press",
+        "Dumbbell Bench Press"
+      ]
+    },
+    "Cable Crunch": {
+      "equipment_note": "Weighted core flexion -- swap for bodyweight or machine options.",
+      "alternatives": [
+        "Crunches",
+        "Sit-Ups",
+        "Reverse Crunch"
+      ]
+    }
+  }
 }
